@@ -12,6 +12,7 @@ const DashboardSelector = props => {
   const [isSuperDuperAdmin, setIsSuperDuperAdmin] = useState(false);
 
   useEffect(() => {
+
     if (kazoo_account.data) {
       if (kazoo_account.data.superduper_admin) {
         setIsSuperDuperAdmin(true);

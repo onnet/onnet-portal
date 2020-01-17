@@ -5,7 +5,7 @@ import router from 'umi/router';
 import Redirect from 'umi/redirect';
 import JSONPretty from 'react-json-pretty';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Tabs, Card, Table, List, Typography } from 'antd';
+import { Tabs, Card, Table, List, Typography, Spin } from 'antd';
 
 import styles from './style.less';
 
@@ -13,19 +13,41 @@ const { Title, Text } = Typography;
 const { TabPane } = Tabs;
 
 const ZoneInfo = props => {
-  const { settings, kazoo_account = {}, kz_system_status = {}, location } = props;
+  const { dispatch, settings, kazoo_login, kazoo_account = {}, kz_system_status = {}, location } = props;
 
   useEffect(() => {
     if (kazoo_account.data) {
-      if (kazoo_account.data.superduper_admin) {
+      if (!kazoo_account.data.superduper_admin) {
         router.push('/int/dashboard');
       }
     }
-  }, [kazoo_account]);
 
-  if (!kz_system_status.data) return <Redirect to="/int/dashboard" />;
+  }, [kazoo_account, kz_system_status]);
 
-  if (!kz_system_status.data[location.state.zone]) return <Redirect to="/int/dashboard" />;
+    if (kz_system_status.data) {
+      if (!kz_system_status.data[location.state.zone]) {
+        console.log('Absent zone name. Redirecting to dashboard. kz_system_status: ', kz_system_status);
+        return <Redirect to="/int/dashboard" />;
+      }
+    } else {
+      console.log('kz_system_status: ', kz_system_status);
+      dispatch({
+        type: 'kz_system_status/refresh',
+        payload: { account_id: kazoo_login.data.account_id },
+      });
+      return <div
+        style={{
+          width: '100%',
+          height: '100%',
+          margin: 'auto',
+          paddingTop: 100,
+          textAlign: 'center',
+        }}
+      >
+        <Spin size="large" />
+      </div>
+ 
+    }
 
   const kapps = Object.values(kz_system_status.data[location.state.zone].kazoo_apps);
   const kamailios = kz_system_status.data[location.state.zone].kamailio

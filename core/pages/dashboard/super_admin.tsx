@@ -181,11 +181,7 @@ const SuperDuperDashboard = props => {
         total_reg_count,
       );
     } else {
-      console.log('super_admin dashboard: else');
-      console.log('super_admin dashboard kazoo_login: ', kazoo_login);
-      console.log('super_admin dashboard kazoo_account: ', kazoo_account);
-      console.log('super_admin dashboard rs_registrations_count: ', rs_registrations_count);
-      console.log('super_admin dashboard kz_system_status: ', kz_system_status);
+      // eslint-disable-next-line no-undef
       if (kazoo_account.data.superduper_admin && !kz_system_status.data) {
         dispatch({
           type: 'kz_system_status/refresh',
