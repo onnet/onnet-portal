@@ -2,11 +2,13 @@
 
 import React from 'react';
 import { connect } from 'dva';
+
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Table, Card, Switch, Menu, Dropdown, Icon, Modal } from 'antd';
 
 import { runAndDispatch } from '@/pages/onnet-portal/core/services/kazoo';
 import AccountParagraph from '@/pages/onnet-portal/core/components/AccountParagraph';
+import AccountTimezone from './AccountTimezone';
 
 import styles from '../style.less';
 
@@ -117,6 +119,11 @@ const GeneralSettingsWidget = props => {
           currentText={kazoo_account.data ? kazoo_account.data.name : 'Loading...'}
         />
       ),
+    },
+    {
+      key: '5',
+      name: formatMessage({ id: 'telephony.account_timezone', defaultMessage: 'Account timezone' }),
+      value: <AccountTimezone />
     },
   ];
 

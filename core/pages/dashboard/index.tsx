@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
+import { Spin } from 'antd';
 import SuperDuperDashboard from './super_admin';
 import ResellerDashboard from './reseller';
 import AccountDashboard from './account';
@@ -40,7 +41,17 @@ const DashboardSelector = props => {
     return lb_account.data ? <LBAccountDashboard /> : <AccountDashboard />;
   }
 
-  return <div>Loading..</div>;
+  return <div
+        style={{
+          width: '100%',
+          height: '100%',
+          margin: 'auto',
+          paddingTop: 100,
+          textAlign: 'center',
+        }}
+      >
+        <Spin size="large" />
+      </div>;
 };
 
 export default connect(({ kazoo_login, kazoo_account, lb_account }) => ({

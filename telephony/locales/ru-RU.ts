@@ -6,4 +6,5 @@ export default {
   'telephony.general_settings': 'Общие настройки',
   'telephony.main_account_number': 'Основной номер',
   'telephony.account_language': 'Язык учетной записи',
+  'telephony.account_timezone': 'Часовой пояс',
 };
