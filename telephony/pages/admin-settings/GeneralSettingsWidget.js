@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 
 import { formatMessage } from 'umi-plugin-react/locale';
@@ -15,7 +15,17 @@ import styles from '../style.less';
 const { confirm } = Modal;
 
 const GeneralSettingsWidget = props => {
-  const { kazoo_account, kazoo_account_numbers } = props;
+
+  const [ mediaName, setMediaName ] = useState('');
+
+  const { kazoo_account, kazoo_account_numbers, kazoo_account_media } = props;
+
+  useEffect(() => {
+    if (kazoo_account.data) {
+      const mediaObj = kazoo_account_media.data.find(({ id }) => id === kazoo_account.data.music_on_hold.media_id);
+      if (mediaObj) setMediaName(mediaObj.name);
+    }
+  }, [kazoo_account, kazoo_account_media]);
 
   function externalNumber() {
     try {
@@ -59,6 +69,32 @@ const GeneralSettingsWidget = props => {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
           data: { caller_id: { external: { number: key, name: key } } },
+        });
+      },
+      onCancel() {},
+    });
+  }
+
+  const menuAccountMusicOnHold = (
+    <Menu selectedKeys={[]} onClick={onMediaSelect}>
+      {kazoo_account_media.data.map(media => (
+        <Menu.Item key={media.id}>{media.name}</Menu.Item>
+      ))}
+    </Menu>
+  );
+
+  function onMediaSelect(event) {
+    const { key } = event;
+    confirm({
+      title: 'You are about to change Music on hold:',
+      content: <span style={{ paddingLeft: '6em' }}>
+	         {kazoo_account_media.data.find(({ id }) => id === key).name}
+	       </span>,
+      onOk() {
+        runAndDispatch('kzAccount', 'kazoo_account/update', {
+          method: 'PATCH',
+          account_id: kazoo_account.data.id,
+          data: { music_on_hold: { media_id: key } },
         });
       },
       onCancel() {},
@@ -125,6 +161,17 @@ const GeneralSettingsWidget = props => {
       name: formatMessage({ id: 'telephony.account_timezone', defaultMessage: 'Account timezone' }),
       value: <AccountTimezone />
     },
+    {
+      key: '6',
+      name: formatMessage({ id: 'telephony.music_on_hold', defaultMessage: 'Music on hold' }),
+      value: (
+        <Dropdown overlay={menuAccountMusicOnHold} trigger={['click']}>
+          <a className="ant-dropdown-link" href="#">
+            { mediaName } <Icon type="down" />
+          </a>
+        </Dropdown>
+      ),
+    },
   ];
 
   const columns = [
@@ -170,7 +217,8 @@ const GeneralSettingsWidget = props => {
   );
 };
 
-export default connect(({ kazoo_account, kazoo_account_numbers }) => ({
+export default connect(({ kazoo_account, kazoo_account_numbers, kazoo_account_media }) => ({
   kazoo_account,
   kazoo_account_numbers,
+  kazoo_account_media,
 }))(GeneralSettingsWidget);

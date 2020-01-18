@@ -7,4 +7,5 @@ export default {
   'telephony.main_account_number': 'Main account number',
   'telephony.account_language': 'Account language',
   'telephony.account_timezone': 'Account timezone',
+  'telephony.music_on_hold': 'Music on hold',
 };

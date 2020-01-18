@@ -7,4 +7,6 @@ export default {
   'telephony.main_account_number': 'Основной номер',
   'telephony.account_language': 'Язык учетной записи',
   'telephony.account_timezone': 'Часовой пояс',
+  'telephony.music_on_hold': 'Музыка на удержании',
+
 };
