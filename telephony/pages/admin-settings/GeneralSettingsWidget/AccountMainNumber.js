@@ -26,8 +26,9 @@ const AccountMainNumber = props => {
 
   useEffect(() => {
     if (kazoo_account.data) {
-      setMainNumber(externalNumber());
-      setModalTitle(`Account default mainNumber: ${kazoo_account.data.caller_id.external.number}`);
+      const extNUm = externalNumber();
+      setMainNumber(extNUm);
+      setModalTitle(`Account default mainNumber: ${extNUm}`);
     }
   }, [kazoo_account]);
 

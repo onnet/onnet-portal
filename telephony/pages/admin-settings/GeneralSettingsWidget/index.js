@@ -24,7 +24,11 @@ const GeneralSettingsWidget = props => {
   useEffect(() => {
     if (kazoo_account.data) {
       const mediaObj = kazoo_account_media.data.find(({ id }) => id === kazoo_account.data.music_on_hold.media_id);
-      if (mediaObj) setMediaName(mediaObj.name);
+      if (mediaObj) { 
+        setMediaName(mediaObj.name);
+      } else { 
+        setMediaName('Default music');
+      }
     }
   }, [kazoo_account, kazoo_account_media]);
 
@@ -73,6 +77,7 @@ const GeneralSettingsWidget = props => {
 
   const menuAccountMusicOnHold = (
     <Menu selectedKeys={[]} onClick={onMediaSelect}>
+      <Menu.Item key=''>Default music</Menu.Item>
       {kazoo_account_media.data.map(media => (
         <Menu.Item key={media.id}>{media.name}</Menu.Item>
       ))}
@@ -81,16 +86,19 @@ const GeneralSettingsWidget = props => {
 
   function onMediaSelect(event) {
     const { key } = event;
+    const mediaJObj = kazoo_account_media.data.find(({ id }) => id === key);
+    const currMediaName = mediaJObj ? mediaJObj.name : 'Default music';
+    const mediaBag = mediaJObj ? { media_id: key } : {};
     confirm({
       title: 'You are about to change Music on hold:',
       content: <span style={{ paddingLeft: '6em' }}>
-	         {kazoo_account_media.data.find(({ id }) => id === key).name}
+	         {currMediaName}
 	       </span>,
       onOk() {
         runAndDispatch('kzAccount', 'kazoo_account/update', {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
-          data: { music_on_hold: { media_id: key } },
+          data: { music_on_hold: mediaBag },
         });
       },
       onCancel() {},
@@ -159,6 +167,16 @@ const GeneralSettingsWidget = props => {
           </a>
         </Dropdown>
       ),
+    },
+    {
+      key: '7',
+      name: formatMessage({ id: 'telephony.dialplan', defaultMessage: 'Dialplan' }),
+      value: 'Dialplan'
+    },
+    {
+      key: '8',
+      name: formatMessage({ id: 'telephony.outbound_routing', defaultMessage: 'Outbound routing' }),
+      value: 'Outbound routing'
     },
   ];
 

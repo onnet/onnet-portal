@@ -8,4 +8,7 @@ export default {
   'telephony.account_language': 'Account language',
   'telephony.account_timezone': 'Account timezone',
   'telephony.music_on_hold': 'Music on hold',
+  'telephony.outbound_routing': 'Outbound routig',
+  'telephony.dialplan': 'Dialplan',
+  'telephony.default_music': 'Default music',
 };
