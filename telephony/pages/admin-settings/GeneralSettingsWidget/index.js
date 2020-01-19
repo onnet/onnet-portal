@@ -9,8 +9,9 @@ import { Table, Card, Switch, Menu, Dropdown, Icon, Modal } from 'antd';
 import { runAndDispatch } from '@/pages/onnet-portal/core/services/kazoo';
 import AccountParagraph from '@/pages/onnet-portal/core/components/AccountParagraph';
 import AccountTimezone from './AccountTimezone';
+import AccountMainNumber from './AccountMainNumber';
 
-import styles from '../style.less';
+import styles from '../../style.less';
 
 const { confirm } = Modal;
 
@@ -18,7 +19,7 @@ const GeneralSettingsWidget = props => {
 
   const [ mediaName, setMediaName ] = useState('');
 
-  const { kazoo_account, kazoo_account_numbers, kazoo_account_media } = props;
+  const { kazoo_account, kazoo_account_media } = props;
 
   useEffect(() => {
     if (kazoo_account.data) {
@@ -27,49 +28,44 @@ const GeneralSettingsWidget = props => {
     }
   }, [kazoo_account, kazoo_account_media]);
 
-  function externalNumber() {
-    try {
-      return kazoo_account.data.caller_id.external.number;
-    } catch (e) {
-      return 'no number selected';
-    }
-  }
-
-  const menuMainNumber = (
-    <Menu selectedKeys={[]} onClick={onMainNumberSelect}>
-      {Object.keys(kazoo_account_numbers.data.numbers).map(number => (
-        <Menu.Item key={number}>{number}</Menu.Item>
-      ))}
-    </Menu>
-  );
-
   const menuAccountLanguage = (
     <Menu
       selectedKeys={[]}
-      onClick={({ key }) =>
-        runAndDispatch('kzAccount', 'kazoo_account/update', {
-          method: 'PATCH',
-          account_id: kazoo_account.data.id,
-          data: { language: key },
-        })
-      }
+      onClick={onAccountLanguageSelect}
     >
-      <Menu.Item key="en">en</Menu.Item>
-      <Menu.Item key="ru">ru</Menu.Item>
+      <Menu.Item key="ru-ru">ru-ru</Menu.Item>
+      <Menu.Item key="en-en">en-en</Menu.Item>
     </Menu>
   );
 
-  function onMainNumberSelect(event) {
+  function onAccountLanguageSelect(event) {
     const { key } = event;
     confirm({
-      title: 'You are about to change main number to:',
+      title: 'You are about to change account language:',
       content: <span style={{ paddingLeft: '6em' }}>{key}</span>,
       onOk() {
         runAndDispatch('kzAccount', 'kazoo_account/update', {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
-          data: { caller_id: { external: { number: key, name: key } } },
-        });
+          data: { language: key },
+        })
+      },
+      onCancel() {},
+    });
+  }
+
+  function onCallRecordingSwitch(checked) {
+    confirm({
+      title: checked ?
+	       'You are about to switch call recording ON'
+	       : 'You are about to switch call recording OFF',
+      content: <span style={{ paddingLeft: '6em' }}>{checked}</span>,
+      onOk() {
+            runAndDispatch('kzAccount', 'kazoo_account/update', {
+              method: 'PATCH',
+              account_id: kazoo_account.data.id,
+              data: { record_call: checked },
+            });
       },
       onCancel() {},
     });
@@ -108,17 +104,14 @@ const GeneralSettingsWidget = props => {
         id: 'telephony.main_account_number',
         defaultMessage: 'Main account number',
       }),
-      value: (
-        <Dropdown overlay={menuMainNumber} trigger={['click']}>
-          <a className="ant-dropdown-link" href="#">
-            {externalNumber()} <Icon type="down" />
-          </a>
-        </Dropdown>
-      ),
+      value: <AccountMainNumber />
     },
     {
       key: '11',
-      name: formatMessage({ id: 'telephony.account_language', defaultMessage: 'Account language' }),
+      name: formatMessage({
+	id: 'telephony.account_language',
+	defaultMessage: 'Account language'
+      }),
       value: (
         <Dropdown overlay={menuAccountLanguage} trigger={['click']}>
           <a className="ant-dropdown-link" href="#">
@@ -135,14 +128,9 @@ const GeneralSettingsWidget = props => {
       }),
       value: (
         <Switch
+	  size='small'
           checked={kazoo_account.data ? kazoo_account.data.record_call : false}
-          onChange={checked => {
-            runAndDispatch('kzAccount', 'kazoo_account/update', {
-              method: 'PATCH',
-              account_id: kazoo_account.data.id,
-              data: { record_call: checked },
-            });
-          }}
+          onChange={onCallRecordingSwitch}
         />
       ),
     },
@@ -185,7 +173,7 @@ const GeneralSettingsWidget = props => {
       title: 'Value',
       dataIndex: 'value',
       key: 'value',
-      align: 'center',
+//      align: 'center',
     },
   ];
 
@@ -217,8 +205,7 @@ const GeneralSettingsWidget = props => {
   );
 };
 
-export default connect(({ kazoo_account, kazoo_account_numbers, kazoo_account_media }) => ({
+export default connect(({ kazoo_account, kazoo_account_media }) => ({
   kazoo_account,
-  kazoo_account_numbers,
   kazoo_account_media,
 }))(GeneralSettingsWidget);
