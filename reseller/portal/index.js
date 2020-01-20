@@ -85,9 +85,6 @@ const ResellerPortal = props => {
                 key={u.id}
                 account_id={rs_child_account.data.id}
                 account_name={rs_child_account.data.name}
-                is_reseller={rs_child_account.data.is_reseller}
-                user_first_name={u.first_name}
-                user_last_name={u.last_name}
                 user_username={u.username}
                 user_id={u.id}
               >
@@ -144,7 +141,7 @@ const ResellerPortal = props => {
     dispatch({
       type: 'rs_children/flush',
     });
-    if (e.item.props.is_reseller) {
+    if (rs_child_account.data.is_reseller) {
       router.push('/int/reseller_portal/accounts');
     } else {
       router.push('/int/dashboard');
