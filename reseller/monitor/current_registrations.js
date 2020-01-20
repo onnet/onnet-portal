@@ -198,7 +198,7 @@ class CurrentRegistrations extends Component {
           dataSource={dataSource}
           columns={columns}
           //   pagination={{ position: 'both' }}
-         // pagination={false}
+          // pagination={false}
           bordered
           onChange={(pagination, filter, sorter, { currentDataSource }) => {
             this.setState({

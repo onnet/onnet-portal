@@ -10,5 +10,4 @@ export default {
   'telephony.music_on_hold': 'Музыка на удержании',
   'telephony.outbound_routing': 'Исходящая маршрутизация',
   'telephony.dialplan': 'План набора',
-
 };

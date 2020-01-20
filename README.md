@@ -2,5 +2,4 @@
 
 Some screenshots:
 
-
-![Alt text](/priv/docs/images/onnet-portal.png "Just first image")
+![Alt text](/priv/docs/images/onnet-portal.png 'Just first image')

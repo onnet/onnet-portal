@@ -13,7 +13,6 @@ const DashboardSelector = props => {
   const [isSuperDuperAdmin, setIsSuperDuperAdmin] = useState(false);
 
   useEffect(() => {
-
     if (kazoo_account.data) {
       if (kazoo_account.data.superduper_admin) {
         setIsSuperDuperAdmin(true);
@@ -41,17 +40,19 @@ const DashboardSelector = props => {
     return lb_account.data ? <LBAccountDashboard /> : <AccountDashboard />;
   }
 
-  return <div
-        style={{
-          width: '100%',
-          height: '100%',
-          margin: 'auto',
-          paddingTop: 100,
-          textAlign: 'center',
-        }}
-      >
-        <Spin size="large" />
-      </div>;
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        margin: 'auto',
+        paddingTop: 100,
+        textAlign: 'center',
+      }}
+    >
+      <Spin size="large" />
+    </div>
+  );
 };
 
 export default connect(({ kazoo_login, kazoo_account, lb_account }) => ({

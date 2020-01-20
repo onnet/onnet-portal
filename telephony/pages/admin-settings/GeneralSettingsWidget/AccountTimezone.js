@@ -12,10 +12,9 @@ import { Button, Select, Icon, Modal } from 'antd';
 import { runAndDispatch } from '@/pages/onnet-portal/core/services/kazoo';
 
 const AccountTimezone = props => {
-
-  const [ tzButtonVisible, setTzButtonVisible ] = useState(false);
-  const [ timezone, setTimezone ] = useState('');
-  const [ modalTitle, setModalTitle ] = useState('Account default timezone');
+  const [tzButtonVisible, setTzButtonVisible] = useState(false);
+  const [timezone, setTimezone] = useState('');
+  const [modalTitle, setModalTitle] = useState('Account default timezone');
 
   const { kazoo_account } = props;
 
@@ -29,43 +28,51 @@ const AccountTimezone = props => {
   const onTimezoneSelect = event => {
     console.log('onTimezoneSelect event: ', event);
     setTimezone(event);
-  }
+  };
 
   const onTimezoneConfirm = () => {
     runAndDispatch('kzAccount', 'kazoo_account/update', {
-          method: 'PATCH',
-          account_id: kazoo_account.data.id,
-          data: { timezone },
-    })
+      method: 'PATCH',
+      account_id: kazoo_account.data.id,
+      data: { timezone },
+    });
     setTzButtonVisible(false);
-  }
+  };
 
   const onTimezoneCancel = () => {
     setTimezone(kazoo_account.data.timezone);
     setTzButtonVisible(false);
-  }
+  };
 
   return (
-	<> 
-	  {kazoo_account.data.timezone} <Button type="link" onClick={() => setTzButtonVisible(true)} ><Icon type="edit" /></Button>
-          <Modal
-          title={modalTitle}
-          visible={tzButtonVisible}
-          onOk={onTimezoneConfirm}
-          onCancel={onTimezoneCancel}
-        >
-	  <div style={{ textAlign: 'center' }}>
+    <>
+      {kazoo_account.data ? kazoo_account.data.timezone : null}
+      <Button type="link" onClick={() => setTzButtonVisible(true)}>
+        <Icon type="edit" />
+      </Button>
+      <Modal
+        title={modalTitle}
+        visible={tzButtonVisible}
+        onOk={onTimezoneConfirm}
+        onCancel={onTimezoneCancel}
+      >
+        <div style={{ textAlign: 'center' }}>
           <Select
             style={{ width: '50%' }}
             onChange={onTimezoneSelect}
             showSearch={true}
-	    defaultValue={kazoo_account.data.timezone}
+            defaultValue={kazoo_account.data ? kazoo_account.data.timezone : null}
           >
-            {moment.tz.names().map(tzname => <Select.Option value={tzname} key={tzname}> {tzname} </Select.Option>)}
+            {moment.tz.names().map(tzname => (
+              <Select.Option value={tzname} key={tzname}>
+                {' '}
+                {tzname}{' '}
+              </Select.Option>
+            ))}
           </Select>
-	  </div>
-        </Modal>
-	</>
+        </div>
+      </Modal>
+    </>
   );
 };
 

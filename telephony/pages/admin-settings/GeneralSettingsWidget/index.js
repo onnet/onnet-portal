@@ -10,33 +10,36 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/services/kazoo';
 import AccountParagraph from '@/pages/onnet-portal/core/components/AccountParagraph';
 import AccountTimezone from './AccountTimezone';
 import AccountMainNumber from './AccountMainNumber';
+import { AccountDialplans } from '../../../services/kazoo-telephony.ts';
 
 import styles from '../../style.less';
 
 const { confirm } = Modal;
 
 const GeneralSettingsWidget = props => {
-
-  const [ mediaName, setMediaName ] = useState('');
+  const [mediaName, setMediaName] = useState('');
+  const [accountDialplans, setAccountDialplans] = useState({});
 
   const { kazoo_account, kazoo_account_media } = props;
 
   useEffect(() => {
     if (kazoo_account.data) {
-      const mediaObj = kazoo_account_media.data.find(({ id }) => id === kazoo_account.data.music_on_hold.media_id);
-      if (mediaObj) { 
+      const mediaObj = kazoo_account_media.data.find(
+        ({ id }) => id === kazoo_account.data.music_on_hold.media_id,
+      );
+      if (mediaObj) {
         setMediaName(mediaObj.name);
-      } else { 
+      } else {
         setMediaName('Default music');
       }
+      AccountDialplans({ account_id: kazoo_account.data.id }).then(res => {
+        if (res.data) setAccountDialplans(res.data);
+      });
     }
   }, [kazoo_account, kazoo_account_media]);
 
   const menuAccountLanguage = (
-    <Menu
-      selectedKeys={[]}
-      onClick={onAccountLanguageSelect}
-    >
+    <Menu selectedKeys={[]} onClick={onAccountLanguageSelect}>
       <Menu.Item key="ru-ru">ru-ru</Menu.Item>
       <Menu.Item key="en-en">en-en</Menu.Item>
     </Menu>
@@ -52,7 +55,7 @@ const GeneralSettingsWidget = props => {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
           data: { language: key },
-        })
+        });
       },
       onCancel() {},
     });
@@ -60,16 +63,16 @@ const GeneralSettingsWidget = props => {
 
   function onCallRecordingSwitch(checked) {
     confirm({
-      title: checked ?
-	       'You are about to switch call recording ON'
-	       : 'You are about to switch call recording OFF',
+      title: checked
+        ? 'You are about to switch call recording ON'
+        : 'You are about to switch call recording OFF',
       content: <span style={{ paddingLeft: '6em' }}>{checked}</span>,
       onOk() {
-            runAndDispatch('kzAccount', 'kazoo_account/update', {
-              method: 'PATCH',
-              account_id: kazoo_account.data.id,
-              data: { record_call: checked },
-            });
+        runAndDispatch('kzAccount', 'kazoo_account/update', {
+          method: 'PATCH',
+          account_id: kazoo_account.data.id,
+          data: { record_call: checked },
+        });
       },
       onCancel() {},
     });
@@ -77,7 +80,7 @@ const GeneralSettingsWidget = props => {
 
   const menuAccountMusicOnHold = (
     <Menu selectedKeys={[]} onClick={onMediaSelect}>
-      <Menu.Item key=''>Default music</Menu.Item>
+      <Menu.Item key="">Default music</Menu.Item>
       {kazoo_account_media.data.map(media => (
         <Menu.Item key={media.id}>{media.name}</Menu.Item>
       ))}
@@ -91,14 +94,35 @@ const GeneralSettingsWidget = props => {
     const mediaBag = mediaJObj ? { media_id: key } : {};
     confirm({
       title: 'You are about to change Music on hold:',
-      content: <span style={{ paddingLeft: '6em' }}>
-	         {currMediaName}
-	       </span>,
+      content: <span style={{ paddingLeft: '6em' }}>{currMediaName}</span>,
       onOk() {
         runAndDispatch('kzAccount', 'kazoo_account/update', {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
           data: { music_on_hold: mediaBag },
+        });
+      },
+      onCancel() {},
+    });
+  }
+
+  const menuAccountDialplan = (
+    <Menu selectedKeys={[]} onClick={onAccountDialplanSelect}>
+      {Object.keys(accountDialplans).map(dpKey => (
+        <Menu.Item key={dpKey}>{dpKey}</Menu.Item>
+      ))}
+    </Menu>
+  );
+
+  function onAccountDialplanSelect({ key }) {
+    confirm({
+      title: 'You are about to change dialplan',
+      content: <span style={{ paddingLeft: '6em' }}>To: {key}</span>,
+      onOk() {
+        runAndDispatch('kzAccount', 'kazoo_account/update', {
+          method: 'PATCH',
+          account_id: kazoo_account.data.id,
+          data: { dial_plan: { system: [key] } },
         });
       },
       onCancel() {},
@@ -112,18 +136,18 @@ const GeneralSettingsWidget = props => {
         id: 'telephony.main_account_number',
         defaultMessage: 'Main account number',
       }),
-      value: <AccountMainNumber />
+      value: <AccountMainNumber />,
     },
     {
       key: '11',
       name: formatMessage({
-	id: 'telephony.account_language',
-	defaultMessage: 'Account language'
+        id: 'telephony.account_language',
+        defaultMessage: 'Account language',
       }),
       value: (
         <Dropdown overlay={menuAccountLanguage} trigger={['click']}>
           <a className="ant-dropdown-link" href="#">
-            {kazoo_account.data.language} <Icon type="down" />
+            {kazoo_account.data ? kazoo_account.data.language : null} <Icon type="down" />
           </a>
         </Dropdown>
       ),
@@ -136,7 +160,7 @@ const GeneralSettingsWidget = props => {
       }),
       value: (
         <Switch
-	  size='small'
+          size="small"
           checked={kazoo_account.data ? kazoo_account.data.record_call : false}
           onChange={onCallRecordingSwitch}
         />
@@ -155,7 +179,7 @@ const GeneralSettingsWidget = props => {
     {
       key: '5',
       name: formatMessage({ id: 'telephony.account_timezone', defaultMessage: 'Account timezone' }),
-      value: <AccountTimezone />
+      value: <AccountTimezone />,
     },
     {
       key: '6',
@@ -163,7 +187,7 @@ const GeneralSettingsWidget = props => {
       value: (
         <Dropdown overlay={menuAccountMusicOnHold} trigger={['click']}>
           <a className="ant-dropdown-link" href="#">
-            { mediaName } <Icon type="down" />
+            {mediaName} <Icon type="down" />
           </a>
         </Dropdown>
       ),
@@ -171,12 +195,23 @@ const GeneralSettingsWidget = props => {
     {
       key: '7',
       name: formatMessage({ id: 'telephony.dialplan', defaultMessage: 'Dialplan' }),
-      value: 'Dialplan'
+      value: (
+        <Dropdown overlay={menuAccountDialplan} trigger={['click']}>
+          <a className="ant-dropdown-link" href="#">
+            {kazoo_account.data
+              ? kazoo_account.data.dial_plan
+                ? kazoo_account.data.dial_plan.system
+                : null
+              : null}{' '}
+            <Icon type="down" />
+          </a>
+        </Dropdown>
+      ),
     },
     {
       key: '8',
       name: formatMessage({ id: 'telephony.outbound_routing', defaultMessage: 'Outbound routing' }),
-      value: 'Outbound routing'
+      value: 'Outbound routing',
     },
   ];
 
@@ -191,7 +226,7 @@ const GeneralSettingsWidget = props => {
       title: 'Value',
       dataIndex: 'value',
       key: 'value',
-//      align: 'center',
+      //      align: 'center',
     },
   ];
 
