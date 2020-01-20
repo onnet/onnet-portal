@@ -1,7 +1,7 @@
 import { AnyAction, Reducer } from 'redux';
 
 import { EffectsCommandMap } from 'dva';
-import { AccountMedia } from '../services/kazoo-telephony';
+import { AccountCallflow } from '../services/kazoo-telephony';
 
 export type Effect = (
   action: AnyAction,
@@ -21,23 +21,21 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'kazoo_account_media',
+  namespace: 'kz_cf_details',
 
-  state: {
-    data: [],
-  },
+  state: { },
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const response = yield call(AccountMedia, { ...payload, method: 'GET' });
+      const response = yield call(AccountCallflow, { ...payload, method: 'GET' });
       yield put({
         type: 'update',
-        payload: response,
+        payload: response.data,
       });
     },
     *flush(_, { put }) {
       yield put({
-        type: 'update',
+        type: 'flush_all',
         payload: {},
       });
     },
@@ -45,7 +43,10 @@ const Model: ModelType = {
 
   reducers: {
     update(state, { payload }) {
-      return { ...payload };
+      return { ...state, [payload.id]: payload, };
+    },
+    flush_all(state, { payload }) {
+      return { payload };
     },
   },
 };

@@ -1,13 +1,6 @@
 import { AnyAction, Reducer } from 'redux';
-
 import { EffectsCommandMap } from 'dva';
-
-function isArrayEqual(array1, array2) {
-  return (
-    array1.length === array2.length &&
-    array1.sort().every((value, index) => value === array2.sort()[index])
-  );
-}
+import { isArrayEqual } from '../utils/subroutine';
 
 export type Effect = (
   action: AnyAction,

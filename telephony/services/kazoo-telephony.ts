@@ -11,3 +11,11 @@ export function AccountMedia(params: FormDataTyp): Promise<any> {
 export function AccountDialplans(params: FormDataTyp): Promise<any> {
   return kzRequest(`${accountsUrl(params)}/dialplans`, params);
 }
+
+export function AccountCallflows(params: FormDataTyp): Promise<any> {
+  return kzRequest(`${accountsUrl(params)}/callflows`, params);
+}
+
+export function AccountCallflow(params: FormDataTyp): Promise<any> {
+	return kzRequest(`${accountsUrl(params)}/callflows/${params.callflow_id}`, params);
+}

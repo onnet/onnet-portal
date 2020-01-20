@@ -10,6 +10,7 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/services/kazoo';
 import AccountParagraph from '@/pages/onnet-portal/core/components/AccountParagraph';
 import AccountTimezone from './AccountTimezone';
 import AccountMainNumber from './AccountMainNumber';
+import AccountOutboundRouting from './AccountOutboundRouting';
 import { AccountDialplans } from '../../../services/kazoo-telephony.ts';
 
 import styles from '../../style.less';
@@ -211,7 +212,7 @@ const GeneralSettingsWidget = props => {
     {
       key: '8',
       name: formatMessage({ id: 'telephony.outbound_routing', defaultMessage: 'Outbound routing' }),
-      value: 'Outbound routing',
+      value: <AccountOutboundRouting />,
     },
   ];
 

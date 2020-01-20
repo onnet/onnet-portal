@@ -20,6 +20,10 @@ const AdminSettings = props => {
         type: 'kazoo_account_media/refresh',
         payload: { method: 'GET', account_id: kazoo_account.data.id },
       });
+      dispatch({
+        type: 'kz_cf_list/refresh',
+        payload: { method: 'GET', account_id: kazoo_account.data.id },
+      });
     }
   }, [kazoo_account]);
 

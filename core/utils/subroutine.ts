@@ -1,5 +1,12 @@
 import * as _ from 'loadsh';
 
+export function isArrayEqual(array1, array2) {
+  return (
+    array1.length === array2.length &&
+    array1.sort().every((value, index) => value === array2.sort()[index])
+  );
+}
+
 export function gregorianToDate(pTimestamp) {
   const timestamp = _.isString(pTimestamp) ? _.parseInt(pTimestamp) : pTimestamp;
   if (_.isNaN(timestamp) || !_.isNumber(timestamp)) {
