@@ -114,4 +114,5 @@ export default {
   'menu.accounting.payments': 'Оплата услуг',
   'menu.accounting.documents': 'Документы',
   'menu.accounting.statistics': 'Статистика',
+  'core.change_to': 'Изменить на',
 };

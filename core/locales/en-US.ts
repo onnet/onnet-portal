@@ -167,4 +167,5 @@ export default {
   'menu.accounting.payments': 'Payments',
   'menu.accounting.documents': 'Documents',
   'menu.accounting.statistics': 'Statistics',
+  'core.change_to': 'Change to',
 };

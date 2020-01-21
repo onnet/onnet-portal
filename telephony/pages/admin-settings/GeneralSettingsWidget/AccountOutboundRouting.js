@@ -28,9 +28,13 @@ const AccountOutboundRouting = props => {
               kz_cf_details[id].flow.data.hunt_account_id) ||
             kz_cf_details[id].flow.module === 'offnet'
           ) {
-            SetCurrRoutingMode('General routing');
+            SetCurrRoutingMode(
+              formatMessage({ id: 'telephony.general_routing', defaultMessage: 'General routing' }),
+            );
           } else if (kz_cf_details[id].flow.module === 'resources') {
-            SetCurrRoutingMode('Account defined');
+            SetCurrRoutingMode(
+              formatMessage({ id: 'telephony.account_defined', defaultMessage: 'Account defined' }),
+            );
           }
         } else {
           dispatch({
@@ -44,18 +48,37 @@ const AccountOutboundRouting = props => {
 
   const menuAccountOutboundRouting = (
     <Menu selectedKeys={[]} onClick={onAccountOutboundRoutingSelect}>
-      <Menu.Item key="general_routing">General routing</Menu.Item>
-      <Menu.Item key="account_defined">Account defined</Menu.Item>
+      <Menu.Item key="general_routing">
+        {formatMessage({ id: 'telephony.general_routing', defaultMessage: 'General routing' })}
+      </Menu.Item>
+      <Menu.Item key="account_defined">
+        {formatMessage({ id: 'telephony.account_defined', defaultMessage: 'Account defined' })}
+      </Menu.Item>
     </Menu>
   );
 
   function onAccountOutboundRoutingSelect(event) {
     const { key } = event;
     confirm({
-      title: 'Outbound routing',
+      title: formatMessage({
+        id: 'telephony.outbound_routing',
+        defaultMessage: 'Outbound routing',
+      }),
       content: (
         <span style={{ paddingLeft: '4em' }}>
-          Change to <b>{key === 'general_routing' ? 'General routing' : 'Account defined'}</b>?
+          {formatMessage({ id: 'core.change_to', defaultMessage: 'Change to' })}{' '}
+          <b>
+            {key === 'general_routing'
+              ? formatMessage({
+                  id: 'telephony.general_routing',
+                  defaultMessage: 'General routing',
+                })
+              : formatMessage({
+                  id: 'telephony.account_defined',
+                  defaultMessage: 'Account defined',
+                })}
+          </b>
+          ?
         </span>
       ),
       onOk() {
