@@ -4,11 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Button, Select, Icon, Modal } from 'antd';
+import { Button, Select, Icon, Modal, Dropdown, Menu } from 'antd';
 
 import { runAndDispatch } from '@/pages/onnet-portal/core/services/kazoo';
 import { isArrayEqual } from '@/pages/onnet-portal/core/utils/subroutine';
 import { AccountCallflow } from '../../../services/kazoo-telephony';
+
+const { confirm } = Modal;
 
 const AccountOutboundRouting = props => {
 
@@ -35,10 +37,48 @@ const AccountOutboundRouting = props => {
     }
   }, [kazoo_account, kz_cf_list, kz_cf_details]);
 
+  const menuAccountOutboundRouting = (
+    <Menu selectedKeys={[]} onClick={onAccountOutboundRoutingSelect}>
+      <Menu.Item key="general_routing">General routing</Menu.Item>
+      <Menu.Item key="account_defined">Account defined</Menu.Item>
+    </Menu>
+  );
+
+  function onAccountOutboundRoutingSelect(event) {
+    const { key } = event;
+	  console.log('onAccountOutboundRoutingSelect event: ', event),
+	  console.log('onAccountOutboundRoutingSelect key: ', key),
+    confirm({
+      title: 'Outbound routing',
+      content: <span style={{ paddingLeft: '4em' }}>
+	         Change to <b>
+	         {(key === 'general_routing') ?
+	           'General routing'
+	           :
+	           'Account defined'}</b>
+	         ?
+	       </span>,
+      onOk() {setOutboundRouting(key)},
+      onCancel() {},
+    });
+  }
+
+  function setOutboundRouting(routingType) {
+    console.log('setOutboundRouting routingType: ', routingType);
+  }
+
   return (
-    <>
-	  {routingModule} - {huntAccountId}
-    </>
+
+        <Dropdown overlay={menuAccountOutboundRouting} trigger={['click']}>
+          <a className="ant-dropdown-link" href="#">
+	  {
+           ((routingModule == 'resources' && huntAccountId) || routingModule == 'offnet') ?
+	   'General routing' : 
+	   ((routingModule == 'resources' && !huntAccountId) ? 'Account defined' : 'undefined' )
+          }
+            <Icon type="down" />
+          </a>
+        </Dropdown>
   );
 };
 
