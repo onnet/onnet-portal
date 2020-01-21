@@ -1,5 +1,18 @@
 import * as _ from 'loadsh';
 
+export function runAndDispatch(fnName, dsName, params) {
+  fnName(params).then(res => {
+    console.log('res');
+    console.log(res);
+    window.g_app._store.dispatch({
+      type: dsName,
+      payload: res,
+    });
+  });
+
+  return 0;
+}
+
 export function isArrayEqual(array1, array2) {
   return (
     array1.length === array2.length &&

@@ -23,7 +23,7 @@ export interface ModelType {
 const Model: ModelType = {
   namespace: 'kz_cf_list',
 
-  state: { },
+  state: {},
 
   effects: {
     *refresh({ payload }, { call, put }) {

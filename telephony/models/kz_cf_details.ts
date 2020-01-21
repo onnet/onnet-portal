@@ -23,14 +23,14 @@ export interface ModelType {
 const Model: ModelType = {
   namespace: 'kz_cf_details',
 
-  state: { },
+  state: {},
 
   effects: {
     *refresh({ payload }, { call, put }) {
       const response = yield call(AccountCallflow, { ...payload, method: 'GET' });
       yield put({
         type: 'update',
-        payload: response.data,
+        payload: response,
       });
     },
     *flush(_, { put }) {
@@ -43,7 +43,7 @@ const Model: ModelType = {
 
   reducers: {
     update(state, { payload }) {
-      return { ...state, [payload.id]: payload, };
+      return { ...state, [payload.data.id]: payload.data };
     },
     flush_all(state, { payload }) {
       return { payload };

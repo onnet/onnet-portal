@@ -17,5 +17,5 @@ export function AccountCallflows(params: FormDataTyp): Promise<any> {
 }
 
 export function AccountCallflow(params: FormDataTyp): Promise<any> {
-	return kzRequest(`${accountsUrl(params)}/callflows/${params.callflow_id}`, params);
+  return kzRequest(`${accountsUrl(params)}/callflows/${params.callflow_id}`, params);
 }
