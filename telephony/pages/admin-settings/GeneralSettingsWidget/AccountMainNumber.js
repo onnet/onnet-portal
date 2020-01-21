@@ -6,7 +6,8 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Button, Select, Icon, Modal } from 'antd';
 
-import { runAndDispatch } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
+import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const AccountMainNumber = props => {
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
@@ -37,7 +38,7 @@ const AccountMainNumber = props => {
   };
 
   const onMainNumberConfirm = () => {
-    runAndDispatch('kzAccount', 'kazoo_account/update', {
+    runAndDispatch(kzAccount, 'kazoo_account/update', {
       method: 'PATCH',
       account_id: kazoo_account.data.id,
       data: { caller_id: { external: { number: mainNumber, name: mainNumber } } },

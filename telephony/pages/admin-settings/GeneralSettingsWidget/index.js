@@ -6,7 +6,8 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Table, Card, Switch, Menu, Dropdown, Icon, Modal } from 'antd';
 
-import { runAndDispatch } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
+import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 import AccountParagraph from '@/pages/onnet-portal/core/components/AccountParagraph';
 import AccountTimezone from './AccountTimezone';
 import AccountMainNumber from './AccountMainNumber';
@@ -52,7 +53,7 @@ const GeneralSettingsWidget = props => {
       title: 'You are about to change account language:',
       content: <span style={{ paddingLeft: '6em' }}>{key}</span>,
       onOk() {
-        runAndDispatch('kzAccount', 'kazoo_account/update', {
+        runAndDispatch(kzAccount, 'kazoo_account/update', {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
           data: { language: key },
@@ -69,7 +70,7 @@ const GeneralSettingsWidget = props => {
         : 'You are about to switch call recording OFF',
       content: <span style={{ paddingLeft: '6em' }}>{checked}</span>,
       onOk() {
-        runAndDispatch('kzAccount', 'kazoo_account/update', {
+        runAndDispatch(kzAccount, 'kazoo_account/update', {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
           data: { record_call: checked },
@@ -97,7 +98,7 @@ const GeneralSettingsWidget = props => {
       title: 'You are about to change Music on hold:',
       content: <span style={{ paddingLeft: '6em' }}>{currMediaName}</span>,
       onOk() {
-        runAndDispatch('kzAccount', 'kazoo_account/update', {
+        runAndDispatch(kzAccount, 'kazoo_account/update', {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
           data: { music_on_hold: mediaBag },
@@ -120,7 +121,7 @@ const GeneralSettingsWidget = props => {
       title: 'You are about to change dialplan',
       content: <span style={{ paddingLeft: '6em' }}>To: {key}</span>,
       onOk() {
-        runAndDispatch('kzAccount', 'kazoo_account/update', {
+        runAndDispatch(kzAccount, 'kazoo_account/update', {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
           data: { dial_plan: { system: [key] } },

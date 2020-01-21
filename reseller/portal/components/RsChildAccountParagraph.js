@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Typography } from 'antd';
-import { runAndDispatch } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
+import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const { Paragraph } = Typography;
 
@@ -16,7 +17,7 @@ const RsChildAccountParagraph = props => {
           console.log(`props.currentText ${props.currentText}`);
           console.log(props.currentText !== updatedText);
           if (props.currentText !== updatedText) {
-            runAndDispatch('kzAccount', 'rs_child_account/update', {
+            runAndDispatch(kzAccount, 'rs_child_account/update', {
               method: 'PATCH',
               account_id: rs_child_account.data.id,
               data: { [props.fieldKey]: updatedText },

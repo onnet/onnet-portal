@@ -217,34 +217,3 @@ export async function kzSystemStatus(): Promise<any> {
     headers: JSON_HEADERS(),
   });
 }
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function runAndDispatch(fnName, dsName, params) {
-  // eslint-disable-next-line no-eval
-  eval(`${fnName}(params)`).then(res => {
-    console.log('res');
-    console.log(res);
-    window.g_app._store.dispatch({
-      type: dsName,
-      payload: res,
-    });
-  });
-
-  return 0;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function runAndDispatch2(fnName, dsName, params) {
-  // eslint-disable-next-line no-eval
-  eval(`${fnName}(params)`).then(res => {
-    console.log('res');
-    console.log(res);
-    window.g_app._store.dispatch({
-      type: dsName,
-      payload: { account_id: params.account_id },
-    });
-  });
-
-  return 0;
-}
-

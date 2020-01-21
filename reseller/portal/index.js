@@ -23,7 +23,8 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ResellerChildrenTable from './components/ResellerChildrenTable';
 import RsChildAccountParagraph from './components/RsChildAccountParagraph';
 import styles from './style.less';
-import { runAndDispatch, kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
+import { resellerStatus, kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
+import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const { Paragraph, Text } = Typography;
 
@@ -99,14 +100,14 @@ const ResellerPortal = props => {
   function switchResellerStatus(checked) {
     if (checked) {
       console.log(`${rs_child_account.data.id} to on switchResellerStatus to ${checked}`);
-      runAndDispatch('resellerStatus', 'rs_child_account/update', {
+      runAndDispatch(resellerStatus, 'rs_child_account/update', {
         method: 'PUT',
         account_id: rs_child_account.data.id,
         data: {},
       });
     } else {
       console.log(`${rs_child_account.data.id} to off switchResellerStatus to ${checked}`);
-      runAndDispatch('resellerStatus', 'rs_child_account/update', {
+      runAndDispatch(resellerStatus, 'rs_child_account/update', {
         method: 'DELETE',
         account_id: rs_child_account.data.id,
       });
@@ -185,7 +186,7 @@ const ResellerPortal = props => {
             onChange: updatedText => {
               if (rs_child_account.data) {
                 if (rs_child_account.data.name !== updatedText) {
-                  runAndDispatch('kzAccount', 'rs_child_account/update', {
+                  runAndDispatch(kzAccount, 'rs_child_account/update', {
                     method: 'PATCH',
                     account_id: rs_child_account.data.id,
                     data: { name: updatedText },
