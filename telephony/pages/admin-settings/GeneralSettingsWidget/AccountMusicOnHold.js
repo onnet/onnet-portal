@@ -33,7 +33,9 @@ const AccountMusicOnHold = props => {
 
   const menuAccountMusicOnHold = (
     <Menu selectedKeys={[]} onClick={onMediaSelect}>
-      <Menu.Item key="">Default music</Menu.Item>
+      <Menu.Item key="">
+        {formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' })}
+      </Menu.Item>
       {kazoo_account_media.data.map(media => (
         <Menu.Item key={media.id}>{media.name}</Menu.Item>
       ))}

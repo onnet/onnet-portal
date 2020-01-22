@@ -12,4 +12,5 @@ export default {
   'telephony.dialplan': 'План набора',
   'telephony.account_defined': 'Самостоятельно',
   'telephony.general_routing': 'Общая',
+  'telephony.default_music': 'Музыка по умолчанию',
 };

@@ -13,6 +13,7 @@ import AccountTimezone from './AccountTimezone';
 import AccountMainNumber from './AccountMainNumber';
 import AccountOutboundRouting from './AccountOutboundRouting';
 import AccountMusicOnHold from './AccountMusicOnHold';
+import AccountLanguage from './AccountLanguage';
 import { AccountDialplans } from '../../../services/kazoo-telephony.ts';
 
 import styles from '../../style.less';
@@ -31,29 +32,6 @@ const GeneralSettingsWidget = props => {
       });
     }
   }, [kazoo_account]);
-
-  const menuAccountLanguage = (
-    <Menu selectedKeys={[]} onClick={onAccountLanguageSelect}>
-      <Menu.Item key="ru-ru">ru-ru</Menu.Item>
-      <Menu.Item key="en-en">en-en</Menu.Item>
-    </Menu>
-  );
-
-  function onAccountLanguageSelect(event) {
-    const { key } = event;
-    confirm({
-      title: 'You are about to change account language:',
-      content: <span style={{ paddingLeft: '6em' }}>{key}</span>,
-      onOk() {
-        runAndDispatch(kzAccount, 'kazoo_account/update', {
-          method: 'PATCH',
-          account_id: kazoo_account.data.id,
-          data: { language: key },
-        });
-      },
-      onCancel() {},
-    });
-  }
 
   function onCallRecordingSwitch(checked) {
     confirm({
@@ -110,13 +88,7 @@ const GeneralSettingsWidget = props => {
         id: 'telephony.account_language',
         defaultMessage: 'Account language',
       }),
-      value: (
-        <Dropdown overlay={menuAccountLanguage} trigger={['click']}>
-          <a className="ant-dropdown-link" href="#">
-            {kazoo_account.data ? kazoo_account.data.language : null} <Icon type="down" />
-          </a>
-        </Dropdown>
-      ),
+      value: <AccountLanguage />,
     },
     {
       key: '2',
