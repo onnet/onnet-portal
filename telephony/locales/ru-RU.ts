@@ -12,5 +12,4 @@ export default {
   'telephony.dialplan': 'План набора',
   'telephony.account_defined': 'Самостоятельно',
   'telephony.general_routing': 'Общая',
-  'telephony.outbound_routing': 'Исходящая маршрутизация',
 };

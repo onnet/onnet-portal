@@ -13,5 +13,4 @@ export default {
   'telephony.default_music': 'Default music',
   'telephony.account_defined': 'Account defined',
   'telephony.general_routing': 'General routing',
-  'telephony.outbound_routing': 'Outbound routing',
 };

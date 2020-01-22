@@ -12,6 +12,7 @@ import AccountParagraph from '@/pages/onnet-portal/core/components/AccountParagr
 import AccountTimezone from './AccountTimezone';
 import AccountMainNumber from './AccountMainNumber';
 import AccountOutboundRouting from './AccountOutboundRouting';
+import AccountMusicOnHold from './AccountMusicOnHold';
 import { AccountDialplans } from '../../../services/kazoo-telephony.ts';
 
 import styles from '../../style.less';
@@ -19,26 +20,17 @@ import styles from '../../style.less';
 const { confirm } = Modal;
 
 const GeneralSettingsWidget = props => {
-  const [mediaName, setMediaName] = useState('');
   const [accountDialplans, setAccountDialplans] = useState({});
 
-  const { kazoo_account, kazoo_account_media } = props;
+  const { kazoo_account } = props;
 
   useEffect(() => {
     if (kazoo_account.data) {
-      const mediaObj = kazoo_account_media.data.find(
-        ({ id }) => id === kazoo_account.data.music_on_hold.media_id,
-      );
-      if (mediaObj) {
-        setMediaName(mediaObj.name);
-      } else {
-        setMediaName('Default music');
-      }
       AccountDialplans({ account_id: kazoo_account.data.id }).then(res => {
         if (res.data) setAccountDialplans(res.data);
       });
     }
-  }, [kazoo_account, kazoo_account_media]);
+  }, [kazoo_account]);
 
   const menuAccountLanguage = (
     <Menu selectedKeys={[]} onClick={onAccountLanguageSelect}>
@@ -74,34 +66,6 @@ const GeneralSettingsWidget = props => {
           method: 'PATCH',
           account_id: kazoo_account.data.id,
           data: { record_call: checked },
-        });
-      },
-      onCancel() {},
-    });
-  }
-
-  const menuAccountMusicOnHold = (
-    <Menu selectedKeys={[]} onClick={onMediaSelect}>
-      <Menu.Item key="">Default music</Menu.Item>
-      {kazoo_account_media.data.map(media => (
-        <Menu.Item key={media.id}>{media.name}</Menu.Item>
-      ))}
-    </Menu>
-  );
-
-  function onMediaSelect(event) {
-    const { key } = event;
-    const mediaJObj = kazoo_account_media.data.find(({ id }) => id === key);
-    const currMediaName = mediaJObj ? mediaJObj.name : 'Default music';
-    const mediaBag = mediaJObj ? { media_id: key } : {};
-    confirm({
-      title: 'You are about to change Music on hold:',
-      content: <span style={{ paddingLeft: '6em' }}>{currMediaName}</span>,
-      onOk() {
-        runAndDispatch(kzAccount, 'kazoo_account/update', {
-          method: 'PATCH',
-          account_id: kazoo_account.data.id,
-          data: { music_on_hold: mediaBag },
         });
       },
       onCancel() {},
@@ -186,13 +150,7 @@ const GeneralSettingsWidget = props => {
     {
       key: '6',
       name: formatMessage({ id: 'telephony.music_on_hold', defaultMessage: 'Music on hold' }),
-      value: (
-        <Dropdown overlay={menuAccountMusicOnHold} trigger={['click']}>
-          <a className="ant-dropdown-link" href="#">
-            {mediaName} <Icon type="down" />
-          </a>
-        </Dropdown>
-      ),
+      value: <AccountMusicOnHold />,
     },
     {
       key: '7',
@@ -260,7 +218,6 @@ const GeneralSettingsWidget = props => {
   );
 };
 
-export default connect(({ kazoo_account, kazoo_account_media }) => ({
+export default connect(({ kazoo_account }) => ({
   kazoo_account,
-  kazoo_account_media,
 }))(GeneralSettingsWidget);
