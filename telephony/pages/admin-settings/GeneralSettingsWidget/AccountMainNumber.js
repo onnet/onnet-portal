@@ -85,7 +85,7 @@ const AccountMainNumber = props => {
           <Select
             style={{ width: '50%' }}
             onChange={onMainNumberSelect}
-            showSearch={true}
+            showSearch
             defaultValue={mainNumber}
           >
             {Object.keys(kazoo_account_numbers.data.numbers).map(number => (

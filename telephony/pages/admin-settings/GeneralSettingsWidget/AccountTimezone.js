@@ -71,7 +71,7 @@ const AccountTimezone = props => {
           <Select
             style={{ width: '50%' }}
             onChange={onTimezoneSelect}
-            showSearch={true}
+            showSearch
             defaultValue={kazoo_account.data ? kazoo_account.data.timezone : null}
           >
             {moment.tz.names().map(tzname => (
