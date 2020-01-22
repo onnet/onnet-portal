@@ -1,78 +1,21 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
-import React, { useState, useEffect } from 'react';
-import { connect } from 'dva';
+import React from 'react';
 
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Table, Card, Switch, Menu, Dropdown, Icon, Modal } from 'antd';
+import { Table, Card } from 'antd';
 
-import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
-import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
-import AccountParagraph from '@/pages/onnet-portal/core/components/AccountParagraph';
 import AccountTimezone from './AccountTimezone';
 import AccountMainNumber from './AccountMainNumber';
 import AccountOutboundRouting from './AccountOutboundRouting';
 import AccountMusicOnHold from './AccountMusicOnHold';
 import AccountLanguage from './AccountLanguage';
-import { AccountDialplans } from '../../../services/kazoo-telephony.ts';
+import AccountCallsRecording from './AccountCallsRecording';
+import AccountDialplan from './AccountDialplan';
 
 import styles from '../../style.less';
 
-const { confirm } = Modal;
-
-const GeneralSettingsWidget = props => {
-  const [accountDialplans, setAccountDialplans] = useState({});
-
-  const { kazoo_account } = props;
-
-  useEffect(() => {
-    if (kazoo_account.data) {
-      AccountDialplans({ account_id: kazoo_account.data.id }).then(res => {
-        if (res.data) setAccountDialplans(res.data);
-      });
-    }
-  }, [kazoo_account]);
-
-  function onCallRecordingSwitch(checked) {
-    confirm({
-      title: checked
-        ? 'You are about to switch call recording ON'
-        : 'You are about to switch call recording OFF',
-      content: <span style={{ paddingLeft: '6em' }}>{checked}</span>,
-      onOk() {
-        runAndDispatch(kzAccount, 'kazoo_account/update', {
-          method: 'PATCH',
-          account_id: kazoo_account.data.id,
-          data: { record_call: checked },
-        });
-      },
-      onCancel() {},
-    });
-  }
-
-  const menuAccountDialplan = (
-    <Menu selectedKeys={[]} onClick={onAccountDialplanSelect}>
-      {Object.keys(accountDialplans).map(dpKey => (
-        <Menu.Item key={dpKey}>{dpKey}</Menu.Item>
-      ))}
-    </Menu>
-  );
-
-  function onAccountDialplanSelect({ key }) {
-    confirm({
-      title: 'You are about to change dialplan',
-      content: <span style={{ paddingLeft: '6em' }}>To: {key}</span>,
-      onOk() {
-        runAndDispatch(kzAccount, 'kazoo_account/update', {
-          method: 'PATCH',
-          account_id: kazoo_account.data.id,
-          data: { dial_plan: { system: [key] } },
-        });
-      },
-      onCancel() {},
-    });
-  }
-
+const GeneralSettingsWidget = () => {
   const tableData = [
     {
       key: '1',
@@ -96,53 +39,38 @@ const GeneralSettingsWidget = props => {
         id: 'telephony.all_calls_recording',
         defaultMessage: 'All calls recording',
       }),
-      value: (
-        <Switch
-          size="small"
-          checked={kazoo_account.data ? kazoo_account.data.record_call : false}
-          onChange={onCallRecordingSwitch}
-        />
-      ),
-    },
-    {
-      key: '4',
-      name: 'AccountParagraph',
-      value: (
-        <AccountParagraph
-          fieldKey="name"
-          currentText={kazoo_account.data ? kazoo_account.data.name : 'Loading...'}
-        />
-      ),
+      value: <AccountCallsRecording />,
     },
     {
       key: '5',
-      name: formatMessage({ id: 'telephony.account_timezone', defaultMessage: 'Account timezone' }),
+      name: formatMessage({
+        id: 'telephony.account_timezone',
+        defaultMessage: 'Account timezone',
+      }),
       value: <AccountTimezone />,
     },
     {
       key: '6',
-      name: formatMessage({ id: 'telephony.music_on_hold', defaultMessage: 'Music on hold' }),
+      name: formatMessage({
+        id: 'telephony.music_on_hold',
+        defaultMessage: 'Music on hold',
+      }),
       value: <AccountMusicOnHold />,
     },
     {
       key: '7',
-      name: formatMessage({ id: 'telephony.dialplan', defaultMessage: 'Dialplan' }),
-      value: (
-        <Dropdown overlay={menuAccountDialplan} trigger={['click']}>
-          <a className="ant-dropdown-link" href="#">
-            {kazoo_account.data
-              ? kazoo_account.data.dial_plan
-                ? kazoo_account.data.dial_plan.system
-                : null
-              : null}{' '}
-            <Icon type="down" />
-          </a>
-        </Dropdown>
-      ),
+      name: formatMessage({
+        id: 'telephony.dialplan',
+        defaultMessage: 'Dialplan',
+      }),
+      value: <AccountDialplan />,
     },
     {
       key: '8',
-      name: formatMessage({ id: 'telephony.outbound_routing', defaultMessage: 'Outbound routing' }),
+      name: formatMessage({
+        id: 'telephony.outbound_routing',
+        defaultMessage: 'Outbound routing',
+      }),
       value: <AccountOutboundRouting />,
     },
   ];
@@ -190,6 +118,4 @@ const GeneralSettingsWidget = props => {
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
-}))(GeneralSettingsWidget);
+export default GeneralSettingsWidget;

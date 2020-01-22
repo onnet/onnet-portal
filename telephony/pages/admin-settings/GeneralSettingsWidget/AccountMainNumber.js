@@ -11,8 +11,18 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const AccountMainNumber = props => {
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
-  const [mainNumber, setMainNumber] = useState('no number selected');
-  const [modalTitle, setModalTitle] = useState('Account default Number');
+  const [mainNumber, setMainNumber] = useState(
+    formatMessage({
+      id: 'telephony.no_number_selected',
+      defaultMessage: 'no number selected',
+    }),
+  );
+  const [modalTitle, setModalTitle] = useState(
+    formatMessage({
+      id: 'telephony.account_default_number',
+      defaultMessage: 'Account default Number',
+    }),
+  );
 
   const { kazoo_account, kazoo_account_numbers } = props;
 
@@ -20,7 +30,10 @@ const AccountMainNumber = props => {
     try {
       return kazoo_account.data.caller_id.external.number;
     } catch (e) {
-      return 'no number selected';
+      return formatMessage({
+        id: 'telephony.no_number_selected',
+        defaultMessage: 'no number selected',
+      });
     }
   }
 
@@ -28,7 +41,12 @@ const AccountMainNumber = props => {
     if (kazoo_account.data) {
       const extNUm = externalNumber();
       setMainNumber(extNUm);
-      setModalTitle(`Account default mainNumber: ${extNUm}`);
+      setModalTitle(
+        `${formatMessage({
+          id: 'telephony.account_default_number',
+          defaultMessage: 'Account default Number',
+        })}: ${extNUm}`,
+      );
     }
   }, [kazoo_account]);
 

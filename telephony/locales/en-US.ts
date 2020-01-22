@@ -3,6 +3,7 @@ export default {
   'menu.telephony.callflow-builder': 'Callflow builder',
   'menu.telephony.settings': 'Settings',
   'telephony.all_calls_recording': 'All calls recording',
+  'telephony.calls_recording': 'Calls recording',
   'telephony.general_settings': 'General settings',
   'telephony.main_account_number': 'Main account number',
   'telephony.account_language': 'Account language',
@@ -13,4 +14,8 @@ export default {
   'telephony.default_music': 'Default music',
   'telephony.account_defined': 'Account defined',
   'telephony.general_routing': 'General routing',
+  'telephony.switch_on': 'Switch ON',
+  'telephony.switch_off': 'Switch OFF',
+  'telephony.no_number_selected': 'no number selected',
+  'telephony.account_default_number': 'Account default Number',
 };

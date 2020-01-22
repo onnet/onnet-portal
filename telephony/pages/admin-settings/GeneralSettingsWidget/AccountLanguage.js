@@ -24,7 +24,10 @@ const AccountLanguage = props => {
   function onAccountLanguageSelect(event) {
     const { key } = event;
     confirm({
-      title: formatMessage({ id: 'telephony.account_language', defaultMessage: 'Account language' }),
+      title: formatMessage({
+        id: 'telephony.account_language',
+        defaultMessage: 'Account language',
+      }),
       content: <span style={{ paddingLeft: '6em' }}>{key}</span>,
       onOk() {
         runAndDispatch(kzAccount, 'kazoo_account/update', {

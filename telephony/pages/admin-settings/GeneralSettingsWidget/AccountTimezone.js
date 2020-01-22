@@ -15,14 +15,24 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 const AccountTimezone = props => {
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
   const [timezone, setTimezone] = useState('');
-  const [modalTitle, setModalTitle] = useState('Account default timezone');
+  const [modalTitle, setModalTitle] = useState(
+    formatMessage({
+      id: 'telephony.account_timezone',
+      defaultMessage: 'Account timezone',
+    }),
+  );
 
   const { kazoo_account } = props;
 
   useEffect(() => {
     if (kazoo_account.data) {
       setTimezone(kazoo_account.data.timezone);
-      setModalTitle(`Account default timezone: ${kazoo_account.data.timezone}`);
+      setModalTitle(
+        `${formatMessage({
+          id: 'telephony.account_timezone',
+          defaultMessage: 'Account timezone',
+        })}: ${kazoo_account.data.timezone}`,
+      );
     }
   }, [kazoo_account]);
 
