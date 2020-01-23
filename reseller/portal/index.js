@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
+import * as _ from 'loadsh';
 import { formatMessage } from 'umi-plugin-react/locale';
+import funReactJson from '@/pages/onnet-portal/core/components/info_details';
 import {
   Tag,
   Table,
@@ -293,10 +295,20 @@ const ResellerPortal = props => {
                       src="https://api.adorable.io/avatars/24/accountdetails.png"
                     />
                   }
-                  title={formatMessage({
-                    id: 'reseller_portal.account_details',
-                    defaultMessage: 'Account details',
-                  })}
+                  title={
+                    <Fragment>
+                      {formatMessage({
+                        id: 'reseller_portal.account_details',
+                        defaultMessage: 'Account details',
+                      })}
+                      <Button
+                        type="link"
+                        onClick={() => funReactJson(_.omit(rs_child_account, 'auth_token'))}
+                      >
+                        <Icon type="info-circle" />
+                      </Button>
+                    </Fragment>
+                  }
                   description={
                     <Table
                       dataSource={tableData}
