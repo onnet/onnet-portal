@@ -11,6 +11,7 @@ const RsChildAccountParagraph = props => {
 
   return (
     <Paragraph
+      style={props.style}
       editable={{
         onChange: updatedText => {
           console.log(`updatedText ${updatedText}`);
