@@ -8,8 +8,6 @@ import AccountDetails from '../portal/AccountDetails';
 const ResellerSettings = props => {
   const { kazoo_account } = props;
 
-  console.log('ResellerSettings kazoo_account: ', kazoo_account);
-
   if (!kazoo_account.data) {
     return <Spin />;
   }

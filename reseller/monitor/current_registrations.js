@@ -38,14 +38,8 @@ class CurrentRegistrations extends Component {
     currentTableLength: 0,
   };
 
-  static getDerivedStateFromProps(props, state) {
-    console.log('Inside getDerivedStateFromProps');
-    console.log(props.kazoo_account.data);
-    console.log(!state.registrationsLoaded);
-    console.log(state);
-    console.log(props);
+  static getDerivedStateFromProps(props) {
     if (props.kazoo_account.data && !props.rs_registrations.data) {
-      console.log('Inside IF getDerivedStateFromProps');
       props.dispatch({
         type: 'rs_registrations/refresh',
         payload: { account_id: props.kazoo_login.data.account_id },
@@ -172,10 +166,7 @@ class CurrentRegistrations extends Component {
         render: (text, record) => (
           <Icon
             type="info-circle"
-            onClick={event => {
-              console.log('IAMS INFO OnClick event: ', event);
-              console.log(record);
-              console.log(record.key);
+            onClick={() => {
               const result = rs_registrations.data.find(
                 ({ username, realm }) => `${username}@${realm}` === record.username,
               );
