@@ -37,11 +37,8 @@ class ResellerChildSearch extends Component {
   handleSearch = value => {
     this.setState({ loading: true });
     if (value) {
-      console.log('handleSearch value');
-      console.log(value);
       fetch(value, data => this.setState({ data, loading: false }));
     } else {
-      console.log('No handleSearch value');
       this.setState({ data: [], loading: false });
     }
   };
@@ -50,11 +47,7 @@ class ResellerChildSearch extends Component {
     this.setState({ value });
   };
 
-  handleSelect = (value, option) => {
-    console.log('handleSelect value');
-    console.log(value);
-    console.log('handleSelect option');
-    console.log(option);
+  handleSelect = value => {
     window.g_app._store.dispatch({
       type: 'rs_child_account/refresh',
       payload: { account_id: value },
@@ -64,10 +57,9 @@ class ResellerChildSearch extends Component {
 
   render() {
     const options = this.state.data.map(d => <Option key={d.id}>{d.name}</Option>);
-    console.log('Select options');
-    console.log(options);
     return (
       <Select
+        key="ResellerChildSearchKey"
         showSearch
         loading={this.state.loading}
         value={this.state.value}

@@ -27,7 +27,6 @@ const Model: ModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      console.log('Reseller Refresh');
       const response = yield call(getResellerChildren, payload);
       yield put({
         type: 'update',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { Typography } from 'antd';
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
@@ -7,7 +7,15 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 const { Paragraph } = Typography;
 
 const RsChildAccountParagraph = props => {
+  const [fieldContent, setFieldContent] = useState('Loading...');
+
   const { rs_child_account } = props;
+
+  useEffect(() => {
+    if (rs_child_account.data) {
+      setFieldContent(rs_child_account.data[props.fieldKey]);
+    }
+  }, [rs_child_account]);
 
   return (
     <Paragraph
@@ -15,9 +23,9 @@ const RsChildAccountParagraph = props => {
       editable={{
         onChange: updatedText => {
           console.log(`updatedText ${updatedText}`);
-          console.log(`props.currentText ${props.currentText}`);
-          console.log(props.currentText !== updatedText);
-          if (props.currentText !== updatedText) {
+          console.log(`fieldContent ${fieldContent}`);
+          console.log(fieldContent !== updatedText);
+          if (fieldContent !== updatedText) {
             runAndDispatch(kzAccount, 'rs_child_account/update', {
               method: 'PATCH',
               account_id: rs_child_account.data.id,
@@ -27,7 +35,7 @@ const RsChildAccountParagraph = props => {
         },
       }}
     >
-      {props.currentText}
+      {fieldContent}
     </Paragraph>
   );
 };

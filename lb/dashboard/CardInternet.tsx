@@ -1,11 +1,20 @@
 import React from 'react';
+import { connect } from 'dva';
 import { Table, Tag, Card } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
 const CardInternet = props => {
-  const { lb_account, settings } = props;
+  const { lb_account = { data: {} }, settings = {} } = props;
+
+  if (lb_account.data.ip_addresses_by_tariff) {
+    if (lb_account.data.ip_addresses_by_tariff.length === 0) {
+      return null;
+    }
+  } else {
+    return null;
+  }
 
   const columns = [
     {
@@ -52,4 +61,7 @@ const CardInternet = props => {
   );
 };
 
-export default CardInternet;
+export default connect(({ lb_account, settings }) => ({
+  lb_account,
+  settings,
+}))(CardInternet);

@@ -29,8 +29,9 @@ import RsChildAccountParagraph from './components/RsChildAccountParagraph';
 import styles from './style.less';
 import { resellerStatus, kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
+import { dashboardTopColProps, cardProps } from '@/pages/onnet-portal/core/utils/props';
 
-const { Paragraph, Text } = Typography;
+const { Text } = Typography;
 
 const { confirm } = Modal;
 
@@ -154,25 +155,7 @@ const ResellerPortal = props => {
     {
       key: '1',
       name: 'Account Name',
-      value: (
-        <Paragraph
-          editable={{
-            onChange: updatedText => {
-              if (rs_child_account.data) {
-                if (rs_child_account.data.name !== updatedText) {
-                  runAndDispatch(kzAccount, 'rs_child_account/update', {
-                    method: 'PATCH',
-                    account_id: rs_child_account.data.id,
-                    data: { name: updatedText },
-                  });
-                }
-              }
-            },
-          }}
-        >
-          {rs_child_account.data ? rs_child_account.data.name : null}
-        </Paragraph>
-      ),
+      value: <RsChildAccountParagraph fieldKey="name" />,
     },
     {
       key: '2',
@@ -182,18 +165,9 @@ const ResellerPortal = props => {
       }),
       value: (
         <Switch
+          size="small"
           checked={rs_child_account.data ? rs_child_account.data.is_reseller : false}
           onChange={switchResellerStatus}
-        />
-      ),
-    },
-    {
-      key: '4',
-      name: 'RsChildAccountParagraph',
-      value: (
-        <RsChildAccountParagraph
-          fieldKey="name"
-          currentText={rs_child_account.data ? rs_child_account.data.name : 'Loading...'}
         />
       ),
     },
@@ -221,132 +195,121 @@ const ResellerPortal = props => {
       title: 'Value',
       dataIndex: 'value',
       key: 'value',
-      align: 'center',
+      //    align: 'center',
     },
   ];
 
   return (
-    <div>
-      <PageHeaderWrapper
-        key="pagewrapper"
-        extra={[<ResellerChildFlush />, <ResellerChildSearch />, <ResellerCreateChild />]}
-      >
-        {rs_child_account.data ? (
-          <>
-            <div style={{ backgroundColor: 'white', display: 'flow-root', marginBottom: '2em' }}>
+    <PageHeaderWrapper
+      key="pagewrapper"
+      extra={[
+        <ResellerChildFlush key="extraFlush" />,
+        <ResellerChildSearch key="extraSearch" />,
+        <ResellerCreateChild key="extraCreate" />,
+      ]}
+    >
+      {rs_child_account.data ? (
+        <Fragment>
+          <div style={{ backgroundColor: 'white', display: 'flow-root', marginBottom: '2em' }}>
+            <Button
+              key="test1122"
+              type="link"
+              style={{ float: 'left', margin: '1em', display: 'flex' }}
+            >
+              <Avatar
+                shape="square"
+                src={
+                  rs_child_account.data.name
+                    ? `https://api.adorable.io/avatars/24/${encodeURIComponent(
+                        rs_child_account.data.name,
+                      )}.png`
+                    : 'https://api.adorable.io/avatars/24/justfunnyaccount.png'
+                }
+              />
+              <RsChildAccountParagraph
+                fieldKey="name"
+                style={{ fontSize: '1.5em', paddingLeft: '1em' }}
+                currentText={rs_child_account.data ? rs_child_account.data.name : 'Loading...'}
+              />
+            </Button>
+            <Button
+              key="buttonkey3"
+              type="danger"
+              style={{ float: 'right', margin: '1em' }}
+              onClick={deleteChildAccount}
+            >
+              {formatMessage({
+                id: 'reseller_portal.delete_account',
+                defaultMessage: 'Delete Account',
+              })}
+            </Button>
+            <Dropdown key="dropdownkey1" overlay={menu}>
               <Button
-                key="test1122"
-                type="link"
-                style={{ float: 'left', margin: '1em', display: 'flex' }}
-              >
-                <Avatar
-                  src={
-                    rs_child_account.data.name
-                      ? `https://api.adorable.io/avatars/24/${encodeURIComponent(
-                          rs_child_account.data.name,
-                        )}.png`
-                      : 'https://api.adorable.io/avatars/24/justfunnyaccount.png'
-                  }
-                />
-                <RsChildAccountParagraph
-                  fieldKey="name"
-                  style={{ fontSize: '1.5em', paddingLeft: '1em' }}
-                  currentText={rs_child_account.data ? rs_child_account.data.name : 'Loading...'}
-                />
-              </Button>
-              <Button
-                key="buttonkey3"
-                type="danger"
-                style={{ float: 'right', margin: '1em' }}
-                onClick={deleteChildAccount}
+                key="buttonkey2"
+                type="primary"
+                style={{ float: 'right', margin: '1em 0em 1em 1em' }}
               >
                 {formatMessage({
-                  id: 'reseller_portal.delete_account',
-                  defaultMessage: 'Delete Account',
+                  id: 'reseller_portal.mask_account',
+                  defaultMessage: 'Mask Account',
                 })}
+                <Icon type="down" />
               </Button>
-              <Dropdown key="dropdownkey1" overlay={menu}>
-                <Button
-                  key="buttonkey2"
-                  type="primary"
-                  style={{ float: 'right', margin: '1em 0em 1em 1em' }}
-                >
-                  {formatMessage({
-                    id: 'reseller_portal.mask_account',
-                    defaultMessage: 'Mask Account',
-                  })}
-                  <Icon type="down" />
-                </Button>
-              </Dropdown>
-            </div>
+            </Dropdown>
+          </div>
 
-            <Row gutter={16}>
-              <Col key="colkey1" span={12}>
-                <Card hoverable className={styles.card}>
-                  <Card.Meta
-                    avatar={
-                      <img
-                        alt=""
-                        className={styles.cardAvatar}
-                        src="https://api.adorable.io/avatars/24/accountdetails.png"
-                      />
-                    }
-                    title={
-                      <Fragment>
-                        {formatMessage({
-                          id: 'reseller_portal.account_details',
-                          defaultMessage: 'Account details',
-                        })}
-                        <Button
-                          type="link"
-                          onClick={() => funReactJson(_.omit(rs_child_account, 'auth_token'))}
-                        >
-                          <Icon type="info-circle" />
-                        </Button>
-                      </Fragment>
-                    }
-                    description={
-                      <Table
-                        dataSource={tableData}
-                        columns={columns}
-                        pagination={false}
-                        showHeader={false}
-                        size="small"
-                      />
-                    }
-                  />
-                </Card>
-              </Col>
-              <Col key="colkey2" span={12}>
-                <Card hoverable className={styles.card}>
-                  <Card.Meta
-                    avatar={
-                      <img
-                        alt=""
-                        className={styles.cardAvatar}
-                        src="https://api.adorable.io/avatars/24/billingdetails.png"
-                      />
-                    }
-                    title={<a>Billing details</a>}
-                    description={
-                      <Table
-                        dataSource={tableData}
-                        columns={columns}
-                        pagination={false}
-                        showHeader={false}
-                        size="small"
-                      />
-                    }
-                  />
-                </Card>
-              </Col>
-            </Row>
-          </>
-        ) : (
-          <ResellerChildrenTable />
-        )}
-      </PageHeaderWrapper>
-    </div>
+          <Row gutter={16}>
+            <Col key="colkey1" {...dashboardTopColProps}>
+              <Card hoverable className={styles.card} {...cardProps}>
+                <Card.Meta
+                  title={
+                    <Fragment>
+                      {formatMessage({
+                        id: 'reseller_portal.account_details',
+                        defaultMessage: 'Account details',
+                      })}
+                      <Button
+                        type="link"
+                        onClick={() => funReactJson(_.omit(rs_child_account, 'auth_token'))}
+                      >
+                        <Icon type="info-circle" />
+                      </Button>
+                    </Fragment>
+                  }
+                  description={
+                    <Table
+                      dataSource={tableData}
+                      columns={columns}
+                      pagination={false}
+                      showHeader={false}
+                      size="small"
+                    />
+                  }
+                />
+              </Card>
+            </Col>
+            <Col key="colkey2" {...dashboardTopColProps}>
+              <Card hoverable className={styles.card} {...cardProps}>
+                <Card.Meta
+                  title={<a>Billing details</a>}
+                  description={
+                    <Table
+                      dataSource={tableData}
+                      columns={columns}
+                      pagination={false}
+                      showHeader={false}
+                      size="small"
+                    />
+                  }
+                />
+              </Card>
+            </Col>
+          </Row>
+        </Fragment>
+      ) : (
+        <ResellerChildrenTable />
+      )}
+    </PageHeaderWrapper>
   );
 };
 

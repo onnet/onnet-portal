@@ -30,7 +30,6 @@ export const MAYBE_SUPER_DUPER = () => {
 };
 
 export function kzRequest(url, params: FormDataTyp): Promise<any> {
-  console.log('inside kzRequest');
   let dataBag;
   switch (params.method) {
     case 'GET':
@@ -42,14 +41,12 @@ export function kzRequest(url, params: FormDataTyp): Promise<any> {
       break;
 
     default:
-      console.log('inside default');
       dataBag = {
         method: params.method,
         headers: JSON_HEADERS(),
         data: { data: params.data },
       };
   }
-
   console.log('dataBag: ', dataBag);
   return request(url, dataBag);
 }
@@ -88,7 +85,6 @@ function userUrl(params) {
   const redux_state = window.g_app._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/users/${params.owner_id}`;
-  console.log(url);
   return url;
 }
 
@@ -96,7 +92,6 @@ function usersUrl(params) {
   const redux_state = window.g_app._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/users`;
-  console.log(url);
   return url;
 }
 
@@ -114,13 +109,9 @@ export function accountsUrl(params) {
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   if (MAYBE_SUPER_DUPER() && params.method === 'PUT') {
     url = `${API_URL_V2}/accounts`;
-    console.log(`Super_Duper Url: ${url}`);
   } else {
     url = `${API_URL_V2}/accounts/${params.account_id}`;
-    console.log(`Not a Super_Duper Url: ${url}`);
   }
-
-  console.log(url);
   return url;
 }
 
@@ -178,8 +169,6 @@ export async function getResellerSIPRegistrationsCount(params: FormDataTyp): Pro
   const url = redux_state.kazoo_account.data.superduper_admin
     ? `${API_URL_V2}/registrations/count`
     : `${API_URL_V2}/accounts/${params.account_id}/registrations/count`;
-  console.log('getResellerSIPRegistrationsCount url');
-  console.log(url);
   return request(url, {
     method: 'GET',
     headers: JSON_HEADERS(),

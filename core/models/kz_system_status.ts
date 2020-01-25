@@ -27,7 +27,6 @@ const KzSystemStatusModel: KzSystemStatusModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      console.log('model kz_system_status Refresh');
       const response = yield call(kzSystemStatus, payload);
       yield put({
         type: 'update',

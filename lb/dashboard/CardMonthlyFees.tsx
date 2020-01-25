@@ -1,12 +1,19 @@
 import React from 'react';
+import { connect } from 'dva';
 import { Table, Card } from 'antd';
-
 import { formatMessage } from 'umi-plugin-react/locale';
-
 import styles from '@/pages/onnet-portal/core/style.less';
 
 const CardMonthlyFees = props => {
-  const { lb_account } = props;
+  const { lb_account = { data: {} } } = props;
+
+  if (lb_account.data.monthly_fees) {
+    if (lb_account.data.monthly_fees.length === 0) {
+      return null;
+    }
+  } else {
+    return null;
+  }
 
   const columns = [
     {
@@ -65,4 +72,6 @@ const CardMonthlyFees = props => {
   );
 };
 
-export default CardMonthlyFees;
+export default connect(({ lb_account }) => ({
+  lb_account,
+}))(CardMonthlyFees);

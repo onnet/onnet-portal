@@ -202,7 +202,7 @@ class ResellerChildSearch extends Component {
     return (
       <Fragment>
         <Button
-          key="1"
+          key="ResellerCreateChildBtnKey1"
           type="primary"
           style={{ marginLeft: '1em', marginRight: '1em' }}
           onClick={this.showModal}
@@ -213,6 +213,7 @@ class ResellerChildSearch extends Component {
           })}
         </Button>
         <CollectionCreateForm
+          key="ResellerCreateChildFormKey2"
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}

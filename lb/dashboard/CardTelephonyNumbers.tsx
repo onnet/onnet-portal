@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'dva';
 import { Table, Tag, Card } from 'antd';
 import { findNumbers } from 'libphonenumber-js';
 import { formatMessage } from 'umi-plugin-react/locale';
@@ -7,7 +8,15 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '../style.less';
 
 const CardTelephonyNumbers = props => {
-  const { lb_account, settings } = props;
+  const { lb_account = { data: {} }, settings = {} } = props;
+
+  if (lb_account.data.phone_numbers_by_tariff) {
+    if (lb_account.data.phone_numbers_by_tariff.length === 0) {
+      return null;
+    }
+  } else {
+    return null;
+  }
 
   const columns = [
     {
@@ -65,4 +74,6 @@ const CardTelephonyNumbers = props => {
   );
 };
 
-export default CardTelephonyNumbers;
+export default connect(({ lb_account }) => ({
+  lb_account,
+}))(CardTelephonyNumbers);

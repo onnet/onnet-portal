@@ -19,7 +19,7 @@ const ResellerChildFlush = props => {
   }
 
   return (
-    <Button type="link" onClick={clearRsChild}>
+    <Button key="ResellerChildFlushKey" type="link" onClick={clearRsChild}>
       <Icon type="user-delete" />
     </Button>
   );

@@ -39,7 +39,6 @@ const ZoneInfo = props => {
       return <Redirect to="/int/dashboard" />;
     }
   } else {
-    console.log('kz_system_status: ', kz_system_status);
     dispatch({
       type: 'kz_system_status/refresh',
       payload: { account_id: kazoo_login.data.account_id },

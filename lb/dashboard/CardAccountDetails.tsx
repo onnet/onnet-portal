@@ -1,51 +1,51 @@
 import React, { Fragment } from 'react';
+import { connect } from 'dva';
 import { Table, Card } from 'antd';
-
 import { formatMessage } from 'umi-plugin-react/locale';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
 const CardAccountDetails = props => {
-  const { lb_account } = props;
+  const { lb_account = { data: {} } } = props;
+
+  if (!lb_account.data.account_info) {
+    return null;
+  }
 
   const tableData = [
     {
       key: 'CardAccountDetailsRowKey1',
-      name: lb_account.data ? <b>{lb_account.data.account_info.name}</b> : null,
+      name: <b>{lb_account.data.account_info.name}</b>,
     },
     {
       key: 'CardAccountDetailsRowKey2',
       name: 'Contact person',
-      value: lb_account.data ? lb_account.data.account_info.kont_person : null,
+      value: lb_account.data.account_info.kont_person,
     },
     {
       key: 'CardAccountDetailsRowKey3',
       name: 'Email',
-      value: lb_account.data ? (
-        lb_account.data.account_info.emails ? (
-          <Fragment>
-            {lb_account.data.account_info.emails.map(email => (
-              <Fragment key={`fragmentkey${email.replace(/[^A-Za-z0-9]/g, '')}`}>
-                <span key={`spankey${email.replace(/[^A-Za-z0-9]/g, '')}`}>{email} </span>
-              </Fragment>
-            ))}
-          </Fragment>
-        ) : null
+      value: lb_account.data.account_info.emails ? (
+        <Fragment>
+          {lb_account.data.account_info.emails.map(email => (
+            <Fragment key={`fragmentkey${email.replace(/[^A-Za-z0-9]/g, '')}`}>
+              <span key={`spankey${email.replace(/[^A-Za-z0-9]/g, '')}`}>{email} </span>
+            </Fragment>
+          ))}
+        </Fragment>
       ) : null,
     },
     {
       key: 'CardAccountDetailsRowKey4',
       name: 'Phone',
-      value: lb_account.data ? (
-        lb_account.data.account_info.phones ? (
-          <Fragment>
-            {lb_account.data.account_info.phones.map(phone => (
-              <Fragment key={`fragmentkey${phone.replace(/[^A-Za-z0-9]/g, '')}`}>
-                <span key={`spankey${phone.replace(/[^A-Za-z0-9]/g, '')}`}>{phone} </span>
-              </Fragment>
-            ))}
-          </Fragment>
-        ) : null
+      value: lb_account.data.account_info.phones ? (
+        <Fragment>
+          {lb_account.data.account_info.phones.map(phone => (
+            <Fragment key={`fragmentkey${phone.replace(/[^A-Za-z0-9]/g, '')}`}>
+              <span key={`spankey${phone.replace(/[^A-Za-z0-9]/g, '')}`}>{phone} </span>
+            </Fragment>
+          ))}
+        </Fragment>
       ) : null,
     },
   ];
@@ -114,4 +114,6 @@ const CardAccountDetails = props => {
   );
 };
 
-export default CardAccountDetails;
+export default connect(({ lb_account }) => ({
+  lb_account,
+}))(CardAccountDetails);

@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'dva';
+import { Spin } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { lbAccountInfo } from '@/pages/onnet-portal/core/services/zzlb';
 
 const AccountDashboard = props => {
   const { kazoo_account } = props;
 
-  useEffect(() => {
-    if (kazoo_account.data) {
-      lbAccountInfo({ account_id: kazoo_account.data.id }).then(respAccountInfo => {
-        console.log('respAccountInfo');
-        console.log(respAccountInfo);
-      });
-    }
-  }, [kazoo_account]);
+  if (!kazoo_account.data) {
+    return <Spin />;
+  }
 
-  return <PageHeaderWrapper>Account dashboard</PageHeaderWrapper>;
+  return (
+    <PageHeaderWrapper>
+      Account dashboard <b>{kazoo_account.data.name}</b>
+    </PageHeaderWrapper>
+  );
 };
 
 export default connect(({ kazoo_account }) => ({
