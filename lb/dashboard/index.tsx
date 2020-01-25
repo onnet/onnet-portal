@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Row, Col } from 'antd';
+import { List } from 'antd';
 
 import CardAccountDetails from './CardAccountDetails';
 import CardBillingDetails from './CardBillingDetails';
 import CardMonthlyFees from './CardMonthlyFees';
 import CardTelephonyNumbers from './CardTelephonyNumbers';
 import CardInternet from './CardInternet';
-import { dashboardTopColProps, cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 const LBAccountDashboard = props => {
-  const { dispatch, lb_account, kazoo_account } = props;
+  const { dispatch, kazoo_account } = props;
 
   useEffect(() => {
     if (kazoo_account.data) {
@@ -22,24 +21,25 @@ const LBAccountDashboard = props => {
     }
   }, [kazoo_account]);
 
+  const data = [
+    <CardAccountDetails key="CardAccountDetails" />,
+    <CardBillingDetails key="CardBillingDetails" />,
+    <CardInternet key="CardInternet" />,
+    <CardTelephonyNumbers key="CardTelephonyNumbers" />,
+    <CardMonthlyFees key="CardMonthlyFees" />,
+  ];
+
   return (
     <PageHeaderWrapper>
-      {lb_account.data ? (
-        <Row gutter={24}>
-          <Col key="colkey1" {...dashboardTopColProps}>
-            <CardAccountDetails />
-            <CardBillingDetails {...cardProps} />
-            <CardMonthlyFees {...cardProps} />
-            <CardInternet {...cardProps} />
-            <CardTelephonyNumbers {...cardProps} />
-          </Col>
-        </Row>
-      ) : null}
+      <List
+        grid={{ gutter: 24, xxl: 2, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
+        dataSource={data}
+        renderItem={item => <List.Item>{item}</List.Item>}
+      />
     </PageHeaderWrapper>
   );
 };
 
-export default connect(({ lb_account, kazoo_account }) => ({
-  lb_account,
+export default connect(({ kazoo_account }) => ({
   kazoo_account,
 }))(LBAccountDashboard);
