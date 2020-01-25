@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Button, Icon, Menu, Dropdown, Row, Modal, message, Avatar, Col } from 'antd';
+import { Button, Icon, Menu, Dropdown, Modal, message, Avatar, List } from 'antd';
 
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
@@ -11,7 +11,6 @@ import ResellerCreateChild from '@/pages/onnet-portal/reseller/portal/components
 import ResellerChildrenTable from './components/ResellerChildrenTable';
 import RsChildAccountParagraph from './components/RsChildAccountParagraph';
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
-import { dashboardTopColProps } from '@/pages/onnet-portal/core/utils/props';
 
 import AccountDetails from './AccountDetails';
 
@@ -116,6 +115,8 @@ const ResellerPortal = props => {
     });
   }
 
+  const data = [<AccountDetails key="AccountDetails1" />, <AccountDetails key="AccountDetails2" />];
+
   return (
     <PageHeaderWrapper
       key="pagewrapper"
@@ -175,12 +176,11 @@ const ResellerPortal = props => {
             </Dropdown>
           </div>
 
-          <Row gutter={16}>
-            <Col key="colkey1" {...dashboardTopColProps}>
-              <AccountDetails />
-              <AccountDetails />
-            </Col>
-          </Row>
+          <List
+            grid={{ gutter: 24, xxl: 2, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
+            dataSource={data}
+            renderItem={item => <List.Item>{item}</List.Item>}
+          />
         </Fragment>
       ) : (
         <ResellerChildrenTable />
