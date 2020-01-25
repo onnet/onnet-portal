@@ -15,10 +15,6 @@ const CardAccountDetails = props => {
 
   const tableData = [
     {
-      key: 'CardAccountDetailsRowKey1',
-      name: <b>{lb_account.data.account_info.name}</b>,
-    },
-    {
       key: 'CardAccountDetailsRowKey2',
       name: 'Contact person',
       value: lb_account.data.account_info.kont_person,
@@ -60,13 +56,13 @@ const CardAccountDetails = props => {
       render: (text, row, index) => {
         if (index === 0) {
           return {
-            children: <a key={`name${index}`}>{text}</a>,
+            children: <span key={`name${index}`}>{text}</span>,
             props: {
               colSpan: 2,
             },
           };
         }
-        return <a key={`name${index}`}>{text}</a>;
+        return <span key={`name${index}`}>{text}</span>;
       },
     },
     {

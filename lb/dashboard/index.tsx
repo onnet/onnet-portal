@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { List } from 'antd';
+import { List, Spin } from 'antd';
 
 import CardAccountDetails from './CardAccountDetails';
 import CardBillingDetails from './CardBillingDetails';
@@ -10,7 +10,7 @@ import CardTelephonyNumbers from './CardTelephonyNumbers';
 import CardInternet from './CardInternet';
 
 const LBAccountDashboard = props => {
-  const { dispatch, kazoo_account } = props;
+  const { dispatch, kazoo_account, lb_account } = props;
 
   useEffect(() => {
     if (kazoo_account.data) {
@@ -21,16 +21,20 @@ const LBAccountDashboard = props => {
     }
   }, [kazoo_account]);
 
+  if (!lb_account.data) {
+    return Spin;
+  }
+
   const data = [
-    <CardAccountDetails key="CardAccountDetails" />,
     <CardBillingDetails key="CardBillingDetails" />,
-    <CardInternet key="CardInternet" />,
+    <CardAccountDetails key="CardAccountDetails" />,
     <CardTelephonyNumbers key="CardTelephonyNumbers" />,
+    <CardInternet key="CardInternet" />,
     <CardMonthlyFees key="CardMonthlyFees" />,
   ];
 
   return (
-    <PageHeaderWrapper>
+    <PageHeaderWrapper title={lb_account.data.account_info.name}>
       <List
         grid={{ gutter: 24, xxl: 2, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
         dataSource={data}
@@ -40,6 +44,7 @@ const LBAccountDashboard = props => {
   );
 };
 
-export default connect(({ kazoo_account }) => ({
+export default connect(({ kazoo_account, lb_account }) => ({
   kazoo_account,
+  lb_account,
 }))(LBAccountDashboard);
