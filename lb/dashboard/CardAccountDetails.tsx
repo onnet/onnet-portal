@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'dva';
 import { Table, Card } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
@@ -87,7 +88,7 @@ const CardAccountDetails = props => {
   ];
 
   return (
-    <Card className={styles.card} {...props}>
+    <Card className={styles.card} {...cardProps}>
       <Card.Meta
         avatar={
           <img

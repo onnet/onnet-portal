@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Table, Card } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
+import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 const CardMonthlyFees = props => {
   const { lb_account = { data: {} } } = props;
@@ -43,7 +44,7 @@ const CardMonthlyFees = props => {
   ];
 
   return (
-    <Card className={styles.card} {...props}>
+    <Card className={styles.card} {...cardProps}>
       <Card.Meta
         avatar={
           <img

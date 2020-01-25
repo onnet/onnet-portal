@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Table, Tag, Card } from 'antd';
 import { findNumbers } from 'libphonenumber-js';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 /* import styles from '@/pages/onnet-portal/core/style.less'; */
 import styles from '../style.less';
@@ -46,7 +47,7 @@ const CardTelephonyNumbers = props => {
   ];
 
   return (
-    <Card className={styles.card} {...props}>
+    <Card className={styles.card} {...cardProps}>
       <Card.Meta
         avatar={
           <img
@@ -74,6 +75,7 @@ const CardTelephonyNumbers = props => {
   );
 };
 
-export default connect(({ lb_account }) => ({
+export default connect(({ lb_account, settings }) => ({
   lb_account,
+  settings,
 }))(CardTelephonyNumbers);

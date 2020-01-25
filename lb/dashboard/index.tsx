@@ -27,7 +27,7 @@ const LBAccountDashboard = props => {
       {lb_account.data ? (
         <Row gutter={24}>
           <Col key="colkey1" {...dashboardTopColProps}>
-            <CardAccountDetails {...cardProps} />
+            <CardAccountDetails />
             <CardBillingDetails {...cardProps} />
             <CardMonthlyFees {...cardProps} />
             <CardInternet {...cardProps} />

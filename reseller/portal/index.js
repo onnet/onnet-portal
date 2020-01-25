@@ -1,24 +1,8 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
-import * as _ from 'loadsh';
 import { formatMessage } from 'umi-plugin-react/locale';
-import funReactJson from '@/pages/onnet-portal/core/components/info_details';
-import {
-  Table,
-  Button,
-  Icon,
-  Menu,
-  Dropdown,
-  Row,
-  Modal,
-  message,
-  Avatar,
-  Card,
-  Col,
-  Switch,
-  Typography,
-} from 'antd';
+import { Button, Icon, Menu, Dropdown, Row, Modal, message, Avatar, Col } from 'antd';
 
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
@@ -26,12 +10,10 @@ import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components
 import ResellerCreateChild from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateChild';
 import ResellerChildrenTable from './components/ResellerChildrenTable';
 import RsChildAccountParagraph from './components/RsChildAccountParagraph';
-import styles from './style.less';
-import { resellerStatus, kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
-import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
-import { dashboardTopColProps, cardProps } from '@/pages/onnet-portal/core/utils/props';
+import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
+import { dashboardTopColProps } from '@/pages/onnet-portal/core/utils/props';
 
-const { Text } = Typography;
+import AccountDetails from './AccountDetails';
 
 const { confirm } = Modal;
 
@@ -75,23 +57,6 @@ const ResellerPortal = props => {
         : null}
     </Menu>
   );
-
-  function switchResellerStatus(checked) {
-    if (checked) {
-      console.log(`${rs_child_account.data.id} to on switchResellerStatus to ${checked}`);
-      runAndDispatch(resellerStatus, 'rs_child_account/update', {
-        method: 'PUT',
-        account_id: rs_child_account.data.id,
-        data: {},
-      });
-    } else {
-      console.log(`${rs_child_account.data.id} to off switchResellerStatus to ${checked}`);
-      runAndDispatch(resellerStatus, 'rs_child_account/update', {
-        method: 'DELETE',
-        account_id: rs_child_account.data.id,
-      });
-    }
-  }
 
   function handleMenuClick(e) {
     message.info(`Masking as ${e.item.props.user_username} @ ${e.item.props.account_name}.`);
@@ -150,54 +115,6 @@ const ResellerPortal = props => {
       onCancel() {},
     });
   }
-
-  const tableData = [
-    {
-      key: '1',
-      name: 'Account Name',
-      value: <RsChildAccountParagraph fieldKey="name" />,
-    },
-    {
-      key: '2',
-      name: formatMessage({
-        id: 'reseller_portal.reseller_status',
-        defaultMessage: 'Reseller status',
-      }),
-      value: (
-        <Switch
-          size="small"
-          checked={rs_child_account.data ? rs_child_account.data.is_reseller : false}
-          onChange={switchResellerStatus}
-        />
-      ),
-    },
-    {
-      key: '3',
-      name: 'Account status',
-      value: rs_child_account.data ? (
-        rs_child_account.data.enabled ? (
-          <Text type="primary">Active</Text>
-        ) : (
-          <Text type="danger">Blocked</Text>
-        )
-      ) : null,
-    },
-  ];
-
-  const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      width: '50%',
-    },
-    {
-      title: 'Value',
-      dataIndex: 'value',
-      key: 'value',
-      //    align: 'center',
-    },
-  ];
 
   return (
     <PageHeaderWrapper
@@ -260,49 +177,8 @@ const ResellerPortal = props => {
 
           <Row gutter={16}>
             <Col key="colkey1" {...dashboardTopColProps}>
-              <Card hoverable className={styles.card} {...cardProps}>
-                <Card.Meta
-                  title={
-                    <Fragment>
-                      {formatMessage({
-                        id: 'reseller_portal.account_details',
-                        defaultMessage: 'Account details',
-                      })}
-                      <Button
-                        type="link"
-                        onClick={() => funReactJson(_.omit(rs_child_account, 'auth_token'))}
-                      >
-                        <Icon type="info-circle" />
-                      </Button>
-                    </Fragment>
-                  }
-                  description={
-                    <Table
-                      dataSource={tableData}
-                      columns={columns}
-                      pagination={false}
-                      showHeader={false}
-                      size="small"
-                    />
-                  }
-                />
-              </Card>
-            </Col>
-            <Col key="colkey2" {...dashboardTopColProps}>
-              <Card hoverable className={styles.card} {...cardProps}>
-                <Card.Meta
-                  title={<a>Billing details</a>}
-                  description={
-                    <Table
-                      dataSource={tableData}
-                      columns={columns}
-                      pagination={false}
-                      showHeader={false}
-                      size="small"
-                    />
-                  }
-                />
-              </Card>
+              <AccountDetails />
+              <AccountDetails />
             </Col>
           </Row>
         </Fragment>

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Table, Tag, Card } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
@@ -37,7 +38,7 @@ const CardInternet = props => {
   ];
 
   return (
-    <Card className={styles.card} {...props}>
+    <Card className={styles.card} {...cardProps}>
       <Card.Meta
         avatar={
           <img
