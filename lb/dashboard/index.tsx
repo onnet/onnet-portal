@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { List, Spin } from 'antd';
+import { Spin } from 'antd';
+import Masonry from 'react-masonry-css';
 
 import CardAccountDetails from './CardAccountDetails';
 import CardBillingDetails from './CardBillingDetails';
 import CardMonthlyFees from './CardMonthlyFees';
 import CardTelephonyNumbers from './CardTelephonyNumbers';
 import CardInternet from './CardInternet';
+
+import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 
 const LBAccountDashboard = props => {
   const { dispatch, kazoo_account, lb_account } = props;
@@ -25,21 +28,19 @@ const LBAccountDashboard = props => {
     return Spin;
   }
 
-  const data = [
-    <CardBillingDetails key="CardBillingDetails" />,
-    <CardAccountDetails key="CardAccountDetails" />,
-    <CardTelephonyNumbers key="CardTelephonyNumbers" />,
-    <CardInternet key="CardInternet" />,
-    <CardMonthlyFees key="CardMonthlyFees" />,
-  ];
-
   return (
     <PageHeaderWrapper title={lb_account.data.account_info.name}>
-      <List
-        grid={{ gutter: 24, xxl: 2, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-        dataSource={data}
-        renderItem={item => <List.Item>{item}</List.Item>}
-      />
+      <Masonry
+        breakpointCols={masonryBreakpointCols}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        <CardBillingDetails key="CardBillingDetails" />
+        <CardMonthlyFees key="CardMonthlyFees" />
+        <CardAccountDetails key="CardAccountDetails" />
+        <CardTelephonyNumbers key="CardTelephonyNumbers" />
+        <CardInternet key="CardInternet" />
+      </Masonry>
     </PageHeaderWrapper>
   );
 };

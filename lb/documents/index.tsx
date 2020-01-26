@@ -1,10 +1,12 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
+import Masonry from 'react-masonry-css';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Row, Col, Button, DatePicker } from 'antd';
+import { Button, DatePicker } from 'antd';
 import styles from '../style.less';
+import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 
 import CardProforma from './CardProforma';
 import CardActs from './CardActs';
@@ -15,21 +17,12 @@ const { MonthPicker } = DatePicker;
 
 const monthFormat = 'YYYY/MM';
 
-const topColResponsiveProps = {
-  xs: 24,
-  sm: 24,
-  md: 24,
-  lg: 24,
-  xl: 24,
-  xxl: 12,
-};
-
 const CardProps = {
   style: { marginBottom: 24 },
 };
 
 const LbFinanceDetails = props => {
-  const { dispatch, lb_documents, kazoo_account } = props;
+  const { dispatch, lb_documents = {}, kazoo_account } = props;
 
   const [selectedMonth, setSelectedMonth] = useState(
     moment()
@@ -91,46 +84,46 @@ const LbFinanceDetails = props => {
     </div>
   );
 
+  if (!lb_documents.data) {
+    return null;
+  }
+
   return (
     <PageHeaderWrapper extra={extraContent}>
-      {lb_documents ? (
-        lb_documents.data ? (
-          <Fragment>
-            <Row gutter={24}>
-              <Col key="colkey11" {...topColResponsiveProps}>
-                {lb_documents.data.proformas.length > 0 ? (
-                  <CardProforma
-                    {...CardProps}
-                    proformas={lb_documents.data.proformas}
-                    account_id={lb_documents.data.account_id}
-                  />
-                ) : null}
-                {lb_documents.data.proformas.length > 0 ? (
-                  <CardVatInvoices
-                    {...CardProps}
-                    proformas={lb_documents.data.vat_invoices}
-                    account_id={lb_documents.data.account_id}
-                  />
-                ) : null}
-                {lb_documents.data.proformas.length > 0 ? (
-                  <CardActs
-                    {...CardProps}
-                    proformas={lb_documents.data.acts}
-                    account_id={lb_documents.data.account_id}
-                  />
-                ) : null}
-                {lb_documents.data.calls_reports_pdf.length > 0 ? (
-                  <CardCallsReports
-                    {...CardProps}
-                    calls_reports_pdf={lb_documents.data.calls_reports_pdf}
-                    account_id={lb_documents.data.account_id}
-                  />
-                ) : null}
-              </Col>
-            </Row>
-          </Fragment>
-        ) : null
-      ) : null}
+      <Masonry
+        breakpointCols={masonryBreakpointCols}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {lb_documents.data.proformas.length > 0 ? (
+          <CardProforma
+            {...CardProps}
+            proformas={lb_documents.data.proformas}
+            account_id={lb_documents.data.account_id}
+          />
+        ) : null}
+        {lb_documents.data.proformas.length > 0 ? (
+          <CardVatInvoices
+            {...CardProps}
+            proformas={lb_documents.data.vat_invoices}
+            account_id={lb_documents.data.account_id}
+          />
+        ) : null}
+        {lb_documents.data.proformas.length > 0 ? (
+          <CardActs
+            {...CardProps}
+            proformas={lb_documents.data.acts}
+            account_id={lb_documents.data.account_id}
+          />
+        ) : null}
+        {lb_documents.data.calls_reports_pdf.length > 0 ? (
+          <CardCallsReports
+            {...CardProps}
+            calls_reports_pdf={lb_documents.data.calls_reports_pdf}
+            account_id={lb_documents.data.account_id}
+          />
+        ) : null}
+      </Masonry>
     </PageHeaderWrapper>
   );
 };
