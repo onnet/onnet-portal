@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Col, Row } from 'antd';
+import { Col, Row, List } from 'antd';
 
 import GeneralSettingsWidget from './GeneralSettingsWidget';
 
@@ -29,14 +29,13 @@ const AdminSettings = props => {
 
   return (
     <PageHeaderWrapper>
-      <Row gutter={16}>
-        <Col key="generalsettings" span={12}>
-          <GeneralSettingsWidget />
-        </Col>
-        <Col key="colkey2" span={12}>
-          <GeneralSettingsWidget />
-        </Col>
-      </Row>
+      <List
+        grid={{ gutter: 24, xxl: 2, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
+        dataSource={[<GeneralSettingsWidget key="GeneralSettingsWidget1"/>,
+		     <GeneralSettingsWidget key="GeneralSettingsWidget2"/>,
+		     <GeneralSettingsWidget key="GeneralSettingsWidget3"/>]}
+        renderItem={item => <List.Item>{item}</List.Item>}
+      />
     </PageHeaderWrapper>
   );
 };
