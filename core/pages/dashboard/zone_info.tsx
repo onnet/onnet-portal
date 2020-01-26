@@ -5,7 +5,10 @@ import router from 'umi/router';
 import Redirect from 'umi/redirect';
 import JSONPretty from 'react-json-pretty';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Tabs, Card, Table, List, Typography, Spin } from 'antd';
+import { Tabs, Card, Table, Typography, Spin } from 'antd';
+import Masonry from 'react-masonry-css';
+
+import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 
 import styles from './style.less';
 
@@ -172,6 +175,24 @@ const ZoneInfo = props => {
     router.push({ pathname: '/int/zone', state: { zone: e } });
   }
 
+  const items = list.map(item => (
+    <Card hoverable className={styles.card} key={item.node}>
+      <Card.Meta
+        avatar={<img alt="" className={styles.cardAvatar} src={select_avatar_img(item)} />}
+        title={<a>{item.node}</a>}
+        description={
+          <Table
+            dataSource={getDataSource(item)}
+            columns={columns}
+            pagination={false}
+            showHeader={false}
+            size="small"
+          />
+        }
+      />
+    </Card>
+  ));
+
   return (
     <PageHeaderWrapper
       title={
@@ -192,34 +213,13 @@ const ZoneInfo = props => {
         </Tabs>,
       ]}
     >
-      <div className={styles.cardList}>
-        <List
-          rowKey="id"
-          grid={{ gutter: 24, xxl: 2, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-          dataSource={list}
-          renderItem={item => (
-            <List.Item key={item.node}>
-              <Card hoverable className={styles.card}>
-                <Card.Meta
-                  avatar={
-                    <img alt="" className={styles.cardAvatar} src={select_avatar_img(item)} />
-                  }
-                  title={<a>{item.node}</a>}
-                  description={
-                    <Table
-                      dataSource={getDataSource(item)}
-                      columns={columns}
-                      pagination={false}
-                      showHeader={false}
-                      size="small"
-                    />
-                  }
-                />
-              </Card>
-            </List.Item>
-          )}
-        />
-      </div>
+      <Masonry
+        breakpointCols={masonryBreakpointCols}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {items}
+      </Masonry>
     </PageHeaderWrapper>
   );
 };
