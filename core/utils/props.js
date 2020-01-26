@@ -19,3 +19,9 @@ export const dashboardTopColProps = {
 export const cardProps = {
   style: { marginBottom: 24 },
 };
+
+export const masonryBreakpointCols = {
+  default: 3,
+  2500: 2,
+  1500: 1,
+};
