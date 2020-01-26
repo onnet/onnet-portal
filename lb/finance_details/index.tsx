@@ -5,23 +5,11 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Row, Col } from 'antd';
 import styles from '../style.less';
+import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 import CardPaymentsList from './CardPaymentsList';
 import CardOnlinePayments from './CardOnlinePayments';
 import CardWireTransfer from './CardWireTransfer';
-
-const topColResponsiveProps = {
-  xs: 24,
-  sm: 24,
-  md: 24,
-  lg: 24,
-  xl: 24,
-  xxl: 12,
-};
-
-const CardProps = {
-  style: { marginBottom: 24 },
-};
 
 const LbFinanceDetails = props => {
   const { dispatch, lb_account, kazoo_account } = props;
@@ -71,24 +59,26 @@ const LbFinanceDetails = props => {
       {lb_account.data ? (
         <Fragment>
           <Row gutter={24}>
-            <Col key="colkey11" {...topColResponsiveProps}>
+            <Col key="colkey11">
               <CardWireTransfer
-                {...CardProps}
-                lb_account={lb_account}
-                account_id={kazoo_account.data.id}
-              />
-            </Col>
-            <Col key="colkey12" {...topColResponsiveProps}>
-              <CardOnlinePayments
-                {...CardProps}
+                {...cardProps}
                 lb_account={lb_account}
                 account_id={kazoo_account.data.id}
               />
             </Col>
           </Row>
           <Row gutter={24}>
-            <Col key="colkey2" {...topColResponsiveProps}>
-              <CardPaymentsList {...CardProps} lb_account={lb_account} />
+            <Col key="colkey12">
+              <CardOnlinePayments
+                {...cardProps}
+                lb_account={lb_account}
+                account_id={kazoo_account.data.id}
+              />
+            </Col>
+          </Row>
+          <Row gutter={24}>
+            <Col key="colkey2">
+              <CardPaymentsList {...cardProps} lb_account={lb_account} />
             </Col>
           </Row>
         </Fragment>

@@ -2,6 +2,7 @@ export default {
   'menu.home': 'Home',
   'menu.dashboard': 'Dashboard',
   'navBar.lang': 'Languages',
+  'core.pagination': 'pagination',
   'core.auth_error': 'Authentication error',
   'core.please_try_again': 'Please try again',
   'menu.account.logout': 'Logout',

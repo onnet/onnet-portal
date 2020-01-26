@@ -5,6 +5,7 @@ export default {
   Confirm_password: 'Подтвердить пароль',
   Account_name: 'Учетная запись',
   Email_address: 'Эл. почта',
+  'core.pagination': 'постранично',
   'core.auth_error': 'Ошибка авторизации',
   'core.please_try_again': 'Пожалуйста повторите попытку',
   'menu.account_portal': 'Портал пользователя',
