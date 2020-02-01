@@ -26,15 +26,13 @@ const CardCDR = props => {
       const { cdrs } = lb_statistics.data;
       if (cdrs) {
         const currTL = cdrs.length;
-        const totalMinutes = cdrs.reduce((acc, call) => acc + parseInt(call.duration, 10), 0);
-        console.log('useEffect totalMinutes: ', totalMinutes);
-        const totalAmount = cdrs.reduce((acc, call) => acc + parseFloat(call.amount), 0.0);
-        console.log('useEffect totalAmount: ', totalAmount);
+        const totMs = cdrs.reduce((acc, call) => acc + parseInt(call.duration, 10), 0);
+        const totAm = cdrs.reduce((acc, call) => acc + parseFloat(call.amount), 0.0);
         setCurrentTableLength(currTL);
+        setTotalAmount(totAm);
+        setTotalMinutes(totMs);
         setCurrentFilter({});
         setSearchText('');
-        setTotalAmount(totalAmount);
-        setTotalMinutes(totalMinutes);
       }
     }
   }, [lb_statistics]);
@@ -107,8 +105,6 @@ const CardCDR = props => {
       />
     ),
   });
-
-  const countSelectedRows = () => `Selected rows amount: ${currentTableLength}`;
 
   const columns = [
     {
@@ -221,21 +217,18 @@ const CardCDR = props => {
               },
             })}
             onChange={(filter, sorter, { currentDataSource = [] }) => {
-              const totalMinutes = currentDataSource.reduce(
+              const totMs = currentDataSource.reduce(
                 (acc, call) => acc + parseInt(call.duration, 10),
                 0,
               );
-              console.log('onChange totalMinutes: ', totalMinutes);
-              const totalAmount = currentDataSource.reduce(
+              const totAm = currentDataSource.reduce(
                 (acc, call) => acc + parseFloat(call.amount),
                 0.0,
               );
-              console.log('onChange totalAmount: ', totalAmount);
-              console.log('onChange sorter: ', sorter);
               setCurrentTableLength(currentDataSource.length);
               setCurrentFilter(filter);
-              setTotalAmount(totalAmount);
-              setTotalMinutes(totalMinutes);
+              setTotalAmount(totAm);
+              setTotalMinutes(totMs);
             }}
             footer={footer}
             style={{ backgroundColor: 'white' }}
