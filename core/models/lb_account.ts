@@ -27,12 +27,22 @@ const LbAccountModel: LbAccountModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const response = yield call(lbAccountInfo, payload);
-      yield put({
-        type: 'update',
-        payload: response,
-      });
-      window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
+      const redux_state = window.g_app._store.getState();
+      if (!redux_state.lb_account.disabled) {
+        const response = yield call(lbAccountInfo, payload);
+        if ( response.status === 404 ) {
+          yield put({
+            type: 'update',
+            payload: {disabled: true},
+          });
+        } else {
+          yield put({
+            type: 'update',
+            payload: response,
+          });
+          window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
+        }
+      }
     },
     *flush(_, { put }) {
       yield put({

@@ -141,7 +141,6 @@ class ResellerChildSearch extends Component {
   };
 
   showModal = () => {
-    console.log('test showModal');
     this.setState({ visible: true });
   };
 
