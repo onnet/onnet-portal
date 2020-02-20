@@ -31,9 +31,14 @@ const checkPermissions = <T, K>(
 
   const redux_state = window.g_app._store.getState();
   const currentAuthority = redux_state.authority ? redux_state.authority.currentAuthority : [];
+  const authorityException = authority.filter((element) => element.startsWith("!")).map((elem) => elem.substring(1));
 
-  // 数组处理
   if (Array.isArray(authority)) {
+    if (Array.isArray(currentAuthority)) {
+      if (currentAuthority.some(item => authorityException.includes(item))) {
+        return Exception;
+      }
+    }
     if (Array.isArray(currentAuthority)) {
       if (currentAuthority.some(item => authority.includes(item))) {
         return target;
