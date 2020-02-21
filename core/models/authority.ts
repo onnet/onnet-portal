@@ -35,6 +35,11 @@ const AuthorityModel: AuthorityModelType = {
         const superduper_admin = redux_state.kazoo_account.data.superduper_admin
           ? ['superduper_admin']
           : [];
+        const child_account_selected = redux_state.rs_child_account
+          ? redux_state.rs_child_account.data
+            ? ['child_account_selected']
+            : []
+          : [];
         const lanbilling = redux_state.lb_account
           ? redux_state.lb_account.data
             ? ['lanbilling']
@@ -48,7 +53,7 @@ const AuthorityModel: AuthorityModelType = {
         const account_id = redux_state.kazoo_account.data
           ? [redux_state.kazoo_account.data.id]
           : [];
-        const authority = priv_level.concat(reseller, superduper_admin, lanbilling, telephony, account_id);
+        const authority = priv_level.concat(reseller, superduper_admin, child_account_selected, lanbilling, telephony, account_id);
         if (!isArrayEqual(authority, redux_state.authority.currentAuthority)) {
           yield put({
             type: 'update',

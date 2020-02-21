@@ -31,16 +31,15 @@ const Model: ModelType = {
         type: 'update',
         payload: response,
       });
-      window.g_app._store.dispatch({
-        type: 'rs_child_users/refresh',
-        payload,
-      });
+      window.g_app._store.dispatch({ type: 'rs_child_users/refresh', payload });
+      window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
     },
     *flush(_, { put }) {
       yield put({
         type: 'update',
         payload: {},
       });
+      window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
     },
   },
 

@@ -13,6 +13,7 @@ import RsChildAccountParagraph from './components/RsChildAccountParagraph';
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 
 import AccountDetails from './AccountDetails';
+import UsersList from './UsersList';
 
 const { confirm } = Modal;
 
@@ -85,7 +86,7 @@ const ResellerPortal = props => {
     dispatch({
       type: 'rs_children/flush',
     });
-    if (rs_child_account.data.is_reseller) {
+    if (rs_child_account.data.is_reseller1) {
       router.push('/int/reseller_portal/accounts');
     } else {
       router.push('/int/dashboard');
@@ -115,7 +116,7 @@ const ResellerPortal = props => {
     });
   }
 
-  const data = [<AccountDetails key="AccountDetails1" />, <AccountDetails key="AccountDetails2" />];
+  const data = [<AccountDetails key="AccountDetails" />, <UsersList key="UsersList" />];
 
   return (
     <PageHeaderWrapper
