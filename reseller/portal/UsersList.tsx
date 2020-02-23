@@ -6,9 +6,10 @@ import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import ResellerCreateUser from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateUser';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
+import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 const UsersList = props => {
-  const { settings, rs_child_users } = props;
+  const { settings, rs_child_account, rs_child_users } = props;
 
   if (rs_child_users.data) {
     if (rs_child_users.data.length === 0) {
@@ -72,9 +73,14 @@ const UsersList = props => {
           style={{ color: settings.primaryColor }}
           onClick={event => {
             console.log('event', event);
-            const result = dataSource.find(({ id }) => id === record.id);
-            console.log('result', result);
-            info_details_fun(result);
+            console.log('record.id', record.id);
+            kzUser({ method: 'DELETE', account_id:  rs_child_account.data.id, owner_id: record.id }).then(uRes => {
+              console.log(uRes);
+              window.g_app._store.dispatch({
+                type: 'rs_child_users/refresh',
+                payload: { account_id: rs_child_account.data.id },
+              });
+            });
           }}
         />
       ),
@@ -129,7 +135,8 @@ const UsersList = props => {
   );
 };
 
-export default connect(({ settings, rs_child_users }) => ({
+export default connect(({ settings, rs_child_account, rs_child_users }) => ({
   settings,
+  rs_child_account,
   rs_child_users,
 }))(UsersList);
