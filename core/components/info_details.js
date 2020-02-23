@@ -18,7 +18,7 @@ const defaultProps = {
 
 export default function funReactJson(info_details) {
   Modal.info({
-    title: 'Registration details',
+    title: 'Details',
     width: 'max-content',
     maskClosable: true,
     content: <ReactJson src={info_details} {...defaultProps} />,

@@ -3,9 +3,9 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzAccount, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
-import { Button, Modal, Form, Input, Row, Col } from 'antd';
+import { Button, Modal, Form, Input, Row, Col, Icon } from 'antd';
 
-const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
+const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
   class extends React.Component {
     state = {
       confirmDirty: false,
@@ -17,6 +17,23 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
       if (!this.state.confirmDirty) {
         this.setState({ confirmDirty: !!value });
       }
+    };
+
+    compareToFirstEmail = (rule, value, callback) => {
+      const { form } = this.props;
+      if (value && value !== form.getFieldValue('email')) {
+        callback('Two email addresses that you enter is inconsistent!');
+      } else {
+        callback();
+      }
+    };
+
+    validateToNextEmail = (rule, value, callback) => {
+      const { form } = this.props;
+      if (value && this.state.confirmDirty) {
+        form.validateFields(['confirm_email'], { force: true });
+      }
+      callback();
     };
 
     compareToFirstPassword = (rule, value, callback) => {
@@ -43,8 +60,8 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
         <Modal
           visible={visible}
           title={formatMessage({
-            id: 'reseller_portal.create_new_account',
-            defaultMessage: 'Create New Account',
+            id: 'reseller_portal.create_new_user',
+            defaultMessage: 'Create New User',
           })}
           okText={formatMessage({
             id: 'reseller_portal.create_account_button',
@@ -56,24 +73,6 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
           <Form layout="vertical">
             <Row gutter={24}>
               <Col span={12}>
-                <Form.Item
-                  label={formatMessage({ id: 'Account_name', defaultMessage: 'Account name' })}
-                >
-                  {getFieldDecorator('name', {
-                    rules: [{ required: true, message: 'Please input Account Name!' }],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label={formatMessage({ id: 'Email_address', defaultMessage: 'Email address' })}
-                >
-                  {getFieldDecorator('email', {
-                    rules: [{ required: true, message: 'Please input Email address!' }],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
                 <Form.Item label={formatMessage({ id: 'Name', defaultMessage: 'Name' })}>
                   {getFieldDecorator('first_name', {
                     rules: [{ required: true, message: 'Please input Name!' }],
@@ -84,6 +83,25 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                 <Form.Item label={formatMessage({ id: 'Surname', defaultMessage: 'Surname' })}>
                   {getFieldDecorator('last_name', {
                     rules: [{ required: true, message: 'Please input Surname!' }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  label={formatMessage({ id: 'core.email_address', defaultMessage: 'Email address' })}
+                >
+                  {getFieldDecorator('email', {
+                    rules: [{ required: true, message: 'Please input Email address!' }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+
+              <Col span={12}>
+                <Form.Item
+                  label={formatMessage({ id: 'core.confirm_email_address', defaultMessage: 'Confirm email address' })}
+                >
+                  {getFieldDecorator('confirm_email', {
+                    rules: [{ required: true, message: 'Please input Email address!' }],
                   })(<Input />)}
                 </Form.Item>
               </Col>
@@ -135,7 +153,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   },
 );
 
-class ResellerChildSearch extends Component {
+class ResellerCreateUser extends Component {
   state = {
     visible: false,
   };
@@ -160,7 +178,6 @@ class ResellerChildSearch extends Component {
       }
 
       console.log('Received values of form: ', values);
-      const accountDataBag = { name: values.name, username: { billing: { email: values.email } } };
       const userDataBag = {
         username: values.email,
         first_name: values.first_name,
@@ -171,22 +188,18 @@ class ResellerChildSearch extends Component {
         password: values.password,
       };
 
-      console.log('accountDataBag: ', accountDataBag);
       console.log('userDataBag: ', userDataBag);
-      kzAccount({
-        method: 'PUT',
-        account_id: this.props.kazoo_account.data.id,
-        data: accountDataBag,
-      }).then(res => {
-        console.log(res);
-        kzUsers({ method: 'PUT', account_id: res.data.id, data: userDataBag }).then(uRes => {
+        kzUsers({
+          method: 'PUT',
+          account_id: this.props.rs_child_account.data.id,
+          data: userDataBag
+	}).then(uRes => {
           console.log(uRes);
           window.g_app._store.dispatch({
-            type: 'rs_child_account/refresh',
-            payload: { account_id: res.data.id },
+            type: 'rs_child_users/refresh',
+            payload: { account_id: this.props.rs_child_account.data.id },
           });
         });
-      });
 
       form.resetFields();
       this.setState({ visible: false });
@@ -198,20 +211,18 @@ class ResellerChildSearch extends Component {
   };
 
   render() {
+    const { btnstyle } = this.props;
     return (
       <Fragment>
         <Button
-          key="ResellerCreateChildBtnKey1"
-          type="primary"
-          style={{ marginLeft: '1em', marginRight: '1em' }}
+          key="ResellerCreateUserIconKey"
+          type="link"
           onClick={this.showModal}
+          style={btnstyle}
         >
-          {formatMessage({
-            id: 'reseller_portal.create_account',
-            defaultMessage: 'Create New Account',
-          })}
+          <Icon type="user-add" />
         </Button>
-        <CollectionCreateForm
+        <UserCreateForm
           key="ResellerCreateChildFormKey2"
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
@@ -223,8 +234,6 @@ class ResellerChildSearch extends Component {
   }
 }
 
-export default connect(({ kazoo_login, kazoo_account, rs_children }) => ({
-  kazoo_login,
-  kazoo_account,
-  rs_children,
-}))(ResellerChildSearch);
+export default connect(({ rs_child_account }) => ({
+  rs_child_account,
+}))(ResellerCreateUser);

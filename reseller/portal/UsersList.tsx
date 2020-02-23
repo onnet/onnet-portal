@@ -1,12 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { Table, Card, Button } from 'antd';
+import { Table, Card, Button, Icon } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+import ResellerCreateUser from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateUser';
+import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 
 const UsersList = props => {
-  const { rs_child_users } = props;
+  const { settings, rs_child_users } = props;
 
   if (rs_child_users.data) {
     if (rs_child_users.data.length === 0) {
@@ -15,6 +17,14 @@ const UsersList = props => {
   } else {
     return null;
   }
+
+  const [dataSource, setDataSource] = useState([]);
+
+  useEffect(() => {
+    if (rs_child_users.data) {
+      setDataSource(rs_child_users.data);
+    }
+  }, [rs_child_users]);
 
   const columns = [
     {
@@ -35,6 +45,57 @@ const UsersList = props => {
       key: 'last_name',
       align: 'center',
     },
+    {
+      dataIndex: 'id',
+      key: 'edit_user',
+      align: 'center',
+      render: (text, record) => (
+        <Icon
+          type="edit"
+          style={{ color: settings.primaryColor }}
+          onClick={event => {
+            console.log('event', event);
+            const result = dataSource.find(({ id }) => id === record.id);
+            console.log('result', result);
+            info_details_fun(result);
+          }}
+        />
+      ),
+    },
+    {
+      dataIndex: 'id',
+      key: 'delete_user',
+      align: 'center',
+      render: (text, record) => (
+        <Icon
+          type="delete"
+          style={{ color: settings.primaryColor }}
+          onClick={event => {
+            console.log('event', event);
+            const result = dataSource.find(({ id }) => id === record.id);
+            console.log('result', result);
+            info_details_fun(result);
+          }}
+        />
+      ),
+    },
+    {
+      dataIndex: 'id',
+      key: 'id',
+      align: 'center',
+      render: (text, record) => (
+        <Icon
+          type="info-circle"
+          style={{ color: settings.primaryColor }}
+          onClick={event => {
+            console.log('event', event);
+            const result = dataSource.find(({ id }) => id === record.id);
+            console.log('result', result);
+            info_details_fun(result);
+          }}
+        />
+      ),
+    },
   ];
 
   return (
@@ -48,9 +109,12 @@ const UsersList = props => {
           />
         }
         title={<Fragment>{formatMessage({
-          id: 'reseller_portal.account_users_list',
-          defaultMessage: 'Account users list',
-        })}<Button size="small" type="primary" style={{ float: 'right' }}>create new user</Button></Fragment>}
+                           id: 'reseller_portal.accounts_users',
+                           defaultMessage: "Account's Users",
+                         })}
+                         <ResellerCreateUser btnstyle={{ float: 'right' }} />
+               </Fragment>
+              }
         description={
           <Table
             dataSource={rs_child_users.data}
@@ -65,6 +129,7 @@ const UsersList = props => {
   );
 };
 
-export default connect(({ rs_child_users }) => ({
+export default connect(({ settings, rs_child_users }) => ({
+  settings,
   rs_child_users,
 }))(UsersList);
