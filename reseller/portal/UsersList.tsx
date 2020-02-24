@@ -222,9 +222,15 @@ const UsersList = props => {
       </Card>
       <Drawer
         title={
-          rs_child_user[selectedUser]
-            ? `Edit user ${rs_child_user[selectedUser].data.username}`
-            : null
+          rs_child_user[selectedUser] ? (
+            <span>
+              {formatMessage({ id: 'core.Edit_user', defaultMessage: 'Edit user' })}
+              <b style={{ color: settings.primaryColor }}>
+                {' '}
+                {rs_child_user[selectedUser].data.username}
+              </b>
+            </span>
+          ) : null
         }
         width="50%"
         placement="right"

@@ -19,6 +19,8 @@ export default {
   'core.Create_new_user': 'Создать пользователя',
   'core.switch_on': 'Включить',
   'core.switch_off': 'Выключить',
+  'core.Change_password': 'Изменить пароль',
+  'core.Edit_user': 'Редактировать полльзователя',
   'menu.account_portal': 'Портал пользователя',
   'menu.account_portal.settings': 'Учетная запись',
   'menu.account.center': 'Профиль',

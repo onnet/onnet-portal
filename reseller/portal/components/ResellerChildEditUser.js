@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Collapse } from 'antd';
+import { formatMessage } from 'umi-plugin-react/locale';
 
 const { Panel } = Collapse;
 
@@ -15,7 +16,10 @@ const ResellerChildEditUser = props => {
       <Panel header="This is panel header 1" key="1">
         <p>`Hello! ${rs_child_user[selectedUser].data.username}`</p>
       </Panel>
-      <Panel header="This is panel header 2" key="2">
+      <Panel
+        header={formatMessage({ id: 'core.Change_password', defaultMessage: 'Change password' })}
+        key="2"
+      >
         <p>`Hello! ${rs_child_user[selectedUser].data.first_name}`</p>
       </Panel>
       <Panel header="This is panel header 3" key="3">

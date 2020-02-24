@@ -16,6 +16,8 @@ export default {
   'core.Create_new_user': 'Create user',
   'core.switch_on': 'Switch ON',
   'core.switch_off': 'Switch OFF',
+  'core.Change_password': 'Change password',
+  'core.Edit_user': 'Edit user',
   'menu.account.logout': 'Logout',
   'user-login.login.userName': 'username',
   'user-login.login.password': 'password',

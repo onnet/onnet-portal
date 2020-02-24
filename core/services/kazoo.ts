@@ -47,6 +47,7 @@ export function kzRequest(url, params: FormDataTyp): Promise<any> {
         data: { data: params.data },
       };
   }
+  console.log('url: ', url);
   console.log('dataBag: ', dataBag);
   return request(url, dataBag);
 }
