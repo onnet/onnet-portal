@@ -14,8 +14,6 @@ export default {
   'telephony.default_music': 'Default music',
   'telephony.account_defined': 'Account defined',
   'telephony.general_routing': 'General routing',
-  'telephony.switch_on': 'Switch ON',
-  'telephony.switch_off': 'Switch OFF',
   'telephony.no_number_selected': 'no number selected',
   'telephony.account_default_number': 'Account default Number',
 };

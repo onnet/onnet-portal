@@ -23,8 +23,8 @@ const AccountCallsRecording = props => {
       content: (
         <span style={{ paddingLeft: '6em' }}>
           {checked
-            ? formatMessage({ id: 'telephony.switch_on', defaultMessage: 'Switch ON' })
-            : formatMessage({ id: 'telephony.switch_off', defaultMessage: 'Switch OFF' })}
+            ? formatMessage({ id: 'core.switch_on', defaultMessage: 'Switch ON' })
+            : formatMessage({ id: 'core.switch_off', defaultMessage: 'Switch OFF' })}
         </span>
       ),
       onOk() {

@@ -14,8 +14,6 @@ export default {
   'telephony.account_defined': 'Самостоятельно',
   'telephony.general_routing': 'Общая',
   'telephony.default_music': 'Музыка по умолчанию',
-  'telephony.switch_on': 'Включить',
-  'telephony.switch_off': 'Выключить',
   'telephony.no_number_selected': 'номер не выбран',
   'telephony.account_default_number': 'Основной номер',
 };

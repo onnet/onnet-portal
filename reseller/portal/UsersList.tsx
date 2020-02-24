@@ -46,24 +46,7 @@ const UsersList = props => {
         <Switch
           size="small"
           checked={rs_child_user[record.id] ? rs_child_user[record.id].data.enabled : false}
-          onChange={checked => {
-            console.log('checked: ', checked);
-            console.log('text: ', text);
-            console.log('record: ', record);
-            console.log('rs_child_user[record.id].data: ', rs_child_user[record.id].data);
-            kzUser({ method: 'PATCH',
-                     account_id:  rs_child_account.data.id,
-                     owner_id: record.id,
-                     data: {enabled: checked}
-            }).then(uRes => {
-              console.log(uRes);
-              dispatch({
-                type: 'rs_child_user/refresh',
-                payload: { account_id: rs_child_account.data.id, owner_id: record.id },
-              });
-            })
-            .catch(() => console.log('Oops errors!', record));
-          }}
+          onChange={checked => onUserEnableSwitch(checked, record)}
         />
       ),
     },
@@ -164,6 +147,35 @@ const UsersList = props => {
   const onDrawerClose = () => {
     setIsDrawerVisible(false);
   };
+
+  function onUserEnableSwitch(checked, record) {
+    confirm({
+      title: <p>{formatMessage({ id: 'core.User', defaultMessage: 'User' })}: {record.username}</p>,
+      content: (
+        <span style={{ paddingLeft: '6em' }}>
+          {checked
+            ? formatMessage({ id: 'core.switch_on', defaultMessage: 'Switch ON' })
+            : formatMessage({ id: 'core.switch_off', defaultMessage: 'Switch OFF' })}
+        </span>
+      ),
+      onOk() {
+        kzUser({ method: 'PATCH',
+                 account_id:  rs_child_account.data.id,
+                 owner_id: record.id,
+                 data: {enabled: checked}
+        }).then(uRes => {
+          console.log(uRes);
+          dispatch({
+            type: 'rs_child_user/refresh',
+            payload: { account_id: rs_child_account.data.id, owner_id: record.id },
+          });
+        })
+        .catch(() => console.log('Oops errors!', record));
+      },
+      onCancel() {},
+    });
+  }
+
 
   return (
     <Fragment>
