@@ -3,7 +3,15 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzAccount, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
-import { Button, Modal, Form, Input, Row, Col, Icon } from 'antd';
+import { Tooltip,
+	 Button,
+	 Modal,
+	 Form,
+	 Input,
+	 Row,
+	 Col,
+	 Icon
+} from 'antd';
 
 const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
   class extends React.Component {
@@ -60,7 +68,7 @@ const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
         <Modal
           visible={visible}
           title={formatMessage({
-            id: 'reseller_portal.create_new_user',
+            id: 'core.Create_new_user',
             defaultMessage: 'Create New User',
           })}
           okText={formatMessage({
@@ -214,14 +222,19 @@ class ResellerCreateUser extends Component {
     const { btnstyle } = this.props;
     return (
       <Fragment>
-        <Button
-          key="ResellerCreateUserIconKey"
-          type="link"
-          onClick={this.showModal}
-          style={btnstyle}
-        >
-          <Icon type="user-add" />
+        <Tooltip
+	  placement="leftTop"
+	  title={formatMessage({ id: 'core.Create_new_user', defaultMessage: 'Create new user!' })}
+	>
+          <Button
+            key="ResellerCreateUserIconKey"
+            type="link"
+            onClick={this.showModal}
+            style={btnstyle}
+          >
+            <Icon type="user-add" />
         </Button>
+	</Tooltip>
         <UserCreateForm
           key="ResellerCreateChildFormKey2"
           wrappedComponentRef={this.saveFormRef}

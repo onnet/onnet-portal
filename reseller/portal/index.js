@@ -97,7 +97,7 @@ const ResellerPortal = props => {
   function deleteChildAccount() {
     confirm({
       title: `Do you want to delete account ${rs_child_account.data.name}`,
-      content: `When clicked the OK button, this dialog will be closed after 1 second ${rs_child_account.data.id}`,
+      content: `Account ID: ${rs_child_account.data.id}`,
       onOk() {
         kzAccount({ method: 'DELETE', account_id: rs_child_account.data.id })
           .then(delRes => {

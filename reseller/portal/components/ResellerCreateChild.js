@@ -165,7 +165,7 @@ class ResellerChildSearch extends Component {
         username: values.email,
         first_name: values.first_name,
         last_name: values.last_name,
-        enaled: 'true',
+        enabled: 'true',
         priv_level: 'admin',
         email: values.email,
         password: values.password,
