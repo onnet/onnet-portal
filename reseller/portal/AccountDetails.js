@@ -46,7 +46,7 @@ const AccountDetails = props => {
     {
       key: '1',
       name: 'Account Name',
-      value: <RsChildAccountParagraph fieldKey="name" />,
+      value: <RsChildAccountParagraph fieldKey="name" style={{ marginBottom: '0' }} />,
     },
     {
       key: '2',
