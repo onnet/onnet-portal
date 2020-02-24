@@ -111,6 +111,9 @@ const BasicLayout: React.FC = props => {
       }, 60000);
       return () => {
         console.log('Unticking it!');
+        dispatch({
+          type: 'kazoo_login/check_auth',
+        });
         clearInterval(interval);
       };
     }

@@ -6,6 +6,7 @@ import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import ResellerCreateUser from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateUser';
 import ResellerChildEditUser from '@/pages/onnet-portal/reseller/portal/components/ResellerChildEditUser';
+import RsChildUserParagraph from './components/RsChildUserParagraph';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
@@ -32,13 +33,10 @@ const UsersList = props => {
     return null;
   }
 
-  const deleteChilduser = record => {
+  const deleteChildUser = record => {
     confirm({
       title: `Do you want to delete user ${record.username}?`,
-      //   content: `Account ID: ${rs_child_account.data.id}`,
       onOk() {
-        console.log('Oops errors record.id 3!', record.id);
-        console.log('Oops errors record 3!', record);
         kzUser({ method: 'DELETE', account_id: rs_child_account.data.id, owner_id: record.id })
           .then(uRes => {
             console.log(uRes);
@@ -76,12 +74,26 @@ const UsersList = props => {
       dataIndex: 'first_name',
       key: 'first_name',
       align: 'center',
+      render: (text, record) => (
+        <RsChildUserParagraph
+          fieldKey="first_name"
+          owner_id={record.id}
+          style={{ marginBottom: '0' }}
+        />
+      ),
     },
     {
       title: formatMessage({ id: 'core.Last_name', defaultMessage: 'Last Name' }),
       dataIndex: 'last_name',
       key: 'last_name',
       align: 'center',
+      render: (text, record) => (
+        <RsChildUserParagraph
+          fieldKey="last_name"
+          owner_id={record.id}
+          style={{ marginBottom: '0' }}
+        />
+      ),
     },
     {
       title: formatMessage({ id: 'core.Privilege', defaultMessage: 'Privilege' }),
@@ -116,7 +128,7 @@ const UsersList = props => {
         <Icon
           type="delete"
           style={{ color: settings.primaryColor }}
-          onClick={() => deleteChilduser(record)}
+          onClick={() => deleteChildUser(record)}
         />
       ),
     },
