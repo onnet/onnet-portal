@@ -60,7 +60,7 @@ const Model: ModelType = {
       });
       yield put({
         type: 'level_down',
-        payload: payload,
+        payload,
       });
     },
   },

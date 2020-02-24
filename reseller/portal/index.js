@@ -176,7 +176,7 @@ const ResellerPortal = props => {
                 <Icon type="down" />
               </Button>
             </Dropdown>
-            {rs_child_users.data && rs_child_users.data.length == 0 ? (
+            {rs_child_users.data && rs_child_users.data.length === 0 ? (
               <ResellerCreateUser btnstyle={{ float: 'right', marginTop: '1em' }} />
             ) : null}
           </div>

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { kzAccount, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
 import { Tooltip, Button, Modal, Form, Input, Row, Col, Icon } from 'antd';
 

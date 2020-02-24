@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
-import { Button, Icon, Table, Collapse } from 'antd';
-import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
+import { Collapse } from 'antd';
 
 const { Panel } = Collapse;
 
@@ -11,8 +9,6 @@ const ResellerChildEditUser = props => {
 
   if (!selectedUser) return null;
   if (!rs_child_user[selectedUser]) return null;
-
-  useEffect(() => {}, []);
 
   return (
     <Collapse accordion defaultActiveKey="1">

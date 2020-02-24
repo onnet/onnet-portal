@@ -14,14 +14,6 @@ const { confirm } = Modal;
 const UsersList = props => {
   const { dispatch, settings, rs_child_account, rs_child_users, rs_child_user } = props;
 
-  if (rs_child_users.data) {
-    if (rs_child_users.data.length === 0) {
-      return null;
-    }
-  } else {
-    return null;
-  }
-
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(false);
@@ -31,6 +23,35 @@ const UsersList = props => {
       setDataSource(rs_child_users.data);
     }
   }, [rs_child_users]);
+
+  if (rs_child_users.data) {
+    if (rs_child_users.data.length === 0) {
+      return null;
+    }
+  } else {
+    return null;
+  }
+
+  const deleteChilduser = record => {
+    confirm({
+      title: `Do you want to delete user ${record.username}?`,
+      //   content: `Account ID: ${rs_child_account.data.id}`,
+      onOk() {
+        console.log('Oops errors record.id 3!', record.id);
+        console.log('Oops errors record 3!', record);
+        kzUser({ method: 'DELETE', account_id: rs_child_account.data.id, owner_id: record.id })
+          .then(uRes => {
+            console.log(uRes);
+            dispatch({
+              type: 'rs_child_users/refresh',
+              payload: { account_id: rs_child_account.data.id },
+            });
+          })
+          .catch(() => console.log('Oops errors!', record));
+      },
+      onCancel() {},
+    });
+  };
 
   const columns = [
     {
@@ -118,27 +139,6 @@ const UsersList = props => {
     },
   ];
 
-  const deleteChilduser = record => {
-    confirm({
-      title: `Do you want to delete user ${record.username}?`,
-      //   content: `Account ID: ${rs_child_account.data.id}`,
-      onOk() {
-        console.log('Oops errors record.id 3!', record.id);
-        console.log('Oops errors record 3!', record);
-        kzUser({ method: 'DELETE', account_id: rs_child_account.data.id, owner_id: record.id })
-          .then(uRes => {
-            console.log(uRes);
-            dispatch({
-              type: 'rs_child_users/refresh',
-              payload: { account_id: rs_child_account.data.id },
-            });
-          })
-          .catch(() => console.log('Oops errors!', record));
-      },
-      onCancel() {},
-    });
-  };
-
   const onDrawerClose = () => {
     setIsDrawerVisible(false);
   };
@@ -214,9 +214,8 @@ const UsersList = props => {
             ? `Edit user ${rs_child_user[selectedUser].data.username}`
             : null
         }
-        width={'50%'}
+        width="50%"
         placement="right"
-        closable={true}
         onClose={onDrawerClose}
         visible={isDrawerVisible}
       >
