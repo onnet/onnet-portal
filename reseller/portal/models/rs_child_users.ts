@@ -32,11 +32,11 @@ const Model: ModelType = {
         type: 'update',
         payload: response,
       });
-      response.data.map(user => { 
+      response.data.map(user => {
         window.g_app._store.dispatch({
           type: 'rs_child_user/refresh',
           payload: { account_id: redux_state.rs_child_account.data.id, owner_id: user.id },
-        })
+        });
       });
     },
     *flush(_, { put }) {

@@ -3,15 +3,7 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzAccount, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
-import { Tooltip,
-	 Button,
-	 Modal,
-	 Form,
-	 Input,
-	 Row,
-	 Col,
-	 Icon
-} from 'antd';
+import { Tooltip, Button, Modal, Form, Input, Row, Col, Icon } from 'antd';
 
 const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
   class extends React.Component {
@@ -96,7 +88,10 @@ const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label={formatMessage({ id: 'core.email_address', defaultMessage: 'Email address' })}
+                  label={formatMessage({
+                    id: 'core.email_address',
+                    defaultMessage: 'Email address',
+                  })}
                 >
                   {getFieldDecorator('email', {
                     rules: [{ required: true, message: 'Please input Email address!' }],
@@ -106,7 +101,10 @@ const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
 
               <Col span={12}>
                 <Form.Item
-                  label={formatMessage({ id: 'core.confirm_email_address', defaultMessage: 'Confirm email address' })}
+                  label={formatMessage({
+                    id: 'core.confirm_email_address',
+                    defaultMessage: 'Confirm email address',
+                  })}
                 >
                   {getFieldDecorator('confirm_email', {
                     rules: [{ required: true, message: 'Please input Email address!' }],
@@ -197,17 +195,17 @@ class ResellerCreateUser extends Component {
       };
 
       console.log('userDataBag: ', userDataBag);
-        kzUsers({
-          method: 'PUT',
-          account_id: this.props.rs_child_account.data.id,
-          data: userDataBag
-	}).then(uRes => {
-          console.log(uRes);
-          window.g_app._store.dispatch({
-            type: 'rs_child_users/refresh',
-            payload: { account_id: this.props.rs_child_account.data.id },
-          });
+      kzUsers({
+        method: 'PUT',
+        account_id: this.props.rs_child_account.data.id,
+        data: userDataBag,
+      }).then(uRes => {
+        console.log(uRes);
+        window.g_app._store.dispatch({
+          type: 'rs_child_users/refresh',
+          payload: { account_id: this.props.rs_child_account.data.id },
         });
+      });
 
       form.resetFields();
       this.setState({ visible: false });
@@ -223,9 +221,9 @@ class ResellerCreateUser extends Component {
     return (
       <Fragment>
         <Tooltip
-	  placement="leftTop"
-	  title={formatMessage({ id: 'core.Create_new_user', defaultMessage: 'Create new user!' })}
-	>
+          placement="leftTop"
+          title={formatMessage({ id: 'core.Create_new_user', defaultMessage: 'Create new user!' })}
+        >
           <Button
             key="ResellerCreateUserIconKey"
             type="link"
@@ -233,8 +231,8 @@ class ResellerCreateUser extends Component {
             style={btnstyle}
           >
             <Icon type="user-add" />
-        </Button>
-	</Tooltip>
+          </Button>
+        </Tooltip>
         <UserCreateForm
           key="ResellerCreateChildFormKey2"
           wrappedComponentRef={this.saveFormRef}

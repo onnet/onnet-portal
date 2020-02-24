@@ -53,7 +53,14 @@ const AuthorityModel: AuthorityModelType = {
         const account_id = redux_state.kazoo_account.data
           ? [redux_state.kazoo_account.data.id]
           : [];
-        const authority = priv_level.concat(reseller, superduper_admin, child_account_selected, lanbilling, telephony, account_id);
+        const authority = priv_level.concat(
+          reseller,
+          superduper_admin,
+          child_account_selected,
+          lanbilling,
+          telephony,
+          account_id,
+        );
         if (!isArrayEqual(authority, redux_state.authority.currentAuthority)) {
           yield put({
             type: 'update',

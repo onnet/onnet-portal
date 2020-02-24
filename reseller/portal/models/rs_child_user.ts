@@ -29,7 +29,7 @@ const Model: ModelType = {
       const response = yield call(getUser, payload);
       yield put({
         type: 'update',
-	payload: {[payload.owner_id]: response,},
+        payload: { [payload.owner_id]: response },
       });
     },
     *flush(_, { put }) {

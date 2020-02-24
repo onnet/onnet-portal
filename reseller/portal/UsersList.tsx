@@ -12,12 +12,7 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 const { confirm } = Modal;
 
 const UsersList = props => {
-  const { dispatch,
-          settings,
-          rs_child_account,
-          rs_child_users,
-          rs_child_user
-        } = props;
+  const { dispatch, settings, rs_child_account, rs_child_users, rs_child_user } = props;
 
   if (rs_child_users.data) {
     if (rs_child_users.data.length === 0) {
@@ -51,24 +46,24 @@ const UsersList = props => {
       ),
     },
     {
-      title: formatMessage({ id: 'core.Username', defaultMessage: "Username", }),
+      title: formatMessage({ id: 'core.Username', defaultMessage: 'Username' }),
       dataIndex: 'username',
       key: 'username',
     },
     {
-      title: formatMessage({ id: 'core.First_name', defaultMessage: "First name", }),
+      title: formatMessage({ id: 'core.First_name', defaultMessage: 'First name' }),
       dataIndex: 'first_name',
       key: 'first_name',
       align: 'center',
     },
     {
-      title: formatMessage({ id: 'core.Last_name', defaultMessage: "Last Name", }),
+      title: formatMessage({ id: 'core.Last_name', defaultMessage: 'Last Name' }),
       dataIndex: 'last_name',
       key: 'last_name',
       align: 'center',
     },
     {
-      title: formatMessage({ id: 'core.Privilege', defaultMessage: "Privilege", }),
+      title: formatMessage({ id: 'core.Privilege', defaultMessage: 'Privilege' }),
       dataIndex: 'priv_level',
       key: 'priv_level',
       align: 'center',
@@ -85,10 +80,9 @@ const UsersList = props => {
             setSelectedUser(record.id);
             dispatch({
               type: 'rs_child_user/refresh',
-              payload: { account_id:  rs_child_account.data.id, owner_id: record.id },
+              payload: { account_id: rs_child_account.data.id, owner_id: record.id },
             });
             setIsDrawerVisible(true);
-            
           }}
         />
       ),
@@ -127,11 +121,12 @@ const UsersList = props => {
   const deleteChilduser = record => {
     confirm({
       title: `Do you want to delete user ${record.username}?`,
-   //   content: `Account ID: ${rs_child_account.data.id}`,
+      //   content: `Account ID: ${rs_child_account.data.id}`,
       onOk() {
-          console.log('Oops errors record.id 3!', record.id);
-          console.log('Oops errors record 3!', record);
-          kzUser({ method: 'DELETE', account_id:  rs_child_account.data.id, owner_id: record.id }).then(uRes => {
+        console.log('Oops errors record.id 3!', record.id);
+        console.log('Oops errors record 3!', record);
+        kzUser({ method: 'DELETE', account_id: rs_child_account.data.id, owner_id: record.id })
+          .then(uRes => {
             console.log(uRes);
             dispatch({
               type: 'rs_child_users/refresh',
@@ -142,7 +137,7 @@ const UsersList = props => {
       },
       onCancel() {},
     });
-  }
+  };
 
   const onDrawerClose = () => {
     setIsDrawerVisible(false);
@@ -150,7 +145,11 @@ const UsersList = props => {
 
   function onUserEnableSwitch(checked, record) {
     confirm({
-      title: <p>{formatMessage({ id: 'core.User', defaultMessage: 'User' })}: {record.username}</p>,
+      title: (
+        <p>
+          {formatMessage({ id: 'core.User', defaultMessage: 'User' })}: {record.username}
+        </p>
+      ),
       content: (
         <span style={{ paddingLeft: '6em' }}>
           {checked
@@ -159,23 +158,24 @@ const UsersList = props => {
         </span>
       ),
       onOk() {
-        kzUser({ method: 'PATCH',
-                 account_id:  rs_child_account.data.id,
-                 owner_id: record.id,
-                 data: {enabled: checked}
-        }).then(uRes => {
-          console.log(uRes);
-          dispatch({
-            type: 'rs_child_user/refresh',
-            payload: { account_id: rs_child_account.data.id, owner_id: record.id },
-          });
+        kzUser({
+          method: 'PATCH',
+          account_id: rs_child_account.data.id,
+          owner_id: record.id,
+          data: { enabled: checked },
         })
-        .catch(() => console.log('Oops errors!', record));
+          .then(uRes => {
+            console.log(uRes);
+            dispatch({
+              type: 'rs_child_user/refresh',
+              payload: { account_id: rs_child_account.data.id, owner_id: record.id },
+            });
+          })
+          .catch(() => console.log('Oops errors!', record));
       },
       onCancel() {},
     });
   }
-
 
   return (
     <Fragment>
@@ -188,13 +188,15 @@ const UsersList = props => {
               src="https://api.adorable.io/avatars/24/CardMonthlyFees.png"
             />
           }
-          title={<Fragment>{formatMessage({
-                             id: 'reseller_portal.accounts_users',
-                             defaultMessage: "Account's Users",
-                           })}
-                           <ResellerCreateUser btnstyle={{ float: 'right' }} />
-                 </Fragment>
-                }
+          title={
+            <Fragment>
+              {formatMessage({
+                id: 'reseller_portal.accounts_users',
+                defaultMessage: "Account's Users",
+              })}
+              <ResellerCreateUser btnstyle={{ float: 'right' }} />
+            </Fragment>
+          }
           description={
             <Table
               dataSource={rs_child_users.data}
@@ -207,7 +209,11 @@ const UsersList = props => {
         />
       </Card>
       <Drawer
-        title={rs_child_user[selectedUser] ? `Edit user ${rs_child_user[selectedUser].data.username}` : null }
+        title={
+          rs_child_user[selectedUser]
+            ? `Edit user ${rs_child_user[selectedUser].data.username}`
+            : null
+        }
         width={'50%'}
         placement="right"
         closable={true}
