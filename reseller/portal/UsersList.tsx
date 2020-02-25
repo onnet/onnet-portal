@@ -197,13 +197,6 @@ const UsersList = props => {
     <Fragment>
       <Card className={styles.card} {...cardProps}>
         <Card.Meta
-          avatar={
-            <img
-              alt=""
-              className={styles.cardAvatar}
-              src="https://api.adorable.io/avatars/24/CardMonthlyFees.png"
-            />
-          }
           title={
             <Fragment>
               {formatMessage({
