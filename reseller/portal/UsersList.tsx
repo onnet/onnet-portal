@@ -7,6 +7,7 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import ResellerCreateUser from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateUser';
 import ResellerChildEditUser from '@/pages/onnet-portal/reseller/portal/components/ResellerChildEditUser';
 import RsChildUserParagraph from './components/RsChildUserParagraph';
+import RsChildUserPrivLevel from './components/RsChildUserPrivLevel';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
@@ -100,6 +101,9 @@ const UsersList = props => {
       dataIndex: 'priv_level',
       key: 'priv_level',
       align: 'center',
+      render: (text, record) => (
+        <RsChildUserPrivLevel owner_id={record.id} style={{ marginBottom: '0' }} />
+      ),
     },
     {
       dataIndex: 'id',

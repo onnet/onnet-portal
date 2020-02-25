@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Collapse } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
+import RsUpdateUserPassword from '@/pages/onnet-portal/reseller/portal/components/RsUpdateUserPassword';
 
 const { Panel } = Collapse;
 
@@ -13,14 +14,14 @@ const ResellerChildEditUser = props => {
 
   return (
     <Collapse accordion defaultActiveKey="1">
-      <Panel header="This is panel header 1" key="1">
-        <p>`Hello! ${rs_child_user[selectedUser].data.username}`</p>
-      </Panel>
       <Panel
         header={formatMessage({ id: 'core.Change_password', defaultMessage: 'Change password' })}
-        key="2"
+        key="1"
       >
-        <p>`Hello! ${rs_child_user[selectedUser].data.first_name}`</p>
+        <RsUpdateUserPassword owner_id={selectedUser} />
+      </Panel>
+      <Panel header="This is panel header 2" key="2">
+        <p>`Hello! ${rs_child_user[selectedUser].data.username}`</p>
       </Panel>
       <Panel header="This is panel header 3" key="3">
         <p>`Hello! ${rs_child_user[selectedUser].data.last_name}`</p>

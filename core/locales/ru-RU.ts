@@ -20,6 +20,7 @@ export default {
   'core.switch_on': 'Включить',
   'core.switch_off': 'Выключить',
   'core.Change_password': 'Изменить пароль',
+  'core.Change': 'Изменить',
   'core.Edit_user': 'Редактировать полльзователя',
   'menu.account_portal': 'Портал пользователя',
   'menu.account_portal.settings': 'Учетная запись',
