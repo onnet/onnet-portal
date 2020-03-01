@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 import { RedoOutlined } from '@ant-design/icons';
 
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-
-import { Button, Input, message } from 'antd';
+import { Form, Button, Input, message } from 'antd';
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -17,27 +14,17 @@ function hasErrors(fieldsError) {
 const UpdatePassword = props => {
   const [confirmDirty, setConfirmDirty] = useState(false);
 
+  const [, forceUpdate] = useState();
+
   const { dispatch, owner_id, rs_child_account, rs_child_user } = props;
+  const [form] = Form.useForm();
 
-  const {
-    getFieldDecorator,
-    getFieldsError,
-    validateFields,
-    getFieldValue,
-    resetFields,
-  } = props.form;
+  // To disable submit button at the beginning.
+  useEffect(() => {
+    forceUpdate({});
+  }, []);
 
-  const handleConfirmBlur = e => {
-    const { value } = e.target;
-    if (!confirmDirty) {
-      setConfirmDirty(!!value);
-    }
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    validateFields((err, values) => {
-      if (!err) {
+  const handleSubmit = values => {
         kzUser({
           method: 'PATCH',
           account_id: rs_child_account.data.id,
@@ -52,9 +39,7 @@ const UpdatePassword = props => {
             `Password for ${rs_child_user[owner_id].data.username} successfully updated.`,
           );
         });
-        resetFields();
-      }
-    });
+        form.resetFields();
   };
 
   const compareToFirstPassword = (rule, value, callback) => {
@@ -75,65 +60,72 @@ const UpdatePassword = props => {
   const inputStyle = { maxWidth: '11em' };
 
   return (
-    <Form layout="inline" onSubmit={handleSubmit}>
-      <Form.Item hasFeedback>
-        {getFieldDecorator('password', {
-          rules: [
-            {
-              required: true,
-              message: 'Please input your password!',
+    <Form form={form} name="horizontal_login" layout="inline" onFinish={handleSubmit}>
+
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+        hasFeedback
+      >
+        <Input.Password
+          style={inputStyle}
+          placeholder={formatMessage({ id: 'Password', defaultMessage: 'Password' })}
+	/>
+      </Form.Item>
+
+      <Form.Item
+        name="confirm"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+
+              return Promise.reject('No match!');
             },
-            {
-              validator: validateToNextPassword,
-            },
-          ],
-        })(
-          <Input.Password
-            style={inputStyle}
-            placeholder={formatMessage({ id: 'Password', defaultMessage: 'Password' })}
-          />,
+          }),
+        ]}
+      >
+        <Input.Password
+          style={inputStyle}
+          placeholder={formatMessage({ id: 'Confirm_password', defaultMessage: 'Confirm password', })}
+	/>
+      </Form.Item>
+      <Form.Item shouldUpdate={true}>
+        {() => (
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={
+              !form.isFieldsTouched(true) ||
+              form.getFieldsError().filter(({ errors }) => errors.length).length
+            }
+          >
+            {formatMessage({ id: 'core.Change', defaultMessage: 'Change' })}
+          </Button>
         )}
       </Form.Item>
-
-      <Form.Item hasFeedback>
-        {getFieldDecorator('confirm', {
-          rules: [
-            {
-              required: true,
-              message: 'Please confirm your password!',
-            },
-            {
-              validator: compareToFirstPassword,
-            },
-          ],
-        })(
-          <Input.Password
-            onBlur={handleConfirmBlur}
-            style={inputStyle}
-            placeholder={formatMessage({
-              id: 'Confirm_password',
-              defaultMessage: 'Confirm password',
-            })}
-          />,
-        )}
-      </Form.Item>
-
       <Form.Item>
-        <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
-          {formatMessage({ id: 'core.Change', defaultMessage: 'Change' })}
-        </Button>
-      </Form.Item>
-
-      <Form.Item>
-        <Button type="primary" icon={<RedoOutlined />} onClick={() => resetFields()} />
+        <Button type="primary" icon={<RedoOutlined />} onClick={() => form.resetFields()} />
       </Form.Item>
     </Form>
+
   );
 };
-
-const RsUpdateUserPassword = Form.create({ name: 'update_pwd_form' })(UpdatePassword);
 
 export default connect(({ rs_child_account, rs_child_user }) => ({
   rs_child_account,
   rs_child_user,
-}))(RsUpdateUserPassword);
+}))(UpdatePassword);
