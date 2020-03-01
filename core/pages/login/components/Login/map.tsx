@@ -1,4 +1,4 @@
-import { Icon } from 'antd';
+import { LockOutlined, MailOutlined, MobileOutlined, UserOutlined } from '@ant-design/icons';
 import React from 'react';
 import styles from './index.less';
 
@@ -7,7 +7,7 @@ export default {
     props: {
       size: 'large',
       id: 'accountName',
-      prefix: <Icon type="user" className={styles.prefixIcon} />,
+      prefix: <UserOutlined className={styles.prefixIcon} />,
       placeholder: 'account name',
     },
     rules: [
@@ -21,7 +21,7 @@ export default {
     props: {
       size: 'large',
       id: 'userName',
-      prefix: <Icon type="user" className={styles.prefixIcon} />,
+      prefix: <UserOutlined className={styles.prefixIcon} />,
       placeholder: 'admin',
     },
     rules: [
@@ -34,7 +34,7 @@ export default {
   Password: {
     props: {
       size: 'large',
-      prefix: <Icon type="lock" className={styles.prefixIcon} />,
+      prefix: <LockOutlined className={styles.prefixIcon} />,
       type: 'password',
       id: 'password',
       placeholder: '888888',
@@ -49,7 +49,7 @@ export default {
   Mobile: {
     props: {
       size: 'large',
-      prefix: <Icon type="mobile" className={styles.prefixIcon} />,
+      prefix: <MobileOutlined className={styles.prefixIcon} />,
       placeholder: 'mobile number',
     },
     rules: [
@@ -66,7 +66,7 @@ export default {
   Captcha: {
     props: {
       size: 'large',
-      prefix: <Icon type="mail" className={styles.prefixIcon} />,
+      prefix: <MailOutlined className={styles.prefixIcon} />,
       placeholder: 'captcha',
     },
     rules: [

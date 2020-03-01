@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import Redirect from 'umi/redirect';
 
 import { Dispatch } from 'redux';
-import { FormComponentProps } from 'antd/es/form';
+import { FormComponentProps } from '@ant-design/compatible/es/form';
 import { connect } from 'dva';
 import LoginComponents from './components/Login';
 import styles from './style.less';

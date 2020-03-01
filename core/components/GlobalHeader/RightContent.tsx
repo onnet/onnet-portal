@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import { Icon, Tooltip } from 'antd';
+import { LogoutOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
 
 import Avatar from './AvatarDropdown';
 import RsDemaskBtn from '@/pages/onnet-portal/reseller/portal/components/RsDemaskBtn';
@@ -38,7 +39,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
         })}
       >
         <span className={styles.action} onClick={() => dispatch({ type: 'kazoo_login/logout' })}>
-          <Icon type="logout" />
+          <LogoutOutlined />
         </span>
       </Tooltip>
     </div>
