@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { Card, Button, Icon, Table, Input, Switch } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { Card, Button, Table, Input, Switch } from 'antd';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import MoneyFormat from '@/pages/onnet-portal/core/components/MoneyFormat';
@@ -72,7 +73,7 @@ const CardCDR = props => {
         <Button
           type="primary"
           onClick={() => handleSearch(selectedKeys, confirm)}
-          icon="search"
+          icon={<SearchOutlined />}
           size="small"
           style={{ width: 90, marginRight: 8 }}
         >
@@ -84,7 +85,7 @@ const CardCDR = props => {
       </div>
     ),
     filterIcon: filtered => (
-      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]

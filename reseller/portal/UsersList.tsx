@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { Drawer, Table, Card, Icon, Modal, Switch } from 'antd';
+import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { Drawer, Table, Card, Modal, Switch } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
@@ -110,8 +111,7 @@ const UsersList = props => {
       key: 'edit_user',
       align: 'center',
       render: (text, record) => (
-        <Icon
-          type="edit"
+        <EditOutlined
           style={{ color: settings.primaryColor }}
           onClick={() => {
             setSelectedUser(record.id);
@@ -120,8 +120,7 @@ const UsersList = props => {
               payload: { account_id: rs_child_account.data.id, owner_id: record.id },
             });
             setIsDrawerVisible(true);
-          }}
-        />
+          }} />
       ),
     },
     {
@@ -129,11 +128,9 @@ const UsersList = props => {
       key: 'delete_user',
       align: 'center',
       render: (text, record) => (
-        <Icon
-          type="delete"
+        <DeleteOutlined
           style={{ color: settings.primaryColor }}
-          onClick={() => deleteChildUser(record)}
-        />
+          onClick={() => deleteChildUser(record)} />
       ),
     },
     {
@@ -141,16 +138,14 @@ const UsersList = props => {
       key: 'id',
       align: 'center',
       render: (text, record) => (
-        <Icon
-          type="info-circle"
+        <InfoCircleOutlined
           style={{ color: settings.primaryColor }}
           onClick={event => {
             console.log('event', event);
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
             info_details_fun(rs_child_user[record.id].data);
-          }}
-        />
+          }} />
       ),
     },
   ];

@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'dva';
-import { Table, Icon, Tag, Modal } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Table, Tag, Modal } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactJson from 'react-json-view';
 
@@ -134,15 +135,13 @@ const CurrentMessages = props => {
       title: 'Message',
       render: (text, record) => (
         <Fragment>
-          <Icon
-            type="info-circle"
+          <InfoCircleOutlined
             onClick={event => {
               console.log('IAMS INFO OnClick');
               console.log(event);
               console.log(record);
               info(record.message);
-            }}
-          />
+            }} />
         </Fragment>
       ),
 

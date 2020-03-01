@@ -2,7 +2,8 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Button, Icon, Menu, Dropdown, Modal, message, Avatar, List } from 'antd';
+import { DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Menu, Dropdown, Modal, message, Avatar, List } from 'antd';
 
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
@@ -51,7 +52,7 @@ const ResellerPortal = props => {
                 user_username={u.username}
                 user_id={u.id}
               >
-                <Icon type="user" />
+                <UserOutlined />
                 {u.first_name} {u.last_name} ({u.username})
               </Menu.Item>
             ))
@@ -173,7 +174,7 @@ const ResellerPortal = props => {
                   id: 'reseller_portal.mask_account',
                   defaultMessage: 'Mask Account',
                 })}
-                <Icon type="down" />
+                <DownOutlined />
               </Button>
             </Dropdown>
             {rs_child_users.data && rs_child_users.data.length === 0 ? (

@@ -4,7 +4,9 @@ import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Row, Col, DatePicker, Radio, Form } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Row, Col, DatePicker, Radio } from 'antd';
 import styles from '../style.less';
 import CardCDR from './CardCDR';
 

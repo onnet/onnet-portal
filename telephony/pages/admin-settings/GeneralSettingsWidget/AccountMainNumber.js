@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Button, Select, Icon, Modal } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+import { Button, Select, Modal } from 'antd';
 
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
@@ -69,35 +70,33 @@ const AccountMainNumber = props => {
     setTzButtonVisible(false);
   };
 
-  return (
-    <>
-      {externalNumber()}{' '}
-      <Button type="link" onClick={() => setTzButtonVisible(true)}>
-        <Icon type="edit" />
-      </Button>
-      <Modal
-        title={modalTitle}
-        visible={tzButtonVisible}
-        onOk={onMainNumberConfirm}
-        onCancel={onMainNumberCancel}
-      >
-        <div style={{ textAlign: 'center' }}>
-          <Select
-            style={{ width: '50%' }}
-            onChange={onMainNumberSelect}
-            showSearch
-            defaultValue={mainNumber}
-          >
-            {Object.keys(kazoo_account_numbers.data.numbers).map(number => (
-              <Select.Option value={number} key={number}>
-                {number}
-              </Select.Option>
-            ))}
-          </Select>
-        </div>
-      </Modal>
-    </>
-  );
+  return <>
+    {externalNumber()}{' '}
+    <Button type="link" onClick={() => setTzButtonVisible(true)}>
+      <EditOutlined />
+    </Button>
+    <Modal
+      title={modalTitle}
+      visible={tzButtonVisible}
+      onOk={onMainNumberConfirm}
+      onCancel={onMainNumberCancel}
+    >
+      <div style={{ textAlign: 'center' }}>
+        <Select
+          style={{ width: '50%' }}
+          onChange={onMainNumberSelect}
+          showSearch
+          defaultValue={mainNumber}
+        >
+          {Object.keys(kazoo_account_numbers.data.numbers).map(number => (
+            <Select.Option value={number} key={number}>
+              {number}
+            </Select.Option>
+          ))}
+        </Select>
+      </div>
+    </Modal>
+  </>;
 };
 
 export default connect(({ kazoo_account, kazoo_account_numbers }) => ({

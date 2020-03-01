@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Button, Icon } from 'antd';
+import { UserDeleteOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 const ResellerChildFlush = props => {
   const { dispatch, rs_child_account } = props;
@@ -20,7 +21,7 @@ const ResellerChildFlush = props => {
 
   return (
     <Button key="ResellerChildFlushKey" type="link" onClick={clearRsChild}>
-      <Icon type="user-delete" />
+      <UserDeleteOutlined />
     </Button>
   );
 };

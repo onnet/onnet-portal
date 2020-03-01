@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { lbAccountDocsPDF } from '@/pages/onnet-portal/core/services/zzlb';
 import download from 'downloadjs';
+import { DownloadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 const LbDownloadDoc = props => {
@@ -29,7 +30,7 @@ const LbDownloadDoc = props => {
     <Button
       type="link"
       shape="circle"
-      icon="download"
+      icon={<DownloadOutlined />}
       loading={isLoading}
       onClick={() => downloadDoc(record)}
     />

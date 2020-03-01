@@ -3,7 +3,10 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzAccount, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
-import { Button, Modal, Form, Input, Row, Col } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+
+import { Button, Modal, Input, Row, Col } from 'antd';
 
 const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   class extends React.Component {

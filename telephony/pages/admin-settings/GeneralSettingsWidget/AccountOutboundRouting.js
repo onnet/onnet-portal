@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Icon, Modal, Dropdown, Menu } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Modal, Dropdown, Menu } from 'antd';
 
 import { isArrayEqual, runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 import { AccountCallflow } from '../../../services/kazoo-telephony';
@@ -112,7 +113,7 @@ const AccountOutboundRouting = props => {
   return (
     <Dropdown overlay={menuAccountOutboundRouting} trigger={['click']}>
       <a className="ant-dropdown-link" href="#">
-        {currRoutingMode} <Icon type="down" />
+        {currRoutingMode} <DownOutlined />
       </a>
     </Dropdown>
   );

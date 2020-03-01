@@ -7,7 +7,8 @@ import moment from 'moment';
 import 'moment-timezone';
 
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Button, Select, Icon, Modal } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+import { Button, Select, Modal } from 'antd';
 
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
@@ -55,36 +56,34 @@ const AccountTimezone = props => {
     setTzButtonVisible(false);
   };
 
-  return (
-    <>
-      {kazoo_account.data ? kazoo_account.data.timezone : null}
-      <Button type="link" onClick={() => setTzButtonVisible(true)}>
-        <Icon type="edit" />
-      </Button>
-      <Modal
-        title={modalTitle}
-        visible={tzButtonVisible}
-        onOk={onTimezoneConfirm}
-        onCancel={onTimezoneCancel}
-      >
-        <div style={{ textAlign: 'center' }}>
-          <Select
-            style={{ width: '50%' }}
-            onChange={onTimezoneSelect}
-            showSearch
-            defaultValue={kazoo_account.data ? kazoo_account.data.timezone : null}
-          >
-            {moment.tz.names().map(tzname => (
-              <Select.Option value={tzname} key={tzname}>
-                {' '}
-                {tzname}{' '}
-              </Select.Option>
-            ))}
-          </Select>
-        </div>
-      </Modal>
-    </>
-  );
+  return <>
+    {kazoo_account.data ? kazoo_account.data.timezone : null}
+    <Button type="link" onClick={() => setTzButtonVisible(true)}>
+      <EditOutlined />
+    </Button>
+    <Modal
+      title={modalTitle}
+      visible={tzButtonVisible}
+      onOk={onTimezoneConfirm}
+      onCancel={onTimezoneCancel}
+    >
+      <div style={{ textAlign: 'center' }}>
+        <Select
+          style={{ width: '50%' }}
+          onChange={onTimezoneSelect}
+          showSearch
+          defaultValue={kazoo_account.data ? kazoo_account.data.timezone : null}
+        >
+          {moment.tz.names().map(tzname => (
+            <Select.Option value={tzname} key={tzname}>
+              {' '}
+              {tzname}{' '}
+            </Select.Option>
+          ))}
+        </Select>
+      </div>
+    </Modal>
+  </>;
 };
 
 export default connect(({ kazoo_account }) => ({

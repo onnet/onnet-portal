@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Button, Icon, Table } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Button, Table } from 'antd';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 
 const ResellerChildrenTable = props => {
@@ -61,16 +62,14 @@ const ResellerChildrenTable = props => {
       key: 'id',
       align: 'center',
       render: (text, record) => (
-        <Icon
-          type="info-circle"
+        <InfoCircleOutlined
           style={{ color: settings.primaryColor }}
           onClick={event => {
             console.log('event', event);
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
             info_details_fun(result);
-          }}
-        />
+          }} />
       ),
     },
   ];

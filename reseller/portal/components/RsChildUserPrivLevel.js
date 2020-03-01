@@ -4,7 +4,8 @@ import React from 'react';
 import { connect } from 'dva';
 
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Icon, Modal, Dropdown, Menu } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Modal, Dropdown, Menu } from 'antd';
 
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
@@ -49,7 +50,7 @@ const RsChildUserPrivLevel = props => {
     <Dropdown overlay={menuUserPrivLevels} trigger={['click']}>
       <a className="ant-dropdown-link" href="#">
         {rs_child_user[owner_id] ? rs_child_user[owner_id].data.priv_level : null}{' '}
-        <Icon type="down" />
+        <DownOutlined />
       </a>
     </Dropdown>
   );

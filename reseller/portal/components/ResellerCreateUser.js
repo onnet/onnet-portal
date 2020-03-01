@@ -3,7 +3,12 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
-import { Tooltip, Button, Modal, Form, Input, Row, Col, Icon } from 'antd';
+import { UserAddOutlined } from '@ant-design/icons';
+
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+
+import { Tooltip, Button, Modal, Input, Row, Col } from 'antd';
 
 const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
   class extends React.Component {
@@ -230,7 +235,7 @@ class ResellerCreateUser extends Component {
             onClick={this.showModal}
             style={btnstyle}
           >
-            <Icon type="user-add" />
+            <UserAddOutlined />
           </Button>
         </Tooltip>
         <UserCreateForm

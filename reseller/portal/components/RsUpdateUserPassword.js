@@ -3,7 +3,12 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
-import { Button, Form, Input, message } from 'antd';
+import { RedoOutlined } from '@ant-design/icons';
+
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+
+import { Button, Input, message } from 'antd';
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -120,7 +125,7 @@ const UpdatePassword = props => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" icon="redo" onClick={() => resetFields()} />
+        <Button type="primary" icon={<RedoOutlined />} onClick={() => resetFields()} />
       </Form.Item>
     </Form>
   );

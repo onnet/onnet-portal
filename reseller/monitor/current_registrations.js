@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Tag, Button, Icon, Table, Modal, Input } from 'antd';
+import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
+import { Tag, Button, Table, Modal, Input } from 'antd';
 
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
@@ -66,7 +67,7 @@ class CurrentRegistrations extends Component {
         <Button
           type="primary"
           onClick={() => this.handleSearch(selectedKeys, confirm)}
-          icon="search"
+          icon={<SearchOutlined />}
           size="small"
           style={{ width: 90, marginRight: 8 }}
         >
@@ -78,7 +79,7 @@ class CurrentRegistrations extends Component {
       </div>
     ),
     filterIcon: filtered => (
-      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
@@ -164,15 +165,13 @@ class CurrentRegistrations extends Component {
         key: 'details',
         align: 'center',
         render: (text, record) => (
-          <Icon
-            type="info-circle"
+          <InfoCircleOutlined
             onClick={() => {
               const result = rs_registrations.data.find(
                 ({ username, realm }) => `${username}@${realm}` === record.username,
               );
               info(result);
-            }}
-          />
+            }} />
         ),
       },
     ];

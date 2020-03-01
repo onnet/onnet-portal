@@ -3,7 +3,8 @@ import { connect } from 'dva';
 import * as _ from 'loadsh';
 import { formatMessage } from 'umi-plugin-react/locale';
 import funReactJson from '@/pages/onnet-portal/core/components/info_details';
-import { Table, Button, Icon, Card, Switch, Typography } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Table, Button, Card, Switch, Typography } from 'antd';
 
 import RsChildAccountParagraph from './components/RsChildAccountParagraph';
 import styles from './style.less';
@@ -103,7 +104,7 @@ const AccountDetails = props => {
               type="link"
               onClick={() => funReactJson(_.omit(rs_child_account, 'auth_token'))}
             >
-              <Icon type="info-circle" />
+              <InfoCircleOutlined />
             </Button>
           </Fragment>
         }

@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Icon, Modal, Dropdown, Menu } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Modal, Dropdown, Menu } from 'antd';
 
 import { AccountDialplans } from '../../../services/kazoo-telephony.ts';
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
@@ -63,7 +64,7 @@ const AccountDialplan = props => {
             ? kazoo_account.data.dial_plan.system
             : null
           : null}{' '}
-        <Icon type="down" />
+        <DownOutlined />
       </a>
     </Dropdown>
   );

@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Icon, Modal, Dropdown, Menu } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Modal, Dropdown, Menu } from 'antd';
 
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
@@ -66,7 +67,7 @@ const AccountMusicOnHold = props => {
   return (
     <Dropdown overlay={menuAccountMusicOnHold} trigger={['click']}>
       <a className="ant-dropdown-link" href="#">
-        {mediaName} <Icon type="down" />
+        {mediaName} <DownOutlined />
       </a>
     </Dropdown>
   );
