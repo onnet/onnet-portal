@@ -120,7 +120,8 @@ const UsersList = props => {
               payload: { account_id: rs_child_account.data.id, owner_id: record.id },
             });
             setIsDrawerVisible(true);
-          }} />
+          }}
+        />
       ),
     },
     {
@@ -130,7 +131,8 @@ const UsersList = props => {
       render: (text, record) => (
         <DeleteOutlined
           style={{ color: settings.primaryColor }}
-          onClick={() => deleteChildUser(record)} />
+          onClick={() => deleteChildUser(record)}
+        />
       ),
     },
     {
@@ -145,7 +147,8 @@ const UsersList = props => {
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
             info_details_fun(rs_child_user[record.id].data);
-          }} />
+          }}
+        />
       ),
     },
   ];

@@ -84,9 +84,7 @@ const CardCDR = props => {
         </Button>
       </div>
     ),
-    filterIcon: filtered => (
-      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
-    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
     onFilter: (value, record) =>
       record[dataIndex]
         .toString()

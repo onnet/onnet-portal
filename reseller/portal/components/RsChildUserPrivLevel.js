@@ -49,8 +49,7 @@ const RsChildUserPrivLevel = props => {
   return (
     <Dropdown overlay={menuUserPrivLevels} trigger={['click']}>
       <a className="ant-dropdown-link" href="#">
-        {rs_child_user[owner_id] ? rs_child_user[owner_id].data.priv_level : null}{' '}
-        <DownOutlined />
+        {rs_child_user[owner_id] ? rs_child_user[owner_id].data.priv_level : null} <DownOutlined />
       </a>
     </Dropdown>
   );

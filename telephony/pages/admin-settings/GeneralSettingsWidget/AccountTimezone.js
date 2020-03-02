@@ -56,34 +56,36 @@ const AccountTimezone = props => {
     setTzButtonVisible(false);
   };
 
-  return <>
-    {kazoo_account.data ? kazoo_account.data.timezone : null}
-    <Button type="link" onClick={() => setTzButtonVisible(true)}>
-      <EditOutlined />
-    </Button>
-    <Modal
-      title={modalTitle}
-      visible={tzButtonVisible}
-      onOk={onTimezoneConfirm}
-      onCancel={onTimezoneCancel}
-    >
-      <div style={{ textAlign: 'center' }}>
-        <Select
-          style={{ width: '50%' }}
-          onChange={onTimezoneSelect}
-          showSearch
-          defaultValue={kazoo_account.data ? kazoo_account.data.timezone : null}
-        >
-          {moment.tz.names().map(tzname => (
-            <Select.Option value={tzname} key={tzname}>
-              {' '}
-              {tzname}{' '}
-            </Select.Option>
-          ))}
-        </Select>
-      </div>
-    </Modal>
-  </>;
+  return (
+    <>
+      {kazoo_account.data ? kazoo_account.data.timezone : null}
+      <Button type="link" onClick={() => setTzButtonVisible(true)}>
+        <EditOutlined />
+      </Button>
+      <Modal
+        title={modalTitle}
+        visible={tzButtonVisible}
+        onOk={onTimezoneConfirm}
+        onCancel={onTimezoneCancel}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <Select
+            style={{ width: '50%' }}
+            onChange={onTimezoneSelect}
+            showSearch
+            defaultValue={kazoo_account.data ? kazoo_account.data.timezone : null}
+          >
+            {moment.tz.names().map(tzname => (
+              <Select.Option value={tzname} key={tzname}>
+                {' '}
+                {tzname}{' '}
+              </Select.Option>
+            ))}
+          </Select>
+        </div>
+      </Modal>
+    </>
+  );
 };
 
 export default connect(({ kazoo_account }) => ({

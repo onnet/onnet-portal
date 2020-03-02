@@ -69,7 +69,8 @@ const ResellerChildrenTable = props => {
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
             info_details_fun(result);
-          }} />
+          }}
+        />
       ),
     },
   ];

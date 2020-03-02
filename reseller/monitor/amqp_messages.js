@@ -141,7 +141,8 @@ const CurrentMessages = props => {
               console.log(event);
               console.log(record);
               info(record.message);
-            }} />
+            }}
+          />
         </Fragment>
       ),
 

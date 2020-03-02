@@ -25,21 +25,19 @@ const UpdatePassword = props => {
   }, []);
 
   const handleSubmit = values => {
-        kzUser({
-          method: 'PATCH',
-          account_id: rs_child_account.data.id,
-          owner_id,
-          data: { password: values.password },
-        }).then(() => {
-          dispatch({
-            type: 'rs_child_user/refresh',
-            payload: { account_id: rs_child_account.data.id, owner_id },
-          });
-          message.info(
-            `Password for ${rs_child_user[owner_id].data.username} successfully updated.`,
-          );
-        });
-        form.resetFields();
+    kzUser({
+      method: 'PATCH',
+      account_id: rs_child_account.data.id,
+      owner_id,
+      data: { password: values.password },
+    }).then(() => {
+      dispatch({
+        type: 'rs_child_user/refresh',
+        payload: { account_id: rs_child_account.data.id, owner_id },
+      });
+      message.info(`Password for ${rs_child_user[owner_id].data.username} successfully updated.`);
+    });
+    form.resetFields();
   };
 
   const compareToFirstPassword = (rule, value, callback) => {
@@ -61,7 +59,6 @@ const UpdatePassword = props => {
 
   return (
     <Form form={form} name="horizontal_login" layout="inline" onFinish={handleSubmit}>
-
       <Form.Item
         name="password"
         rules={[
@@ -75,7 +72,7 @@ const UpdatePassword = props => {
         <Input.Password
           style={inputStyle}
           placeholder={formatMessage({ id: 'Password', defaultMessage: 'Password' })}
-	/>
+        />
       </Form.Item>
 
       <Form.Item
@@ -100,8 +97,11 @@ const UpdatePassword = props => {
       >
         <Input.Password
           style={inputStyle}
-          placeholder={formatMessage({ id: 'Confirm_password', defaultMessage: 'Confirm password', })}
-	/>
+          placeholder={formatMessage({
+            id: 'Confirm_password',
+            defaultMessage: 'Confirm password',
+          })}
+        />
       </Form.Item>
       <Form.Item shouldUpdate={true}>
         {() => (
@@ -121,7 +121,6 @@ const UpdatePassword = props => {
         <Button type="primary" icon={<RedoOutlined />} onClick={() => form.resetFields()} />
       </Form.Item>
     </Form>
-
   );
 };
 

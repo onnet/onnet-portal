@@ -70,33 +70,35 @@ const AccountMainNumber = props => {
     setTzButtonVisible(false);
   };
 
-  return <>
-    {externalNumber()}{' '}
-    <Button type="link" onClick={() => setTzButtonVisible(true)}>
-      <EditOutlined />
-    </Button>
-    <Modal
-      title={modalTitle}
-      visible={tzButtonVisible}
-      onOk={onMainNumberConfirm}
-      onCancel={onMainNumberCancel}
-    >
-      <div style={{ textAlign: 'center' }}>
-        <Select
-          style={{ width: '50%' }}
-          onChange={onMainNumberSelect}
-          showSearch
-          defaultValue={mainNumber}
-        >
-          {Object.keys(kazoo_account_numbers.data.numbers).map(number => (
-            <Select.Option value={number} key={number}>
-              {number}
-            </Select.Option>
-          ))}
-        </Select>
-      </div>
-    </Modal>
-  </>;
+  return (
+    <>
+      {externalNumber()}{' '}
+      <Button type="link" onClick={() => setTzButtonVisible(true)}>
+        <EditOutlined />
+      </Button>
+      <Modal
+        title={modalTitle}
+        visible={tzButtonVisible}
+        onOk={onMainNumberConfirm}
+        onCancel={onMainNumberCancel}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <Select
+            style={{ width: '50%' }}
+            onChange={onMainNumberSelect}
+            showSearch
+            defaultValue={mainNumber}
+          >
+            {Object.keys(kazoo_account_numbers.data.numbers).map(number => (
+              <Select.Option value={number} key={number}>
+                {number}
+              </Select.Option>
+            ))}
+          </Select>
+        </div>
+      </Modal>
+    </>
+  );
 };
 
 export default connect(({ kazoo_account, kazoo_account_numbers }) => ({
