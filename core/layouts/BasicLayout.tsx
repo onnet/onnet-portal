@@ -44,7 +44,7 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
 
-const footerRender = () => <span></span>;
+const footerRender = () => <span />;
 
 const breadcrumbRender = (routers = []) => {
   const pathList = [

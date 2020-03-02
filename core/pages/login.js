@@ -1,15 +1,10 @@
 import md5 from 'md5';
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'dva';
 import Redirect from 'umi/redirect';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
-import { Card, Button, Input, message, Form, Checkbox } from 'antd';
-
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+import { Card, Button, Input, Form } from 'antd';
 
 const layout = {
   labelCol: {
@@ -32,8 +27,6 @@ const LoginForm = props => {
   if (kazoo_login.status === 'success') {
     return <Redirect to="/dashboard" />;
   }
-
-  const [form] = Form.useForm();
 
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);

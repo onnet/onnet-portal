@@ -208,10 +208,10 @@ const SuperDuperDashboard = props => {
             }}
           />
         ) : (
-          <div id="registrations_pie_div"></div>
+          <div id="registrations_pie_div" />
         )
       ) : (
-        <div id="registrations_pie_div"></div>
+        <div id="registrations_pie_div" />
       )}
     </PageHeaderWrapper>
   );

@@ -7,12 +7,7 @@ import { RedoOutlined } from '@ant-design/icons';
 
 import { Form, Button, Input, message } from 'antd';
 
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
-
 const UpdatePassword = props => {
-  const [confirmDirty, setConfirmDirty] = useState(false);
 
   const [, forceUpdate] = useState();
 
@@ -38,21 +33,6 @@ const UpdatePassword = props => {
       message.info(`Password for ${rs_child_user[owner_id].data.username} successfully updated.`);
     });
     form.resetFields();
-  };
-
-  const compareToFirstPassword = (rule, value, callback) => {
-    if (value && value !== getFieldValue('password')) {
-      callback('No match!');
-    } else {
-      callback();
-    }
-  };
-
-  const validateToNextPassword = (rule, value, callback) => {
-    if (value && confirmDirty) {
-      validateFields(['confirm'], { force: true });
-    }
-    callback();
   };
 
   const inputStyle = { maxWidth: '11em' };
@@ -90,7 +70,7 @@ const UpdatePassword = props => {
                 return Promise.resolve();
               }
 
-              return Promise.reject('No match!');
+              return Promise.reject(new Error('No match!'));
             },
           }),
         ]}
@@ -103,7 +83,7 @@ const UpdatePassword = props => {
           })}
         />
       </Form.Item>
-      <Form.Item shouldUpdate={true}>
+      <Form.Item shouldUpdate>
         {() => (
           <Button
             type="primary"

@@ -8,57 +8,14 @@ import { UserAddOutlined } from '@ant-design/icons';
 import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
 
 const UserCreateForm = props => {
-  const [confirmDirty, setConfirmDirty] = useState(false);
 
   const [, forceUpdate] = useState();
 
-  const { dispatch, owner_id, rs_child_account, rs_child_user, form, formRef } = props;
-  const { visible, onCancel, onCreate } = props;
+  const { formRef, visible, onCancel, onCreate } = props;
 
   useEffect(() => {
     forceUpdate({});
   }, []);
-
-  const handleConfirmBlur = e => {
-    const { value } = e.target;
-    if (!confirmDirty) {
-      setConfirmDirtyr(!!value);
-    }
-  };
-
-  const compareToFirstEmail = (rule, value, callback) => {
-    const { form } = props;
-    if (value && value !== form.getFieldValue('email')) {
-      callback('Two email addresses that you enter is inconsistent!');
-    } else {
-      callback();
-    }
-  };
-
-  const validateToNextEmail = (rule, value, callback) => {
-    const { form } = props;
-    if (value && confirmDirty) {
-      form.validateFields(['confirm_email'], { force: true });
-    }
-    callback();
-  };
-
-  const compareToFirstPassword = (rule, value, callback) => {
-    const { form } = props;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
-    } else {
-      callback();
-    }
-  };
-
-  const validateToNextPassword = (rule, value, callback) => {
-    const { form } = props;
-    if (value && confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
-    }
-    callback();
-  };
 
   const inputStyle = { maxWidth: '15em' };
 
@@ -157,7 +114,7 @@ const UserCreateForm = props => {
                       return Promise.resolve();
                     }
 
-                    return Promise.reject('No match!');
+                    return Promise.reject(new Error('No match!'));
                   },
                 }),
               ]}
@@ -205,7 +162,7 @@ const UserCreateForm = props => {
                       return Promise.resolve();
                     }
 
-                    return Promise.reject('No match!');
+                    return Promise.reject(new Error('No match!'));
                   },
                 }),
               ]}
@@ -227,6 +184,8 @@ const UserCreateForm = props => {
 
 const ResellerCreateUser = props => {
   const [visible, setVisible] = useState(false);
+
+  const { dispatch, rs_child_account, } = props;
 
   const formRef = React.createRef();
 
@@ -259,23 +218,19 @@ const ResellerCreateUser = props => {
       console.log('userDataBag: ', userDataBag);
       kzUsers({
         method: 'PUT',
-        account_id: props.rs_child_account.data.id,
+        account_id: rs_child_account.data.id,
         data: userDataBag,
       }).then(uRes => {
         console.log(uRes);
-        window.g_app._store.dispatch({
+        dispatch({
           type: 'rs_child_users/refresh',
-          payload: { account_id: props.rs_child_account.data.id },
+          payload: { account_id: rs_child_account.data.id },
         });
       });
 
       formRef.current.resetFields();
       setVisible(false);
     });
-  };
-
-  const saveFormRef = formRef => {
-    formRef = formRef;
   };
 
   const { btnstyle } = props;
@@ -291,7 +246,6 @@ const ResellerCreateUser = props => {
       </Tooltip>
       <UserCreateForm
         key="ResellerCreateChildFormKey2"
-        wrappedComponentRef={saveFormRef}
         formRef={formRef}
         visible={visible}
         onCancel={handleCancel}
