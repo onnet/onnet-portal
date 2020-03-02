@@ -1,31 +1,34 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
 import { UserAddOutlined } from '@ant-design/icons';
 
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
+import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
 
-import { Tooltip, Button, Modal, Input, Row, Col } from 'antd';
+const UserCreateForm = props => {
 
-const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
-  class extends React.Component {
-    state = {
-      confirmDirty: false,
-      autoCompleteResult: [],
-    };
+  const [confirmDirty, setConfirmDirty] = useState(false);
 
-    handleConfirmBlur = e => {
+  const [, forceUpdate] = useState();
+
+  const { dispatch, owner_id, rs_child_account, rs_child_user, form, formRef } = props;
+  const { visible, onCancel, onCreate } = props;
+
+  useEffect(() => {
+    forceUpdate({});
+  }, []);
+
+  const handleConfirmBlur = e => {
       const { value } = e.target;
-      if (!this.state.confirmDirty) {
-        this.setState({ confirmDirty: !!value });
+      if (!confirmDirty) {
+        setConfirmDirtyr( !!value );
       }
     };
 
-    compareToFirstEmail = (rule, value, callback) => {
-      const { form } = this.props;
+  const compareToFirstEmail = (rule, value, callback) => {
+      const { form } = props;
       if (value && value !== form.getFieldValue('email')) {
         callback('Two email addresses that you enter is inconsistent!');
       } else {
@@ -33,16 +36,16 @@ const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
       }
     };
 
-    validateToNextEmail = (rule, value, callback) => {
-      const { form } = this.props;
-      if (value && this.state.confirmDirty) {
+  const validateToNextEmail = (rule, value, callback) => {
+      const { form } = props;
+      if (value && confirmDirty) {
         form.validateFields(['confirm_email'], { force: true });
       }
       callback();
     };
 
-    compareToFirstPassword = (rule, value, callback) => {
-      const { form } = this.props;
+  const compareToFirstPassword = (rule, value, callback) => {
+      const { form } = props;
       if (value && value !== form.getFieldValue('password')) {
         callback('Two passwords that you enter is inconsistent!');
       } else {
@@ -50,17 +53,17 @@ const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
       }
     };
 
-    validateToNextPassword = (rule, value, callback) => {
-      const { form } = this.props;
-      if (value && this.state.confirmDirty) {
+  const validateToNextPassword = (rule, value, callback) => {
+      const { form } = props;
+      if (value && confirmDirty) {
         form.validateFields(['confirm'], { force: true });
       }
       callback();
     };
 
-    render() {
-      const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
+  const inputStyle = { maxWidth: '15em' };
+
+
       return (
         <Modal
           visible={visible}
@@ -75,120 +78,172 @@ const UserCreateForm = Form.create({ name: 'create_user_form_in_modal' })(
           onOk={onCreate}
           onCancel={onCancel}
         >
-          <Form layout="vertical">
+          <Form layout="vertical" ref={formRef} >
             <Row gutter={24}>
               <Col span={12}>
-                <Form.Item label={formatMessage({ id: 'Name', defaultMessage: 'Name' })}>
-                  {getFieldDecorator('first_name', {
-                    rules: [{ required: true, message: 'Please input Name!' }],
-                  })(<Input />)}
-                </Form.Item>
+
+
+      <Form.Item
+        name="first_name"
+        rules={[
+          {
+            required: true,
+            message: 'Please input our Name!',
+          },
+        ]}
+        hasFeedback
+      >
+        <Input
+          style={inputStyle}
+          placeholder={formatMessage({ id: 'Name', defaultMessage: 'Name' })}
+        />
+      </Form.Item>
+
               </Col>
               <Col span={12}>
-                <Form.Item label={formatMessage({ id: 'Surname', defaultMessage: 'Surname' })}>
-                  {getFieldDecorator('last_name', {
-                    rules: [{ required: true, message: 'Please input Surname!' }],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label={formatMessage({
-                    id: 'core.email_address',
-                    defaultMessage: 'Email address',
-                  })}
-                >
-                  {getFieldDecorator('email', {
-                    rules: [{ required: true, message: 'Please input Email address!' }],
-                  })(<Input />)}
-                </Form.Item>
+
+
+      <Form.Item
+        name="last_name"
+        rules={[
+          {
+            required: true,
+            message: 'Please input our Surname!',
+          },
+        ]}
+        hasFeedback
+      >
+        <Input
+          style={inputStyle}
+          placeholder={formatMessage({ id: 'Surname', defaultMessage: 'Surname' })}
+        />
+      </Form.Item>
+
               </Col>
 
               <Col span={12}>
-                <Form.Item
-                  label={formatMessage({
-                    id: 'core.confirm_email_address',
-                    defaultMessage: 'Confirm email address',
-                  })}
-                >
-                  {getFieldDecorator('confirm_email', {
-                    rules: [{ required: true, message: 'Please input Email address!' }],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
+      <Form.Item
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your email!',
+          },
+        ]}
+        hasFeedback
+      >
+        <Input.Password
+          style={inputStyle}
+          placeholder={formatMessage({ id: 'core.email_address', defaultMessage: 'Email address' })}
+        />
+      </Form.Item>
 
-              <Col span={12}>
-                <Form.Item
-                  label={formatMessage({ id: 'Password', defaultMessage: 'Password' })}
-                  hasFeedback
-                >
-                  {getFieldDecorator('password', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input your password!',
-                      },
-                      {
-                        validator: this.validateToNextPassword,
-                      },
-                    ],
-                  })(<Input.Password />)}
-                </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item
-                  label={formatMessage({
-                    id: 'Confirm_password',
-                    defaultMessage: 'Confirm password',
-                  })}
-                  hasFeedback
-                >
-                  {getFieldDecorator('confirm', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please confirm your password!',
-                      },
-                      {
-                        validator: this.compareToFirstPassword,
-                      },
-                    ],
-                  })(<Input.Password onBlur={this.handleConfirmBlur} />)}
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
-        </Modal>
-      );
-    }
-  },
-);
 
-class ResellerCreateUser extends Component {
-  state = {
-    visible: false,
+      <Form.Item
+        name="confirm_email"
+        dependencies={['email']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your email!',
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!value || getFieldValue('email') === value) {
+                return Promise.resolve();
+              }
+
+              return Promise.reject('No match!');
+            },
+          }),
+        ]}
+      >
+             <Input.Password
+               style={inputStyle}
+               placeholder={formatMessage({ id: 'core.confirm_email_address', defaultMessage: 'Confirm email', })}
+             />
+           </Form.Item>
+          </Col>
+
+              <Col span={12}>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+        hasFeedback
+      >
+        <Input.Password
+          style={inputStyle}
+          placeholder={formatMessage({ id: 'Password', defaultMessage: 'Password' })}
+        />
+      </Form.Item>
+
+              </Col>
+              <Col span={12}>
+
+      <Form.Item
+        name="confirm"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+
+              return Promise.reject('No match!');
+            },
+          }),
+        ]}
+      >
+             <Input.Password
+               style={inputStyle}
+               placeholder={formatMessage({ id: 'Confirm_password', defaultMessage: 'Confirm password', })}
+             />
+           </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    </Modal>
+  );
+};
+
+const ResellerCreateUser = props => {
+
+  const [visible, setVisible] = useState(false);
+
+  const formRef = React.createRef();
+
+  const showModal = () => {
+    setVisible(true);
   };
 
-  showModal = () => {
-    this.setState({ visible: true });
-  };
-
-  handleCancel = () => {
-    this.setState({ visible: false });
+  const handleCancel = () => {
+    setVisible(false);
   };
 
   //  handleCreate = () => {
-  handleCreate = prps => {
+  const handleCreate = prps => {
     console.log('Handle Create: ');
     console.log(prps);
+    console.log('formRef: ', formRef);
 
-    const { form } = this.formRef.props;
-    form.validateFields((err, values) => {
-      if (err) {
-        return;
-      }
 
-      console.log('Received values of form: ', values);
+formRef.current.validateFields()
+          .then(values => {
+            console.log('Validate OK:', values);
       const userDataBag = {
         username: values.email,
         first_name: values.first_name,
@@ -202,27 +257,26 @@ class ResellerCreateUser extends Component {
       console.log('userDataBag: ', userDataBag);
       kzUsers({
         method: 'PUT',
-        account_id: this.props.rs_child_account.data.id,
+        account_id: props.rs_child_account.data.id,
         data: userDataBag,
       }).then(uRes => {
         console.log(uRes);
         window.g_app._store.dispatch({
           type: 'rs_child_users/refresh',
-          payload: { account_id: this.props.rs_child_account.data.id },
+          payload: { account_id: props.rs_child_account.data.id },
         });
       });
 
-      form.resetFields();
-      this.setState({ visible: false });
+      formRef.current.resetFields();
+      setVisible(false);
     });
   };
 
-  saveFormRef = formRef => {
-    this.formRef = formRef;
+  const saveFormRef = formRef => {
+    formRef = formRef;
   };
 
-  render() {
-    const { btnstyle } = this.props;
+    const { btnstyle } = props;
     return (
       <Fragment>
         <Tooltip
@@ -232,7 +286,7 @@ class ResellerCreateUser extends Component {
           <Button
             key="ResellerCreateUserIconKey"
             type="link"
-            onClick={this.showModal}
+            onClick={showModal}
             style={btnstyle}
           >
             <UserAddOutlined />
@@ -240,14 +294,14 @@ class ResellerCreateUser extends Component {
         </Tooltip>
         <UserCreateForm
           key="ResellerCreateChildFormKey2"
-          wrappedComponentRef={this.saveFormRef}
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={this.handleCreate}
+          wrappedComponentRef={saveFormRef}
+          formRef={formRef}
+          visible={visible}
+          onCancel={handleCancel}
+          onCreate={handleCreate}
         />
       </Fragment>
     );
-  }
 }
 
 export default connect(({ rs_child_account }) => ({
