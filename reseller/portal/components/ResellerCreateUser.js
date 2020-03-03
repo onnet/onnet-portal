@@ -8,7 +8,6 @@ import { UserAddOutlined } from '@ant-design/icons';
 import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
 
 const UserCreateForm = props => {
-
   const [, forceUpdate] = useState();
 
   const { formRef, visible, onCancel, onCreate } = props;
@@ -41,7 +40,7 @@ const UserCreateForm = props => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input our Name!',
+                  message: 'Please input your Name!',
                 },
               ]}
               hasFeedback
@@ -58,7 +57,7 @@ const UserCreateForm = props => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input our Surname!',
+                  message: 'Please input your Surname!',
                 },
               ]}
               hasFeedback
@@ -185,7 +184,7 @@ const UserCreateForm = props => {
 const ResellerCreateUser = props => {
   const [visible, setVisible] = useState(false);
 
-  const { dispatch, rs_child_account, } = props;
+  const { dispatch, rs_child_account } = props;
 
   const formRef = React.createRef();
 

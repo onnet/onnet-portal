@@ -146,7 +146,7 @@ const CardWireTransfer = props => {
         return {
           children: <a key={index}>{text}</a>,
           props: {
-            //      align: 'center',
+            align: 'left',
           },
         };
       },

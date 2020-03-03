@@ -214,7 +214,7 @@ const LbStatistics = props => {
           </Row>
 
           <Row gutter={24}>
-            <Col key="colkey11">
+            <Col key="colkey11" span={24}>
               <CardCDR {...cardProps} />
             </Col>
           </Row>

@@ -1,167 +1,187 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzAccount, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
+import { Form, Button, Modal, Input, Row, Col } from 'antd';
 
-import { Button, Modal, Input, Row, Col } from 'antd';
+const CollectionCreateForm = props => {
+  const [, forceUpdate] = useState();
 
-const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
-  class extends React.Component {
-    state = {
-      confirmDirty: false,
-      autoCompleteResult: [],
-    };
+  const { formRef, visible, onCancel, onCreate } = props;
 
-    handleConfirmBlur = e => {
-      const { value } = e.target;
-      if (!this.state.confirmDirty) {
-        this.setState({ confirmDirty: !!value });
-      }
-    };
+  useEffect(() => {
+    forceUpdate({});
+  }, []);
 
-    compareToFirstPassword = (rule, value, callback) => {
-      const { form } = this.props;
-      if (value && value !== form.getFieldValue('password')) {
-        callback('Two passwords that you enter is inconsistent!');
-      } else {
-        callback();
-      }
-    };
+  const inputStyle = { maxWidth: '15em' };
 
-    validateToNextPassword = (rule, value, callback) => {
-      const { form } = this.props;
-      if (value && this.state.confirmDirty) {
-        form.validateFields(['confirm'], { force: true });
-      }
-      callback();
-    };
+  return (
+    <Modal
+      visible={visible}
+      title={formatMessage({
+        id: 'reseller_portal.create_new_account',
+        defaultMessage: 'Create New Account',
+      })}
+      okText={formatMessage({
+        id: 'reseller_portal.create_account_button',
+        defaultMessage: 'Create',
+      })}
+      onOk={onCreate}
+      onCancel={onCancel}
+    >
+      <Form layout="vertical" ref={formRef}>
+        <Row gutter={24}>
+          <Col span={12}>
+            <Form.Item
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Account name!',
+                },
+              ]}
+              hasFeedback
+            >
+              <Input
+                style={inputStyle}
+                placeholder={formatMessage({ id: 'Account_name', defaultMessage: 'Account name' })}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!',
+                },
+                {
+                  required: true,
+                  message: 'Please input your email!',
+                },
+              ]}
+              hasFeedback
+            >
+              <Input
+                style={inputStyle}
+                placeholder={formatMessage({
+                  id: 'core.email_address',
+                  defaultMessage: 'Email address',
+                })}
+              />
+            </Form.Item>
+          </Col>
 
-    render() {
-      const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
-      return (
-        <Modal
-          visible={visible}
-          title={formatMessage({
-            id: 'reseller_portal.create_new_account',
-            defaultMessage: 'Create New Account',
-          })}
-          okText={formatMessage({
-            id: 'reseller_portal.create_account_button',
-            defaultMessage: 'Create',
-          })}
-          onOk={onCreate}
-          onCancel={onCancel}
-        >
-          <Form layout="vertical">
-            <Row gutter={24}>
-              <Col span={12}>
-                <Form.Item
-                  label={formatMessage({ id: 'Account_name', defaultMessage: 'Account name' })}
-                >
-                  {getFieldDecorator('name', {
-                    rules: [{ required: true, message: 'Please input Account Name!' }],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label={formatMessage({ id: 'Email_address', defaultMessage: 'Email address' })}
-                >
-                  {getFieldDecorator('email', {
-                    rules: [{ required: true, message: 'Please input Email address!' }],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label={formatMessage({ id: 'Name', defaultMessage: 'Name' })}>
-                  {getFieldDecorator('first_name', {
-                    rules: [{ required: true, message: 'Please input Name!' }],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label={formatMessage({ id: 'Surname', defaultMessage: 'Surname' })}>
-                  {getFieldDecorator('last_name', {
-                    rules: [{ required: true, message: 'Please input Surname!' }],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
+          <Col span={12}>
+            <Form.Item
+              name="first_name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Name!',
+                },
+              ]}
+              hasFeedback
+            >
+              <Input
+                style={inputStyle}
+                placeholder={formatMessage({ id: 'Name', defaultMessage: 'Name' })}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              name="last_name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Surname!',
+                },
+              ]}
+              hasFeedback
+            >
+              <Input
+                style={inputStyle}
+                placeholder={formatMessage({ id: 'Surname', defaultMessage: 'Surname' })}
+              />
+            </Form.Item>
+          </Col>
 
-              <Col span={12}>
-                <Form.Item
-                  label={formatMessage({ id: 'Password', defaultMessage: 'Password' })}
-                  hasFeedback
-                >
-                  {getFieldDecorator('password', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input your password!',
-                      },
-                      {
-                        validator: this.validateToNextPassword,
-                      },
-                    ],
-                  })(<Input.Password />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label={formatMessage({
-                    id: 'Confirm_password',
-                    defaultMessage: 'Confirm password',
-                  })}
-                  hasFeedback
-                >
-                  {getFieldDecorator('confirm', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please confirm your password!',
-                      },
-                      {
-                        validator: this.compareToFirstPassword,
-                      },
-                    ],
-                  })(<Input.Password onBlur={this.handleConfirmBlur} />)}
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
-        </Modal>
-      );
-    }
-  },
-);
+          <Col span={12}>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your password!',
+                },
+              ]}
+              hasFeedback
+            >
+              <Input.Password
+                style={inputStyle}
+                placeholder={formatMessage({ id: 'Password', defaultMessage: 'Password' })}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              name="confirm"
+              dependencies={['password']}
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'Please confirm your password!',
+                },
+                ({ getFieldValue }) => ({
+                  validator(rule, value) {
+                    if (!value || getFieldValue('password') === value) {
+                      return Promise.resolve();
+                    }
 
-class ResellerChildSearch extends Component {
-  state = {
-    visible: false,
+                    return Promise.reject(new Error('No match!'));
+                  },
+                }),
+              ]}
+            >
+              <Input.Password
+                style={inputStyle}
+                placeholder={formatMessage({
+                  id: 'Confirm_password',
+                  defaultMessage: 'Confirm password',
+                })}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    </Modal>
+  );
+};
+
+const ResellerCreateChild = props => {
+  const [visible, setVisible] = useState(false);
+
+  const { dispatch, kazoo_account } = props;
+
+  const formRef = React.createRef();
+
+  const showModal = () => {
+    setVisible(true);
   };
 
-  showModal = () => {
-    this.setState({ visible: true });
+  const handleCancel = () => {
+    setVisible(false);
   };
 
-  handleCancel = () => {
-    this.setState({ visible: false });
-  };
-
-  //  handleCreate = () => {
-  handleCreate = prps => {
+  const handleCreate = prps => {
     console.log('Handle Create: ');
     console.log(prps);
 
-    const { form } = this.formRef.props;
-    form.validateFields((err, values) => {
-      if (err) {
-        return;
-      }
-
+    formRef.current.validateFields().then(values => {
       console.log('Received values of form: ', values);
       const accountDataBag = { name: values.name, username: { billing: { email: values.email } } };
       const userDataBag = {
@@ -173,61 +193,52 @@ class ResellerChildSearch extends Component {
         email: values.email,
         password: values.password,
       };
-
       console.log('accountDataBag: ', accountDataBag);
       console.log('userDataBag: ', userDataBag);
       kzAccount({
         method: 'PUT',
-        account_id: this.props.kazoo_account.data.id,
+        account_id: kazoo_account.data.id,
         data: accountDataBag,
       }).then(res => {
         console.log(res);
         kzUsers({ method: 'PUT', account_id: res.data.id, data: userDataBag }).then(uRes => {
           console.log(uRes);
-          window.g_app._store.dispatch({
+          dispatch({
             type: 'rs_child_account/refresh',
             payload: { account_id: res.data.id },
           });
         });
       });
 
-      form.resetFields();
-      this.setState({ visible: false });
+      formRef.current.resetFields();
+      setVisible(false);
     });
   };
 
-  saveFormRef = formRef => {
-    this.formRef = formRef;
-  };
+  return (
+    <Fragment>
+      <Button
+        key="ResellerCreateChildBtnKey1"
+        type="primary"
+        style={{ marginLeft: '1em', marginRight: '1em' }}
+        onClick={showModal}
+      >
+        {formatMessage({
+          id: 'reseller_portal.create_account',
+          defaultMessage: 'Create New Account',
+        })}
+      </Button>
+      <CollectionCreateForm
+        key="ResellerCreateChildFormKey2"
+        formRef={formRef}
+        visible={visible}
+        onCancel={handleCancel}
+        onCreate={handleCreate}
+      />
+    </Fragment>
+  );
+};
 
-  render() {
-    return (
-      <Fragment>
-        <Button
-          key="ResellerCreateChildBtnKey1"
-          type="primary"
-          style={{ marginLeft: '1em', marginRight: '1em' }}
-          onClick={this.showModal}
-        >
-          {formatMessage({
-            id: 'reseller_portal.create_account',
-            defaultMessage: 'Create New Account',
-          })}
-        </Button>
-        <CollectionCreateForm
-          key="ResellerCreateChildFormKey2"
-          wrappedComponentRef={this.saveFormRef}
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={this.handleCreate}
-        />
-      </Fragment>
-    );
-  }
-}
-
-export default connect(({ kazoo_login, kazoo_account, rs_children }) => ({
-  kazoo_login,
+export default connect(({ kazoo_account }) => ({
   kazoo_account,
-  rs_children,
-}))(ResellerChildSearch);
+}))(ResellerCreateChild);

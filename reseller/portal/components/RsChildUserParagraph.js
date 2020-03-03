@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
+import * as _ from 'loadsh';
 import { Typography } from 'antd';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
@@ -12,7 +13,7 @@ const RsChildUserParagraph = props => {
 
   useEffect(() => {
     if (rs_child_user[owner_id]) {
-      setFieldContent(rs_child_user[owner_id].data[fieldKey]);
+      setFieldContent(_.get(rs_child_user[owner_id].data, fieldKey));
     }
   }, [rs_child_user[owner_id]]);
 
@@ -21,15 +22,14 @@ const RsChildUserParagraph = props => {
       style={props.style}
       editable={{
         onChange: updatedText => {
-          console.log(`updatedText ${updatedText}`);
-          console.log(`fieldContent ${fieldContent}`);
-          console.log(fieldContent !== updatedText);
           if (fieldContent !== updatedText) {
+            const data = {};
+            _.set(data, fieldKey, updatedText);
             kzUser({
               method: 'PATCH',
               account_id: rs_child_account.data.id,
               owner_id,
-              data: { [fieldKey]: updatedText },
+              data,
             }).then(() =>
               dispatch({
                 type: 'rs_child_user/refresh',

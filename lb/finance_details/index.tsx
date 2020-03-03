@@ -59,7 +59,7 @@ const LbFinanceDetails = props => {
       {lb_account.data ? (
         <Fragment>
           <Row gutter={24}>
-            <Col key="colkey11">
+            <Col key="colkey11" span={24}>
               <CardWireTransfer
                 {...cardProps}
                 lb_account={lb_account}
@@ -68,7 +68,7 @@ const LbFinanceDetails = props => {
             </Col>
           </Row>
           <Row gutter={24}>
-            <Col key="colkey12">
+            <Col key="colkey12" span={24}>
               <CardOnlinePayments
                 {...cardProps}
                 lb_account={lb_account}
@@ -77,7 +77,7 @@ const LbFinanceDetails = props => {
             </Col>
           </Row>
           <Row gutter={24}>
-            <Col key="colkey2">
+            <Col key="colkey2" span={24}>
               <CardPaymentsList {...cardProps} lb_account={lb_account} />
             </Col>
           </Row>

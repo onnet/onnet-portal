@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
+import * as _ from 'loadsh';
 import { Typography } from 'antd';
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
@@ -22,14 +23,14 @@ const RsChildAccountParagraph = props => {
       style={props.style}
       editable={{
         onChange: updatedText => {
-          console.log(`updatedText ${updatedText}`);
-          console.log(`fieldContent ${fieldContent}`);
-          console.log(fieldContent !== updatedText);
           if (fieldContent !== updatedText) {
+            const data = {};
+            _.set(data, props.fieldKey, updatedText);
             runAndDispatch(kzAccount, 'rs_child_account/update', {
               method: 'PATCH',
               account_id: rs_child_account.data.id,
-              data: { [props.fieldKey]: updatedText },
+              //            data: { [props.fieldKey]: updatedText },
+              data,
             });
           }
         },

@@ -8,7 +8,6 @@ import { RedoOutlined } from '@ant-design/icons';
 import { Form, Button, Input, message } from 'antd';
 
 const UpdatePassword = props => {
-
   const [, forceUpdate] = useState();
 
   const { dispatch, owner_id, rs_child_account, rs_child_user } = props;
