@@ -102,14 +102,14 @@ const LbFinanceDetails = props => {
             account_id={lb_documents.data.account_id}
           />
         ) : null}
-        {lb_documents.data.proformas.length > 0 ? (
+        {lb_documents.data.vat_invoices.length > 0 ? (
           <CardVatInvoices
             {...CardProps}
             proformas={lb_documents.data.vat_invoices}
             account_id={lb_documents.data.account_id}
           />
         ) : null}
-        {lb_documents.data.proformas.length > 0 ? (
+        {lb_documents.data.acts.length > 0 ? (
           <CardActs
             {...CardProps}
             proformas={lb_documents.data.acts}
