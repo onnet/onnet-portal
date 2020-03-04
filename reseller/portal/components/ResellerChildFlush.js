@@ -13,6 +13,9 @@ const ResellerChildFlush = props => {
     dispatch({
       type: 'rs_child_users/flush',
     });
+    dispatch({
+      type: 'rs_child_numbers/flush',
+    });
   };
 
   if (!rs_child_account.data) {

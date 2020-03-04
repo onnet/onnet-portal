@@ -28,6 +28,10 @@ const LBAccountDashboard = props => {
     return Spin;
   }
 
+  if (!lb_account.data.account_info) {
+    return Spin;
+  }
+
   return (
     <PageHeaderWrapper title={lb_account.data.account_info.name}>
       <Masonry

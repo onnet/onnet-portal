@@ -88,6 +88,9 @@ const ResellerPortal = props => {
     dispatch({
       type: 'rs_children/flush',
     });
+    dispatch({
+      type: 'rs_child_numbers/flush',
+    });
     if (rs_child_account.data.is_reseller1) {
       router.push('/int/reseller_portal/accounts');
     } else {

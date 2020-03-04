@@ -1,5 +1,4 @@
 import { AnyAction, Reducer } from 'redux';
-
 import { EffectsCommandMap } from 'dva';
 import { AccountNumbers } from '@/pages/onnet-portal/core/services/kazoo';
 
@@ -21,19 +20,13 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'kazoo_account_numbers',
+  namespace: 'rs_child_numbers',
 
-  state: {
-    data: {
-      numbers: [],
-    },
-  },
+  state: {},
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      console.log('model kazoo_account_numbers Refresh');
-      const response = yield call(AccountNumbers, { ...payload, method: 'GET' });
-      console.log('model kazoo_account_numbers numbers: ', Object.keys(response.data.numbers));
+      const response = yield call(AccountNumbers, payload);
       yield put({
         type: 'update',
         payload: response,

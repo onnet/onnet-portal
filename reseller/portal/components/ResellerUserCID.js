@@ -4,6 +4,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import { Table, Card } from 'antd';
 
 import RsChildUserParagraph from './RsChildUserParagraph';
+import ResellerUserCIDSelect from './ResellerUserCIDSelect';
 import styles from '../style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
@@ -63,7 +64,7 @@ const ResellerUserCID = props => {
         defaultMessage: 'Caller ID Number',
       }),
       value: (
-        <RsChildUserParagraph
+        <ResellerUserCIDSelect
           fieldKey="caller_id.external.number"
           owner_id={owner_id}
           style={{ marginBottom: '0' }}

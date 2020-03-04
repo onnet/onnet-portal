@@ -208,3 +208,8 @@ export async function kzSystemStatus(): Promise<any> {
     headers: JSON_HEADERS(),
   });
 }
+
+export function AccountNumbers(params: FormDataTyp): Promise<any> {
+  return kzRequest(`${accountsUrl(params)}/phone_numbers`, params);
+}
+
