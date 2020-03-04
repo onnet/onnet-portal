@@ -20,7 +20,7 @@ const ResellerUserCIDSelect = props => {
   );
   const [modalTitle, setModalTitle] = useState(
     formatMessage({
-      id: 'telephony.Select_number',
+      id: 'core.Select_number',
       defaultMessage: 'Select number',
     }),
   );
@@ -37,15 +37,8 @@ const ResellerUserCIDSelect = props => {
 
   function NumberToShow() {
     try {
-      console.log(
-        'NumberToShow _.get(rs_child_user[owner_id].data, fieldKey): ',
-        _.get(rs_child_user[owner_id].data, fieldKey),
-      );
       return _.get(rs_child_user[owner_id].data, fieldKey);
     } catch (e) {
-      console.log('NumberToShow error');
-      console.log('NumberToShow fieldKey: ', fieldKey);
-      console.log('NumberToShow rs_child_user[owner_id]: ', rs_child_user[owner_id]);
       return formatMessage({
         id: 'telephony.no_number_selected',
         defaultMessage: 'no number selected',
@@ -62,7 +55,6 @@ const ResellerUserCIDSelect = props => {
   }, [rs_child_user[owner_id]]);
 
   const onMainNumberSelect = event => {
-    console.log('onMainNumberSelect event: ', event);
     setMainNumber(event);
   };
 

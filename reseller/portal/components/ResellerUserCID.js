@@ -15,7 +15,7 @@ const ResellerUserCID = props => {
     {
       key: '1',
       name: formatMessage({
-        id: 'reseller_portal.CallerIDName',
+        id: 'core.CallerIDName',
         defaultMessage: 'Caller ID Name',
       }),
       value: (
@@ -29,7 +29,7 @@ const ResellerUserCID = props => {
     {
       key: '2',
       name: formatMessage({
-        id: 'reseller_portal.CallerIDNumber',
+        id: 'core.CallerIDNumber',
         defaultMessage: 'Caller ID Number',
       }),
       value: (
@@ -46,7 +46,7 @@ const ResellerUserCID = props => {
     {
       key: '1',
       name: formatMessage({
-        id: 'reseller_portal.CallerIDName',
+        id: 'core.CallerIDName',
         defaultMessage: 'Caller ID Name',
       }),
       value: (
@@ -60,7 +60,7 @@ const ResellerUserCID = props => {
     {
       key: '2',
       name: formatMessage({
-        id: 'reseller_portal.CallerIDNumber',
+        id: 'core.CallerIDNumber',
         defaultMessage: 'Caller ID Number',
       }),
       value: (
@@ -68,7 +68,7 @@ const ResellerUserCID = props => {
           fieldKey="caller_id.external.number"
           owner_id={owner_id}
           modal_title={formatMessage({
-            id: 'reseller_portal.ExternalCallerIDNumber',
+            id: 'core.ExternalCallerIDNumber',
             defaultMessage: 'External Caller ID Number',
           })}
         />
@@ -80,7 +80,7 @@ const ResellerUserCID = props => {
     {
       key: '1',
       name: formatMessage({
-        id: 'reseller_portal.CallerIDName',
+        id: 'core.CallerIDName',
         defaultMessage: 'Caller ID Name',
       }),
       value: (
@@ -94,7 +94,7 @@ const ResellerUserCID = props => {
     {
       key: '2',
       name: formatMessage({
-        id: 'reseller_portal.CallerIDNumber',
+        id: 'core.CallerIDNumber',
         defaultMessage: 'Caller ID Number',
       }),
       value: (
@@ -102,7 +102,7 @@ const ResellerUserCID = props => {
           fieldKey="caller_id.emergency.number"
           owner_id={owner_id}
           modal_title={formatMessage({
-            id: 'reseller_portal.EmergencyCallerIDNumber',
+            id: 'core.EmergencyCallerIDNumber',
             defaultMessage: 'Emergency Caller ID Number',
           })}
         />
@@ -132,7 +132,7 @@ const ResellerUserCID = props => {
           title={
             <Fragment>
               {formatMessage({
-                id: 'reseller_portal.InHouseCalls',
+                id: 'core.InHouseCalls',
                 defaultMessage: 'In-House Calls',
               })}
             </Fragment>
@@ -153,7 +153,7 @@ const ResellerUserCID = props => {
           title={
             <Fragment>
               {formatMessage({
-                id: 'reseller_portal.OutboundCalls',
+                id: 'core.OutboundCalls',
                 defaultMessage: 'Outbound Calls',
               })}
             </Fragment>
@@ -174,7 +174,7 @@ const ResellerUserCID = props => {
           title={
             <Fragment>
               {formatMessage({
-                id: 'reseller_portal.EmergencyCalls',
+                id: 'core.EmergencyCalls',
                 defaultMessage: 'EmergencyCalls',
               })}
             </Fragment>
