@@ -67,7 +67,10 @@ const ResellerUserCID = props => {
         <ResellerUserCIDSelect
           fieldKey="caller_id.external.number"
           owner_id={owner_id}
-          style={{ marginBottom: '0' }}
+          modal_title={formatMessage({
+            id: 'reseller_portal.ExternalCallerIDNumber',
+            defaultMessage: 'External Caller ID Number',
+          })}
         />
       ),
     },
@@ -95,10 +98,13 @@ const ResellerUserCID = props => {
         defaultMessage: 'Caller ID Number',
       }),
       value: (
-        <RsChildUserParagraph
+        <ResellerUserCIDSelect
           fieldKey="caller_id.emergency.number"
           owner_id={owner_id}
-          style={{ marginBottom: '0' }}
+          modal_title={formatMessage({
+            id: 'reseller_portal.EmergencyCallerIDNumber',
+            defaultMessage: 'Emergency Caller ID Number',
+          })}
         />
       ),
     },
