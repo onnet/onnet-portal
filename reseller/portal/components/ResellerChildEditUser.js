@@ -4,6 +4,7 @@ import { Collapse } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import RsUpdateUserPassword from '@/pages/onnet-portal/reseller/portal/components/RsUpdateUserPassword';
 import ResellerUserCID from '@/pages/onnet-portal/reseller/portal/components/ResellerUserCID';
+import ResellerUserDiversion from '@/pages/onnet-portal/reseller/portal/components/ResellerUserDiversion';
 
 const { Panel } = Collapse;
 
@@ -22,7 +23,7 @@ const ResellerChildEditUser = props => {
         <RsUpdateUserPassword owner_id={selectedUser} />
       </Panel>
       <Panel header={formatMessage({ id: 'core.Telephony', defaultMessage: 'Telephony' })} key="2">
-        <Collapse accordion defaultActiveKey="21">
+        <Collapse accordion>
           <Panel header={formatMessage({ id: 'core.CID', defaultMessage: 'CID' })} key="21">
             <ResellerUserCID owner_id={selectedUser} />
           </Panel>
@@ -30,7 +31,7 @@ const ResellerChildEditUser = props => {
             header={formatMessage({ id: 'core.Diversion', defaultMessage: 'Diversion' })}
             key="22"
           >
-            <p>`Hello21! ${rs_child_user[selectedUser].data.username}`</p>
+            <ResellerUserDiversion owner_id={selectedUser} />
           </Panel>
           <Panel header={formatMessage({ id: 'core.Media', defaultMessage: 'Media' })} key="23">
             <p>`Hello21! ${rs_child_user[selectedUser].data.username}`</p>
