@@ -17,7 +17,7 @@ const ResellerUserDiversion = props => {
         id: 'core.EnableCallForward',
         defaultMessage: 'Enable Call-Forward',
       }),
-      value: (
+      value: 
         <RsChildUserSwitch
           fieldKey="call_forward.enabled"
           owner_id={owner_id}
@@ -26,8 +26,7 @@ const ResellerUserDiversion = props => {
             id: 'core.EnableCallForward',
             defaultMessage: 'Enable Call-Forward',
           })}
-        />
-      ),
+        />,
     },
     {
       key: '2',
@@ -35,13 +34,12 @@ const ResellerUserDiversion = props => {
         id: 'core.Redirect_calls_to',
         defaultMessage: 'Redirect calls to',
       }),
-      value: (
+      value: 
         <RsChildUserParagraph
-          fieldKey="call_forward.number"
+          fieldKey='call_forward.number'
           owner_id={owner_id}
           style={{ marginBottom: '0' }}
-        />
-      ),
+        />,
     },
     {
       key: '3',
@@ -49,7 +47,67 @@ const ResellerUserDiversion = props => {
         id: 'core.Bypass_users_phones',
         defaultMessage: "Bypass user's phones",
       }),
-      value: <Switch size="small" />,
+      value:
+        <RsChildUserSwitch
+          fieldKey='call_forward.substitute'
+          owner_id={owner_id}
+          style={{ marginBottom: '0' }}
+          modal_title={formatMessage({
+            id: 'core.Bypass_users_phones',
+            defaultMessage: "Bypass user's phones",
+          })}
+        />,
+    },
+    {
+      key: '4',
+      name: formatMessage({
+        id: 'core.RequireKeyPress',
+        defaultMessage: 'Require Key Press',
+      }),
+      value:
+        <RsChildUserSwitch
+          fieldKey='call_forward.require_keypress'
+          owner_id={owner_id}
+          style={{ marginBottom: '0' }}
+          modal_title={formatMessage({
+            id: 'core.RequireKeyPress',
+            defaultMessage: 'Require Key Press',
+          })}
+        />,
+    },
+    {
+      key: '5',
+      name: formatMessage({
+        id: 'core.KeepCallerID',
+        defaultMessage: 'Keep Caller ID',
+      }),
+      value:
+        <RsChildUserSwitch
+          fieldKey='call_forward.keep_caller_id'
+          owner_id={owner_id}
+          style={{ marginBottom: '0' }}
+          modal_title={formatMessage({
+            id: 'core.KeepCallerID',
+            defaultMessage: 'Keep Caller ID',
+          })}
+        />,
+    },
+    {
+      key: '6',
+      name: formatMessage({
+        id: 'core.DirectCallsOnly',
+        defaultMessage: 'Direct Calls Only',
+      }),
+      value:
+        <RsChildUserSwitch
+          fieldKey='call_forward.direct_calls_only'
+          owner_id={owner_id}
+          style={{ marginBottom: '0' }}
+          modal_title={formatMessage({
+            id: 'core.DirectCallsOnly',
+            defaultMessage: 'Direct Calls Only',
+          })}
+        />,
     },
   ];
 

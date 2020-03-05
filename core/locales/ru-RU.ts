@@ -36,7 +36,7 @@ export default {
   'core.OutboundCalls': 'Исходящие вызовы',
   'core.ExternalCallerIDNumber': 'АОН внешнего вызова',
   'core.EmergencyCallerIDNumber': 'АОН экстренного вызова',
-  'core.EnableCallForward': 'Включить переадресацию',
+  'core.EnableCallForward': 'Переадресация активирована',
   'core.Redirect_calls_to': 'Переадресовывать вызовы на',
   'core.Bypass_users_phones': 'Пропускать устройства',
   'core.RequireKeyPress': 'Требовать нажатия клавиши',
