@@ -1,0 +1,145 @@
+import React, { Fragment, useState, useEffect } from 'react';
+import { connect } from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
+import { Card, Switch } from 'antd';
+import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
+import * as _ from 'loadsh';
+
+import styles from '../style.less';
+import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+
+const ResellerUserMedia = props => {
+  const [audioCodecs, setAudioCodecs] = useState([]);
+  const [videoCodecs, setVideoCodecs] = useState([]);
+
+  const { rs_child_account, rs_child_user, owner_id } = props;
+
+  useEffect(() => {
+    if (rs_child_user[owner_id]) {
+      setAudioCodecs(_.get(rs_child_user[owner_id].data, 'media.audio.codecs', []));
+      setVideoCodecs(_.get(rs_child_user[owner_id].data, 'media.video.codecs', []));
+    }
+  }, [rs_child_user[owner_id]]);
+
+  if (!rs_child_user[owner_id]) return null;
+
+  const gridStyle = {
+    width: '25%',
+    textAlign: 'center',
+  };
+
+  const onCodecChange = (checked, media, codec) => {
+    console.log('checked: ', checked);
+    console.log('media: ', media);
+    console.log('codec: ', codec);
+    kzUser({
+      method: 'GET',
+      account_id: rs_child_account.data.id,
+      owner_id,
+    }).then(resp => console.log('kzUser resp.data.media: ', resp.data.media));
+  };
+
+  return (
+    <Fragment>
+      <Card hoverable className={styles.card} {...cardProps}>
+        <Card.Meta
+          title={
+            <Fragment>
+              {formatMessage({
+                id: 'core.Audio_codecs',
+                defaultMessage: 'Audio codecs',
+              })}
+            </Fragment>
+          }
+          description={
+            <>
+              <Card.Grid style={gridStyle}>
+                <Switch
+                  checkedChildren="PCMA"
+                  unCheckedChildren="PCMA"
+                  checked={audioCodecs.includes('PCMA')}
+                  onChange={checked => onCodecChange(checked, 'audio', 'PCMA')}
+                />
+              </Card.Grid>
+              <Card.Grid style={gridStyle}>
+                <Switch
+                  checkedChildren="PCMU"
+                  unCheckedChildren="PCMU"
+                  checked={audioCodecs.includes('PCMU')}
+                />
+              </Card.Grid>
+              <Card.Grid style={gridStyle}>
+                <Switch
+                  checkedChildren="G722"
+                  unCheckedChildren="G722"
+                  checked={audioCodecs.includes('G722')}
+                />
+              </Card.Grid>
+              <Card.Grid style={gridStyle}>
+                <Switch
+                  checkedChildren="OPUS"
+                  unCheckedChildren="OPUS"
+                  checked={audioCodecs.includes('OPUS')}
+                />
+              </Card.Grid>
+            </>
+          }
+        />
+      </Card>
+      <Card hoverable className={styles.card} {...cardProps}>
+        <Card.Meta
+          title={
+            <Fragment>
+              {formatMessage({
+                id: 'core.Video_codecs',
+                defaultMessage: 'Video codecs',
+              })}
+            </Fragment>
+          }
+          description={
+            <>
+              <Card.Grid style={gridStyle}>
+                <Switch
+                  checkedChildren="VP8"
+                  unCheckedChildren="VP8"
+                  checked={videoCodecs.includes('VP8')}
+                />
+              </Card.Grid>
+              <Card.Grid style={gridStyle}>
+                <Switch
+                  checkedChildren="H264"
+                  unCheckedChildren="H264"
+                  checked={videoCodecs.includes('H264')}
+                />
+              </Card.Grid>
+              <Card.Grid style={gridStyle}>
+                <Switch
+                  checkedChildren="H263"
+                  unCheckedChildren="H263"
+                  checked={videoCodecs.includes('H263')}
+                />
+              </Card.Grid>
+              <Card.Grid style={gridStyle}>
+                <Switch
+                  checkedChildren="H261"
+                  unCheckedChildren="H261"
+                  checked={videoCodecs.includes('H261')}
+                />
+              </Card.Grid>
+            </>
+          }
+        />
+      </Card>
+    </Fragment>
+  );
+};
+
+export default connect(
+  ({ kazoo_login, kazoo_account, rs_children, rs_child_account, rs_child_user }) => ({
+    kazoo_login,
+    kazoo_account,
+    rs_children,
+    rs_child_account,
+    rs_child_user,
+  }),
+)(ResellerUserMedia);

@@ -5,6 +5,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import RsUpdateUserPassword from '@/pages/onnet-portal/reseller/portal/components/RsUpdateUserPassword';
 import ResellerUserCID from '@/pages/onnet-portal/reseller/portal/components/ResellerUserCID';
 import ResellerUserDiversion from '@/pages/onnet-portal/reseller/portal/components/ResellerUserDiversion';
+import ResellerUserMedia from '@/pages/onnet-portal/reseller/portal/components/ResellerUserMedia';
 
 const { Panel } = Collapse;
 
@@ -16,13 +17,7 @@ const ResellerChildEditUser = props => {
 
   return (
     <Collapse accordion defaultActiveKey="1">
-      <Panel
-        header={formatMessage({ id: 'core.Change_password', defaultMessage: 'Change password' })}
-        key="1"
-      >
-        <RsUpdateUserPassword owner_id={selectedUser} />
-      </Panel>
-      <Panel header={formatMessage({ id: 'core.Telephony', defaultMessage: 'Telephony' })} key="2">
+      <Panel header={formatMessage({ id: 'core.Telephony', defaultMessage: 'Telephony' })} key="1">
         <Collapse accordion>
           <Panel header={formatMessage({ id: 'core.CID', defaultMessage: 'CID' })} key="21">
             <ResellerUserCID owner_id={selectedUser} />
@@ -34,7 +29,7 @@ const ResellerChildEditUser = props => {
             <ResellerUserDiversion owner_id={selectedUser} />
           </Panel>
           <Panel header={formatMessage({ id: 'core.Media', defaultMessage: 'Media' })} key="23">
-            <p>`Hello21! ${rs_child_user[selectedUser].data.username}`</p>
+            <ResellerUserMedia owner_id={selectedUser} />
           </Panel>
           <Panel header={formatMessage({ id: 'core.Devices', defaultMessage: 'Devices' })} key="24">
             <p>`Hello21! ${rs_child_user[selectedUser].data.username}`</p>
@@ -49,9 +44,9 @@ const ResellerChildEditUser = props => {
       </Panel>
       <Panel
         header={formatMessage({ id: 'core.Change_password', defaultMessage: 'Change password' })}
-        key="3"
+        key="2"
       >
-        <p>`Hello! ${rs_child_user[selectedUser].data.last_name}`</p>
+        <RsUpdateUserPassword owner_id={selectedUser} />
       </Panel>
     </Collapse>
   );

@@ -42,6 +42,8 @@ export default {
   'core.RequireKeyPress': 'Требовать нажатия клавиши',
   'core.KeepCallerID': 'Сохранять АОН',
   'core.DirectCallsOnly': 'Только прямые вызовы',
+  'core.Audio_codecs': 'Голосовые кодеки',
+  'core.Video_codecs': 'Видео кодеки',
   'menu.account_portal': 'Портал пользователя',
   'menu.account_portal.settings': 'Учетная запись',
   'menu.account.center': 'Профиль',

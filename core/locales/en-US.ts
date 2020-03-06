@@ -39,6 +39,8 @@ export default {
   'core.RequireKeyPress': 'Require Key Press',
   'core.KeepCallerID': 'Keep Caller ID',
   'core.DirectCallsOnly': 'Direct Calls Only',
+  'core.Audio_codecs': 'Audio codecs',
+  'core.Video_codecs': 'Video codecs',
   'menu.account.logout': 'Logout',
   'user-login.login.userName': 'username',
   'user-login.login.password': 'password',

@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Table, Switch } from 'antd';
+import { Table } from 'antd';
 import RsChildUserParagraph from './RsChildUserParagraph';
 import RsChildUserSwitch from './RsChildUserSwitch';
 
@@ -17,7 +17,7 @@ const ResellerUserDiversion = props => {
         id: 'core.EnableCallForward',
         defaultMessage: 'Enable Call-Forward',
       }),
-      value: 
+      value: (
         <RsChildUserSwitch
           fieldKey="call_forward.enabled"
           owner_id={owner_id}
@@ -26,7 +26,8 @@ const ResellerUserDiversion = props => {
             id: 'core.EnableCallForward',
             defaultMessage: 'Enable Call-Forward',
           })}
-        />,
+        />
+      ),
     },
     {
       key: '2',
@@ -34,12 +35,13 @@ const ResellerUserDiversion = props => {
         id: 'core.Redirect_calls_to',
         defaultMessage: 'Redirect calls to',
       }),
-      value: 
+      value: (
         <RsChildUserParagraph
-          fieldKey='call_forward.number'
+          fieldKey="call_forward.number"
           owner_id={owner_id}
           style={{ marginBottom: '0' }}
-        />,
+        />
+      ),
     },
     {
       key: '3',
@@ -47,16 +49,17 @@ const ResellerUserDiversion = props => {
         id: 'core.Bypass_users_phones',
         defaultMessage: "Bypass user's phones",
       }),
-      value:
+      value: (
         <RsChildUserSwitch
-          fieldKey='call_forward.substitute'
+          fieldKey="call_forward.substitute"
           owner_id={owner_id}
           style={{ marginBottom: '0' }}
           modal_title={formatMessage({
             id: 'core.Bypass_users_phones',
             defaultMessage: "Bypass user's phones",
           })}
-        />,
+        />
+      ),
     },
     {
       key: '4',
@@ -64,16 +67,17 @@ const ResellerUserDiversion = props => {
         id: 'core.RequireKeyPress',
         defaultMessage: 'Require Key Press',
       }),
-      value:
+      value: (
         <RsChildUserSwitch
-          fieldKey='call_forward.require_keypress'
+          fieldKey="call_forward.require_keypress"
           owner_id={owner_id}
           style={{ marginBottom: '0' }}
           modal_title={formatMessage({
             id: 'core.RequireKeyPress',
             defaultMessage: 'Require Key Press',
           })}
-        />,
+        />
+      ),
     },
     {
       key: '5',
@@ -81,16 +85,17 @@ const ResellerUserDiversion = props => {
         id: 'core.KeepCallerID',
         defaultMessage: 'Keep Caller ID',
       }),
-      value:
+      value: (
         <RsChildUserSwitch
-          fieldKey='call_forward.keep_caller_id'
+          fieldKey="call_forward.keep_caller_id"
           owner_id={owner_id}
           style={{ marginBottom: '0' }}
           modal_title={formatMessage({
             id: 'core.KeepCallerID',
             defaultMessage: 'Keep Caller ID',
           })}
-        />,
+        />
+      ),
     },
     {
       key: '6',
@@ -98,16 +103,17 @@ const ResellerUserDiversion = props => {
         id: 'core.DirectCallsOnly',
         defaultMessage: 'Direct Calls Only',
       }),
-      value:
+      value: (
         <RsChildUserSwitch
-          fieldKey='call_forward.direct_calls_only'
+          fieldKey="call_forward.direct_calls_only"
           owner_id={owner_id}
           style={{ marginBottom: '0' }}
           modal_title={formatMessage({
             id: 'core.DirectCallsOnly',
             defaultMessage: 'Direct Calls Only',
           })}
-        />,
+        />
+      ),
     },
   ];
 
