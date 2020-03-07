@@ -173,15 +173,7 @@ const BasicLayout: React.FC = props => {
 };
 
 export default connect(
-  ({
-    global,
-    settings,
-    kz_login,
-    kz_account,
-    kz_user,
-    kz_registrations_count,
-    authority,
-  }) => ({
+  ({ global, settings, kz_login, kz_account, kz_user, kz_registrations_count, authority }) => ({
     collapsed: global.collapsed,
     settings,
     kz_login,

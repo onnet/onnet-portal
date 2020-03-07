@@ -220,7 +220,10 @@ const UsersList = props => {
           full_users[selectedUser] ? (
             <span>
               {formatMessage({ id: 'core.Edit_user', defaultMessage: 'Edit user' })}
-              <b style={{ color: settings.primaryColor }}> {full_users[selectedUser].data.username}</b>
+              <b style={{ color: settings.primaryColor }}>
+                {' '}
+                {full_users[selectedUser].data.username}
+              </b>
             </span>
           ) : null
         }

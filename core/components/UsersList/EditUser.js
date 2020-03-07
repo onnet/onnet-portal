@@ -21,7 +21,7 @@ const EditUser = props => {
       <Panel header={formatMessage({ id: 'core.Telephony', defaultMessage: 'Telephony' })} key="1">
         <Collapse accordion>
           <Panel header={formatMessage({ id: 'core.CID', defaultMessage: 'CID' })} key="21">
-            <ResellerUserCID owner_id={selectedUser} />
+            <UserCID owner_id={selectedUser} />
           </Panel>
           <Panel
             header={formatMessage({ id: 'core.Diversion', defaultMessage: 'Diversion' })}

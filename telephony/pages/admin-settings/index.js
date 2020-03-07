@@ -33,7 +33,7 @@ const AdminSettings = props => {
       <List
         grid={{ gutter: 24, xxl: 2, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
         dataSource={[
-	  <GeneralSettingsWidget key="GeneralSettingsWidgetKey" />,
+          <GeneralSettingsWidget key="GeneralSettingsWidgetKey" />,
           <UsersList key="UsersListKey" />,
         ]}
         renderItem={item => <List.Item>{item}</List.Item>}

@@ -82,11 +82,7 @@ const UsersList = props => {
       key: 'first_name',
       align: 'center',
       render: (text, record) => (
-        <UserParagraph
-          fieldKey="first_name"
-          owner_id={record.id}
-          style={{ marginBottom: '0' }}
-        />
+        <UserParagraph fieldKey="first_name" owner_id={record.id} style={{ marginBottom: '0' }} />
       ),
     },
     {
@@ -95,11 +91,7 @@ const UsersList = props => {
       key: 'last_name',
       align: 'center',
       render: (text, record) => (
-        <UserParagraph
-          fieldKey="last_name"
-          owner_id={record.id}
-          style={{ marginBottom: '0' }}
-        />
+        <UserParagraph fieldKey="last_name" owner_id={record.id} style={{ marginBottom: '0' }} />
       ),
     },
     {
@@ -225,7 +217,10 @@ const UsersList = props => {
           full_users[selectedUser] ? (
             <span>
               {formatMessage({ id: 'core.Edit_user', defaultMessage: 'Edit user' })}
-              <b style={{ color: settings.primaryColor }}> {full_users[selectedUser].data.username}</b>
+              <b style={{ color: settings.primaryColor }}>
+                {' '}
+                {full_users[selectedUser].data.username}
+              </b>
             </span>
           ) : null
         }

@@ -46,13 +46,10 @@ const AuthorityModel: AuthorityModelType = {
             : []
           : [];
         const telephony =
-          redux_state.kz_account.data.is_reseller ||
-          redux_state.kz_account.data.superduper_admin
+          redux_state.kz_account.data.is_reseller || redux_state.kz_account.data.superduper_admin
             ? []
             : ['telephony'];
-        const account_id = redux_state.kz_account.data
-          ? [redux_state.kz_account.data.id]
-          : [];
+        const account_id = redux_state.kz_account.data ? [redux_state.kz_account.data.id] : [];
         const authority = priv_level.concat(
           reseller,
           superduper_admin,

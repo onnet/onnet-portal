@@ -16,14 +16,7 @@ const { Title, Text } = Typography;
 const { TabPane } = Tabs;
 
 const ZoneInfo = props => {
-  const {
-    dispatch,
-    settings,
-    kz_login,
-    kz_account = {},
-    kz_system_status = {},
-    location,
-  } = props;
+  const { dispatch, settings, kz_login, kz_account = {}, kz_system_status = {}, location } = props;
 
   useEffect(() => {
     if (kz_account.data) {

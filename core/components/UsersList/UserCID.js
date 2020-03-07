@@ -64,7 +64,7 @@ const ResellerUserCID = props => {
         defaultMessage: 'Caller ID Number',
       }),
       value: (
-        <ResellerUserCIDSelect
+        <UserCIDSelect
           fieldKey="caller_id.external.number"
           owner_id={owner_id}
           modal_title={formatMessage({
@@ -98,7 +98,7 @@ const ResellerUserCID = props => {
         defaultMessage: 'Caller ID Number',
       }),
       value: (
-        <ResellerUserCIDSelect
+        <UserCIDSelect
           fieldKey="caller_id.emergency.number"
           owner_id={owner_id}
           modal_title={formatMessage({

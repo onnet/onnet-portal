@@ -217,11 +217,9 @@ const SuperDuperDashboard = props => {
   );
 };
 
-export default connect(
-  ({ kz_login, kz_account, kz_system_status, kz_registrations_count }) => ({
-    kz_login,
-    kz_account,
-    kz_system_status,
-    kz_registrations_count,
-  }),
-)(SuperDuperDashboard);
+export default connect(({ kz_login, kz_account, kz_system_status, kz_registrations_count }) => ({
+  kz_login,
+  kz_account,
+  kz_system_status,
+  kz_registrations_count,
+}))(SuperDuperDashboard);
