@@ -7,7 +7,7 @@ import router from 'umi/router';
 import Redirect from 'umi/redirect';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-const myGraph = (system_status, rs_registrations_count) =>
+const myGraph = (system_status, kz_registrations_count) =>
   system_status.data
     ? Object.keys(system_status.data).map(zone => {
         if (system_status.data[zone].kamailio) {
@@ -16,7 +16,7 @@ const myGraph = (system_status, rs_registrations_count) =>
             0,
           );
 
-          const cluster_regs = rs_registrations_count.data ? rs_registrations_count.data.count : 0;
+          const cluster_regs = kz_registrations_count.data ? kz_registrations_count.data.count : 0;
           let value = 0;
           let label_value = 0;
 
@@ -44,7 +44,7 @@ const SuperDuperDashboard = props => {
     dispatch,
     kazoo_login = {},
     kazoo_account = {},
-    rs_registrations_count = {},
+    kz_registrations_count = {},
     kz_system_status = {},
   } = props;
 
@@ -52,7 +52,7 @@ const SuperDuperDashboard = props => {
     if (
       kz_system_status.data &&
       Object.keys(kz_system_status.data).length > 1 &&
-      rs_registrations_count.data
+      kz_registrations_count.data
     ) {
       // eslint-disable-next-line no-undef
       Raphael.fn.pieChart = function(cx, cy, r, values, stroke, total_reg_count) {
@@ -170,13 +170,13 @@ const SuperDuperDashboard = props => {
           });
       };
       document.getElementById('registrations_pie_div').innerHTML = '';
-      const total_reg_count = rs_registrations_count.data ? rs_registrations_count.data.count : 0;
+      const total_reg_count = kz_registrations_count.data ? kz_registrations_count.data.count : 0;
       // eslint-disable-next-line no-undef
       Raphael('registrations_pie_div', 800, 600).pieChart(
         400,
         300,
         250,
-        myGraph(kz_system_status, rs_registrations_count),
+        myGraph(kz_system_status, kz_registrations_count),
         '#fff',
         total_reg_count,
       );
@@ -188,14 +188,14 @@ const SuperDuperDashboard = props => {
           payload: { account_id: kazoo_login.data.account_id },
         });
       }
-      if (!rs_registrations_count.data) {
+      if (!kz_registrations_count.data) {
         dispatch({
-          type: 'rs_registrations_count/refresh',
+          type: 'kz_registrations_count/refresh',
           payload: { account_id: kazoo_login.data.account_id },
         });
       }
     }
-  }, [kazoo_login, kazoo_account, rs_registrations_count, kz_system_status]);
+  }, [kazoo_login, kazoo_account, kz_registrations_count, kz_system_status]);
 
   return (
     <PageHeaderWrapper>
@@ -218,10 +218,10 @@ const SuperDuperDashboard = props => {
 };
 
 export default connect(
-  ({ kazoo_login, kazoo_account, kz_system_status, rs_registrations_count }) => ({
+  ({ kazoo_login, kazoo_account, kz_system_status, kz_registrations_count }) => ({
     kazoo_login,
     kazoo_account,
     kz_system_status,
-    rs_registrations_count,
+    kz_registrations_count,
   }),
 )(SuperDuperDashboard);

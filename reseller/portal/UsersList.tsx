@@ -43,7 +43,7 @@ const UsersList = props => {
           .then(uRes => {
             console.log(uRes);
             dispatch({
-              type: 'rs_child_users/refresh',
+              type: 'child_brief_users/refresh',
               payload: { account_id: account.data.id },
             });
           })
@@ -116,7 +116,7 @@ const UsersList = props => {
           onClick={() => {
             setSelectedUser(record.id);
             dispatch({
-              type: 'rs_child_user/refresh',
+              type: 'child_full_users/refresh',
               payload: { account_id: account.data.id, owner_id: record.id },
             });
             setIsDrawerVisible(true);
@@ -181,7 +181,7 @@ const UsersList = props => {
           .then(uRes => {
             console.log(uRes);
             dispatch({
-              type: 'rs_child_user/refresh',
+              type: 'child_full_users/refresh',
               payload: { account_id: account.data.id, owner_id: record.id },
             });
           })
@@ -235,9 +235,9 @@ const UsersList = props => {
   );
 };
 
-export default connect(({ settings, rs_child_account, rs_child_users, rs_child_user }) => ({
+export default connect(({ settings, child_account, child_brief_users, child_full_users }) => ({
   settings,
-  account: rs_child_account,
-  users: rs_child_users,
-  user: rs_child_user,
+  account: child_account,
+  users: child_brief_users,
+  user: child_full_users,
 }))(UsersList);

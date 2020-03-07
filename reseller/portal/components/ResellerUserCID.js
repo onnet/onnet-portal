@@ -194,9 +194,9 @@ const ResellerUserCID = props => {
   );
 };
 
-export default connect(({ kazoo_login, kazoo_account, rs_children, rs_child_account }) => ({
+export default connect(({ kazoo_login, kazoo_account, kz_children, child_account }) => ({
   kazoo_login,
   kazoo_account,
-  rs_children,
-  rs_child_account,
+  kz_children,
+  child_account,
 }))(ResellerUserCID);

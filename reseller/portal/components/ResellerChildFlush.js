@@ -4,21 +4,21 @@ import { UserDeleteOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 const ResellerChildFlush = props => {
-  const { dispatch, rs_child_account } = props;
+  const { dispatch, child_account } = props;
 
   const clearRsChild = () => {
     dispatch({
-      type: 'rs_child_account/flush',
+      type: 'child_account/flush',
     });
     dispatch({
-      type: 'rs_child_users/flush',
+      type: 'child_brief_users/flush',
     });
     dispatch({
-      type: 'rs_child_numbers/flush',
+      type: 'child_numbers/flush',
     });
   };
 
-  if (!rs_child_account.data) {
+  if (!child_account.data) {
     return null;
   }
 
@@ -29,4 +29,4 @@ const ResellerChildFlush = props => {
   );
 };
 
-export default connect(({ rs_child_account }) => ({ rs_child_account }))(ResellerChildFlush);
+export default connect(({ child_account }) => ({ child_account }))(ResellerChildFlush);

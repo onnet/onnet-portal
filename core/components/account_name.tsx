@@ -11,7 +11,7 @@ const MyLink = props => (
     type="link"
     onClick={() => {
       window.g_app._store.dispatch({
-        type: 'rs_child_account/refresh',
+        type: 'child_account/refresh',
         payload: { account_id: props.account_id },
       });
       router.push('/int/reseller_portal/accounts');

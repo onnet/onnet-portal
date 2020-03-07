@@ -20,7 +20,7 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'rs_child_account',
+  namespace: 'child_account',
 
   state: {},
 
@@ -31,8 +31,8 @@ const Model: ModelType = {
         type: 'update',
         payload: response,
       });
-      window.g_app._store.dispatch({ type: 'rs_child_users/refresh', payload });
-      window.g_app._store.dispatch({ type: 'rs_child_numbers/refresh', payload });
+      window.g_app._store.dispatch({ type: 'child_brief_users/refresh', payload });
+      window.g_app._store.dispatch({ type: 'child_numbers/refresh', payload });
       window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
     },
     *flush(_, { put }) {

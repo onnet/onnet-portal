@@ -10,13 +10,13 @@ const { Paragraph } = Typography;
 const RsChildAccountParagraph = props => {
   const [fieldContent, setFieldContent] = useState('Loading...');
 
-  const { rs_child_account } = props;
+  const { child_account } = props;
 
   useEffect(() => {
-    if (rs_child_account.data) {
-      setFieldContent(rs_child_account.data[props.fieldKey]);
+    if (child_account.data) {
+      setFieldContent(child_account.data[props.fieldKey]);
     }
-  }, [rs_child_account]);
+  }, [child_account]);
 
   return (
     <Paragraph
@@ -26,9 +26,9 @@ const RsChildAccountParagraph = props => {
           if (fieldContent !== updatedText) {
             const data = {};
             _.set(data, props.fieldKey, updatedText);
-            runAndDispatch(kzAccount, 'rs_child_account/update', {
+            runAndDispatch(kzAccount, 'child_account/update', {
               method: 'PATCH',
-              account_id: rs_child_account.data.id,
+              account_id: child_account.data.id,
               //            data: { [props.fieldKey]: updatedText },
               data,
             });
@@ -41,6 +41,6 @@ const RsChildAccountParagraph = props => {
   );
 };
 
-export default connect(({ rs_child_account }) => ({
-  rs_child_account,
+export default connect(({ child_account }) => ({
+  child_account,
 }))(RsChildAccountParagraph);

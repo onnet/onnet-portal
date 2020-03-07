@@ -184,7 +184,7 @@ const UserCreateForm = props => {
 const ResellerCreateUser = props => {
   const [visible, setVisible] = useState(false);
 
-  const { dispatch, rs_child_account } = props;
+  const { dispatch, child_account } = props;
 
   const formRef = React.createRef();
 
@@ -217,13 +217,13 @@ const ResellerCreateUser = props => {
       console.log('userDataBag: ', userDataBag);
       kzUsers({
         method: 'PUT',
-        account_id: rs_child_account.data.id,
+        account_id: child_account.data.id,
         data: userDataBag,
       }).then(uRes => {
         console.log(uRes);
         dispatch({
-          type: 'rs_child_users/refresh',
-          payload: { account_id: rs_child_account.data.id },
+          type: 'child_brief_users/refresh',
+          payload: { account_id: child_account.data.id },
         });
       });
 
@@ -254,6 +254,6 @@ const ResellerCreateUser = props => {
   );
 };
 
-export default connect(({ rs_child_account }) => ({
-  rs_child_account,
+export default connect(({ child_account }) => ({
+  child_account,
 }))(ResellerCreateUser);

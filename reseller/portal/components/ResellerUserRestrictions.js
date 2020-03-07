@@ -9,16 +9,16 @@ import RsChildUserRestrictionLevel from './RsChildUserRestrictionLevel';
 const ResellerUserRestrictions = props => {
   const [tableData, setTableData] = useState([]);
 
-  const { dispatch, rs_child_account, rs_child_user, kz_numbers_classifiers, owner_id } = props;
+  const { dispatch, child_account, child_full_users, kz_numbers_classifiers, owner_id } = props;
 
   useEffect(() => {
     if (!kz_numbers_classifiers.data) {
       dispatch({
         type: 'kz_numbers_classifiers/refresh',
-        payload: { account_id: rs_child_account.data.id },
+        payload: { account_id: child_account.data.id },
       });
-    } else if (rs_child_user[owner_id]) {
-      const jobj = _.get(rs_child_user[owner_id].data, 'call_restriction', {});
+    } else if (child_full_users[owner_id]) {
+      const jobj = _.get(child_full_users[owner_id].data, 'call_restriction', {});
       const TabDat = Object.keys(kz_numbers_classifiers.data).map(key => ({
         key,
         action: jobj[key] ? jobj[key].action : null,
@@ -26,9 +26,9 @@ const ResellerUserRestrictions = props => {
       console.log('TabDat: ', TabDat);
       setTableData(TabDat);
     }
-  }, [rs_child_user[owner_id], kz_numbers_classifiers]);
+  }, [child_full_users[owner_id], kz_numbers_classifiers]);
 
-  if (!rs_child_user[owner_id]) return null;
+  if (!child_full_users[owner_id]) return null;
   if (!kz_numbers_classifiers.data) return null;
 
   const columns = [
@@ -65,8 +65,8 @@ const ResellerUserRestrictions = props => {
   );
 };
 
-export default connect(({ kz_numbers_classifiers, rs_child_account, rs_child_user }) => ({
+export default connect(({ kz_numbers_classifiers, child_account, child_full_users }) => ({
   kz_numbers_classifiers,
-  rs_child_account,
-  rs_child_user,
+  child_account,
+  child_full_users,
 }))(ResellerUserRestrictions);

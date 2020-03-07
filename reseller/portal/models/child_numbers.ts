@@ -1,6 +1,6 @@
 import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap } from 'dva';
-import { getUsers } from '@/pages/onnet-portal/core/services/kazoo';
+import { AccountNumbers } from '@/pages/onnet-portal/core/services/kazoo';
 
 export type Effect = (
   action: AnyAction,
@@ -20,24 +20,17 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'rs_child_users',
+  namespace: 'child_numbers',
 
   state: {},
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const redux_state = window.g_app._store.getState();
-      const response = yield call(getUsers, payload);
+      const response = yield call(AccountNumbers, payload);
       yield put({
         type: 'update',
         payload: response,
       });
-      response.data.map(user =>
-        window.g_app._store.dispatch({
-          type: 'rs_child_user/refresh',
-          payload: { account_id: redux_state.rs_child_account.data.id, owner_id: user.id },
-        }),
-      );
     },
     *flush(_, { put }) {
       yield put({

@@ -68,7 +68,7 @@ const BasicLayout: React.FC = props => {
     kazoo_login,
     kazoo_account,
     kazoo_user,
-    rs_registrations_count,
+    kz_registrations_count,
     authority,
   } = props;
 
@@ -90,9 +90,9 @@ const BasicLayout: React.FC = props => {
             },
           });
         }
-        if (!rs_registrations_count.data) {
+        if (!kz_registrations_count.data) {
           dispatch({
-            type: 'rs_registrations_count/refresh',
+            type: 'kz_registrations_count/refresh',
             payload: { account_id: kazoo_login.data.account_id },
           });
         }
@@ -179,7 +179,7 @@ export default connect(
     kazoo_login,
     kazoo_account,
     kazoo_user,
-    rs_registrations_count,
+    kz_registrations_count,
     authority,
   }) => ({
     collapsed: global.collapsed,
@@ -187,7 +187,7 @@ export default connect(
     kazoo_login,
     kazoo_account,
     kazoo_user,
-    rs_registrations_count,
+    kz_registrations_count,
     authority,
   }),
 )(BasicLayout);

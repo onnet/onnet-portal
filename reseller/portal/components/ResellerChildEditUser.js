@@ -11,10 +11,10 @@ import ResellerUserRestrictions from '@/pages/onnet-portal/reseller/portal/compo
 const { Panel } = Collapse;
 
 const ResellerChildEditUser = props => {
-  const { selectedUser, rs_child_user } = props;
+  const { selectedUser, child_full_users } = props;
 
   if (!selectedUser) return null;
-  if (!rs_child_user[selectedUser]) return null;
+  if (!child_full_users[selectedUser]) return null;
 
   return (
     <Collapse accordion defaultActiveKey="1">
@@ -33,7 +33,7 @@ const ResellerChildEditUser = props => {
             <ResellerUserMedia owner_id={selectedUser} />
           </Panel>
           <Panel header={formatMessage({ id: 'core.Devices', defaultMessage: 'Devices' })} key="24">
-            <p>`Hello21! ${rs_child_user[selectedUser].data.username}`</p>
+            <p>`Hello21! ${child_full_users[selectedUser].data.username}`</p>
           </Panel>
           <Panel
             header={formatMessage({ id: 'core.Restrictions', defaultMessage: 'Restrictions' })}
@@ -53,6 +53,6 @@ const ResellerChildEditUser = props => {
   );
 };
 
-export default connect(({ rs_child_user }) => ({
-  rs_child_user,
+export default connect(({ child_full_users }) => ({
+  child_full_users,
 }))(ResellerChildEditUser);

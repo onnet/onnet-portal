@@ -1,14 +1,15 @@
 import { AnyAction, Reducer } from 'redux';
+
 import { EffectsCommandMap } from 'dva';
-import { AccountNumbers } from '@/pages/onnet-portal/core/services/kazoo';
+import { SIPRegistrationsCount } from '@/pages/onnet-portal/core/services/kazoo';
 
 export type Effect = (
   action: AnyAction,
   effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
 ) => void;
 
-export interface ModelType {
-  namespace: string;
+export interface RsRegistrationsCountModelType {
+  namespace: 'kz_registrations_count';
   state: {};
   effects: {
     refreshAccountState: Effect;
@@ -19,18 +20,21 @@ export interface ModelType {
   };
 }
 
-const Model: ModelType = {
-  namespace: 'rs_child_numbers',
+const RsRegistrationsCountModel: RsRegistrationsCountModelType = {
+  namespace: 'kz_registrations_count',
 
   state: {},
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const response = yield call(AccountNumbers, payload);
-      yield put({
-        type: 'update',
-        payload: response,
-      });
+      const redux_state = window.g_app._store.getState();
+      if (redux_state.kazoo_account.data) {
+        const response = yield call(SIPRegistrationsCount, payload);
+        yield put({
+          type: 'update',
+          payload: response,
+        });
+      }
     },
     *flush(_, { put }) {
       yield put({
@@ -47,4 +51,4 @@ const Model: ModelType = {
   },
 };
 
-export default Model;
+export default RsRegistrationsCountModel;

@@ -12,7 +12,7 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 const { confirm } = Modal;
 
 const RsChildUserPrivLevel = props => {
-  const { dispatch, rs_child_account, rs_child_user, owner_id } = props;
+  const { dispatch, child_account, child_full_users, owner_id } = props;
 
   const menuUserPrivLevels = (
     <Menu selectedKeys={[]} onClick={onUserPrivilegeSelect}>
@@ -32,13 +32,13 @@ const RsChildUserPrivLevel = props => {
       onOk() {
         kzUser({
           method: 'PATCH',
-          account_id: rs_child_account.data.id,
+          account_id: child_account.data.id,
           owner_id,
           data: { priv_level: key },
         }).then(() =>
           dispatch({
-            type: 'rs_child_user/refresh',
-            payload: { account_id: rs_child_account.data.id, owner_id },
+            type: 'child_full_users/refresh',
+            payload: { account_id: child_account.data.id, owner_id },
           }),
         );
       },
@@ -49,13 +49,14 @@ const RsChildUserPrivLevel = props => {
   return (
     <Dropdown overlay={menuUserPrivLevels} trigger={['click']}>
       <a className="ant-dropdown-link" href="#">
-        {rs_child_user[owner_id] ? rs_child_user[owner_id].data.priv_level : null} <DownOutlined />
+        {child_full_users[owner_id] ? child_full_users[owner_id].data.priv_level : null}{' '}
+        <DownOutlined />
       </a>
     </Dropdown>
   );
 };
 
-export default connect(({ rs_child_account, rs_child_user }) => ({
-  rs_child_account,
-  rs_child_user,
+export default connect(({ child_account, child_full_users }) => ({
+  child_account,
+  child_full_users,
 }))(RsChildUserPrivLevel);

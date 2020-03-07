@@ -19,7 +19,7 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'rs_mask_history',
+  namespace: 'mask_history',
 
   state: {},
 
@@ -27,11 +27,11 @@ const Model: ModelType = {
     *demask(_, { put, select }) {
       console.log('Demask attempt');
       const state = yield select();
-      const account_id = state.rs_mask_history.children.account_id
-        ? state.rs_mask_history.children.account_id
+      const account_id = state.mask_history.children.account_id
+        ? state.mask_history.children.account_id
         : state.kazoo_login.data.account_id;
-      const owner_id = state.rs_mask_history.children.owner_id
-        ? state.rs_mask_history.children.owner_id
+      const owner_id = state.mask_history.children.owner_id
+        ? state.mask_history.children.owner_id
         : state.kazoo_login.data.owner_id;
       yield window.g_app._store.dispatch({
         type: 'lb_account/refresh',
@@ -46,8 +46,8 @@ const Model: ModelType = {
         payload: { account_id, owner_id },
       });
       yield window.g_app._store.dispatch({
-        type: 'rs_child_account/refresh',
-        payload: { account_id: state.rs_mask_history.account_id },
+        type: 'child_account/refresh',
+        payload: { account_id: state.mask_history.account_id },
       });
       yield put({
         type: 'levelup',

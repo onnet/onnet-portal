@@ -20,12 +20,12 @@ import UsersList from './UsersList';
 const { confirm } = Modal;
 
 const ResellerPortal = props => {
-  const { dispatch, kazoo_account, rs_child_account, rs_child_users } = props;
+  const { dispatch, kazoo_account, child_account, child_brief_users } = props;
 
   useEffect(() => {
     if (kazoo_account.data) {
       dispatch({
-        type: 'rs_children/refresh',
+        type: 'kz_children/refresh',
         payload: { account_id: kazoo_account.data.id },
       });
     }
@@ -33,7 +33,7 @@ const ResellerPortal = props => {
 
   const menu = (
     <Menu onClick={handleMenuClick}>
-      {rs_child_account.data && rs_child_users.data
+      {child_account.data && child_brief_users.data
         ? [
             {
               id: 'no_user_defined',
@@ -43,12 +43,12 @@ const ResellerPortal = props => {
               priv_level: 'user',
             },
           ]
-            .concat(rs_child_users.data)
+            .concat(child_brief_users.data)
             .map(u => (
               <Menu.Item
                 key={u.id}
-                account_id={rs_child_account.data.id}
-                account_name={rs_child_account.data.name}
+                account_id={child_account.data.id}
+                account_name={child_account.data.name}
                 user_username={u.username}
                 user_id={u.id}
               >
@@ -72,7 +72,7 @@ const ResellerPortal = props => {
       payload: { account_id: e.item.props.account_id, owner_id: e.item.props.user_id },
     });
     dispatch({
-      type: 'rs_mask_history/mask',
+      type: 'mask_history/mask',
       payload: { account_id: e.item.props.account_id, owner_id: e.item.props.user_id },
     });
     dispatch({
@@ -80,18 +80,18 @@ const ResellerPortal = props => {
       payload: { account_id: e.item.props.account_id },
     });
     dispatch({
-      type: 'rs_child_account/flush',
+      type: 'child_account/flush',
     });
     dispatch({
-      type: 'rs_child_users/flush',
+      type: 'child_brief_users/flush',
     });
     dispatch({
-      type: 'rs_children/flush',
+      type: 'kz_children/flush',
     });
     dispatch({
-      type: 'rs_child_numbers/flush',
+      type: 'child_numbers/flush',
     });
-    if (rs_child_account.data.is_reseller1) {
+    if (child_account.data.is_reseller1) {
       router.push('/int/reseller_portal/accounts');
     } else {
       router.push('/int/dashboard');
@@ -100,17 +100,17 @@ const ResellerPortal = props => {
 
   function deleteChildAccount() {
     confirm({
-      title: `Do you want to delete account ${rs_child_account.data.name}`,
-      content: `Account ID: ${rs_child_account.data.id}`,
+      title: `Do you want to delete account ${child_account.data.name}`,
+      content: `Account ID: ${child_account.data.id}`,
       onOk() {
-        kzAccount({ method: 'DELETE', account_id: rs_child_account.data.id })
+        kzAccount({ method: 'DELETE', account_id: child_account.data.id })
           .then(delRes => {
             console.log(delRes);
             dispatch({
-              type: 'rs_child_account/flush',
+              type: 'child_account/flush',
             });
             dispatch({
-              type: 'rs_children/refresh',
+              type: 'kz_children/refresh',
               payload: { account_id: kazoo_account.data.id },
             });
             //    window.location.reload(true);
@@ -132,7 +132,7 @@ const ResellerPortal = props => {
         <ResellerCreateChild key="extraCreate" />,
       ]}
     >
-      {rs_child_account.data ? (
+      {child_account.data ? (
         <Fragment>
           <div style={{ backgroundColor: 'white', display: 'flow-root', marginBottom: '2em' }}>
             <Button
@@ -143,9 +143,9 @@ const ResellerPortal = props => {
               <Avatar
                 shape="square"
                 src={
-                  rs_child_account.data.name
+                  child_account.data.name
                     ? `https://api.adorable.io/avatars/24/${encodeURIComponent(
-                        rs_child_account.data.name,
+                        child_account.data.name,
                       )}.png`
                     : 'https://api.adorable.io/avatars/24/justfunnyaccount.png'
                 }
@@ -153,7 +153,7 @@ const ResellerPortal = props => {
               <RsChildAccountParagraph
                 fieldKey="name"
                 style={{ fontSize: '1.5em', paddingLeft: '1em' }}
-                currentText={rs_child_account.data ? rs_child_account.data.name : 'Loading...'}
+                currentText={child_account.data ? child_account.data.name : 'Loading...'}
               />
             </Button>
             <Button
@@ -180,7 +180,7 @@ const ResellerPortal = props => {
                 <DownOutlined />
               </Button>
             </Dropdown>
-            {rs_child_users.data && rs_child_users.data.length === 0 ? (
+            {child_brief_users.data && child_brief_users.data.length === 0 ? (
               <ResellerCreateUser btnstyle={{ float: 'right', marginTop: '1em' }} />
             ) : null}
           </div>
@@ -199,11 +199,11 @@ const ResellerPortal = props => {
 };
 
 export default connect(
-  ({ kazoo_login, kazoo_account, rs_children, rs_child_account, rs_child_users }) => ({
+  ({ kazoo_login, kazoo_account, kz_children, child_account, child_brief_users }) => ({
     kazoo_login,
     kazoo_account,
-    rs_children,
-    rs_child_account,
-    rs_child_users,
+    kz_children,
+    child_account,
+    child_brief_users,
   }),
 )(ResellerPortal);

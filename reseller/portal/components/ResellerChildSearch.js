@@ -16,7 +16,7 @@ function fetch(value, callback) {
   function fake() {
     const redux_state = window.g_app._store.getState();
     const data = [];
-    redux_state.rs_children.data.forEach(d => {
+    redux_state.kz_children.data.forEach(d => {
       if (d.name.toLowerCase().includes(value.toLowerCase())) {
         data.push(d);
       }
@@ -49,7 +49,7 @@ class ResellerChildSearch extends Component {
 
   handleSelect = value => {
     window.g_app._store.dispatch({
-      type: 'rs_child_account/refresh',
+      type: 'child_account/refresh',
       payload: { account_id: value },
     });
     this.setState({ data: [], value: undefined, loading: false });
@@ -82,8 +82,8 @@ class ResellerChildSearch extends Component {
   }
 }
 
-export default connect(({ kazoo_login, kazoo_account, rs_children }) => ({
+export default connect(({ kazoo_login, kazoo_account, kz_children }) => ({
   kazoo_login,
   kazoo_account,
-  rs_children,
+  kz_children,
 }))(ResellerChildSearch);

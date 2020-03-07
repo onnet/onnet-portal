@@ -1,15 +1,14 @@
 import { AnyAction, Reducer } from 'redux';
-
 import { EffectsCommandMap } from 'dva';
-import { getResellerSIPRegistrationsCount } from '@/pages/onnet-portal/core/services/kazoo';
+import { getUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
 export type Effect = (
   action: AnyAction,
   effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
 ) => void;
 
-export interface RsRegistrationsCountModelType {
-  namespace: 'rs_registrations_count';
+export interface ModelType {
+  namespace: string;
   state: {};
   effects: {
     refreshAccountState: Effect;
@@ -20,21 +19,25 @@ export interface RsRegistrationsCountModelType {
   };
 }
 
-const RsRegistrationsCountModel: RsRegistrationsCountModelType = {
-  namespace: 'rs_registrations_count',
+const Model: ModelType = {
+  namespace: 'child_brief_users',
 
   state: {},
 
   effects: {
     *refresh({ payload }, { call, put }) {
       const redux_state = window.g_app._store.getState();
-      if (redux_state.kazoo_account.data) {
-        const response = yield call(getResellerSIPRegistrationsCount, payload);
-        yield put({
-          type: 'update',
-          payload: response,
-        });
-      }
+      const response = yield call(getUsers, payload);
+      yield put({
+        type: 'update',
+        payload: response,
+      });
+      response.data.map(user =>
+        window.g_app._store.dispatch({
+          type: 'child_full_users/refresh',
+          payload: { account_id: redux_state.child_account.data.id, owner_id: user.id },
+        }),
+      );
     },
     *flush(_, { put }) {
       yield put({
@@ -51,4 +54,4 @@ const RsRegistrationsCountModel: RsRegistrationsCountModelType = {
   },
 };
 
-export default RsRegistrationsCountModel;
+export default Model;

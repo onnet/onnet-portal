@@ -13,7 +13,7 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 const { confirm } = Modal;
 
 const RsChildUserRestrictionLevel = props => {
-  const { dispatch, rs_child_account, owner_id, classifier, text } = props;
+  const { dispatch, child_account, owner_id, classifier, text } = props;
 
   const menuUserPrivLevels = (
     <Menu selectedKeys={[]} onClick={onUserRestrictionSelect}>
@@ -38,13 +38,13 @@ const RsChildUserRestrictionLevel = props => {
         console.log('data: ', data);
         kzUser({
           method: 'PATCH',
-          account_id: rs_child_account.data.id,
+          account_id: child_account.data.id,
           owner_id,
           data,
         }).then(() =>
           dispatch({
-            type: 'rs_child_user/refresh',
-            payload: { account_id: rs_child_account.data.id, owner_id },
+            type: 'child_full_users/refresh',
+            payload: { account_id: child_account.data.id, owner_id },
           }),
         );
       },
@@ -61,6 +61,6 @@ const RsChildUserRestrictionLevel = props => {
   );
 };
 
-export default connect(({ rs_child_account }) => ({
-  rs_child_account,
+export default connect(({ child_account }) => ({
+  child_account,
 }))(RsChildUserRestrictionLevel);

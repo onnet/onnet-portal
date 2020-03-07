@@ -15,12 +15,12 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 const { Text } = Typography;
 
 const AccountDetails = props => {
-  const { dispatch, kazoo_account, rs_child_account } = props;
+  const { dispatch, kazoo_account, child_account } = props;
 
   useEffect(() => {
     if (kazoo_account.data) {
       dispatch({
-        type: 'rs_children/refresh',
+        type: 'kz_children/refresh',
         payload: { account_id: kazoo_account.data.id },
       });
     }
@@ -28,17 +28,17 @@ const AccountDetails = props => {
 
   function switchResellerStatus(checked) {
     if (checked) {
-      console.log(`${rs_child_account.data.id} to on switchResellerStatus to ${checked}`);
-      runAndDispatch(resellerStatus, 'rs_child_account/update', {
+      console.log(`${child_account.data.id} to on switchResellerStatus to ${checked}`);
+      runAndDispatch(resellerStatus, 'child_account/update', {
         method: 'PUT',
-        account_id: rs_child_account.data.id,
+        account_id: child_account.data.id,
         data: {},
       });
     } else {
-      console.log(`${rs_child_account.data.id} to off switchResellerStatus to ${checked}`);
-      runAndDispatch(resellerStatus, 'rs_child_account/update', {
+      console.log(`${child_account.data.id} to off switchResellerStatus to ${checked}`);
+      runAndDispatch(resellerStatus, 'child_account/update', {
         method: 'DELETE',
-        account_id: rs_child_account.data.id,
+        account_id: child_account.data.id,
       });
     }
   }
@@ -58,7 +58,7 @@ const AccountDetails = props => {
       value: (
         <Switch
           size="small"
-          checked={rs_child_account.data ? rs_child_account.data.is_reseller : false}
+          checked={child_account.data ? child_account.data.is_reseller : false}
           onChange={switchResellerStatus}
         />
       ),
@@ -66,8 +66,8 @@ const AccountDetails = props => {
     {
       key: '3',
       name: 'Account status',
-      value: rs_child_account.data ? (
-        rs_child_account.data.enabled ? (
+      value: child_account.data ? (
+        child_account.data.enabled ? (
           <Text type="primary">Active</Text>
         ) : (
           <Text type="danger">Blocked</Text>
@@ -100,10 +100,7 @@ const AccountDetails = props => {
               id: 'reseller_portal.account_details',
               defaultMessage: 'Account details',
             })}
-            <Button
-              type="link"
-              onClick={() => funReactJson(_.omit(rs_child_account, 'auth_token'))}
-            >
+            <Button type="link" onClick={() => funReactJson(_.omit(child_account, 'auth_token'))}>
               <InfoCircleOutlined />
             </Button>
           </Fragment>
@@ -122,9 +119,9 @@ const AccountDetails = props => {
   );
 };
 
-export default connect(({ kazoo_login, kazoo_account, rs_children, rs_child_account }) => ({
+export default connect(({ kazoo_login, kazoo_account, kz_children, child_account }) => ({
   kazoo_login,
   kazoo_account,
-  rs_children,
-  rs_child_account,
+  kz_children,
+  child_account,
 }))(AccountDetails);

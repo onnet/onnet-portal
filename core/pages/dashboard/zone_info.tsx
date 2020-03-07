@@ -225,11 +225,11 @@ const ZoneInfo = props => {
 };
 
 export default connect(
-  ({ settings, kazoo_login, kazoo_account, kz_system_status, rs_registrations_count }) => ({
+  ({ settings, kazoo_login, kazoo_account, kz_system_status, kz_registrations_count }) => ({
     settings,
     kazoo_login,
     kazoo_account,
     kz_system_status,
-    rs_registrations_count,
+    kz_registrations_count,
   }),
 )(ZoneInfo);

@@ -6,15 +6,15 @@ import { Button, Table } from 'antd';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 
 const ResellerChildrenTable = props => {
-  const { settings, rs_children } = props;
+  const { settings, kz_children } = props;
 
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
-    if (rs_children.data) {
-      setDataSource(rs_children.data);
+    if (kz_children.data) {
+      setDataSource(kz_children.data);
     }
-  }, [rs_children]);
+  }, [kz_children]);
 
   const columns = [
     {
@@ -27,7 +27,7 @@ const ResellerChildrenTable = props => {
           type="link"
           onClick={() => {
             window.g_app._store.dispatch({
-              type: 'rs_child_account/refresh',
+              type: 'child_account/refresh',
               payload: { account_id: record.id },
             });
             window.scrollTo({
@@ -88,7 +88,7 @@ const ResellerChildrenTable = props => {
   );
 };
 
-export default connect(({ settings, rs_children }) => ({
+export default connect(({ settings, kz_children }) => ({
   settings,
-  rs_children,
+  kz_children,
 }))(ResellerChildrenTable);

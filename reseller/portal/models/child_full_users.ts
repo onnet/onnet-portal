@@ -1,7 +1,6 @@
 import { AnyAction, Reducer } from 'redux';
-
 import { EffectsCommandMap } from 'dva';
-import { getResellerChildren } from '@/pages/onnet-portal/core/services/kazoo';
+import { getUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 export type Effect = (
   action: AnyAction,
@@ -21,16 +20,16 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'rs_children',
+  namespace: 'child_full_users',
 
   state: {},
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const response = yield call(getResellerChildren, payload);
+      const response = yield call(getUser, payload);
       yield put({
         type: 'update',
-        payload: response,
+        payload: { [payload.owner_id]: response },
       });
     },
     *flush(_, { put }) {
@@ -43,7 +42,7 @@ const Model: ModelType = {
 
   reducers: {
     update(state, { payload }) {
-      return { ...payload };
+      return { ...state, ...payload };
     },
   },
 };

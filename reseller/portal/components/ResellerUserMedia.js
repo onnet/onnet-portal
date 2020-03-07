@@ -13,17 +13,17 @@ const ResellerUserMedia = props => {
   const [videoCodecs, setVideoCodecs] = useState([]);
   const [isLoading, setIsLoading] = useState({});
 
-  const { dispatch, rs_child_account, rs_child_user, owner_id } = props;
+  const { dispatch, child_account, child_full_users, owner_id } = props;
 
   useEffect(() => {
-    if (rs_child_user[owner_id]) {
-      setAudioCodecs(_.get(rs_child_user[owner_id].data, 'media.audio.codecs', []));
-      setVideoCodecs(_.get(rs_child_user[owner_id].data, 'media.video.codecs', []));
+    if (child_full_users[owner_id]) {
+      setAudioCodecs(_.get(child_full_users[owner_id].data, 'media.audio.codecs', []));
+      setVideoCodecs(_.get(child_full_users[owner_id].data, 'media.video.codecs', []));
     }
     setIsLoading({});
-  }, [rs_child_user[owner_id]]);
+  }, [child_full_users[owner_id]]);
 
-  if (!rs_child_user[owner_id]) return null;
+  if (!child_full_users[owner_id]) return null;
 
   const gridStyle = {
     width: '25%',
@@ -34,7 +34,7 @@ const ResellerUserMedia = props => {
     setIsLoading({ [codec]: true });
     kzUser({
       method: 'GET',
-      account_id: rs_child_account.data.id,
+      account_id: child_account.data.id,
       owner_id,
     }).then(resp => {
       const codecsList = _.get(resp, `data.media.${media}.codecs`, []);
@@ -48,13 +48,13 @@ const ResellerUserMedia = props => {
       _.set(data, `media.${media}.codecs`, newCodecsList);
       kzUser({
         method: 'PATCH',
-        account_id: rs_child_account.data.id,
+        account_id: child_account.data.id,
         owner_id,
         data,
       }).then(() =>
         dispatch({
-          type: 'rs_child_user/refresh',
-          payload: { account_id: rs_child_account.data.id, owner_id },
+          type: 'child_full_users/refresh',
+          payload: { account_id: child_account.data.id, owner_id },
         }),
       );
     });
@@ -171,11 +171,11 @@ const ResellerUserMedia = props => {
 };
 
 export default connect(
-  ({ kazoo_login, kazoo_account, rs_children, rs_child_account, rs_child_user }) => ({
+  ({ kazoo_login, kazoo_account, kz_children, child_account, child_full_users }) => ({
     kazoo_login,
     kazoo_account,
-    rs_children,
-    rs_child_account,
-    rs_child_user,
+    kz_children,
+    child_account,
+    child_full_users,
   }),
 )(ResellerUserMedia);

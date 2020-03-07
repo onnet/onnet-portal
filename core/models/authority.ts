@@ -35,8 +35,8 @@ const AuthorityModel: AuthorityModelType = {
         const superduper_admin = redux_state.kazoo_account.data.superduper_admin
           ? ['superduper_admin']
           : [];
-        const child_account_selected = redux_state.rs_child_account
-          ? redux_state.rs_child_account.data
+        const child_account_selected = redux_state.child_account
+          ? redux_state.child_account.data
             ? ['child_account_selected']
             : []
           : [];

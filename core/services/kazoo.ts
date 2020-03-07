@@ -165,7 +165,7 @@ export async function getResellerSIPRegistrations(params: FormDataTyp): Promise<
   });
 }
 
-export async function getResellerSIPRegistrationsCount(params: FormDataTyp): Promise<any> {
+export async function SIPRegistrationsCount(params: FormDataTyp): Promise<any> {
   const redux_state = window.g_app._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = redux_state.kazoo_account.data.superduper_admin

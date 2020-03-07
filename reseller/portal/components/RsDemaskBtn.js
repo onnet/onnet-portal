@@ -11,7 +11,7 @@ const RsDemaskBtn = props => {
       type="primary"
       onClick={() => {
         console.log('dispatchDemask onClick');
-        dispatch({ type: 'rs_mask_history/demask' });
+        dispatch({ type: 'mask_history/demask' });
         router.push('/int/reseller_portal/accounts');
       }}
     >

@@ -204,7 +204,7 @@ const ResellerCreateChild = props => {
         kzUsers({ method: 'PUT', account_id: res.data.id, data: userDataBag }).then(uRes => {
           console.log(uRes);
           dispatch({
-            type: 'rs_child_account/refresh',
+            type: 'child_account/refresh',
             payload: { account_id: res.data.id },
           });
         });
