@@ -30,10 +30,10 @@ const AuthComponent: React.FC = ({
   location = {
     pathname: '',
   },
-  kazoo_login,
+  kz_login,
 }) => {
   const { routes = [] } = route;
-  const isLogin = kazoo_login && kazoo_login.data;
+  const isLogin = kz_login && kz_login.data;
   return (
     <Authorized
       authority={getRouteAuthority(location.pathname, routes) || ''}
@@ -44,6 +44,6 @@ const AuthComponent: React.FC = ({
   );
 };
 
-export default connect(({ kazoo_login }) => ({
-  kazoo_login,
+export default connect(({ kz_login }) => ({
+  kz_login,
 }))(AuthComponent);

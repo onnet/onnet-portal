@@ -13,7 +13,7 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 const { confirm } = Modal;
 
 const AccountLanguage = props => {
-  const { kazoo_account } = props;
+  const { kz_account } = props;
 
   const menuAccountLanguage = (
     <Menu selectedKeys={[]} onClick={onAccountLanguageSelect}>
@@ -31,9 +31,9 @@ const AccountLanguage = props => {
       }),
       content: <span style={{ paddingLeft: '6em' }}>{key}</span>,
       onOk() {
-        runAndDispatch(kzAccount, 'kazoo_account/update', {
+        runAndDispatch(kzAccount, 'kz_account/update', {
           method: 'PATCH',
-          account_id: kazoo_account.data.id,
+          account_id: kz_account.data.id,
           data: { language: key },
         });
       },
@@ -44,12 +44,12 @@ const AccountLanguage = props => {
   return (
     <Dropdown overlay={menuAccountLanguage} trigger={['click']}>
       <a className="ant-dropdown-link" href="#">
-        {kazoo_account.data ? kazoo_account.data.language : null} <DownOutlined />
+        {kz_account.data ? kz_account.data.language : null} <DownOutlined />
       </a>
     </Dropdown>
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account }) => ({
+  kz_account,
 }))(AccountLanguage);

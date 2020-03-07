@@ -171,9 +171,9 @@ const ResellerUserMedia = props => {
 };
 
 export default connect(
-  ({ kazoo_login, kazoo_account, kz_children, child_account, child_full_users }) => ({
-    kazoo_login,
-    kazoo_account,
+  ({ kz_login, kz_account, kz_children, child_account, child_full_users }) => ({
+    kz_login,
+    kz_account,
     kz_children,
     child_account,
     child_full_users,

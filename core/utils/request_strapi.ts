@@ -35,8 +35,8 @@ const errorHandler = error => {
       message: `${url}`,
     });
     if (status === '401') {
-      console.log('About to dispatch kazoo_login/logout');
-      window.g_app._store.dispatch({ type: 'kazoo_login/logout' });
+      console.log('About to dispatch kz_login/logout');
+      window.g_app._store.dispatch({ type: 'kz_login/logout' });
     }
   }
   return response;

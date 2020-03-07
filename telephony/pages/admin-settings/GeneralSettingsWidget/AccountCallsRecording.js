@@ -12,7 +12,7 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 const { confirm } = Modal;
 
 const AccountCallsRecording = props => {
-  const { kazoo_account } = props;
+  const { kz_account } = props;
 
   function onCallRecordingSwitch(checked) {
     confirm({
@@ -28,9 +28,9 @@ const AccountCallsRecording = props => {
         </span>
       ),
       onOk() {
-        runAndDispatch(kzAccount, 'kazoo_account/update', {
+        runAndDispatch(kzAccount, 'kz_account/update', {
           method: 'PATCH',
-          account_id: kazoo_account.data.id,
+          account_id: kz_account.data.id,
           data: { record_call: checked },
         });
       },
@@ -41,12 +41,12 @@ const AccountCallsRecording = props => {
   return (
     <Switch
       size="small"
-      checked={kazoo_account.data ? kazoo_account.data.record_call : false}
+      checked={kz_account.data ? kz_account.data.record_call : false}
       onChange={onCallRecordingSwitch}
     />
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account }) => ({
+  kz_account,
 }))(AccountCallsRecording);

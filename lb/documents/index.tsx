@@ -22,7 +22,7 @@ const CardProps = {
 };
 
 const LbFinanceDetails = props => {
-  const { dispatch, lb_documents = {}, kazoo_account } = props;
+  const { dispatch, lb_documents = {}, kz_account } = props;
 
   const [selectedMonth, setSelectedMonth] = useState(
     moment()
@@ -36,17 +36,17 @@ const LbFinanceDetails = props => {
   );
 
   useEffect(() => {
-    if (kazoo_account.data) {
+    if (kz_account.data) {
       dispatch({
         type: 'lb_documents/refresh',
         payload: {
           method: 'POST',
-          account_id: kazoo_account.data.id,
+          account_id: kz_account.data.id,
           data: { year: selectedYear, month: selectedMonth },
         },
       });
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   const extraContent = (
     <div className={styles.extraContent}>
@@ -63,7 +63,7 @@ const LbFinanceDetails = props => {
               type: 'lb_documents/refresh',
               payload: {
                 method: 'POST',
-                account_id: kazoo_account.data.id,
+                account_id: kz_account.data.id,
                 data: { year: date.format('YYYY'), month: date.format('MM') },
               },
             });
@@ -128,7 +128,7 @@ const LbFinanceDetails = props => {
   );
 };
 
-export default connect(({ lb_documents, kazoo_account }) => ({
+export default connect(({ lb_documents, kz_account }) => ({
   lb_documents,
-  kazoo_account,
+  kz_account,
 }))(LbFinanceDetails);

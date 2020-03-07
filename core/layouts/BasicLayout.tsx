@@ -65,62 +65,62 @@ const BasicLayout: React.FC = props => {
     dispatch,
     children,
     settings,
-    kazoo_login,
-    kazoo_account,
-    kazoo_user,
+    kz_login,
+    kz_account,
+    kz_user,
     kz_registrations_count,
     authority,
   } = props;
 
   useEffect(() => {
-    if (kazoo_login.data) {
+    if (kz_login.data) {
       if (dispatch) {
-        if (!kazoo_account.data) {
+        if (!kz_account.data) {
           dispatch({
-            type: 'kazoo_account/refresh',
-            payload: { account_id: kazoo_login.data.account_id },
+            type: 'kz_account/refresh',
+            payload: { account_id: kz_login.data.account_id },
           });
         }
-        if (!kazoo_user.data) {
+        if (!kz_user.data) {
           dispatch({
-            type: 'kazoo_user/refresh',
+            type: 'kz_user/refresh',
             payload: {
-              account_id: kazoo_login.data.account_id,
-              owner_id: kazoo_login.data.owner_id,
+              account_id: kz_login.data.account_id,
+              owner_id: kz_login.data.owner_id,
             },
           });
         }
         if (!kz_registrations_count.data) {
           dispatch({
             type: 'kz_registrations_count/refresh',
-            payload: { account_id: kazoo_login.data.account_id },
+            payload: { account_id: kz_login.data.account_id },
           });
         }
-        if (kazoo_account.data) {
+        if (kz_account.data) {
           dispatch({
             type: 'lb_account/refresh',
-            payload: { account_id: kazoo_account.data.id },
+            payload: { account_id: kz_account.data.id },
           });
         }
       }
       const interval = setInterval(() => {
         console.log('tick');
         dispatch({
-          type: 'kazoo_login/check_auth',
+          type: 'kz_login/check_auth',
         });
       }, 60000);
       return () => {
         console.log('Unticking it!');
         dispatch({
-          type: 'kazoo_login/check_auth',
+          type: 'kz_login/check_auth',
         });
         clearInterval(interval);
       };
     }
     return () => {
-      console.log('kazoo_login.data yet...');
+      console.log('kz_login.data yet...');
     };
-  }, [kazoo_account, kazoo_user, authority]);
+  }, [kz_account, kz_user, authority]);
 
   const handleMenuCollapse = (payload: boolean): void =>
     dispatch &&
@@ -176,17 +176,17 @@ export default connect(
   ({
     global,
     settings,
-    kazoo_login,
-    kazoo_account,
-    kazoo_user,
+    kz_login,
+    kz_account,
+    kz_user,
     kz_registrations_count,
     authority,
   }) => ({
     collapsed: global.collapsed,
     settings,
-    kazoo_login,
-    kazoo_account,
-    kazoo_user,
+    kz_login,
+    kz_account,
+    kz_user,
     kz_registrations_count,
     authority,
   }),

@@ -13,16 +13,16 @@ import CardInternet from './CardInternet';
 import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 
 const LBAccountDashboard = props => {
-  const { dispatch, kazoo_account, lb_account } = props;
+  const { dispatch, kz_account, lb_account } = props;
 
   useEffect(() => {
-    if (kazoo_account.data) {
+    if (kz_account.data) {
       dispatch({
         type: 'lb_account/refresh',
-        payload: { account_id: kazoo_account.data.id },
+        payload: { account_id: kz_account.data.id },
       });
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   if (!lb_account.data) {
     return Spin;
@@ -49,7 +49,7 @@ const LBAccountDashboard = props => {
   );
 };
 
-export default connect(({ kazoo_account, lb_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account, lb_account }) => ({
+  kz_account,
   lb_account,
 }))(LBAccountDashboard);

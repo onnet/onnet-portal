@@ -15,16 +15,16 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 const { Text } = Typography;
 
 const AccountDetails = props => {
-  const { dispatch, kazoo_account, child_account } = props;
+  const { dispatch, kz_account, child_account } = props;
 
   useEffect(() => {
-    if (kazoo_account.data) {
+    if (kz_account.data) {
       dispatch({
         type: 'kz_children/refresh',
-        payload: { account_id: kazoo_account.data.id },
+        payload: { account_id: kz_account.data.id },
       });
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   function switchResellerStatus(checked) {
     if (checked) {
@@ -119,9 +119,9 @@ const AccountDetails = props => {
   );
 };
 
-export default connect(({ kazoo_login, kazoo_account, kz_children, child_account }) => ({
-  kazoo_login,
-  kazoo_account,
+export default connect(({ kz_login, kz_account, kz_children, child_account }) => ({
+  kz_login,
+  kz_account,
   kz_children,
   child_account,
 }))(AccountDetails);

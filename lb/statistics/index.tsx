@@ -15,7 +15,7 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 const dayFormat = 'YYYY/MM/DD';
 
 const LbStatistics = props => {
-  const { dispatch, lb_statistics, lb_account, kazoo_account } = props;
+  const { dispatch, lb_statistics, lb_account, kz_account } = props;
 
   const [selectedYear, setSelectedYear] = useState(moment().format('YYYY'));
   const [selectedMonth, setSelectedMonth] = useState(moment().format('MM'));
@@ -24,12 +24,12 @@ const LbStatistics = props => {
   const [callsType, setCallsType] = useState('1,2,3,4');
 
   useEffect(() => {
-    if (kazoo_account.data) {
+    if (kz_account.data) {
       dispatch({
         type: 'lb_statistics/refresh',
         payload: {
           method: 'POST',
-          account_id: kazoo_account.data.id,
+          account_id: kz_account.data.id,
           data: {
             year: selectedYear,
             month: selectedMonth,
@@ -40,7 +40,7 @@ const LbStatistics = props => {
         },
       });
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   const handleCallsDirection = e => {
     dispatch({ type: 'lb_statistics/is_loading' });
@@ -51,7 +51,7 @@ const LbStatistics = props => {
       type: 'lb_statistics/refresh',
       payload: {
         method: 'POST',
-        account_id: kazoo_account.data.id,
+        account_id: kz_account.data.id,
         data: {
           year: selectedYear,
           month: selectedMonth,
@@ -72,7 +72,7 @@ const LbStatistics = props => {
       type: 'lb_statistics/refresh',
       payload: {
         method: 'POST',
-        account_id: kazoo_account.data.id,
+        account_id: kz_account.data.id,
         data: {
           year: selectedYear,
           month: selectedMonth,
@@ -143,7 +143,7 @@ const LbStatistics = props => {
                       type: 'lb_statistics/refresh',
                       payload: {
                         method: 'POST',
-                        account_id: kazoo_account.data.id,
+                        account_id: kz_account.data.id,
                         data: {
                           year: date.format('YYYY'),
                           month: date.format('MM'),
@@ -224,8 +224,8 @@ const LbStatistics = props => {
   );
 };
 
-export default connect(({ lb_statistics, lb_account, kazoo_account }) => ({
+export default connect(({ lb_statistics, lb_account, kz_account }) => ({
   lb_statistics,
   lb_account,
-  kazoo_account,
+  kz_account,
 }))(LbStatistics);

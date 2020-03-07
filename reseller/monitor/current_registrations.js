@@ -40,10 +40,10 @@ class CurrentRegistrations extends Component {
   };
 
   static getDerivedStateFromProps(props) {
-    if (props.kazoo_account.data && !props.rs_registrations.data) {
+    if (props.kz_account.data && !props.rs_registrations.data) {
       props.dispatch({
         type: 'rs_registrations/refresh',
-        payload: { account_id: props.kazoo_login.data.account_id },
+        payload: { account_id: props.kz_login.data.account_id },
       });
       return null;
     }
@@ -203,8 +203,8 @@ class CurrentRegistrations extends Component {
   }
 }
 
-export default connect(({ kazoo_login, kazoo_account, rs_registrations }) => ({
-  kazoo_login,
-  kazoo_account,
+export default connect(({ kz_login, kz_account, rs_registrations }) => ({
+  kz_login,
+  kz_account,
   rs_registrations,
 }))(CurrentRegistrations);

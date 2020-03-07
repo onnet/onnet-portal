@@ -23,19 +23,19 @@ const AccountTimezone = props => {
     }),
   );
 
-  const { kazoo_account } = props;
+  const { kz_account } = props;
 
   useEffect(() => {
-    if (kazoo_account.data) {
-      setTimezone(kazoo_account.data.timezone);
+    if (kz_account.data) {
+      setTimezone(kz_account.data.timezone);
       setModalTitle(
         `${formatMessage({
           id: 'telephony.account_timezone',
           defaultMessage: 'Account timezone',
-        })}: ${kazoo_account.data.timezone}`,
+        })}: ${kz_account.data.timezone}`,
       );
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   const onTimezoneSelect = event => {
     console.log('onTimezoneSelect event: ', event);
@@ -43,22 +43,22 @@ const AccountTimezone = props => {
   };
 
   const onTimezoneConfirm = () => {
-    runAndDispatch(kzAccount, 'kazoo_account/update', {
+    runAndDispatch(kzAccount, 'kz_account/update', {
       method: 'PATCH',
-      account_id: kazoo_account.data.id,
+      account_id: kz_account.data.id,
       data: { timezone },
     });
     setTzButtonVisible(false);
   };
 
   const onTimezoneCancel = () => {
-    setTimezone(kazoo_account.data.timezone);
+    setTimezone(kz_account.data.timezone);
     setTzButtonVisible(false);
   };
 
   return (
     <>
-      {kazoo_account.data ? kazoo_account.data.timezone : null}
+      {kz_account.data ? kz_account.data.timezone : null}
       <Button type="link" onClick={() => setTzButtonVisible(true)}>
         <EditOutlined />
       </Button>
@@ -73,7 +73,7 @@ const AccountTimezone = props => {
             style={{ width: '50%' }}
             onChange={onTimezoneSelect}
             showSearch
-            defaultValue={kazoo_account.data ? kazoo_account.data.timezone : null}
+            defaultValue={kz_account.data ? kz_account.data.timezone : null}
           >
             {moment.tz.names().map(tzname => (
               <Select.Option value={tzname} key={tzname}>
@@ -88,6 +88,6 @@ const AccountTimezone = props => {
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account }) => ({
+  kz_account,
 }))(AccountTimezone);

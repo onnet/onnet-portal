@@ -11,8 +11,8 @@ import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 export interface GlobalHeaderRightProps extends ConnectProps {
-  kazoo_user?: any;
-  kazoo_account?: any;
+  kz_user?: any;
+  kz_account?: any;
 }
 
 class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
@@ -25,7 +25,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
       const { dispatch } = this.props;
       if (dispatch) {
         dispatch({
-          type: 'kazoo_login/logout',
+          type: 'kz_login/logout',
         });
       }
 
@@ -35,7 +35,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
   };
 
   render(): React.ReactNode {
-    const { kazoo_user_data = {}, kazoo_account_data = {} } = this.props;
+    const { kz_user_data = {}, kz_account_data = {} } = this.props;
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         <Menu.Item key="center">
@@ -60,23 +60,23 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
             size="small"
             className={styles.avatar}
             src={
-              kazoo_user_data.id
-                ? `https://api.adorable.io/avatars/24/${encodeURIComponent(kazoo_user_data.id)}.png`
+              kz_user_data.id
+                ? `https://api.adorable.io/avatars/24/${encodeURIComponent(kz_user_data.id)}.png`
                 : 'https://api.adorable.io/avatars/24/justfunnyaccount.png'
             }
             alt="avatar"
           />
           <span className={styles.name}>
-            {kazoo_user_data.first_name ? `${kazoo_user_data.first_name} ` : ' '}
-            {kazoo_user_data.last_name ? kazoo_user_data.last_name : ' '}
-            {kazoo_account_data.name ? ` @ ${kazoo_account_data.name}` : ' '}
+            {kz_user_data.first_name ? `${kz_user_data.first_name} ` : ' '}
+            {kz_user_data.last_name ? kz_user_data.last_name : ' '}
+            {kz_account_data.name ? ` @ ${kz_account_data.name}` : ' '}
           </span>
         </span>
       </HeaderDropdown>
     );
   }
 }
-export default connect(({ kazoo_user, kazoo_account }: ConnectState) => ({
-  kazoo_user_data: kazoo_user.data ? kazoo_user.data : {},
-  kazoo_account_data: kazoo_account.data ? kazoo_account.data : {},
+export default connect(({ kz_user, kz_account }: ConnectState) => ({
+  kz_user_data: kz_user.data ? kz_user.data : {},
+  kz_account_data: kz_account.data ? kz_account.data : {},
 }))(AvatarDropdown);

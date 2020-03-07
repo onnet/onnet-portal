@@ -82,8 +82,8 @@ class ResellerChildSearch extends Component {
   }
 }
 
-export default connect(({ kazoo_login, kazoo_account, kz_children }) => ({
-  kazoo_login,
-  kazoo_account,
+export default connect(({ kz_login, kz_account, kz_children }) => ({
+  kz_login,
+  kz_account,
   kz_children,
 }))(ResellerChildSearch);

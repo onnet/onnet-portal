@@ -12,16 +12,16 @@ import CardOnlinePayments from './CardOnlinePayments';
 import CardWireTransfer from './CardWireTransfer';
 
 const LbFinanceDetails = props => {
-  const { dispatch, lb_account, kazoo_account } = props;
+  const { dispatch, lb_account, kz_account } = props;
 
   useEffect(() => {
-    if (kazoo_account.data) {
+    if (kz_account.data) {
       dispatch({
         type: 'lb_account/refresh',
-        payload: { account_id: kazoo_account.data.id },
+        payload: { account_id: kz_account.data.id },
       });
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   const extraContent = (
     <div className={styles.extraContent}>
@@ -63,7 +63,7 @@ const LbFinanceDetails = props => {
               <CardWireTransfer
                 {...cardProps}
                 lb_account={lb_account}
-                account_id={kazoo_account.data.id}
+                account_id={kz_account.data.id}
               />
             </Col>
           </Row>
@@ -72,7 +72,7 @@ const LbFinanceDetails = props => {
               <CardOnlinePayments
                 {...cardProps}
                 lb_account={lb_account}
-                account_id={kazoo_account.data.id}
+                account_id={kz_account.data.id}
               />
             </Col>
           </Row>
@@ -87,7 +87,7 @@ const LbFinanceDetails = props => {
   );
 };
 
-export default connect(({ lb_account, kazoo_account }) => ({
+export default connect(({ lb_account, kz_account }) => ({
   lb_account,
-  kazoo_account,
+  kz_account,
 }))(LbFinanceDetails);

@@ -29,20 +29,20 @@ const Model: ModelType = {
       const state = yield select();
       const account_id = state.mask_history.children.account_id
         ? state.mask_history.children.account_id
-        : state.kazoo_login.data.account_id;
+        : state.kz_login.data.account_id;
       const owner_id = state.mask_history.children.owner_id
         ? state.mask_history.children.owner_id
-        : state.kazoo_login.data.owner_id;
+        : state.kz_login.data.owner_id;
       yield window.g_app._store.dispatch({
         type: 'lb_account/refresh',
         payload: { account_id },
       });
       yield window.g_app._store.dispatch({
-        type: 'kazoo_account/refresh',
+        type: 'kz_account/refresh',
         payload: { account_id },
       });
       yield window.g_app._store.dispatch({
-        type: 'kazoo_user/refresh',
+        type: 'kz_user/refresh',
         payload: { account_id, owner_id },
       });
       yield window.g_app._store.dispatch({

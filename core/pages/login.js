@@ -22,9 +22,9 @@ const tailLayout = {
 };
 
 const LoginForm = props => {
-  const { dispatch, kazoo_login } = props;
+  const { dispatch, kz_login } = props;
 
-  if (kazoo_login.status === 'success') {
+  if (kz_login.status === 'success') {
     return <Redirect to="/dashboard" />;
   }
 
@@ -41,7 +41,7 @@ const LoginForm = props => {
     console.log(accountname);
     console.log(data);
     dispatch({
-      type: 'kazoo_login/login',
+      type: 'kz_login/login',
       payload: { data, type: 'account' },
     });
   };
@@ -123,6 +123,6 @@ const LoginForm = props => {
   );
 };
 
-export default connect(({ kazoo_login }) => ({
-  kazoo_login,
+export default connect(({ kz_login }) => ({
+  kz_login,
 }))(LoginForm);

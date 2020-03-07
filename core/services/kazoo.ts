@@ -5,7 +5,7 @@ export const JSON_HEADERS = () => {
   return {
     'Content-Type': 'application/json; charset=utf-8',
     Accept: 'application/json',
-    'X-Auth-Token': redux_state.kazoo_login.auth_token,
+    'X-Auth-Token': redux_state.kz_login.auth_token,
   };
 };
 
@@ -14,15 +14,15 @@ export const PDF_HEADERS = () => {
   return {
     'Content-Type': 'application/json; charset=utf-8',
     Accept: 'application/pdf',
-    'X-Auth-Token': redux_state.kazoo_login.auth_token,
+    'X-Auth-Token': redux_state.kz_login.auth_token,
   };
 };
 
 export const MAYBE_SUPER_DUPER = () => {
   const redux_state = window.g_app._store.getState();
-  if (redux_state.kazoo_account.data) {
-    if (redux_state.kazoo_account.data.superduper_admin) {
-      return redux_state.kazoo_account.data.superduper_admin === true;
+  if (redux_state.kz_account.data) {
+    if (redux_state.kz_account.data.superduper_admin) {
+      return redux_state.kz_account.data.superduper_admin === true;
     }
     return false;
   }
@@ -156,7 +156,7 @@ export async function getResellerChildren(params: FormDataTyp): Promise<any> {
 export async function getResellerSIPRegistrations(params: FormDataTyp): Promise<any> {
   const redux_state = window.g_app._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = redux_state.kazoo_account.data.superduper_admin
+  const url = redux_state.kz_account.data.superduper_admin
     ? `${API_URL_V2}/registrations`
     : `${API_URL_V2}/accounts/${params.account_id}/registrations`;
   return request(url, {
@@ -168,7 +168,7 @@ export async function getResellerSIPRegistrations(params: FormDataTyp): Promise<
 export async function SIPRegistrationsCount(params: FormDataTyp): Promise<any> {
   const redux_state = window.g_app._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = redux_state.kazoo_account.data.superduper_admin
+  const url = redux_state.kz_account.data.superduper_admin
     ? `${API_URL_V2}/registrations/count`
     : `${API_URL_V2}/accounts/${params.account_id}/registrations/count`;
   return request(url, {
@@ -180,7 +180,7 @@ export async function SIPRegistrationsCount(params: FormDataTyp): Promise<any> {
 export function getResellerChannels(params: FormDataTyp): Promise<any> {
   const redux_state = window.g_app._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = redux_state.kazoo_account.data.superduper_admin
+  const url = redux_state.kz_account.data.superduper_admin
     ? `${API_URL_V2}/channels`
     : `${API_URL_V2}/accounts/${params.account_id}/channels`;
   return request(url, {
@@ -192,7 +192,7 @@ export function getResellerChannels(params: FormDataTyp): Promise<any> {
 export async function checkCurrentAuthToken(): Promise<any> {
   const redux_state = window.g_app._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = `${API_URL_V2}/auth/tokeninfo?token=${redux_state.kazoo_login.auth_token}`;
+  const url = `${API_URL_V2}/auth/tokeninfo?token=${redux_state.kz_login.auth_token}`;
   return request(url, {
     method: 'GET',
     headers: JSON_HEADERS(),

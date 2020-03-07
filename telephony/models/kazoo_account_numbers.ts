@@ -21,7 +21,7 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'kazoo_account_numbers',
+  namespace: 'kz_account_numbers',
 
   state: {
     data: {
@@ -31,9 +31,9 @@ const Model: ModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      console.log('model kazoo_account_numbers Refresh');
+      console.log('model kz_account_numbers Refresh');
       const response = yield call(AccountNumbers, { ...payload, method: 'GET' });
-      console.log('model kazoo_account_numbers numbers: ', Object.keys(response.data.numbers));
+      console.log('model kz_account_numbers numbers: ', Object.keys(response.data.numbers));
       yield put({
         type: 'update',
         payload: response,

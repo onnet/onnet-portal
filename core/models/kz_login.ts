@@ -13,7 +13,7 @@ export type Effect = (
 ) => void;
 
 export interface KazooLoginModelType {
-  namespace: 'kazoo_login';
+  namespace: 'kz_login';
   state: {};
   effects: {
     logout: Effect;
@@ -24,7 +24,7 @@ export interface KazooLoginModelType {
 }
 
 const KazooLoginModel: KazooLoginModelType = {
-  namespace: 'kazoo_login',
+  namespace: 'kz_login',
 
   state: {
     ...JSON.parse(localStorage.getItem('userLogin')),
@@ -39,11 +39,11 @@ const KazooLoginModel: KazooLoginModelType = {
           payload: response,
         });
         window.g_app._store.dispatch({
-          type: 'kazoo_user/refresh',
+          type: 'kz_user/refresh',
           payload: { account_id: response.data.account_id, owner_id: response.data.owner_id },
         });
         window.g_app._store.dispatch({
-          type: 'kazoo_account/refresh',
+          type: 'kz_account/refresh',
           payload: { account_id: response.data.account_id },
         });
         //       router.push('/dashboard');
@@ -56,8 +56,8 @@ const KazooLoginModel: KazooLoginModelType = {
           type: 'changeLoginStatus',
           payload: { currentAuthority: null },
         });
-        window.g_app._store.dispatch({ type: 'kazoo_user/flush' });
-        window.g_app._store.dispatch({ type: 'kazoo_account/flush' });
+        window.g_app._store.dispatch({ type: 'kz_user/flush' });
+        window.g_app._store.dispatch({ type: 'kz_account/flush' });
       }
     },
     *logout(_, { put }) {
@@ -65,8 +65,8 @@ const KazooLoginModel: KazooLoginModelType = {
         type: 'changeLoginStatus',
         payload: { currentAuthority: null },
       });
-      window.g_app._store.dispatch({ type: 'kazoo_user/flush' });
-      window.g_app._store.dispatch({ type: 'kazoo_account/flush' });
+      window.g_app._store.dispatch({ type: 'kz_user/flush' });
+      window.g_app._store.dispatch({ type: 'kz_account/flush' });
       window.location.replace('/');
     },
   },

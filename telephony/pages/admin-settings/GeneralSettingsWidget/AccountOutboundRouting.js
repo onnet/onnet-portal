@@ -16,10 +16,10 @@ const AccountOutboundRouting = props => {
   const [noMatchId, SetNoMatchId] = useState(false);
   const [currRoutingMode, SetCurrRoutingMode] = useState('');
 
-  const { dispatch, kazoo_account, kz_cf_list, kz_cf_details } = props;
+  const { dispatch, kz_account, kz_cf_list, kz_cf_details } = props;
 
   useEffect(() => {
-    if (kazoo_account.data) {
+    if (kz_account.data) {
       if (kz_cf_list.data) {
         const { id } = kz_cf_list.data.find(({ numbers }) => isArrayEqual(numbers, ['no_match']));
         if (kz_cf_details[id]) {
@@ -40,12 +40,12 @@ const AccountOutboundRouting = props => {
         } else {
           dispatch({
             type: 'kz_cf_details/refresh',
-            payload: { method: 'GET', account_id: kazoo_account.data.id, callflow_id: id },
+            payload: { method: 'GET', account_id: kz_account.data.id, callflow_id: id },
           });
         }
       }
     }
-  }, [kazoo_account, kz_cf_list, kz_cf_details]);
+  }, [kz_account, kz_cf_list, kz_cf_details]);
 
   const menuAccountOutboundRouting = (
     <Menu selectedKeys={[]} onClick={onAccountOutboundRoutingSelect}>
@@ -93,17 +93,17 @@ const AccountOutboundRouting = props => {
     if (routingType === 'general_routing') {
       runAndDispatch(AccountCallflow, 'kz_cf_details/update', {
         method: 'PATCH',
-        account_id: kazoo_account.data.id,
+        account_id: kz_account.data.id,
         callflow_id: noMatchId,
         //       data: { flow: { data: { }, module: 'offnet' } },
         data: {
-          flow: { data: { hunt_account_id: kazoo_account.data.reseller_id }, module: 'resources' },
+          flow: { data: { hunt_account_id: kz_account.data.reseller_id }, module: 'resources' },
         },
       });
     } else {
       runAndDispatch(AccountCallflow, 'kz_cf_details/update', {
         method: 'PATCH',
-        account_id: kazoo_account.data.id,
+        account_id: kz_account.data.id,
         callflow_id: noMatchId,
         data: { flow: { data: {}, module: 'resources' } },
       });
@@ -119,8 +119,8 @@ const AccountOutboundRouting = props => {
   );
 };
 
-export default connect(({ kazoo_account, kz_cf_list, kz_cf_details }) => ({
-  kazoo_account,
+export default connect(({ kz_account, kz_cf_list, kz_cf_details }) => ({
+  kz_account,
   kz_cf_list,
   kz_cf_details,
 }))(AccountOutboundRouting);

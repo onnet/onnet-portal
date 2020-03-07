@@ -28,7 +28,7 @@ const RsRegistrationsCountModel: RsRegistrationsCountModelType = {
   effects: {
     *refresh({ payload }, { call, put }) {
       const redux_state = window.g_app._store.getState();
-      if (redux_state.kazoo_account.data) {
+      if (redux_state.kz_account.data) {
         const response = yield call(SIPRegistrationsCount, payload);
         yield put({
           type: 'update',

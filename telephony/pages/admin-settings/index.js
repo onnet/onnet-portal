@@ -8,24 +8,24 @@ import { List } from 'antd';
 import GeneralSettingsWidget from './GeneralSettingsWidget';
 
 const AdminSettings = props => {
-  const { dispatch, kazoo_account } = props;
+  const { dispatch, kz_account } = props;
 
   useEffect(() => {
-    if (kazoo_account.data) {
+    if (kz_account.data) {
       dispatch({
-        type: 'kazoo_account_numbers/refresh',
-        payload: { method: 'GET', account_id: kazoo_account.data.id },
+        type: 'kz_account_numbers/refresh',
+        payload: { method: 'GET', account_id: kz_account.data.id },
       });
       dispatch({
-        type: 'kazoo_account_media/refresh',
-        payload: { method: 'GET', account_id: kazoo_account.data.id },
+        type: 'kz_account_media/refresh',
+        payload: { method: 'GET', account_id: kz_account.data.id },
       });
       dispatch({
         type: 'kz_cf_list/refresh',
-        payload: { method: 'GET', account_id: kazoo_account.data.id },
+        payload: { method: 'GET', account_id: kz_account.data.id },
       });
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   return (
     <PageHeaderWrapper>
@@ -42,6 +42,6 @@ const AdminSettings = props => {
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account }) => ({
+  kz_account,
 }))(AdminSettings);

@@ -17,7 +17,7 @@ export interface GlobalHeaderRightProps extends ConnectProps {
 }
 
 const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
-  const { dispatch, theme, layout, kazoo_account = {}, kazoo_login = {} } = props;
+  const { dispatch, theme, layout, kz_account = {}, kz_login = {} } = props;
   let className = styles.right;
 
   if (theme === 'dark' && layout === 'topmenu') {
@@ -26,8 +26,8 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
 
   return (
     <div className={className}>
-      {kazoo_account.data ? (
-        kazoo_account.data.id !== kazoo_login.data.account_id ? (
+      {kz_account.data ? (
+        kz_account.data.id !== kz_login.data.account_id ? (
           <RsDemaskBtn />
         ) : null
       ) : null}
@@ -38,7 +38,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
           id: 'menu.account.logout',
         })}
       >
-        <span className={styles.action} onClick={() => dispatch({ type: 'kazoo_login/logout' })}>
+        <span className={styles.action} onClick={() => dispatch({ type: 'kz_login/logout' })}>
           <LogoutOutlined />
         </span>
       </Tooltip>
@@ -46,9 +46,9 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
   );
 };
 
-export default connect(({ settings, kazoo_account, kazoo_login }: ConnectState) => ({
+export default connect(({ settings, kz_account, kz_login }: ConnectState) => ({
   theme: settings.navTheme,
   layout: settings.layout,
-  kazoo_account,
-  kazoo_login,
+  kz_account,
+  kz_login,
 }))(GlobalHeaderRight);

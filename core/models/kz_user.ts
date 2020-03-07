@@ -9,7 +9,7 @@ export type Effect = (
 ) => void;
 
 export interface KazooUserModelType {
-  namespace: 'kazoo_user';
+  namespace: 'kz_user';
   state: {};
   effects: {
     refresh: Effect;
@@ -21,7 +21,7 @@ export interface KazooUserModelType {
 }
 
 const KazooUserModel: KazooUserModelType = {
-  namespace: 'kazoo_user',
+  namespace: 'kz_user',
 
   state: {},
 

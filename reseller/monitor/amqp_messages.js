@@ -30,12 +30,12 @@ function info(reg_details) {
 }
 
 const CurrentMessages = props => {
-  const { dispatch, kazoo_login, settings } = props;
+  const { dispatch, kz_login, settings } = props;
   const [rows, setRows] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
 
   const connection = new WebSocket(settings.blackholeUrl);
-  const { auth_token } = kazoo_login;
+  const { auth_token } = kz_login;
 
   useEffect(() => {
     setIsMounted(true);
@@ -89,7 +89,7 @@ const CurrentMessages = props => {
           console.log(jsdata);
         } else if (jsdata.data.errors[0].startsWith('failed to authenticate token')) {
           console.log(jsdata.data.errors[0]);
-          dispatch({ type: 'kazoo_login/logout' });
+          dispatch({ type: 'kz_login/logout' });
         }
       }
     };
@@ -164,7 +164,7 @@ const CurrentMessages = props => {
   );
 };
 
-export default connect(({ kazoo_login, settings }) => ({
-  kazoo_login,
+export default connect(({ kz_login, settings }) => ({
+  kz_login,
   settings,
 }))(CurrentMessages);

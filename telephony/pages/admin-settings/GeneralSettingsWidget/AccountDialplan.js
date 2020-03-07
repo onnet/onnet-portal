@@ -16,15 +16,15 @@ const { confirm } = Modal;
 const AccountDialplan = props => {
   const [accountDialplans, setAccountDialplans] = useState({});
 
-  const { kazoo_account } = props;
+  const { kz_account } = props;
 
   useEffect(() => {
-    if (kazoo_account.data) {
-      AccountDialplans({ account_id: kazoo_account.data.id }).then(res => {
+    if (kz_account.data) {
+      AccountDialplans({ account_id: kz_account.data.id }).then(res => {
         if (res.data) setAccountDialplans(res.data);
       });
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   const menuAccountDialplan = (
     <Menu selectedKeys={[]} onClick={onAccountDialplanSelect}>
@@ -46,9 +46,9 @@ const AccountDialplan = props => {
         </span>
       ),
       onOk() {
-        runAndDispatch(kzAccount, 'kazoo_account/update', {
+        runAndDispatch(kzAccount, 'kz_account/update', {
           method: 'PATCH',
-          account_id: kazoo_account.data.id,
+          account_id: kz_account.data.id,
           data: { dial_plan: { system: [key] } },
         });
       },
@@ -59,9 +59,9 @@ const AccountDialplan = props => {
   return (
     <Dropdown overlay={menuAccountDialplan} trigger={['click']}>
       <a className="ant-dropdown-link" href="#">
-        {kazoo_account.data
-          ? kazoo_account.data.dial_plan
-            ? kazoo_account.data.dial_plan.system
+        {kz_account.data
+          ? kz_account.data.dial_plan
+            ? kz_account.data.dial_plan.system
             : null
           : null}{' '}
         <DownOutlined />
@@ -70,6 +70,6 @@ const AccountDialplan = props => {
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account }) => ({
+  kz_account,
 }))(AccountDialplan);

@@ -21,7 +21,7 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'kazoo_account_media',
+  namespace: 'kz_account_media',
 
   state: {
     data: [],

@@ -19,19 +19,19 @@ const ZoneInfo = props => {
   const {
     dispatch,
     settings,
-    kazoo_login,
-    kazoo_account = {},
+    kz_login,
+    kz_account = {},
     kz_system_status = {},
     location,
   } = props;
 
   useEffect(() => {
-    if (kazoo_account.data) {
-      if (!kazoo_account.data.superduper_admin) {
+    if (kz_account.data) {
+      if (!kz_account.data.superduper_admin) {
         router.push('/int/dashboard');
       }
     }
-  }, [kazoo_account, kz_system_status]);
+  }, [kz_account, kz_system_status]);
 
   if (kz_system_status.data) {
     if (!kz_system_status.data[location.state.zone]) {
@@ -44,7 +44,7 @@ const ZoneInfo = props => {
   } else {
     dispatch({
       type: 'kz_system_status/refresh',
-      payload: { account_id: kazoo_login.data.account_id },
+      payload: { account_id: kz_login.data.account_id },
     });
     return (
       <div
@@ -225,10 +225,10 @@ const ZoneInfo = props => {
 };
 
 export default connect(
-  ({ settings, kazoo_login, kazoo_account, kz_system_status, kz_registrations_count }) => ({
+  ({ settings, kz_login, kz_account, kz_system_status, kz_registrations_count }) => ({
     settings,
-    kazoo_login,
-    kazoo_account,
+    kz_login,
+    kz_account,
     kz_system_status,
     kz_registrations_count,
   }),

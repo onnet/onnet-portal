@@ -20,16 +20,16 @@ import UsersList from './UsersList';
 const { confirm } = Modal;
 
 const ResellerPortal = props => {
-  const { dispatch, kazoo_account, child_account, child_brief_users } = props;
+  const { dispatch, kz_account, child_account, child_brief_users } = props;
 
   useEffect(() => {
-    if (kazoo_account.data) {
+    if (kz_account.data) {
       dispatch({
         type: 'kz_children/refresh',
-        payload: { account_id: kazoo_account.data.id },
+        payload: { account_id: kz_account.data.id },
       });
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   const menu = (
     <Menu onClick={handleMenuClick}>
@@ -64,11 +64,11 @@ const ResellerPortal = props => {
     message.info(`Masking as ${e.item.props.user_username} @ ${e.item.props.account_name}.`);
     console.log('click', e.item.props);
     dispatch({
-      type: 'kazoo_account/refresh',
+      type: 'kz_account/refresh',
       payload: { account_id: e.item.props.account_id },
     });
     dispatch({
-      type: 'kazoo_user/refresh',
+      type: 'kz_user/refresh',
       payload: { account_id: e.item.props.account_id, owner_id: e.item.props.user_id },
     });
     dispatch({
@@ -111,7 +111,7 @@ const ResellerPortal = props => {
             });
             dispatch({
               type: 'kz_children/refresh',
-              payload: { account_id: kazoo_account.data.id },
+              payload: { account_id: kz_account.data.id },
             });
             //    window.location.reload(true);
           })
@@ -199,9 +199,9 @@ const ResellerPortal = props => {
 };
 
 export default connect(
-  ({ kazoo_login, kazoo_account, kz_children, child_account, child_brief_users }) => ({
-    kazoo_login,
-    kazoo_account,
+  ({ kz_login, kz_account, kz_children, child_account, child_brief_users }) => ({
+    kz_login,
+    kz_account,
     kz_children,
     child_account,
     child_brief_users,

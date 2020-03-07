@@ -43,7 +43,7 @@ const FetchNameByAccount = account_id => {
 
 const MaybeFetchByNumber = number => {
   const redux_state = window.g_app._store.getState();
-  const { account_id } = redux_state.kazoo_login.data;
+  const { account_id } = redux_state.kz_login.data;
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${account_id}/phone_numbers/${number}/identify`;
   const response = useFetch(url, { method: 'GET', headers: JSON_HEADERS() });
@@ -102,12 +102,12 @@ const MyFetchingComponent = params => {
 };
 
 const AccountName = props => {
-  const { kazoo_cache } = props;
+  const { kz_cache } = props;
 
   return (
     <Suspense fallback="Loading...">
-      {kazoo_cache.account_name[props.account_id] ? (
-        kazoo_cache.account_name[props.account_id]
+      {kz_cache.account_name[props.account_id] ? (
+        kz_cache.account_name[props.account_id]
       ) : (
         <MyFetchingComponent
           account_id={props.account_id}
@@ -121,8 +121,8 @@ const AccountName = props => {
   );
 };
 
-export default connect(({ kazoo_login, kazoo_account, kazoo_cache }) => ({
-  kazoo_login,
-  kazoo_account,
-  kazoo_cache,
+export default connect(({ kz_login, kz_account, kz_cache }) => ({
+  kz_login,
+  kz_account,
+  kz_cache,
 }))(AccountName);

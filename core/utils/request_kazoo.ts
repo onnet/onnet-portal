@@ -43,9 +43,9 @@ const errorHandler = error => {
     //    });
     if (status === 401) {
       const redux_state = window.g_app._store.getState();
-      if (redux_state.kazoo_login.data) {
-        console.log('About to dispatch kazoo_login/logout');
-        window.g_app._store.dispatch({ type: 'kazoo_login/logout' });
+      if (redux_state.kz_login.data) {
+        console.log('About to dispatch kz_login/logout');
+        window.g_app._store.dispatch({ type: 'kz_login/logout' });
       } else {
         notification.error({
           message: formatMessage({ id: 'core.auth_error', defaultMessage: 'Error' }),

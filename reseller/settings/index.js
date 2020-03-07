@@ -6,9 +6,9 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import AccountDetails from '../portal/AccountDetails';
 
 const ResellerSettings = props => {
-  const { kazoo_account } = props;
+  const { kz_account } = props;
 
-  if (!kazoo_account.data) {
+  if (!kz_account.data) {
     return <Spin />;
   }
 
@@ -24,7 +24,7 @@ const ResellerSettings = props => {
           padding: '1em',
         }}
       >
-        Hello from Reseller Settings <b>{kazoo_account.data.name}</b>!
+        Hello from Reseller Settings <b>{kz_account.data.name}</b>!
       </div>
 
       <List
@@ -36,6 +36,6 @@ const ResellerSettings = props => {
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account }) => ({
+  kz_account,
 }))(ResellerSettings);

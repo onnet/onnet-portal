@@ -3,14 +3,14 @@ import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 const ResellerDashboard = props => {
-  const { kazoo_login, kazoo_account } = props;
+  const { kz_login, kz_account } = props;
 
-  useEffect(() => {}, [kazoo_login, kazoo_account]);
+  useEffect(() => {}, [kz_login, kz_account]);
 
   return <PageHeaderWrapper>Reseller dashboard</PageHeaderWrapper>;
 };
 
-export default connect(({ kazoo_login, kazoo_account }) => ({
-  kazoo_login,
-  kazoo_account,
+export default connect(({ kz_login, kz_account }) => ({
+  kz_login,
+  kz_account,
 }))(ResellerDashboard);

@@ -9,7 +9,7 @@ export type Effect = (
 ) => void;
 
 export interface KzooCacheModelType {
-  namespace: 'kazoo_cache';
+  namespace: 'kz_cache';
   state: {};
   effects: {
     refreshAccountState: Effect;
@@ -21,7 +21,7 @@ export interface KzooCacheModelType {
 }
 
 const KzooCacheModel: KzooCacheModelType = {
-  namespace: 'kazoo_cache',
+  namespace: 'kz_cache',
 
   state: { account_name: [] },
 

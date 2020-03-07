@@ -165,7 +165,7 @@ const CollectionCreateForm = props => {
 const ResellerCreateChild = props => {
   const [visible, setVisible] = useState(false);
 
-  const { dispatch, kazoo_account } = props;
+  const { dispatch, kz_account } = props;
 
   const formRef = React.createRef();
 
@@ -197,7 +197,7 @@ const ResellerCreateChild = props => {
       console.log('userDataBag: ', userDataBag);
       kzAccount({
         method: 'PUT',
-        account_id: kazoo_account.data.id,
+        account_id: kz_account.data.id,
         data: accountDataBag,
       }).then(res => {
         console.log(res);
@@ -239,6 +239,6 @@ const ResellerCreateChild = props => {
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account }) => ({
+  kz_account,
 }))(ResellerCreateChild);

@@ -4,19 +4,19 @@ import { Spin } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 const AccountDashboard = props => {
-  const { kazoo_account } = props;
+  const { kz_account } = props;
 
-  if (!kazoo_account.data) {
+  if (!kz_account.data) {
     return <Spin />;
   }
 
   return (
     <PageHeaderWrapper>
-      Account dashboard <b>{kazoo_account.data.name}</b>
+      Account dashboard <b>{kz_account.data.name}</b>
     </PageHeaderWrapper>
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account }) => ({
+  kz_account,
 }))(AccountDashboard);

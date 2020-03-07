@@ -42,8 +42,8 @@ const myGraph = (system_status, kz_registrations_count) =>
 const SuperDuperDashboard = props => {
   const {
     dispatch,
-    kazoo_login = {},
-    kazoo_account = {},
+    kz_login = {},
+    kz_account = {},
     kz_registrations_count = {},
     kz_system_status = {},
   } = props;
@@ -182,20 +182,20 @@ const SuperDuperDashboard = props => {
       );
     } else {
       // eslint-disable-next-line no-undef
-      if (kazoo_account.data.superduper_admin && !kz_system_status.data) {
+      if (kz_account.data.superduper_admin && !kz_system_status.data) {
         dispatch({
           type: 'kz_system_status/refresh',
-          payload: { account_id: kazoo_login.data.account_id },
+          payload: { account_id: kz_login.data.account_id },
         });
       }
       if (!kz_registrations_count.data) {
         dispatch({
           type: 'kz_registrations_count/refresh',
-          payload: { account_id: kazoo_login.data.account_id },
+          payload: { account_id: kz_login.data.account_id },
         });
       }
     }
-  }, [kazoo_login, kazoo_account, kz_registrations_count, kz_system_status]);
+  }, [kz_login, kz_account, kz_registrations_count, kz_system_status]);
 
   return (
     <PageHeaderWrapper>
@@ -218,9 +218,9 @@ const SuperDuperDashboard = props => {
 };
 
 export default connect(
-  ({ kazoo_login, kazoo_account, kz_system_status, kz_registrations_count }) => ({
-    kazoo_login,
-    kazoo_account,
+  ({ kz_login, kz_account, kz_system_status, kz_registrations_count }) => ({
+    kz_login,
+    kz_account,
     kz_system_status,
     kz_registrations_count,
   }),

@@ -33,9 +33,9 @@ class CurrentCalls extends React.Component {
     console.log(subr.dateToGregorian(new Date()));
 
     const connection = new WebSocket(this.props.settings.blackholeUrl);
-    const { auth_token } = this.props.kazoo_login;
+    const { auth_token } = this.props.kz_login;
 
-    if (this.props.kazoo_account.data) {
+    if (this.props.kz_account.data) {
       this.initCurCalls();
     }
 
@@ -145,20 +145,20 @@ class CurrentCalls extends React.Component {
         }
       } else if (jsdata.data.errors[0].startsWith('failed to authenticate token')) {
         console.log(jsdata.data.errors[0]);
-        this.props.dispatch({ type: 'kazoo_login/logout' });
+        this.props.dispatch({ type: 'kz_login/logout' });
       }
     };
   }
 
   componentDidUpdate(prevProps) {
-    if (!prevProps.kazoo_account.data && this.props.kazoo_account.data) {
+    if (!prevProps.kz_account.data && this.props.kz_account.data) {
       this.initCurCalls();
     }
   }
 
   initCurCalls = () => {
-    const reqPayload = this.props.kazoo_account.data
-      ? { account_id: this.props.kazoo_account.data.id }
+    const reqPayload = this.props.kz_account.data
+      ? { account_id: this.props.kz_account.data.id }
       : {};
     getResellerChannels(reqPayload).then(respCurCalls => {
       if (respCurCalls.data) {
@@ -254,8 +254,8 @@ class CurrentCalls extends React.Component {
   }
 }
 
-export default connect(({ kazoo_login, kazoo_account, settings }) => ({
-  kazoo_login,
-  kazoo_account,
+export default connect(({ kz_login, kz_account, settings }) => ({
+  kz_login,
+  kz_account,
   settings,
 }))(CurrentCalls);

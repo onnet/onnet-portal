@@ -7,7 +7,7 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 const { Paragraph } = Typography;
 
 const AccountParagraph = props => {
-  const { kazoo_account } = props;
+  const { kz_account } = props;
 
   return (
     <Paragraph
@@ -17,9 +17,9 @@ const AccountParagraph = props => {
           console.log(`props.currentText ${props.currentText}`);
           console.log(props.currentText !== updatedText);
           if (props.currentText !== updatedText) {
-            runAndDispatch(kzAccount, 'kazoo_account/update', {
+            runAndDispatch(kzAccount, 'kz_account/update', {
               method: 'PATCH',
-              account_id: kazoo_account.data.id,
+              account_id: kz_account.data.id,
               data: { [props.fieldKey]: updatedText },
             });
           }
@@ -31,6 +31,6 @@ const AccountParagraph = props => {
   );
 };
 
-export default connect(({ kazoo_account }) => ({
-  kazoo_account,
+export default connect(({ kz_account }) => ({
+  kz_account,
 }))(AccountParagraph);

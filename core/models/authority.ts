@@ -28,11 +28,11 @@ const AuthorityModel: AuthorityModelType = {
     *refresh(_, { put }) {
       try {
         const redux_state = window.g_app._store.getState();
-        const priv_level = redux_state.kazoo_user.data.priv_level
-          ? [redux_state.kazoo_user.data.priv_level]
+        const priv_level = redux_state.kz_user.data.priv_level
+          ? [redux_state.kz_user.data.priv_level]
           : [];
-        const reseller = redux_state.kazoo_account.data.is_reseller ? ['reseller'] : [];
-        const superduper_admin = redux_state.kazoo_account.data.superduper_admin
+        const reseller = redux_state.kz_account.data.is_reseller ? ['reseller'] : [];
+        const superduper_admin = redux_state.kz_account.data.superduper_admin
           ? ['superduper_admin']
           : [];
         const child_account_selected = redux_state.child_account
@@ -46,12 +46,12 @@ const AuthorityModel: AuthorityModelType = {
             : []
           : [];
         const telephony =
-          redux_state.kazoo_account.data.is_reseller ||
-          redux_state.kazoo_account.data.superduper_admin
+          redux_state.kz_account.data.is_reseller ||
+          redux_state.kz_account.data.superduper_admin
             ? []
             : ['telephony'];
-        const account_id = redux_state.kazoo_account.data
-          ? [redux_state.kazoo_account.data.id]
+        const account_id = redux_state.kz_account.data
+          ? [redux_state.kz_account.data.id]
           : [];
         const authority = priv_level.concat(
           reseller,

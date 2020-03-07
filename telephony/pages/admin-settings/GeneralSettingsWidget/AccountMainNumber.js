@@ -25,11 +25,11 @@ const AccountMainNumber = props => {
     }),
   );
 
-  const { kazoo_account, kazoo_account_numbers } = props;
+  const { kz_account, kz_account_numbers } = props;
 
   function externalNumber() {
     try {
-      return kazoo_account.data.caller_id.external.number;
+      return kz_account.data.caller_id.external.number;
     } catch (e) {
       return formatMessage({
         id: 'telephony.no_number_selected',
@@ -39,7 +39,7 @@ const AccountMainNumber = props => {
   }
 
   useEffect(() => {
-    if (kazoo_account.data) {
+    if (kz_account.data) {
       const extNUm = externalNumber();
       setMainNumber(extNUm);
       setModalTitle(
@@ -49,7 +49,7 @@ const AccountMainNumber = props => {
         })}: ${extNUm}`,
       );
     }
-  }, [kazoo_account]);
+  }, [kz_account]);
 
   const onMainNumberSelect = event => {
     console.log('onMainNumberSelect event: ', event);
@@ -57,16 +57,16 @@ const AccountMainNumber = props => {
   };
 
   const onMainNumberConfirm = () => {
-    runAndDispatch(kzAccount, 'kazoo_account/update', {
+    runAndDispatch(kzAccount, 'kz_account/update', {
       method: 'PATCH',
-      account_id: kazoo_account.data.id,
+      account_id: kz_account.data.id,
       data: { caller_id: { external: { number: mainNumber, name: mainNumber } } },
     });
     setTzButtonVisible(false);
   };
 
   const onMainNumberCancel = () => {
-    setMainNumber(kazoo_account.data.mainNumber);
+    setMainNumber(kz_account.data.mainNumber);
     setTzButtonVisible(false);
   };
 
@@ -89,7 +89,7 @@ const AccountMainNumber = props => {
             showSearch
             defaultValue={mainNumber}
           >
-            {Object.keys(kazoo_account_numbers.data.numbers).map(number => (
+            {Object.keys(kz_account_numbers.data.numbers).map(number => (
               <Select.Option value={number} key={number}>
                 {number}
               </Select.Option>
@@ -101,7 +101,7 @@ const AccountMainNumber = props => {
   );
 };
 
-export default connect(({ kazoo_account, kazoo_account_numbers }) => ({
-  kazoo_account,
-  kazoo_account_numbers,
+export default connect(({ kz_account, kz_account_numbers }) => ({
+  kz_account,
+  kz_account_numbers,
 }))(AccountMainNumber);
