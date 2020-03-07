@@ -11,14 +11,16 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 const ResellerUserMedia = props => {
   const [audioCodecs, setAudioCodecs] = useState([]);
   const [videoCodecs, setVideoCodecs] = useState([]);
+  const [isLoading, setIsLoading] = useState({});
 
-  const { rs_child_account, rs_child_user, owner_id } = props;
+  const { dispatch, rs_child_account, rs_child_user, owner_id } = props;
 
   useEffect(() => {
     if (rs_child_user[owner_id]) {
       setAudioCodecs(_.get(rs_child_user[owner_id].data, 'media.audio.codecs', []));
       setVideoCodecs(_.get(rs_child_user[owner_id].data, 'media.video.codecs', []));
     }
+    setIsLoading({});
   }, [rs_child_user[owner_id]]);
 
   if (!rs_child_user[owner_id]) return null;
@@ -29,14 +31,33 @@ const ResellerUserMedia = props => {
   };
 
   const onCodecChange = (checked, media, codec) => {
-    console.log('checked: ', checked);
-    console.log('media: ', media);
-    console.log('codec: ', codec);
+    setIsLoading({ [codec]: true });
     kzUser({
       method: 'GET',
       account_id: rs_child_account.data.id,
       owner_id,
-    }).then(resp => console.log('kzUser resp.data.media: ', resp.data.media));
+    }).then(resp => {
+      const codecsList = _.get(resp, `data.media.${media}.codecs`, []);
+      let newCodecsList = [];
+      if (_.get(resp, `data.media.${media}.codecs`, []).includes(codec)) {
+        newCodecsList = _.pull(codecsList, codec);
+      } else {
+        newCodecsList = _.concat(codecsList, codec);
+      }
+      const data = {};
+      _.set(data, `media.${media}.codecs`, newCodecsList);
+      kzUser({
+        method: 'PATCH',
+        account_id: rs_child_account.data.id,
+        owner_id,
+        data,
+      }).then(() =>
+        dispatch({
+          type: 'rs_child_user/refresh',
+          payload: { account_id: rs_child_account.data.id, owner_id },
+        }),
+      );
+    });
   };
 
   return (
@@ -59,6 +80,7 @@ const ResellerUserMedia = props => {
                   unCheckedChildren="PCMA"
                   checked={audioCodecs.includes('PCMA')}
                   onChange={checked => onCodecChange(checked, 'audio', 'PCMA')}
+                  loading={isLoading.PCMA}
                 />
               </Card.Grid>
               <Card.Grid style={gridStyle}>
