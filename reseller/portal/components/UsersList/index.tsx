@@ -7,28 +7,28 @@ import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import ResellerCreateUser from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateUser';
 import ResellerChildEditUser from '@/pages/onnet-portal/reseller/portal/components/ResellerChildEditUser';
-import RsChildUserParagraph from './components/RsChildUserParagraph';
-import RsChildUserPrivLevel from './components/RsChildUserPrivLevel';
+import RsChildUserParagraph from '@/pages/onnet-portal/reseller/portal/components/RsChildUserParagraph';
+import RsChildUserPrivLevel from '@/pages/onnet-portal/reseller/portal/components/RsChildUserPrivLevel';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { confirm } = Modal;
 
 const UsersList = props => {
-  const { dispatch, settings, account, users, user } = props;
+  const { dispatch, settings, account, brief_users, full_users } = props;
 
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(false);
 
   useEffect(() => {
-    if (users.data) {
-      setDataSource(users.data);
+    if (brief_users.data) {
+      setDataSource(brief_users.data);
     }
-  }, [users]);
+  }, [brief_users]);
 
-  if (users.data) {
-    if (users.data.length === 0) {
+  if (brief_users.data) {
+    if (brief_users.data.length === 0) {
       return null;
     }
   } else {
@@ -61,7 +61,7 @@ const UsersList = props => {
       render: (text, record) => (
         <Switch
           size="small"
-          checked={user[record.id] ? user[record.id].data.enabled : false}
+          checked={full_users[record.id] ? full_users[record.id].data.enabled : false}
           onChange={checked => onUserEnableSwitch(checked, record)}
         />
       ),
@@ -146,7 +146,7 @@ const UsersList = props => {
             console.log('event', event);
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
-            info_details_fun(user[record.id].data);
+            info_details_fun(full_users[record.id].data);
           }}
         />
       ),
@@ -206,7 +206,7 @@ const UsersList = props => {
           }
           description={
             <Table
-              dataSource={users.data}
+              dataSource={brief_users.data}
               columns={columns}
               pagination={false}
               size="small"
@@ -217,10 +217,10 @@ const UsersList = props => {
       </Card>
       <Drawer
         title={
-          user[selectedUser] ? (
+          full_users[selectedUser] ? (
             <span>
               {formatMessage({ id: 'core.Edit_user', defaultMessage: 'Edit user' })}
-              <b style={{ color: settings.primaryColor }}> {user[selectedUser].data.username}</b>
+              <b style={{ color: settings.primaryColor }}> {full_users[selectedUser].data.username}</b>
             </span>
           ) : null
         }
@@ -238,6 +238,6 @@ const UsersList = props => {
 export default connect(({ settings, child_account, child_brief_users, child_full_users }) => ({
   settings,
   account: child_account,
-  users: child_brief_users,
-  user: child_full_users,
+  brief_users: child_brief_users,
+  full_users: child_full_users,
 }))(UsersList);

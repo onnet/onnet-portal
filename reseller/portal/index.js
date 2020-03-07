@@ -15,7 +15,7 @@ import RsChildAccountParagraph from './components/RsChildAccountParagraph';
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 
 import AccountDetails from './AccountDetails';
-import UsersList from './UsersList';
+import UsersList from './components/UsersList';
 
 const { confirm } = Modal;
 
