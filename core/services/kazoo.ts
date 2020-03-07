@@ -212,3 +212,7 @@ export async function kzSystemStatus(): Promise<any> {
 export function AccountNumbers(params: FormDataTyp): Promise<any> {
   return kzRequest(`${accountsUrl(params)}/phone_numbers`, params);
 }
+
+export function numbersClassifiers(params: FormDataTyp): Promise<any> {
+  return kzRequest(`${accountsUrl(params)}/phone_numbers/classifiers`, params);
+}

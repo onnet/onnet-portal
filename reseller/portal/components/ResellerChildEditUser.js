@@ -6,6 +6,7 @@ import RsUpdateUserPassword from '@/pages/onnet-portal/reseller/portal/component
 import ResellerUserCID from '@/pages/onnet-portal/reseller/portal/components/ResellerUserCID';
 import ResellerUserDiversion from '@/pages/onnet-portal/reseller/portal/components/ResellerUserDiversion';
 import ResellerUserMedia from '@/pages/onnet-portal/reseller/portal/components/ResellerUserMedia';
+import ResellerUserRestrictions from '@/pages/onnet-portal/reseller/portal/components/ResellerUserRestrictions';
 
 const { Panel } = Collapse;
 
@@ -38,7 +39,7 @@ const ResellerChildEditUser = props => {
             header={formatMessage({ id: 'core.Restrictions', defaultMessage: 'Restrictions' })}
             key="25"
           >
-            <p>`Hello21! ${rs_child_user[selectedUser].data.username}`</p>
+            <ResellerUserRestrictions owner_id={selectedUser} />
           </Panel>
         </Collapse>
       </Panel>

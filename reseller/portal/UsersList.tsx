@@ -15,20 +15,20 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 const { confirm } = Modal;
 
 const UsersList = props => {
-  const { dispatch, settings, rs_child_account, rs_child_users, rs_child_user } = props;
+  const { dispatch, settings, account, users, user } = props;
 
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(false);
 
   useEffect(() => {
-    if (rs_child_users.data) {
-      setDataSource(rs_child_users.data);
+    if (users.data) {
+      setDataSource(users.data);
     }
-  }, [rs_child_users]);
+  }, [users]);
 
-  if (rs_child_users.data) {
-    if (rs_child_users.data.length === 0) {
+  if (users.data) {
+    if (users.data.length === 0) {
       return null;
     }
   } else {
@@ -39,12 +39,12 @@ const UsersList = props => {
     confirm({
       title: `Do you want to delete user ${record.username}?`,
       onOk() {
-        kzUser({ method: 'DELETE', account_id: rs_child_account.data.id, owner_id: record.id })
+        kzUser({ method: 'DELETE', account_id: account.data.id, owner_id: record.id })
           .then(uRes => {
             console.log(uRes);
             dispatch({
               type: 'rs_child_users/refresh',
-              payload: { account_id: rs_child_account.data.id },
+              payload: { account_id: account.data.id },
             });
           })
           .catch(() => console.log('Oops errors!', record));
@@ -61,7 +61,7 @@ const UsersList = props => {
       render: (text, record) => (
         <Switch
           size="small"
-          checked={rs_child_user[record.id] ? rs_child_user[record.id].data.enabled : false}
+          checked={user[record.id] ? user[record.id].data.enabled : false}
           onChange={checked => onUserEnableSwitch(checked, record)}
         />
       ),
@@ -117,7 +117,7 @@ const UsersList = props => {
             setSelectedUser(record.id);
             dispatch({
               type: 'rs_child_user/refresh',
-              payload: { account_id: rs_child_account.data.id, owner_id: record.id },
+              payload: { account_id: account.data.id, owner_id: record.id },
             });
             setIsDrawerVisible(true);
           }}
@@ -146,7 +146,7 @@ const UsersList = props => {
             console.log('event', event);
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
-            info_details_fun(rs_child_user[record.id].data);
+            info_details_fun(user[record.id].data);
           }}
         />
       ),
@@ -174,7 +174,7 @@ const UsersList = props => {
       onOk() {
         kzUser({
           method: 'PATCH',
-          account_id: rs_child_account.data.id,
+          account_id: account.data.id,
           owner_id: record.id,
           data: { enabled: checked },
         })
@@ -182,7 +182,7 @@ const UsersList = props => {
             console.log(uRes);
             dispatch({
               type: 'rs_child_user/refresh',
-              payload: { account_id: rs_child_account.data.id, owner_id: record.id },
+              payload: { account_id: account.data.id, owner_id: record.id },
             });
           })
           .catch(() => console.log('Oops errors!', record));
@@ -206,7 +206,7 @@ const UsersList = props => {
           }
           description={
             <Table
-              dataSource={rs_child_users.data}
+              dataSource={users.data}
               columns={columns}
               pagination={false}
               size="small"
@@ -217,13 +217,10 @@ const UsersList = props => {
       </Card>
       <Drawer
         title={
-          rs_child_user[selectedUser] ? (
+          user[selectedUser] ? (
             <span>
               {formatMessage({ id: 'core.Edit_user', defaultMessage: 'Edit user' })}
-              <b style={{ color: settings.primaryColor }}>
-                {' '}
-                {rs_child_user[selectedUser].data.username}
-              </b>
+              <b style={{ color: settings.primaryColor }}> {user[selectedUser].data.username}</b>
             </span>
           ) : null
         }
@@ -240,7 +237,7 @@ const UsersList = props => {
 
 export default connect(({ settings, rs_child_account, rs_child_users, rs_child_user }) => ({
   settings,
-  rs_child_account,
-  rs_child_users,
-  rs_child_user,
+  account: rs_child_account,
+  users: rs_child_users,
+  user: rs_child_user,
 }))(UsersList);

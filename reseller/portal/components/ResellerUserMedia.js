@@ -85,8 +85,8 @@ const ResellerUserMedia = props => {
               </Card.Grid>
               <Card.Grid style={gridStyle}>
                 <Switch
-                  checkedChildren='PCMU'
-                  unCheckedChildren='PCMU'
+                  checkedChildren="PCMU"
+                  unCheckedChildren="PCMU"
                   checked={audioCodecs.includes('PCMU')}
                   onChange={checked => onCodecChange(checked, 'audio', 'PCMU')}
                   loading={isLoading.PCMU}
@@ -94,8 +94,8 @@ const ResellerUserMedia = props => {
               </Card.Grid>
               <Card.Grid style={gridStyle}>
                 <Switch
-                  checkedChildren='G722'
-                  unCheckedChildren='G722'
+                  checkedChildren="G722"
+                  unCheckedChildren="G722"
                   checked={audioCodecs.includes('G722')}
                   onChange={checked => onCodecChange(checked, 'audio', 'G722')}
                   loading={isLoading.G722}
@@ -103,8 +103,8 @@ const ResellerUserMedia = props => {
               </Card.Grid>
               <Card.Grid style={gridStyle}>
                 <Switch
-                  checkedChildren='OPUS'
-                  unCheckedChildren='OPUS'
+                  checkedChildren="OPUS"
+                  unCheckedChildren="OPUS"
                   checked={audioCodecs.includes('OPUS')}
                   onChange={checked => onCodecChange(checked, 'audio', 'OPUS')}
                   loading={isLoading.OPUS}
@@ -128,8 +128,8 @@ const ResellerUserMedia = props => {
             <>
               <Card.Grid style={gridStyle}>
                 <Switch
-                  checkedChildren='VP8'
-                  unCheckedChildren='VP8'
+                  checkedChildren="VP8"
+                  unCheckedChildren="VP8"
                   checked={videoCodecs.includes('VP8')}
                   onChange={checked => onCodecChange(checked, 'video', 'VP8')}
                   loading={isLoading.VP8}
@@ -137,8 +137,8 @@ const ResellerUserMedia = props => {
               </Card.Grid>
               <Card.Grid style={gridStyle}>
                 <Switch
-                  checkedChildren='H264'
-                  unCheckedChildren='H264'
+                  checkedChildren="H264"
+                  unCheckedChildren="H264"
                   checked={videoCodecs.includes('H264')}
                   onChange={checked => onCodecChange(checked, 'video', 'H264')}
                   loading={isLoading.H264}
@@ -146,8 +146,8 @@ const ResellerUserMedia = props => {
               </Card.Grid>
               <Card.Grid style={gridStyle}>
                 <Switch
-                  checkedChildren='H263'
-                  unCheckedChildren='H263'
+                  checkedChildren="H263"
+                  unCheckedChildren="H263"
                   checked={videoCodecs.includes('H263')}
                   onChange={checked => onCodecChange(checked, 'video', 'H263')}
                   loading={isLoading.H263}
@@ -155,8 +155,8 @@ const ResellerUserMedia = props => {
               </Card.Grid>
               <Card.Grid style={gridStyle}>
                 <Switch
-                  checkedChildren='H261'
-                  unCheckedChildren='H261'
+                  checkedChildren="H261"
+                  unCheckedChildren="H261"
                   checked={videoCodecs.includes('H261')}
                   onChange={checked => onCodecChange(checked, 'video', 'H261')}
                   loading={isLoading.H261}
