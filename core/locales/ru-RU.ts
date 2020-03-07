@@ -21,7 +21,7 @@ export default {
   'core.switch_off': 'Выключить',
   'core.Change_password': 'Изменить пароль',
   'core.Change': 'Изменить',
-  'core.Edit_user': 'Редактировать полльзователя',
+  'core.Edit_user': 'Редактировать пользователя',
   'core.Select_number': 'Выберите номер',
   'core.EmergencyCalls': 'Экстренные вызовы',
   'core.Restrictions': 'Ограничения',
