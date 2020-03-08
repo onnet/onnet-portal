@@ -216,3 +216,26 @@ export function AccountNumbers(params: FormDataTyp): Promise<any> {
 export function numbersClassifiers(params: FormDataTyp): Promise<any> {
   return kzRequest(`${accountsUrl(params)}/phone_numbers/classifiers`, params);
 }
+
+function deviceUrl(params) {
+  const redux_state = window.g_app._store.getState();
+  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
+  const url = `${API_URL_V2}/accounts/${params.account_id}/devices/${params.device_id}`;
+  return url;
+}
+
+function devicesUrl(params) {
+  const redux_state = window.g_app._store.getState();
+  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
+  const url = `${API_URL_V2}/accounts/${params.account_id}/devices`;
+  return url;
+}
+
+export function kzDevices(params: FormDataTyp) {
+  return kzRequest(devicesUrl(params), params);
+}
+
+export function kzDevice(params: FormDataTyp) {
+  console.log('IAMMM!!!!  kzDevice services file, params: ', params);
+  return kzRequest(deviceUrl(params), params);
+}

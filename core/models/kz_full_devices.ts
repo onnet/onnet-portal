@@ -1,7 +1,6 @@
 import { AnyAction, Reducer } from 'redux';
-
 import { EffectsCommandMap } from 'dva';
-import { AccountNumbers } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 
 export type Effect = (
   action: AnyAction,
@@ -21,20 +20,16 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'kz_account_numbers',
+  namespace: 'kz_full_devices',
 
-  state: {
-    data: {
-      numbers: [],
-    },
-  },
+  state: {},
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const response = yield call(AccountNumbers, { ...payload, method: 'GET' });
+      const response = yield call(kzDevice, payload);
       yield put({
         type: 'update',
-        payload: response,
+        payload: { [payload.device_id]: response },
       });
     },
     *flush(_, { put }) {
@@ -47,7 +42,7 @@ const Model: ModelType = {
 
   reducers: {
     update(state, { payload }) {
-      return { ...payload };
+      return { ...state, ...payload };
     },
   },
 };

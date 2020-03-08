@@ -38,6 +38,7 @@ const KazooAccountModel: KazooAccountModelType = {
       });
       window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
       window.g_app._store.dispatch({ type: 'kz_brief_users/refresh', payload });
+      window.g_app._store.dispatch({ type: 'kz_brief_devices/refresh', payload });
       window.g_app._store.dispatch({ type: 'kz_numbers/refresh', payload });
     },
     *flush(_, { put }) {
