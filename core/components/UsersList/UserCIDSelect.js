@@ -10,7 +10,7 @@ import { Button, Select, Modal } from 'antd';
 
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
-const ResellerUserCIDSelect = props => {
+const UserCIDSelect = props => {
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
   const [mainNumber, setMainNumber] = useState(
     formatMessage({
@@ -25,19 +25,11 @@ const ResellerUserCIDSelect = props => {
     }),
   );
 
-  const {
-    dispatch,
-    child_account,
-    child_full_users,
-    child_numbers,
-    fieldKey,
-    owner_id,
-    modal_title,
-  } = props;
+  const { dispatch, account, full_users, numbers, fieldKey, owner_id, modal_title } = props;
 
   function NumberToShow() {
     try {
-      return _.get(child_full_users[owner_id].data, fieldKey);
+      return _.get(full_users[owner_id].data, fieldKey);
     } catch (e) {
       return formatMessage({
         id: 'telephony.no_number_selected',
@@ -47,12 +39,12 @@ const ResellerUserCIDSelect = props => {
   }
 
   useEffect(() => {
-    if (child_full_users[owner_id]) {
+    if (full_users[owner_id]) {
       const extNUm = NumberToShow();
       setMainNumber(extNUm);
       setModalTitle(`${modal_title}: ${extNUm}`);
     }
-  }, [child_full_users[owner_id]]);
+  }, [full_users[owner_id]]);
 
   const onMainNumberSelect = event => {
     setMainNumber(event);
@@ -63,13 +55,13 @@ const ResellerUserCIDSelect = props => {
     _.set(data, fieldKey, mainNumber);
     kzUser({
       method: 'PATCH',
-      account_id: child_account.data.id,
+      account_id: account.data.id,
       owner_id,
       data,
     }).then(() =>
       dispatch({
-        type: 'child_full_users/refresh',
-        payload: { account_id: child_account.data.id, owner_id },
+        type: 'kz_full_users/refresh',
+        payload: { account_id: account.data.id, owner_id },
       }),
     );
 
@@ -100,7 +92,7 @@ const ResellerUserCIDSelect = props => {
             showSearch
             defaultValue={mainNumber}
           >
-            {Object.keys(child_numbers.data.numbers).map(number => (
+            {Object.keys(numbers.data.numbers).map(number => (
               <Select.Option value={number} key={number}>
                 {number}
               </Select.Option>
@@ -112,8 +104,8 @@ const ResellerUserCIDSelect = props => {
   );
 };
 
-export default connect(({ child_account, child_full_users, child_numbers }) => ({
-  child_account,
-  child_full_users,
-  child_numbers,
-}))(ResellerUserCIDSelect);
+export default connect(({ kz_account, kz_full_users, kz_numbers }) => ({
+  account: kz_account,
+  full_users: kz_full_users,
+  numbers: kz_numbers,
+}))(UserCIDSelect);

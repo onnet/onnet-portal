@@ -193,7 +193,7 @@ const UsersList = props => {
 
   return (
     <Fragment>
-      <Card className={styles.card} {...cardProps}>
+      <Card hoverable className={styles.card} {...cardProps}>
         <Card.Meta
           title={
             <Fragment>

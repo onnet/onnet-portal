@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Table, Card } from 'antd';
 
@@ -8,7 +7,7 @@ import UserCIDSelect from './UserCIDSelect';
 import styles from './style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
-const ResellerUserCID = props => {
+const UserCID = props => {
   const { owner_id } = props;
 
   const tableDataInternal = [
@@ -194,9 +193,4 @@ const ResellerUserCID = props => {
   );
 };
 
-export default connect(({ kz_login, kz_account, kz_children, child_account }) => ({
-  kz_login,
-  kz_account,
-  kz_children,
-  child_account,
-}))(ResellerUserCID);
+export default UserCID;
