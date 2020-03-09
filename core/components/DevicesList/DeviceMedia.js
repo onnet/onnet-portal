@@ -2,28 +2,28 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Card, Switch } from 'antd';
-import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 import * as _ from 'loadsh';
 
 import styles from '../style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
-const UserMedia = props => {
+const DeviceMedia = props => {
   const [audioCodecs, setAudioCodecs] = useState([]);
   const [videoCodecs, setVideoCodecs] = useState([]);
   const [isLoading, setIsLoading] = useState({});
 
-  const { dispatch, account, full_users, owner_id } = props;
+  const { dispatch, account, full_devices, device_id } = props;
 
   useEffect(() => {
-    if (full_users[owner_id]) {
-      setAudioCodecs(_.get(full_users[owner_id].data, 'media.audio.codecs', []));
-      setVideoCodecs(_.get(full_users[owner_id].data, 'media.video.codecs', []));
+    if (full_devices[device_id]) {
+      setAudioCodecs(_.get(full_devices[device_id].data, 'media.audio.codecs', []));
+      setVideoCodecs(_.get(full_devices[device_id].data, 'media.video.codecs', []));
     }
     setIsLoading({});
-  }, [full_users[owner_id]]);
+  }, [full_devices[device_id]]);
 
-  if (!full_users[owner_id]) return null;
+  if (!full_devices[device_id]) return null;
 
   const gridStyle = {
     width: '25%',
@@ -32,10 +32,10 @@ const UserMedia = props => {
 
   const onCodecChange = (checked, media, codec) => {
     setIsLoading({ [codec]: true });
-    kzUser({
+    kzDevice({
       method: 'GET',
       account_id: account.data.id,
-      owner_id,
+      device_id,
     }).then(resp => {
       const codecsList = _.get(resp, `data.media.${media}.codecs`, []);
       let newCodecsList = [];
@@ -46,15 +46,15 @@ const UserMedia = props => {
       }
       const data = {};
       _.set(data, `media.${media}.codecs`, newCodecsList);
-      kzUser({
+      kzDevice({
         method: 'PATCH',
         account_id: account.data.id,
-        owner_id,
+        device_id,
         data,
       }).then(() =>
         dispatch({
-          type: 'kz_full_users/refresh',
-          payload: { account_id: account.data.id, owner_id },
+          type: 'kz_full_devices/refresh',
+          payload: { account_id: account.data.id, device_id },
         }),
       );
     });
@@ -170,7 +170,7 @@ const UserMedia = props => {
   );
 };
 
-export default connect(({ kz_account, kz_full_users }) => ({
+export default connect(({ kz_account, kz_full_devices }) => ({
   account: kz_account,
-  full_users: kz_full_users,
-}))(UserMedia);
+  full_devices: kz_full_devices,
+}))(DeviceMedia);

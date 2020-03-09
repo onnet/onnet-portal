@@ -2,13 +2,13 @@ import React, { Fragment } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Table, Card } from 'antd';
 
-import UserParagraph from './UserParagraph';
-import UserCIDSelect from './UserCIDSelect';
+import DeviceParagraph from './DeviceParagraph';
+import DeviceCIDSelect from './DeviceCIDSelect';
 import styles from '../style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
-const UserCID = props => {
-  const { owner_id } = props;
+const DeviceCID = props => {
+  const { device_id } = props;
 
   const tableDataInternal = [
     {
@@ -18,9 +18,9 @@ const UserCID = props => {
         defaultMessage: 'Caller ID Name',
       }),
       value: (
-        <UserParagraph
+        <DeviceParagraph
           fieldKey="caller_id.internal.name"
-          owner_id={owner_id}
+          device_id={device_id}
           style={{ marginBottom: '0' }}
         />
       ),
@@ -32,9 +32,9 @@ const UserCID = props => {
         defaultMessage: 'Caller ID Number',
       }),
       value: (
-        <UserParagraph
+        <DeviceParagraph
           fieldKey="caller_id.internal.number"
-          owner_id={owner_id}
+          device_id={device_id}
           style={{ marginBottom: '0' }}
         />
       ),
@@ -49,9 +49,9 @@ const UserCID = props => {
         defaultMessage: 'Caller ID Name',
       }),
       value: (
-        <UserParagraph
+        <DeviceParagraph
           fieldKey="caller_id.external.name"
-          owner_id={owner_id}
+          device_id={device_id}
           style={{ marginBottom: '0' }}
         />
       ),
@@ -63,9 +63,9 @@ const UserCID = props => {
         defaultMessage: 'Caller ID Number',
       }),
       value: (
-        <UserCIDSelect
+        <DeviceCIDSelect
           fieldKey="caller_id.external.number"
-          owner_id={owner_id}
+          device_id={device_id}
           modal_title={formatMessage({
             id: 'core.ExternalCallerIDNumber',
             defaultMessage: 'External Caller ID Number',
@@ -83,9 +83,9 @@ const UserCID = props => {
         defaultMessage: 'Caller ID Name',
       }),
       value: (
-        <UserParagraph
+        <DeviceParagraph
           fieldKey="caller_id.emergency.name"
-          owner_id={owner_id}
+          device_id={device_id}
           style={{ marginBottom: '0' }}
         />
       ),
@@ -97,9 +97,9 @@ const UserCID = props => {
         defaultMessage: 'Caller ID Number',
       }),
       value: (
-        <UserCIDSelect
+        <DeviceCIDSelect
           fieldKey="caller_id.emergency.number"
-          owner_id={owner_id}
+          device_id={device_id}
           modal_title={formatMessage({
             id: 'core.EmergencyCallerIDNumber',
             defaultMessage: 'Emergency Caller ID Number',
@@ -193,4 +193,4 @@ const UserCID = props => {
   );
 };
 
-export default UserCID;
+export default DeviceCID;

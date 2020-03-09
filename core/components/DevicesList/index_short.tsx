@@ -16,7 +16,6 @@ import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 const { confirm } = Modal;
 
 const DevicesList = props => {
-
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
@@ -69,7 +68,7 @@ const DevicesList = props => {
       render: (text, record) => (
         <Switch
           size="small"
-          checked={record.enabled}
+          checked={full_devices[record.id] ? full_devices[record.id].data.enabled : record.enabled}
           onChange={checked => onDeviceEnableSwitch(checked, record)}
         />
       ),
@@ -81,7 +80,7 @@ const DevicesList = props => {
       render: (text, record) => (
         <DeviceType
           device_id={record.id}
-          text={text}
+          text={full_devices[record.id] ? full_devices[record.id].data.device_type : text}
         />
       ),
     },
@@ -91,33 +90,9 @@ const DevicesList = props => {
       key: 'name',
     },
     {
-      title: formatMessage({ id: 'core.Owner', defaultMessage: 'Owner' }),
-      dataIndex: 'owner_id',
-      key: 'owner_id',
-      align: 'center',
-      render: (text, record) =>
-        full_users[text]
-          ? `${full_users[text].data.username} (${full_users[text].data.first_name} ${full_users[text].data.last_name})`
-          : null,
-    },
-    {
-      title: formatMessage({ id: 'core.CID', defaultMessage: 'CID' }),
-      key: 'device_cid',
-      align: 'center',
-      render: record => {
-        console.log('IAM!!! CID field record', record);
-        console.log('IAM!!! full_devices[record.id]', full_devices[record.id]);
-        const InternalCIDNumber = _.get(full_devices[record.id], 'data.caller_id.internal.number');
-        const ExternalCIDNumber = _.get(full_devices[record.id], 'data.caller_id.external.number');
-        if (InternalCIDNumber && ExternalCIDNumber) {
-          return `${InternalCIDNumber} | ${ExternalCIDNumber}`;
-        } else if (InternalCIDNumber) {
-          return InternalCIDNumber;
-        } else if (ExternalCIDNumber) {
-          return ExternalCIDNumber;
-        }
-        return null;
-      },
+      title: formatMessage({ id: 'core.Username', defaultMessage: 'Username' }),
+      dataIndex: 'username',
+      key: 'username',
     },
     {
       dataIndex: 'id',
@@ -148,22 +123,6 @@ const DevicesList = props => {
         />
       ),
     },
-    {
-      dataIndex: 'id',
-      key: 'id',
-      align: 'center',
-      render: (text, record) => (
-        <InfoCircleOutlined
-          style={{ color: settings.primaryColor }}
-          onClick={event => {
-            console.log('event', event);
-            const result = dataSource.find(({ id }) => id === record.id);
-            console.log('result', result);
-            info_details_fun(full_devices[record.id].data);
-          }}
-        />
-      ),
-    },
   ];
 
   const onDrawerClose = () => {
@@ -174,7 +133,7 @@ const DevicesList = props => {
     confirm({
       title: (
         <p>
-          {formatMessage({ id: 'core.Device', defaultMessage: 'Device' })}: {record.username}
+          {formatMessage({ id: 'core.Device', defaultMessage: 'Device' })}: {record.name}
         </p>
       ),
       content: (
@@ -223,7 +182,7 @@ const DevicesList = props => {
                 id: 'reseller_portal.accounts_devices',
                 defaultMessage: "Account's Devices",
               })}
-              <CreateDevice btnstyle={{ float: 'right1' }} />
+              <CreateDevice btnstyle={{ float: 'left1' }} />
               <p style={{ float: 'right', display: 'inline-flex' }}>
                 {formatMessage({
                   id: 'core.pagination',

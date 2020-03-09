@@ -15,11 +15,12 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 const { confirm } = Modal;
 
 const UsersList = props => {
-  const { dispatch, settings, account, brief_users, full_users } = props;
-
+  const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(false);
+
+  const { dispatch, settings, account, brief_users, full_users } = props;
 
   useEffect(() => {
     if (brief_users.data) {
@@ -188,6 +189,15 @@ const UsersList = props => {
     });
   }
 
+  const handlePagination = e => {
+    console.log('handlePagination e: ', e);
+    if (e) {
+      setIsPaginated({ position: 'bottom' });
+    } else {
+      setIsPaginated(false);
+    }
+  };
+
   return (
     <Fragment>
       <Card hoverable className={styles.card} {...cardProps}>
@@ -198,14 +208,27 @@ const UsersList = props => {
                 id: 'reseller_portal.accounts_users',
                 defaultMessage: "Account's Users",
               })}
-              <CreateUser btnstyle={{ float: 'right' }} />
+              <CreateUser btnstyle={{ float: 'right1' }} />
+              <p style={{ float: 'right', display: 'inline-flex' }}>
+                {formatMessage({
+                  id: 'core.pagination',
+                  defaultMessage: 'pagination',
+                })}
+                :
+                <Switch
+                  style={{ marginLeft: '1em', marginTop: '0.4em' }}
+                  checked={!!isPaginated}
+                  onChange={handlePagination}
+                  size="small"
+                />
+              </p>
             </Fragment>
           }
           description={
             <Table
               dataSource={brief_users.data}
               columns={columns}
-              pagination={false}
+              pagination={isPaginated}
               size="small"
               rowKey={record => record.id}
             />
@@ -215,13 +238,10 @@ const UsersList = props => {
       <Drawer
         title={
           full_users[selectedUser] ? (
-            <span>
-              {formatMessage({ id: 'core.Edit_user', defaultMessage: 'Edit user' })}
               <b style={{ color: settings.primaryColor }}>
                 {' '}
                 {full_users[selectedUser].data.username}
               </b>
-            </span>
           ) : null
         }
         width="50%"

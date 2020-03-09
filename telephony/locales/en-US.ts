@@ -2,6 +2,8 @@ export default {
   'menu.telephony': 'Telephony',
   'menu.telephony.callflow-builder': 'Callflow builder',
   'menu.telephony.settings': 'Settings',
+  'menu.telephony.devices': 'Devices',
+  'menu.telephony.users': 'Users',
   'telephony.all_calls_recording': 'All calls recording',
   'telephony.calls_recording': 'Calls recording',
   'telephony.general_settings': 'General settings',

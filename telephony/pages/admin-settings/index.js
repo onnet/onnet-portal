@@ -7,7 +7,7 @@ import Masonry from 'react-masonry-css';
 
 import GeneralSettingsWidget from './GeneralSettingsWidget';
 import UsersList from '@/pages/onnet-portal/core/components/UsersList';
-import DevicesList from '@/pages/onnet-portal/core/components/DevicesList';
+import DevicesList from '@/pages/onnet-portal/core/components/DevicesList/index_short';
 
 import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 

@@ -31,13 +31,13 @@ const Model: ModelType = {
         type: 'update',
         payload: response,
       });
-      const redux_state = window.g_app._store.getState();
-      response.data.map(device =>
-        window.g_app._store.dispatch({
-          type: 'kz_full_devices/refresh',
-          payload: { account_id: redux_state.kz_account.data.id, device_id: device.id },
-        }),
-      );
+  //    const redux_state = window.g_app._store.getState();
+  //    response.data.map(device =>
+  //      window.g_app._store.dispatch({
+  //        type: 'kz_full_devices/refresh',
+  //        payload: { account_id: redux_state.kz_account.data.id, device_id: device.id },
+  //      }),
+  //    );
     },
     *flush(_, { put }) {
       yield put({
