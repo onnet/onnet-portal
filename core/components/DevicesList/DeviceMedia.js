@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Card, Switch } from 'antd';
 import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
-import * as _ from 'loadsh';
+import * as _ from 'lodash';
 
 import styles from '../style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';

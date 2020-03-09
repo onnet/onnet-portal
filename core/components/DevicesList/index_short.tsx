@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import * as _ from 'loadsh';
+import * as _ from 'lodash';
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';

@@ -1,4 +1,4 @@
-import * as _ from 'loadsh';
+import * as _ from 'lodash';
 
 export function runAndDispatch(fnName, dsName, params) {
   fnName(params).then(res => {

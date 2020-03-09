@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-import * as _ from 'loadsh';
+import * as _ from 'lodash';
 import { Typography } from 'antd';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-import * as _ from 'loadsh';
+import * as _ from 'lodash';
 import { Table } from 'antd';
 import DeviceRestrictionLevel from './DeviceRestrictionLevel';
 
