@@ -7,6 +7,7 @@ import DeviceCID from './DeviceCID';
 import DeviceDiversion from './DeviceDiversion';
 import DeviceMedia from './DeviceMedia';
 import DeviceRestrictions from './DeviceRestrictions';
+import DeviceSettings from './DeviceSettings';
 
 const { Panel } = Collapse;
 
@@ -33,7 +34,7 @@ const EditDevice = props => {
   return (
     <Collapse accordion>
       <Panel header={formatMessage({ id: 'core.Device_settings', defaultMessage: 'Device settings' })} key="20">
-        <DeviceCID device_id={selectedDevice} />
+        <DeviceSettings device_id={selectedDevice} />
       </Panel>
       <Panel header={formatMessage({ id: 'core.CID', defaultMessage: 'CID' })} key="21">
         <DeviceCID device_id={selectedDevice} />

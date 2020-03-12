@@ -18,9 +18,14 @@ const AccountOutboundRouting = props => {
 
   const { dispatch, kz_account, kz_cf_list, kz_cf_details } = props;
 
+
   useEffect(() => {
     if (kz_account.data) {
-      if (kz_cf_list.data) {
+      if (kz_cf_list) {
+      if (_.find(kz_cf_list.data, { 'numbers': ['no_match'] })) {
+    const noMatchCF = _.find(kz_cf_list.data, { 'numbers': ['no_match'] });
+console.log('noMatchCF: ', noMatchCF);
+console.log('no_match: ', kz_cf_list.data.find(({ numbers }) => isArrayEqual(numbers, ['no_match'])));
         const { id } = kz_cf_list.data.find(({ numbers }) => isArrayEqual(numbers, ['no_match']));
         if (kz_cf_details[id]) {
           SetNoMatchId(id);
@@ -44,8 +49,11 @@ const AccountOutboundRouting = props => {
           });
         }
       }
+      }
     }
   }, [kz_account, kz_cf_list, kz_cf_details]);
+
+  if (!kz_cf_list.data) return null;
 
   const menuAccountOutboundRouting = (
     <Menu selectedKeys={[]} onClick={onAccountOutboundRoutingSelect}>
