@@ -9,11 +9,42 @@ import DeviceSwitch from './DeviceSwitch';
 import DeviceSetSelect from './DeviceSetSelect';
 
 const DeviceSettings = props => {
-  const { device_id, full_devices } = props;
+  const { device_id, account } = props;
 
   const tableData = [
     {
-      key: '11',
+      key: '1',
+      name: formatMessage({
+        id: 'core.Device_nickname',
+        defaultMessage: 'Device nickname',
+      }),
+      value: (
+        <DeviceParagraph
+          fieldKey="name"
+          device_id={device_id}
+          style={{ marginBottom: '0' }}
+        />
+      ),
+    },
+    {
+      key: '2',
+      name: formatMessage({ id: 'core.Device_type', defaultMessage: "Device type", }),
+      value: (
+        <DeviceSetSelect
+          device_id={device_id}
+          title={formatMessage({ id: 'core.Device_type', defaultMessage: "Device type", })}
+          menu_items={[{key: 'sip_device', text: 'sip_device'},
+		       {key: 'softphone', text: 'softphone'},
+		       {key: 'cellphone', text: 'cellphone'},
+		       {key: 'fax', text: 'fax'},
+		       {key: 'sip_uri', text: 'sip_uri'},
+	             ]}
+          fieldKey="device_type"
+        />
+      ),
+    },
+    {
+      key: '3',
       name: formatMessage({
         id: 'core.Enabled',
         defaultMessage: 'Enabled',
@@ -31,10 +62,10 @@ const DeviceSettings = props => {
       ),
     },
     {
-      key: '2',
+      key: '4',
       name: formatMessage({
-        id: 'core.Device_nickname',
-        defaultMessage: 'Device nickname',
+        id: 'core.Assign_to',
+        defaultMessage: 'Assign to',
       }),
       value: (
         <DeviceParagraph
@@ -45,25 +76,62 @@ const DeviceSettings = props => {
       ),
     },
     {
-      key: '21',
-      name: formatMessage({ id: 'core.Device_type', defaultMessage: "Device type", }),
+      key: '5',
+      name: formatMessage({
+        id: 'core.realm',
+        defaultMessage: 'Realm',
+      }),
+      value: account.data.realm,
+    },
+    {
+      key: '6',
+      name: formatMessage({
+        id: 'core.Username',
+        defaultMessage: 'Username',
+      }),
       value: (
-        <DeviceSetSelect
+        <DeviceParagraph
+          fieldKey="sip.username"
           device_id={device_id}
-          text={full_devices ? full_devices[device_id].device_type : null}
-          title={formatMessage({ id: 'core.Device_type', defaultMessage: "Device type", })}
-          menu_items={[{key: 'sip_device', text: 'sip_device'},
-		       {key: 'softphone', text: 'softphone'},
-		       {key: 'cellphone', text: 'cellphone'},
-		       {key: 'fax', text: 'fax'},
-		       {key: 'sip_uri', text: 'sip_uri'},
-	             ]}
-          fieldKey="device_type"
+          style={{ marginBottom: '0' }}
         />
       ),
     },
     {
-      key: '3',
+      key: '7',
+      name: formatMessage({
+        id: 'core.Password',
+        defaultMessage: 'Password',
+      }),
+      value: (
+        <DeviceParagraph
+          fieldKey="sip.password"
+          device_id={device_id}
+          style={{ marginBottom: '0' }}
+        />
+      ),
+    },
+    {
+      key: '8',
+      name: formatMessage({
+        id: 'core.Invite_format',
+        defaultMessage: 'Invite format',
+      }),
+      value: (
+        <DeviceSetSelect
+          device_id={device_id}
+          title={formatMessage({ id: 'core.Invite_format', defaultMessage: "Invite format", })}
+          menu_items={[{key: 'username', text: 'username'},
+		       {key: 'e164', text: 'e164'},
+		       {key: 'route', text: 'route'},
+		       {key: 'contact', text: 'contact'},
+	             ]}
+          fieldKey="sip.invite_format"
+        />
+      ),
+    },
+    {
+      key: '9',
       name: formatMessage({
         id: 'core.Record_calls',
         defaultMessage: "Record calls",
@@ -81,7 +149,35 @@ const DeviceSettings = props => {
       ),
     },
     {
-      key: '4',
+      key: '10',
+      name: formatMessage({
+        id: 'core.Dialplan',
+        defaultMessage: 'Dialplan',
+      }),
+      value: (
+        <DeviceParagraph
+          fieldKey="name"
+          device_id={device_id}
+          style={{ marginBottom: '0' }}
+        />
+      ),
+    },
+    {
+      key: '11',
+      name: formatMessage({
+        id: 'core.Music_on_hold',
+        defaultMessage: 'Music on hold',
+      }),
+      value: (
+        <DeviceParagraph
+          fieldKey="name"
+          device_id={device_id}
+          style={{ marginBottom: '0' }}
+        />
+      ),
+    },
+    {
+      key: '12',
       name: formatMessage({
         id: 'core.T38',
         defaultMessage: "T.38",
@@ -94,6 +190,43 @@ const DeviceSettings = props => {
           modal_title={formatMessage({
             id: 'core.T38',
             defaultMessage: "T.38",
+          })}
+        />
+      ),
+    },
+    {
+      key: '13',
+      name: formatMessage({
+        id: 'core.Encryption_methods',
+        defaultMessage: 'Encryption methods',
+      }),
+      value: (
+        <DeviceSetSelect
+          device_id={device_id}
+          title={formatMessage({ id: 'core.Encryption_methods', defaultMessage: "Encryption methods", })}
+          menu_items={[{key: ['srtp'], text: 'srtp1'},
+		       {key: ['zrtp'], text: 'zrtp1'},
+		       {key: ['srtp','zrtp'], text: 'srtp1, zrtp1'},
+		       {key: [], text: 'No encryption1'},
+	             ]}
+          fieldKey="media.encryption.methods"
+        />
+      ),
+    },
+    {
+      key: '14',
+      name: formatMessage({
+        id: 'core.Enforce_rtp_encryption',
+        defaultMessage: 'Enforce rtp encryption',
+      }),
+      value: (
+        <DeviceSwitch
+          fieldKey="media.encryption.enforce_security"
+          device_id={device_id}
+          style={{ marginBottom: '0' }}
+          modal_title={formatMessage({
+            id: 'core.Enforce_rtp_encryption',
+            defaultMessage: "Enforce rtp encryption",
           })}
         />
       ),
@@ -125,7 +258,7 @@ const DeviceSettings = props => {
   );
 };
 
-export default connect(({ kz_full_devices }) => ({
-  full_devices: kz_full_devices,
+export default connect(({ kz_account }) => ({
+  account: kz_account,
 }))(DeviceSettings);
 

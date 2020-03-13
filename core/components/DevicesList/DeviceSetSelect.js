@@ -21,7 +21,6 @@ const DeviceSetSelect = props => {
 	  full_devices,
 	  kz_login,
 	  device_id,
-	  text,
 	  title,
 	  menu_items,
 	  fieldKey
