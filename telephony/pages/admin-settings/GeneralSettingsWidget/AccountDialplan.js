@@ -7,8 +7,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 
-import { AccountDialplans } from '../../../services/kazoo-telephony.ts';
-import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzAccount, AccountDialplans } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const { confirm } = Modal;

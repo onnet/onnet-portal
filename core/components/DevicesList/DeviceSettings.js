@@ -1,15 +1,26 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Table } from 'antd';
 import DeviceParagraph from './DeviceParagraph';
 import DeviceSwitch from './DeviceSwitch';
 import DeviceSetSelect from './DeviceSetSelect';
+import { AccountDialplans } from '@/pages/onnet-portal/core/services/kazoo';
 
 const DeviceSettings = props => {
+  const [accountDialplans, setAccountDialplans] = useState({});
+
   const { device_id, account } = props;
+
+  useEffect(() => {
+    if (account.data) {
+      AccountDialplans({ account_id: account.data.id }).then(res => {
+        if (res.data) setAccountDialplans(res.data);
+      });
+    }
+  }, [account]);
 
   const tableData = [
     {
@@ -155,10 +166,11 @@ const DeviceSettings = props => {
         defaultMessage: 'Dialplan',
       }),
       value: (
-        <DeviceParagraph
-          fieldKey="name"
+        <DeviceSetSelect
           device_id={device_id}
-          style={{ marginBottom: '0' }}
+          title={formatMessage({ id: 'core.Dialplan', defaultMessage: "Dialplan", })}
+          menu_items={Object.keys(accountDialplans).map(dpKey => ( {key: [dpKey], text: dpKey}))}
+          fieldKey="dial_plan.system[0]"
         />
       ),
     },

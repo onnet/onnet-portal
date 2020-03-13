@@ -239,3 +239,8 @@ export function kzDevice(params: FormDataTyp) {
   console.log('IAMMM!!!!  kzDevice services file, params: ', params);
   return kzRequest(deviceUrl(params), params);
 }
+
+export function AccountDialplans(params: FormDataTyp): Promise<any> {
+  return kzRequest(`${accountsUrl(params)}/dialplans`, params);
+}
+
