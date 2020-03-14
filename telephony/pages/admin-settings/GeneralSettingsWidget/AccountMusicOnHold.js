@@ -15,12 +15,19 @@ const { confirm } = Modal;
 const AccountMusicOnHold = props => {
   const [mediaName, setMediaName] = useState('');
 
-  const { kz_account, kz_account_media } = props;
+  const { dispatch, account, account_media } = props;
 
   useEffect(() => {
-    if (kz_account.data) {
-      const mediaObj = kz_account_media.data.find(
-        ({ id }) => id === kz_account.data.music_on_hold.media_id,
+    if (!account_media.data) {
+      dispatch({
+        type: 'kz_account_media/refresh',
+        payload: { method: 'GET', account_id: account.data.id },
+      });
+    }
+
+    if (account.data && account_media.data) {
+      const mediaObj = account_media.data.find(
+        ({ id }) => id === account.data.music_on_hold.media_id,
       );
       if (mediaObj) {
         setMediaName(mediaObj.name);
@@ -30,14 +37,16 @@ const AccountMusicOnHold = props => {
         );
       }
     }
-  }, [kz_account, kz_account_media]);
+  }, [account, account_media]);
+
+  if (!account_media.data) return null;
 
   const menuAccountMusicOnHold = (
     <Menu selectedKeys={[]} onClick={onMediaSelect}>
       <Menu.Item key="">
         {formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' })}
       </Menu.Item>
-      {kz_account_media.data.map(media => (
+      {account_media.data.map(media => (
         <Menu.Item key={media.id}>{media.name}</Menu.Item>
       ))}
     </Menu>
@@ -45,7 +54,7 @@ const AccountMusicOnHold = props => {
 
   function onMediaSelect(event) {
     const { key } = event;
-    const mediaJObj = kz_account_media.data.find(({ id }) => id === key);
+    const mediaJObj = account_media.data.find(({ id }) => id === key);
     const currMediaName = mediaJObj
       ? mediaJObj.name
       : formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' });
@@ -56,7 +65,7 @@ const AccountMusicOnHold = props => {
       onOk() {
         runAndDispatch(kzAccount, 'kz_account/update', {
           method: 'PATCH',
-          account_id: kz_account.data.id,
+          account_id: account.data.id,
           data: { music_on_hold: mediaBag },
         });
       },
@@ -74,6 +83,6 @@ const AccountMusicOnHold = props => {
 };
 
 export default connect(({ kz_account, kz_account_media }) => ({
-  kz_account,
-  kz_account_media,
+  account: kz_account,
+  account_media: kz_account_media,
 }))(AccountMusicOnHold);

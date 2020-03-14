@@ -23,11 +23,17 @@ const DeviceSetSelect = props => {
     title,
     menu_items,
     fieldKey,
+    fieldType,
   } = props;
 
   useEffect(() => {
     if (full_devices[device_id]) {
-      setFieldContent(_.get(full_devices[device_id].data, fieldKey));
+      const fCont = _.get(full_devices[device_id].data, fieldKey);
+      if (_.isArray(fCont)) {
+        setFieldContent(_.join(fCont, ', '));
+      } else {
+        setFieldContent(fCont);
+      }
     }
   }, [full_devices[device_id]]);
 
@@ -48,7 +54,13 @@ const DeviceSetSelect = props => {
       content: <span style={{ paddingLeft: '6em' }}>{key}</span>,
       onOk() {
         const data = {};
-        _.set(data, fieldKey, key);
+	if (key === 'empty_array') {
+          _.set(data, fieldKey, []);
+        } else if (fieldType === 'array') {
+          _.set(data, fieldKey, _.split(key, ','));
+        } else {
+          _.set(data, fieldKey, key);
+        }
         console.log('data: ', data);
         kzDevice({
           method: 'PATCH',
@@ -66,7 +78,7 @@ const DeviceSetSelect = props => {
     });
   }
 
-  if (!kz_login.data.is_reseller) return fieldContent;
+//  if (!kz_login.data.is_reseller) return fieldContent;
 
   return (
     <Dropdown overlay={menu} trigger={['click']}>

@@ -209,12 +209,13 @@ const DeviceSettings = props => {
             defaultMessage: 'Encryption methods',
           })}
           menu_items={[
-            { key: ['srtp'], text: 'srtp1' },
-            { key: ['zrtp'], text: 'zrtp1' },
-            { key: ['srtp', 'zrtp'], text: 'srtp1, zrtp1' },
-            { key: [], text: 'No encryption1' },
+            { key: 'srtp', text: 'srtp' },
+            { key: 'zrtp', text: 'zrtp' },
+            { key: 'srtp,zrtp', text: 'srtp, zrtp' },
+            { key: 'empty_array', text: 'No encryption' },
           ]}
           fieldKey="media.encryption.methods"
+          fieldType="array"
         />
       ),
     },
