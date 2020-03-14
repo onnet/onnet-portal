@@ -7,6 +7,7 @@ import { Table } from 'antd';
 import DeviceParagraph from './DeviceParagraph';
 import DeviceSwitch from './DeviceSwitch';
 import DeviceSetSelect from './DeviceSetSelect';
+import DeviceMusicOnHold from './DeviceMusicOnHold';
 import { AccountDialplans } from '@/pages/onnet-portal/core/services/kazoo';
 
 const DeviceSettings = props => {
@@ -181,10 +182,8 @@ const DeviceSettings = props => {
         defaultMessage: 'Music on hold',
       }),
       value: (
-        <DeviceParagraph
-          fieldKey="name"
+        <DeviceMusicOnHold
           device_id={device_id}
-          style={{ marginBottom: '0' }}
         />
       ),
     },
