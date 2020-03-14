@@ -238,10 +238,10 @@ const UsersList = props => {
       <Drawer
         title={
           full_users[selectedUser] ? (
-              <b style={{ color: settings.primaryColor }}>
-                {' '}
-                {full_users[selectedUser].data.username}
-              </b>
+            <b style={{ color: settings.primaryColor }}>
+              {' '}
+              {full_users[selectedUser].data.username}
+            </b>
           ) : null
         }
         width="50%"

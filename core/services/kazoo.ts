@@ -243,4 +243,3 @@ export function kzDevice(params: FormDataTyp) {
 export function AccountDialplans(params: FormDataTyp): Promise<any> {
   return kzRequest(`${accountsUrl(params)}/dialplans`, params);
 }
-

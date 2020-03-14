@@ -16,7 +16,6 @@ import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 const { confirm } = Modal;
 
 const DevicesList = props => {
-
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
@@ -78,12 +77,7 @@ const DevicesList = props => {
       title: formatMessage({ id: 'core.Type', defaultMessage: 'Type' }),
       dataIndex: 'device_type',
       key: 'device_type',
-      render: (text, record) => (
-        <DeviceType
-          device_id={record.id}
-          text={text}
-        />
-      ),
+      render: (text, record) => <DeviceType device_id={record.id} text={text} />,
     },
     {
       title: formatMessage({ id: 'core.Devicename', defaultMessage: 'Devicename' }),
@@ -253,10 +247,10 @@ const DevicesList = props => {
       <Drawer
         title={
           full_devices[selectedDevice] ? (
-              <b style={{ color: settings.primaryColor }}>
-                {' '}
-                {full_devices[selectedDevice].data.name}
-              </b>
+            <b style={{ color: settings.primaryColor }}>
+              {' '}
+              {full_devices[selectedDevice].data.name}
+            </b>
           ) : null
         }
         width="50%"

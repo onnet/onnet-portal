@@ -14,12 +14,7 @@ const { confirm } = Modal;
 const DeviceMusicOnHold = props => {
   const [mediaName, setMediaName] = useState('');
 
-  const { dispatch,
-	  account,
-	  full_devices,
-	  account_media,
-	  device_id
-  } = props;
+  const { dispatch, account, full_devices, account_media, device_id } = props;
 
   useEffect(() => {
     if (full_devices[device_id]) {

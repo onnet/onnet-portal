@@ -18,37 +18,45 @@ const AccountOutboundRouting = props => {
 
   const { dispatch, kz_account, kz_cf_list, kz_cf_details } = props;
 
-
   useEffect(() => {
     if (kz_account.data) {
       if (kz_cf_list) {
-      if (_.find(kz_cf_list.data, { 'numbers': ['no_match'] })) {
-    const noMatchCF = _.find(kz_cf_list.data, { 'numbers': ['no_match'] });
-console.log('noMatchCF: ', noMatchCF);
-console.log('no_match: ', kz_cf_list.data.find(({ numbers }) => isArrayEqual(numbers, ['no_match'])));
-        const { id } = kz_cf_list.data.find(({ numbers }) => isArrayEqual(numbers, ['no_match']));
-        if (kz_cf_details[id]) {
-          SetNoMatchId(id);
-          if (
-            (kz_cf_details[id].flow.module === 'resources' &&
-              kz_cf_details[id].flow.data.hunt_account_id) ||
-            kz_cf_details[id].flow.module === 'offnet'
-          ) {
-            SetCurrRoutingMode(
-              formatMessage({ id: 'telephony.general_routing', defaultMessage: 'General routing' }),
-            );
-          } else if (kz_cf_details[id].flow.module === 'resources') {
-            SetCurrRoutingMode(
-              formatMessage({ id: 'telephony.account_defined', defaultMessage: 'Account defined' }),
-            );
+        if (_.find(kz_cf_list.data, { numbers: ['no_match'] })) {
+          const noMatchCF = _.find(kz_cf_list.data, { numbers: ['no_match'] });
+          console.log('noMatchCF: ', noMatchCF);
+          console.log(
+            'no_match: ',
+            kz_cf_list.data.find(({ numbers }) => isArrayEqual(numbers, ['no_match'])),
+          );
+          const { id } = kz_cf_list.data.find(({ numbers }) => isArrayEqual(numbers, ['no_match']));
+          if (kz_cf_details[id]) {
+            SetNoMatchId(id);
+            if (
+              (kz_cf_details[id].flow.module === 'resources' &&
+                kz_cf_details[id].flow.data.hunt_account_id) ||
+              kz_cf_details[id].flow.module === 'offnet'
+            ) {
+              SetCurrRoutingMode(
+                formatMessage({
+                  id: 'telephony.general_routing',
+                  defaultMessage: 'General routing',
+                }),
+              );
+            } else if (kz_cf_details[id].flow.module === 'resources') {
+              SetCurrRoutingMode(
+                formatMessage({
+                  id: 'telephony.account_defined',
+                  defaultMessage: 'Account defined',
+                }),
+              );
+            }
+          } else {
+            dispatch({
+              type: 'kz_cf_details/refresh',
+              payload: { method: 'GET', account_id: kz_account.data.id, callflow_id: id },
+            });
           }
-        } else {
-          dispatch({
-            type: 'kz_cf_details/refresh',
-            payload: { method: 'GET', account_id: kz_account.data.id, callflow_id: id },
-          });
         }
-      }
       }
     }
   }, [kz_account, kz_cf_list, kz_cf_details]);

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import * as _ from 'lodash';
 
@@ -13,17 +13,17 @@ import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 const { confirm } = Modal;
 
 const DeviceSetSelect = props => {
-
   const [fieldContent, setFieldContent] = useState('Loading...');
 
-  const { dispatch,
-	  account,
-	  full_devices,
-	  kz_login,
-	  device_id,
-	  title,
-	  menu_items,
-	  fieldKey
+  const {
+    dispatch,
+    account,
+    full_devices,
+    kz_login,
+    device_id,
+    title,
+    menu_items,
+    fieldKey,
   } = props;
 
   useEffect(() => {
@@ -34,7 +34,9 @@ const DeviceSetSelect = props => {
 
   const menu = (
     <Menu selectedKeys={[]} onClick={onDeviceRestrictionSelect}>
-	  {menu_items.map(item => <Menu.Item key={item.key}>{item.text}</Menu.Item>)}
+      {menu_items.map(item => (
+        <Menu.Item key={item.key}>{item.text}</Menu.Item>
+      ))}
     </Menu>
   );
 

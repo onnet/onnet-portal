@@ -212,10 +212,10 @@ const DevicesList = props => {
       <Drawer
         title={
           full_devices[selectedDevice] ? (
-              <b style={{ color: settings.primaryColor }}>
-                {' '}
-                {full_devices[selectedDevice].data.name}
-              </b>
+            <b style={{ color: settings.primaryColor }}>
+              {' '}
+              {full_devices[selectedDevice].data.name}
+            </b>
           ) : null
         }
         width="50%"

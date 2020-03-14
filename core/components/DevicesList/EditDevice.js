@@ -33,7 +33,10 @@ const EditDevice = props => {
 
   return (
     <Collapse accordion>
-      <Panel header={formatMessage({ id: 'core.Device_settings', defaultMessage: 'Device settings' })} key="20">
+      <Panel
+        header={formatMessage({ id: 'core.Device_settings', defaultMessage: 'Device settings' })}
+        key="20"
+      >
         <DeviceSettings device_id={selectedDevice} />
       </Panel>
       <Panel header={formatMessage({ id: 'core.CID', defaultMessage: 'CID' })} key="21">
@@ -52,7 +55,7 @@ const EditDevice = props => {
         <DeviceRestrictions device_id={selectedDevice} />
       </Panel>
       <Panel header={formatMessage({ id: 'core.Details', defaultMessage: 'Details' })} key="24">
-	<ReactJson src={full_devices[selectedDevice].data} {...defaultProps} />
+        <ReactJson src={full_devices[selectedDevice].data} {...defaultProps} />
       </Panel>
     </Collapse>
   );

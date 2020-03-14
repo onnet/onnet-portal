@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Table } from 'antd';
@@ -31,26 +31,23 @@ const DeviceSettings = props => {
         defaultMessage: 'Device nickname',
       }),
       value: (
-        <DeviceParagraph
-          fieldKey="name"
-          device_id={device_id}
-          style={{ marginBottom: '0' }}
-        />
+        <DeviceParagraph fieldKey="name" device_id={device_id} style={{ marginBottom: '0' }} />
       ),
     },
     {
       key: '2',
-      name: formatMessage({ id: 'core.Device_type', defaultMessage: "Device type", }),
+      name: formatMessage({ id: 'core.Device_type', defaultMessage: 'Device type' }),
       value: (
         <DeviceSetSelect
           device_id={device_id}
-          title={formatMessage({ id: 'core.Device_type', defaultMessage: "Device type", })}
-          menu_items={[{key: 'sip_device', text: 'sip_device'},
-		       {key: 'softphone', text: 'softphone'},
-		       {key: 'cellphone', text: 'cellphone'},
-		       {key: 'fax', text: 'fax'},
-		       {key: 'sip_uri', text: 'sip_uri'},
-	             ]}
+          title={formatMessage({ id: 'core.Device_type', defaultMessage: 'Device type' })}
+          menu_items={[
+            { key: 'sip_device', text: 'sip_device' },
+            { key: 'softphone', text: 'softphone' },
+            { key: 'cellphone', text: 'cellphone' },
+            { key: 'fax', text: 'fax' },
+            { key: 'sip_uri', text: 'sip_uri' },
+          ]}
           fieldKey="device_type"
         />
       ),
@@ -80,11 +77,7 @@ const DeviceSettings = props => {
         defaultMessage: 'Assign to',
       }),
       value: (
-        <DeviceParagraph
-          fieldKey="name"
-          device_id={device_id}
-          style={{ marginBottom: '0' }}
-        />
+        <DeviceParagraph fieldKey="name" device_id={device_id} style={{ marginBottom: '0' }} />
       ),
     },
     {
@@ -132,12 +125,13 @@ const DeviceSettings = props => {
       value: (
         <DeviceSetSelect
           device_id={device_id}
-          title={formatMessage({ id: 'core.Invite_format', defaultMessage: "Invite format", })}
-          menu_items={[{key: 'username', text: 'username'},
-		       {key: 'e164', text: 'e164'},
-		       {key: 'route', text: 'route'},
-		       {key: 'contact', text: 'contact'},
-	             ]}
+          title={formatMessage({ id: 'core.Invite_format', defaultMessage: 'Invite format' })}
+          menu_items={[
+            { key: 'username', text: 'username' },
+            { key: 'e164', text: 'e164' },
+            { key: 'route', text: 'route' },
+            { key: 'contact', text: 'contact' },
+          ]}
           fieldKey="sip.invite_format"
         />
       ),
@@ -146,7 +140,7 @@ const DeviceSettings = props => {
       key: '9',
       name: formatMessage({
         id: 'core.Record_calls',
-        defaultMessage: "Record calls",
+        defaultMessage: 'Record calls',
       }),
       value: (
         <DeviceSwitch
@@ -155,7 +149,7 @@ const DeviceSettings = props => {
           style={{ marginBottom: '0' }}
           modal_title={formatMessage({
             id: 'core.Record_calls',
-            defaultMessage: "Record calls",
+            defaultMessage: 'Record calls',
           })}
         />
       ),
@@ -169,8 +163,8 @@ const DeviceSettings = props => {
       value: (
         <DeviceSetSelect
           device_id={device_id}
-          title={formatMessage({ id: 'core.Dialplan', defaultMessage: "Dialplan", })}
-          menu_items={Object.keys(accountDialplans).map(dpKey => ( {key: [dpKey], text: dpKey}))}
+          title={formatMessage({ id: 'core.Dialplan', defaultMessage: 'Dialplan' })}
+          menu_items={Object.keys(accountDialplans).map(dpKey => ({ key: [dpKey], text: dpKey }))}
           fieldKey="dial_plan.system[0]"
         />
       ),
@@ -181,17 +175,13 @@ const DeviceSettings = props => {
         id: 'core.Music_on_hold',
         defaultMessage: 'Music on hold',
       }),
-      value: (
-        <DeviceMusicOnHold
-          device_id={device_id}
-        />
-      ),
+      value: <DeviceMusicOnHold device_id={device_id} />,
     },
     {
       key: '12',
       name: formatMessage({
         id: 'core.T38',
-        defaultMessage: "T.38",
+        defaultMessage: 'T.38',
       }),
       value: (
         <DeviceSwitch
@@ -200,7 +190,7 @@ const DeviceSettings = props => {
           style={{ marginBottom: '0' }}
           modal_title={formatMessage({
             id: 'core.T38',
-            defaultMessage: "T.38",
+            defaultMessage: 'T.38',
           })}
         />
       ),
@@ -214,12 +204,16 @@ const DeviceSettings = props => {
       value: (
         <DeviceSetSelect
           device_id={device_id}
-          title={formatMessage({ id: 'core.Encryption_methods', defaultMessage: "Encryption methods", })}
-          menu_items={[{key: ['srtp'], text: 'srtp1'},
-		       {key: ['zrtp'], text: 'zrtp1'},
-		       {key: ['srtp','zrtp'], text: 'srtp1, zrtp1'},
-		       {key: [], text: 'No encryption1'},
-	             ]}
+          title={formatMessage({
+            id: 'core.Encryption_methods',
+            defaultMessage: 'Encryption methods',
+          })}
+          menu_items={[
+            { key: ['srtp'], text: 'srtp1' },
+            { key: ['zrtp'], text: 'zrtp1' },
+            { key: ['srtp', 'zrtp'], text: 'srtp1, zrtp1' },
+            { key: [], text: 'No encryption1' },
+          ]}
           fieldKey="media.encryption.methods"
         />
       ),
@@ -237,7 +231,7 @@ const DeviceSettings = props => {
           style={{ marginBottom: '0' }}
           modal_title={formatMessage({
             id: 'core.Enforce_rtp_encryption',
-            defaultMessage: "Enforce rtp encryption",
+            defaultMessage: 'Enforce rtp encryption',
           })}
         />
       ),
@@ -272,4 +266,3 @@ const DeviceSettings = props => {
 export default connect(({ kz_account }) => ({
   account: kz_account,
 }))(DeviceSettings);
-
