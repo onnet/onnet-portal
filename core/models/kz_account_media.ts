@@ -24,7 +24,6 @@ const Model: ModelType = {
   namespace: 'kz_account_media',
 
   state: {
-    data: [],
   },
 
   effects: {

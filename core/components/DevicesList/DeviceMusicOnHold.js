@@ -17,7 +17,13 @@ const DeviceMusicOnHold = props => {
   const { dispatch, account, full_devices, account_media, device_id } = props;
 
   useEffect(() => {
-    if (full_devices[device_id]) {
+    if (!account_media.data) {
+      dispatch({
+        type: 'kz_account_media/refresh',
+        payload: { method: 'GET', account_id: account.data.id },
+      });
+    }
+    if (full_devices[device_id] && account_media.data) {
       const mediaObj = account_media.data.find(
         ({ id }) => id === full_devices[device_id].data.music_on_hold.media_id,
       );
@@ -30,6 +36,8 @@ const DeviceMusicOnHold = props => {
       }
     }
   }, [account, full_devices, account_media]);
+
+  if (!account_media.data) return null;
 
   const menuAccountMusicOnHold = (
     <Menu selectedKeys={[]} onClick={onMediaSelect}>
