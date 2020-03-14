@@ -1,16 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import * as _ from 'lodash';
-import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import CreateDevice from './CreateDevice';
 import EditDevice from './EditDevice';
-import DeviceParagraph from './DeviceParagraph';
 import DeviceType from './DeviceType';
-import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { confirm } = Modal;
@@ -21,7 +18,7 @@ const DevicesList = props => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(false);
 
-  const { dispatch, settings, account, brief_devices, full_devices, full_users } = props;
+  const { dispatch, settings, account, brief_devices, full_devices } = props;
 
   useEffect(() => {
     if (brief_devices.data) {
@@ -200,7 +197,7 @@ const DevicesList = props => {
           }
           description={
             <Table
-              dataSource={brief_devices.data}
+              dataSource={dataSource}
               columns={columns}
               pagination={isPaginated}
               size="small"
@@ -230,11 +227,10 @@ const DevicesList = props => {
 };
 
 export default connect(
-  ({ settings, kz_account, kz_brief_devices, kz_full_devices, kz_full_users }) => ({
+  ({ settings, kz_account, kz_brief_devices, kz_full_devices }) => ({
     settings,
     account: kz_account,
     brief_devices: kz_brief_devices,
     full_devices: kz_full_devices,
-    full_users: kz_full_users,
   }),
 )(DevicesList);

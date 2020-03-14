@@ -8,7 +8,6 @@ import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import CreateDevice from './CreateDevice';
 import EditDevice from './EditDevice';
-import DeviceParagraph from './DeviceParagraph';
 import DeviceType from './DeviceType';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
@@ -105,9 +104,11 @@ const DevicesList = props => {
         const ExternalCIDNumber = _.get(full_devices[record.id], 'data.caller_id.external.number');
         if (InternalCIDNumber && ExternalCIDNumber) {
           return `${InternalCIDNumber} | ${ExternalCIDNumber}`;
-        } else if (InternalCIDNumber) {
+        }
+        if (InternalCIDNumber) {
           return InternalCIDNumber;
-        } else if (ExternalCIDNumber) {
+        }
+        if (ExternalCIDNumber) {
           return ExternalCIDNumber;
         }
         return null;

@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import * as _ from 'lodash';
 
-import { formatMessage } from 'umi-plugin-react/locale';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 
@@ -45,7 +44,7 @@ const DeviceSetSelect = props => {
     console.log('event: ', event);
     console.log('key: ', key);
     confirm({
-      title: title,
+      title,
       content: <span style={{ paddingLeft: '6em' }}>{key}</span>,
       onOk() {
         const data = {};
