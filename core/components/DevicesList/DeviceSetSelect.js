@@ -46,12 +46,13 @@ const DeviceSetSelect = props => {
   );
 
   function onDeviceRestrictionSelect(event) {
-    const { key } = event;
+    const { key, item } = event;
     console.log('event: ', event);
     console.log('key: ', key);
+    console.log('item: ', item);
     confirm({
       title,
-      content: <span style={{ paddingLeft: '6em' }}>{key}</span>,
+      content: <span style={{ paddingLeft: '6em' }}>{item.props.children}</span>,
       onOk() {
         const data = {};
 	if (key === 'empty_array') {
