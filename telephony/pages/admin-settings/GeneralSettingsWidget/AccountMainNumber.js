@@ -66,7 +66,7 @@ const AccountMainNumber = props => {
   };
 
   const onMainNumberCancel = () => {
-    setMainNumber(kz_account.data.mainNumber);
+    setMainNumber(externalNumber());
     setTzButtonVisible(false);
   };
 

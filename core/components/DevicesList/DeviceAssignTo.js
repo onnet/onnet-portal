@@ -2,74 +2,74 @@
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-import * as _ from 'lodash';
+
 import { formatMessage } from 'umi-plugin-react/locale';
-import { DownOutlined } from '@ant-design/icons';
-import { Modal, Dropdown, Menu } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+import { Button, Select, Modal } from 'antd';
 
 import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 
-const { confirm } = Modal;
-
 const DeviceAssignTo = props => {
-  const [fieldContent, setFieldContent] = useState('No assignment');
+  const [buttonVisible, setButtonVisible] = useState(false);
+  const [selectedId, setSelectedId] = useState('');
+  const [currentValue, setCurrentValue] = useState(
+    formatMessage({
+      id: 'core.No_owner',
+      defaultMessage: '-No owner-',
+    }),
+  );
+  const [modalTitle, setModalTitle] = useState(
+    formatMessage({
+      id: 'core.Assign_to',
+      defaultMessage: 'Assign to',
+    }),
+  );
 
   const { dispatch, account, full_devices, brief_users, full_users, device_id } = props;
 
-  useEffect(() => {
-    if (full_devices[device_id]) {
-      let ownerId = full_devices[device_id].data.owner_id;
+  function currentDocValue() {
+    try {
+      const ownerId = full_devices[device_id].data.owner_id;
       if (ownerId) {
-        setFieldContent(full_users[ownerId].data.username);
+        return full_users[ownerId].data.username;
       } else {
-        setFieldContent(formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' }));
+        return formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' });
       }
+    } catch (e) {
+      return formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-', });
+    }
+  }
+
+  useEffect(() => {
+    if (account.data && full_devices[device_id]) {
+      const currVal = currentDocValue();
+      setCurrentValue(currVal);
+      setModalTitle(
+        `${formatMessage({
+          id: 'core.Assign_to',
+          defaultMessage: 'Assign to',
+        })}: ${currVal}`,
+      );
     }
   }, [account, full_devices, full_users]);
 
-  if (!full_devices[device_id]) return null;
-  const menu = (
-    <Menu selectedKeys={[]} onClick={onSelect}>
-      {brief_users.data.map(user => (
-        <Menu.Item key={user.id}>{user.username}</Menu.Item>
-      ))}
-      <Menu.Item key="no_owner_key">
-        {formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' })}
-      </Menu.Item>
-    </Menu>
-  );
+  const onSelect = event => {
+    console.log('onSelect event: ', event);
+    setSelectedId(event);
+  };
 
-  function onSelect(event) {
-    const { key } = event;
-    confirm({
-      title: formatMessage({ id: 'core.Assign_to', defaultMessage: 'Assign to' }),
-      content: <span style={{ paddingLeft: '6em' }}>{full_users[key] ? full_users[key].data.username : '-No owner-'}</span>,
-      onOk() {
-        if (key === "no_owner_key") {
+  const onModalConfirm = props => {
+    if (selectedId === "no_owner_key") {
+      kzDevice({
+        method: 'GET',
+        account_id: account.data.id,
+        device_id,
+      }).then(res => {
           kzDevice({
-            method: 'GET',
+            method: 'POST',
             account_id: account.data.id,
             device_id,
-          }).then(res => {
-              kzDevice({
-                method: 'POST',
-                account_id: account.data.id,
-                device_id,
-                data: _.omit(res.data, 'owner_id'),
-              }).then(() =>
-                dispatch({
-                  type: 'kz_full_devices/refresh',
-                  payload: { account_id: account.data.id, device_id },
-                }),
-              );
-            }
-          )
-        } else {
-          kzDevice({
-            method: 'PATCH',
-            account_id: account.data.id,
-            device_id,
-            data: { owner_id: key },
+            data: _.omit(res.data, 'owner_id'),
           }).then(() =>
             dispatch({
               type: 'kz_full_devices/refresh',
@@ -77,17 +77,57 @@ const DeviceAssignTo = props => {
             }),
           );
         }
-      },
-      onCancel() {},
-    });
-  }
+      )
+    } else {
+      kzDevice({
+        method: 'PATCH',
+        account_id: account.data.id,
+        device_id,
+        data: { owner_id: selectedId },
+      }).then(() =>
+        dispatch({
+          type: 'kz_full_devices/refresh',
+          payload: { account_id: account.data.id, device_id },
+        }),
+      );
+    }
+    setButtonVisible(false);
+  };
+
+  const onModalCancel = () => {
+    setCurrentValue(currentDocValue());
+    setButtonVisible(false);
+  };
 
   return (
-    <Dropdown overlay={menu} trigger={['click']}>
-      <a className="ant-dropdown-link" href="#">
-        {fieldContent} <DownOutlined />
-      </a>
-    </Dropdown>
+    <>
+      {currentDocValue()}{' '}
+      <Button type="link" onClick={() => setButtonVisible(true)}>
+        <EditOutlined />
+      </Button>
+      <Modal
+        title={modalTitle}
+        visible={buttonVisible}
+        onOk={onModalConfirm}
+        onCancel={onModalCancel}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <Select
+            style={{ width: '50%' }}
+            onChange={onSelect}
+            showSearch
+            defaultValue={currentValue}
+          >
+            {brief_users.data.map(user => (
+              <Select.Option value={user.id} key={user.id}>{user.username}</Select.Option>
+            ))}
+            <Select.Option value="no_owner_key" key="no_owner_key">
+              {formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' })}
+            </Select.Option>
+          </Select>
+        </div>
+      </Modal>
+    </>
   );
 };
 
