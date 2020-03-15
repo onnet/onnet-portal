@@ -237,7 +237,10 @@ const CreateDevice = props => {
     <Fragment>
       <Tooltip
         placement="leftTop"
-        title={formatMessage({ id: 'core.Create_new_device', defaultMessage: 'Create new device!' })}
+        title={formatMessage({
+          id: 'core.Create_new_device',
+          defaultMessage: 'Create new device!',
+        })}
       >
         <Button key="CreateDeviceIconKey" type="link" onClick={showModal} style={btnstyle}>
           <PlusOutlined />

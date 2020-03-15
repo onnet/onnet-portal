@@ -36,20 +36,20 @@ const DeviceMusicOnHold = props => {
       if (mediaObj) {
         return mediaObj.name;
       } else {
-        return  formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' });
+        return formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' });
       }
     } catch (e) {
-      return formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music', });
+      return formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' });
     }
   }
 
-  const fullSelectList = account_media.data ?
-    account_media.data.concat({id: '',
-	                       field_for_search: 'defaultmusiconhold',
-                               name: formatMessage({id: 'telephony.music_on_hold',
-                                                      defaultMessage: 'Music on hold',
-                                                    })
-  }) : [];
+  const fullSelectList = account_media.data
+    ? account_media.data.concat({
+        id: '',
+        field_for_search: 'defaultmusiconhold',
+        name: formatMessage({ id: 'telephony.music_on_hold', defaultMessage: 'Music on hold' }),
+      })
+    : [];
 
   useEffect(() => {
     if (!account_media.data) {
@@ -103,16 +103,17 @@ const DeviceMusicOnHold = props => {
   };
 
   const selectSearch = val => {
-    const searchRes = _.filter(fullSelectList, (o) => _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()));
+    const searchRes = _.filter(fullSelectList, o =>
+      _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()),
+    );
     setDataForSelect(searchRes);
   };
 
-  const options = 
-            dataForSelect.map(media => (
-              <Select.Option value={media.id} key={media.id}>
-		{media.name}
-              </Select.Option>
-            ));
+  const options = dataForSelect.map(media => (
+    <Select.Option value={media.id} key={media.id}>
+      {media.name}
+    </Select.Option>
+  ));
 
   return (
     <>
@@ -131,11 +132,11 @@ const DeviceMusicOnHold = props => {
             style={{ width: '65%' }}
             onChange={onSelect}
             showSearch
-	    filterOption={false}
-	    onSearch={selectSearch}
+            filterOption={false}
+            onSearch={selectSearch}
             defaultValue={currentValue}
           >
-	    {options}
+            {options}
           </Select>
         </div>
       </Modal>
@@ -148,4 +149,3 @@ export default connect(({ kz_account, kz_account_media, kz_full_devices }) => ({
   full_devices: kz_full_devices,
   account_media: kz_account_media,
 }))(DeviceMusicOnHold);
-

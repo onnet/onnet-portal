@@ -55,7 +55,7 @@ const DeviceSetSelect = props => {
       content: <span style={{ paddingLeft: '6em' }}>{item.props.children}</span>,
       onOk() {
         const data = {};
-	if (key === 'empty_array') {
+        if (key === 'empty_array') {
           _.set(data, fieldKey, []);
         } else if (fieldType === 'array') {
           _.set(data, fieldKey, _.split(key, ','));
@@ -79,7 +79,7 @@ const DeviceSetSelect = props => {
     });
   }
 
-//  if (!kz_login.data.is_reseller) return fieldContent;
+  //  if (!kz_login.data.is_reseller) return fieldContent;
 
   return (
     <Dropdown overlay={menu} trigger={['click']}>

@@ -247,4 +247,3 @@ export function AccountDialplans(params: FormDataTyp): Promise<any> {
 export function AccountMedia(params: FormDataTyp): Promise<any> {
   return kzRequest(`${accountsUrl(params)}/media`, params);
 }
-

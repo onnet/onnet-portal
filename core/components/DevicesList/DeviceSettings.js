@@ -77,9 +77,7 @@ const DeviceSettings = props => {
         id: 'core.Assign_to',
         defaultMessage: 'Assign to',
       }),
-      value: (
-        <DeviceAssignTo device_id={device_id} />
-      ),
+      value: <DeviceAssignTo device_id={device_id} />,
     },
     {
       key: '5',

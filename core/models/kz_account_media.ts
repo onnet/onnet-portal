@@ -23,8 +23,7 @@ export interface ModelType {
 const Model: ModelType = {
   namespace: 'kz_account_media',
 
-  state: {
-  },
+  state: {},
 
   effects: {
     *refresh({ payload }, { call, put }) {

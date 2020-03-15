@@ -1,12 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Drawer, Table, Card, Modal, Switch } from 'antd';
+import { DeleteOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import CreateDevice from './CreateDevice';
 import EditDevice from './EditDevice';
+import CreateDeviceDrawer from './CreateDeviceDrawer';
 import DeviceType from './DeviceType';
 import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 
@@ -15,10 +16,12 @@ const { confirm } = Modal;
 const DevicesList = props => {
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSource, setDataSource] = useState([]);
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [isEditDrawerVisible, setIsEditDrawerVisible] = useState(false);
+  const [isCreateDrawerVisible, setIsCreateDrawerVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(false);
 
   const { dispatch, settings, account, brief_devices, full_devices } = props;
+  const formRef = React.createRef();
 
   useEffect(() => {
     if (brief_devices.data) {
@@ -104,7 +107,7 @@ const DevicesList = props => {
               type: 'kz_full_devices/refresh',
               payload: { account_id: account.data.id, device_id: record.id },
             });
-            setIsDrawerVisible(true);
+            setIsEditDrawerVisible(true);
           }}
         />
       ),
@@ -123,7 +126,7 @@ const DevicesList = props => {
   ];
 
   const onDrawerClose = () => {
-    setIsDrawerVisible(false);
+    setIsEditDrawerVisible(false);
   };
 
   function onDeviceEnableSwitch(checked, record) {
@@ -169,6 +172,17 @@ const DevicesList = props => {
     }
   };
 
+  const onCloseCancel = props => {
+    console.log('onCloseCancel props: ', props);
+    formRef.current.resetFields();
+    setIsCreateDrawerVisible(false);
+  };
+
+  const onCloseSubmit = props => {
+    console.log('onCloseCancel props: ', props);
+    formRef.current.submit();
+  };
+
   return (
     <Fragment>
       <Card hoverable className={styles.card} {...cardProps}>
@@ -180,6 +194,12 @@ const DevicesList = props => {
                 defaultMessage: "Account's Devices",
               })}
               <CreateDevice btnstyle={{ float: 'left1' }} />
+              <PlusCircleOutlined
+                style={{ color: settings.primaryColor }}
+                onClick={() => {
+                  setIsCreateDrawerVisible(true);
+                }}
+              />
               <p style={{ float: 'right', display: 'inline-flex' }}>
                 {formatMessage({
                   id: 'core.pagination',
@@ -218,19 +238,41 @@ const DevicesList = props => {
         width="50%"
         placement="right"
         onClose={onDrawerClose}
-        visible={isDrawerVisible}
+        visible={isEditDrawerVisible}
       >
         <EditDevice selectedDevice={selectedDevice} />
+      </Drawer>
+      <Drawer
+        title={<b style={{ color: settings.primaryColor }}>Create device</b>}
+        width="50%"
+        placement="right"
+        onClose={onDrawerClose}
+        visible={isCreateDrawerVisible}
+        bodyStyle={{ paddingBottom: 80 }}
+        footer={
+          <div
+            style={{
+              textAlign: 'right',
+            }}
+          >
+            <Button onClick={onCloseCancel} style={{ marginRight: 8 }}>
+              Cancel
+            </Button>
+            <Button onClick={onCloseSubmit} type="primary">
+              Submit
+            </Button>
+          </div>
+        }
+      >
+        <CreateDeviceDrawer formRef={formRef} />
       </Drawer>
     </Fragment>
   );
 };
 
-export default connect(
-  ({ settings, kz_account, kz_brief_devices, kz_full_devices }) => ({
-    settings,
-    account: kz_account,
-    brief_devices: kz_brief_devices,
-    full_devices: kz_full_devices,
-  }),
-)(DevicesList);
+export default connect(({ settings, kz_account, kz_brief_devices, kz_full_devices }) => ({
+  settings,
+  account: kz_account,
+  brief_devices: kz_brief_devices,
+  full_devices: kz_full_devices,
+}))(DevicesList);

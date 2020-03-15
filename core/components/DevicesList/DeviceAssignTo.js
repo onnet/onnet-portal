@@ -37,16 +37,16 @@ const DeviceAssignTo = props => {
         return formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' });
       }
     } catch (e) {
-      return formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-', });
+      return formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' });
     }
   }
 
-  const fullSelectList = brief_users.data ?
-    brief_users.data.concat({id: 'no_owner_key',
-                             username: formatMessage({id: 'core.No_owner',
-                                                      defaultMessage: '-No owner-',
-                                                    })
-  }) : [];
+  const fullSelectList = brief_users.data
+    ? brief_users.data.concat({
+        id: 'no_owner_key',
+        username: formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' }),
+      })
+    : [];
 
   useEffect(() => {
     if (account.data && full_devices[device_id]) {
@@ -63,25 +63,24 @@ const DeviceAssignTo = props => {
   }, [account, full_devices, full_users]);
 
   const onModalConfirm = () => {
-    if (selectedId === "no_owner_key") {
+    if (selectedId === 'no_owner_key') {
       kzDevice({
         method: 'GET',
         account_id: account.data.id,
         device_id,
       }).then(res => {
-          kzDevice({
-            method: 'POST',
-            account_id: account.data.id,
-            device_id,
-            data: _.omit(res.data, 'owner_id'),
-          }).then(() =>
-            dispatch({
-              type: 'kz_full_devices/refresh',
-              payload: { account_id: account.data.id, device_id },
-            }),
-          );
-        }
-      )
+        kzDevice({
+          method: 'POST',
+          account_id: account.data.id,
+          device_id,
+          data: _.omit(res.data, 'owner_id'),
+        }).then(() =>
+          dispatch({
+            type: 'kz_full_devices/refresh',
+            payload: { account_id: account.data.id, device_id },
+          }),
+        );
+      });
     } else {
       kzDevice({
         method: 'PATCH',
@@ -110,16 +109,17 @@ const DeviceAssignTo = props => {
   };
 
   const selectSearch = val => {
-    const searchRes = _.filter(fullSelectList, (o) => _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()));
+    const searchRes = _.filter(fullSelectList, o =>
+      _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()),
+    );
     setDataForSelect(searchRes);
   };
 
-  const options = 
-            dataForSelect.map(user => (
-              <Select.Option value={user.id} key={user.id}>
-		{user.username} {user.first_name ? `(${user.first_name} ${user.last_name})` : null}
-              </Select.Option>
-            ));
+  const options = dataForSelect.map(user => (
+    <Select.Option value={user.id} key={user.id}>
+      {user.username} {user.first_name ? `(${user.first_name} ${user.last_name})` : null}
+    </Select.Option>
+  ));
 
   return (
     <>
@@ -138,11 +138,11 @@ const DeviceAssignTo = props => {
             style={{ width: '65%' }}
             onChange={onSelect}
             showSearch
-	    filterOption={false}
-	    onSearch={selectSearch}
+            filterOption={false}
+            onSearch={selectSearch}
             defaultValue={currentValue}
           >
-	    {options}
+            {options}
           </Select>
         </div>
       </Modal>
