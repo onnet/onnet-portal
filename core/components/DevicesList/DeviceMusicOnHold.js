@@ -95,7 +95,7 @@ const DeviceMusicOnHold = props => {
   };
 
   const selectSearch = val => {
-    const searchRes = _.filter(account_media.data, (o) => _.includes(_.toString(Object.values(o)), val));
+    const searchRes = _.filter(account_media.data, (o) => _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()));
     setDataForSelect(searchRes);
   };
 

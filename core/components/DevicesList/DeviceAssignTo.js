@@ -103,7 +103,7 @@ const DeviceAssignTo = props => {
   };
 
   const selectSearch = val => {
-    const searchRes = _.filter(brief_users.data, (o) => _.includes(_.toString(Object.values(o)), val));
+    const searchRes = _.filter(brief_users.data, (o) => _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()));
     setDataForSelect(searchRes);
   };
 
