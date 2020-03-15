@@ -43,6 +43,14 @@ const DeviceMusicOnHold = props => {
     }
   }
 
+  const fullSelectList = account_media.data ?
+    account_media.data.concat({id: '',
+	                       field_for_search: 'defaultmusiconhold',
+                               name: formatMessage({id: 'telephony.music_on_hold',
+                                                      defaultMessage: 'Music on hold',
+                                                    })
+  }) : [];
+
   useEffect(() => {
     if (!account_media.data) {
       dispatch({
@@ -51,7 +59,7 @@ const DeviceMusicOnHold = props => {
       });
     }
     if (full_devices[device_id] && account_media.data) {
-      setDataForSelect(account_media.data);
+      setDataForSelect(fullSelectList);
       const currVal = currentDocValue();
       setCurrentValue(currVal);
       setModalTitle(
@@ -85,17 +93,17 @@ const DeviceMusicOnHold = props => {
 
   const onSelect = event => {
     setSelectedId(event);
-    setDataForSelect(account_media.data);
+    setDataForSelect(fullSelectList);
   };
 
   const onModalCancel = () => {
     setCurrentValue(currentDocValue());
-    setDataForSelect(account_media.data);
+    setDataForSelect(fullSelectList);
     setButtonVisible(false);
   };
 
   const selectSearch = val => {
-    const searchRes = _.filter(account_media.data, (o) => _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()));
+    const searchRes = _.filter(fullSelectList, (o) => _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()));
     setDataForSelect(searchRes);
   };
 
@@ -104,10 +112,7 @@ const DeviceMusicOnHold = props => {
               <Select.Option value={media.id} key={media.id}>
 		{media.name}
               </Select.Option>
-            )).concat(
-            <Select.Option value="" key="">
-              {formatMessage({ id: 'telephony.music_on_hold', defaultMessage: 'Default music' })}
-            </Select.Option>);
+            ));
 
   return (
     <>

@@ -41,9 +41,16 @@ const DeviceAssignTo = props => {
     }
   }
 
+  const fullSelectList = brief_users.data ?
+    brief_users.data.concat({id: 'no_owner_key',
+                             username: formatMessage({id: 'core.No_owner',
+                                                      defaultMessage: '-No owner-',
+                                                    })
+  }) : [];
+
   useEffect(() => {
     if (account.data && full_devices[device_id]) {
-      setDataForSelect(brief_users.data);
+      setDataForSelect(fullSelectList);
       const currVal = currentDocValue();
       setCurrentValue(currVal);
       setModalTitle(
@@ -93,29 +100,26 @@ const DeviceAssignTo = props => {
 
   const onSelect = event => {
     setSelectedId(event);
-    setDataForSelect(brief_users.data);
+    setDataForSelect(fullSelectList);
   };
 
   const onModalCancel = () => {
     setCurrentValue(currentDocValue());
-    setDataForSelect(brief_users.data);
+    setDataForSelect(fullSelectList);
     setButtonVisible(false);
   };
 
   const selectSearch = val => {
-    const searchRes = _.filter(brief_users.data, (o) => _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()));
+    const searchRes = _.filter(fullSelectList, (o) => _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()));
     setDataForSelect(searchRes);
   };
 
   const options = 
             dataForSelect.map(user => (
               <Select.Option value={user.id} key={user.id}>
-		{user.username} ({user.first_name} {user.last_name})
+		{user.username} {user.first_name ? `(${user.first_name} ${user.last_name})` : null}
               </Select.Option>
-            )).concat(
-            <Select.Option value="no_owner_key" key="no_owner_key">
-              {formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' })}
-            </Select.Option>);
+            ));
 
   return (
     <>
