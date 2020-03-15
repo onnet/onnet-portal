@@ -30,6 +30,7 @@ export default {
   'core.Privilege': 'Privilege',
   'core.Create_user': 'Create user',
   'core.Create_new_user': 'Create user',
+  'core.Create_new_device': 'Create device',
   'core.switch_on': 'Switch ON',
   'core.switch_off': 'Switch OFF',
   'core.Change_password': 'Change password',

@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { kzDevices } from '@/pages/onnet-portal/core/services/kazoo';
 
-import { UserAddOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 
 import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
 
@@ -22,7 +22,7 @@ const DeviceCreateForm = props => {
     <Modal
       visible={visible}
       title={formatMessage({
-        id: 'core.Create_new_user',
+        id: 'core.Create_new_device',
         defaultMessage: 'Create New Device',
       })}
       okText={formatMessage({
@@ -237,10 +237,10 @@ const CreateDevice = props => {
     <Fragment>
       <Tooltip
         placement="leftTop"
-        title={formatMessage({ id: 'core.Create_new_user', defaultMessage: 'Create new user!' })}
+        title={formatMessage({ id: 'core.Create_new_device', defaultMessage: 'Create new device!' })}
       >
         <Button key="CreateDeviceIconKey" type="link" onClick={showModal} style={btnstyle}>
-          <UserAddOutlined />
+          <PlusOutlined />
         </Button>
       </Tooltip>
       <DeviceCreateForm

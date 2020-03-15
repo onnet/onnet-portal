@@ -33,6 +33,7 @@ export default {
   'core.Privilege': 'Уровень достуа',
   'core.Create_user': 'Создать пользователя',
   'core.Create_new_user': 'Создать пользователя',
+  'core.Create_new_device': 'Создать устройство',
   'core.switch_on': 'Включить',
   'core.switch_off': 'Выключить',
   'core.Change_password': 'Изменить пароль',
