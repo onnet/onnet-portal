@@ -7,6 +7,7 @@ export default {
   Email_address: 'Эл. почта',
   'core.email_address': 'Эл. почта',
   'core.T38': 'T.38',
+  'core.No_owner': ' -No owner- ',
   'core.Dialplan': 'План набора',
   'core.realm': 'SIP-домен (realm)',
   'core.Realm': 'SIP-домен (Realm)',

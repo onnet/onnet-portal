@@ -4,6 +4,7 @@ export default {
   'navBar.lang': 'Languages',
   'core.T38': 'T.38',
   'core.Enabled': 'Enabled',
+  'core.No_owner': ' -No owner- ',
   'core.Password': 'Password',
   'core.Dialplan': 'Dialplan',
   'core.realm': 'realm',

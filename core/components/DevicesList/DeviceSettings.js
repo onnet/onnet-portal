@@ -8,13 +8,13 @@ import DeviceParagraph from './DeviceParagraph';
 import DeviceSwitch from './DeviceSwitch';
 import DeviceSetSelect from './DeviceSetSelect';
 import DeviceMusicOnHold from './DeviceMusicOnHold';
+import DeviceAssignTo from './DeviceAssignTo';
 import { AccountDialplans } from '@/pages/onnet-portal/core/services/kazoo';
 
 const DeviceSettings = props => {
   const [accountDialplans, setAccountDialplans] = useState({});
-  const [briefUsers, setBriefUsers] = useState([]);
 
-  const { device_id, account, brief_users } = props;
+  const { device_id, account } = props;
 
   useEffect(() => {
     if (account.data) {
@@ -22,13 +22,7 @@ const DeviceSettings = props => {
         if (res.data) setAccountDialplans(res.data);
       });
     }
-    if (brief_users.data) {
-      setBriefUsers(brief_users.data);
-    }
-  }, [account, brief_users]);
-
-
-console.log('IAM briefUsers: ', briefUsers.map(user => ({ key: user.id, text: user.username })));
+  }, [account]);
 
   const tableData = [
     {
@@ -84,12 +78,7 @@ console.log('IAM briefUsers: ', briefUsers.map(user => ({ key: user.id, text: us
         defaultMessage: 'Assign to',
       }),
       value: (
-        <DeviceSetSelect
-          device_id={device_id}
-          title={formatMessage({ id: 'core.Assign_to', defaultMessage: 'Assign to' })}
-          menu_items={briefUsers.map(user => ({ key: user.id, text: user.username }))}
-          fieldKey="owner_id"
-        />
+        <DeviceAssignTo device_id={device_id} />
       ),
     },
     {
@@ -276,7 +265,6 @@ console.log('IAM briefUsers: ', briefUsers.map(user => ({ key: user.id, text: us
   );
 };
 
-export default connect(({ kz_account, kz_brief_users }) => ({
+export default connect(({ kz_account }) => ({
   account: kz_account,
-  brief_users: kz_brief_users,
 }))(DeviceSettings);
