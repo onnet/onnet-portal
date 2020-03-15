@@ -55,7 +55,7 @@ const DeviceAssignTo = props => {
     }
   }, [account, full_devices, full_users]);
 
-  const onModalConfirm = props => {
+  const onModalConfirm = () => {
     if (selectedId === "no_owner_key") {
       kzDevice({
         method: 'GET',
