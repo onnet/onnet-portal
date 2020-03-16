@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
-import { Drawer, Table, Card, Modal, Switch } from 'antd';
+import { DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
@@ -9,8 +9,9 @@ import CreateUser from './CreateUser';
 import EditUser from './EditUser';
 import UserParagraph from './UserParagraph';
 import UserPrivLevel from './UserPrivLevel';
+import CreateUserDrawer from './CreateUserDrawer';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
-import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzUser, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { confirm } = Modal;
 
@@ -18,9 +19,11 @@ const UsersList = props => {
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [isCreateDrawerVisible, setIsCreateDrawerVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(false);
 
   const { dispatch, settings, account, brief_users, full_users } = props;
+  const formRef = React.createRef();
 
   useEffect(() => {
     if (brief_users.data) {
@@ -151,10 +154,6 @@ const UsersList = props => {
     },
   ];
 
-  const onDrawerClose = () => {
-    setIsDrawerVisible(false);
-  };
-
   function onUserEnableSwitch(checked, record) {
     confirm({
       title: (
@@ -198,6 +197,45 @@ const UsersList = props => {
     }
   };
 
+  const onDrawerClose = () => {
+    setIsDrawerVisible(false);
+  };
+
+  const onCloseCancel = props => {
+    console.log('onCloseCancel props: ', props);
+    formRef.current.resetFields();
+    setIsCreateDrawerVisible(false);
+  };
+
+  const onCloseSubmit = props => {
+    console.log('onCloseCancel props: ', props);
+    formRef.current.submit();
+  };
+
+  const onFinish = values => {
+      const userDataBag = {
+        username: values.email,
+        first_name: values.first_name,
+        last_name: values.last_name,
+        enaled: 'true',
+        priv_level: 'admin',
+        email: values.email,
+        password: values.password,
+      };
+      kzUsers({
+        method: 'PUT',
+        account_id: account.data.id,
+        data: userDataBag,
+      }).then(uRes => {
+        dispatch({
+          type: 'kz_brief_users/refresh',
+          payload: { account_id: account.data.id },
+        });
+      });
+      formRef.current.resetFields();
+      setIsCreateDrawerVisible(false);
+  };
+
   return (
     <Fragment>
       <Card hoverable className={styles.card} {...cardProps}>
@@ -209,6 +247,12 @@ const UsersList = props => {
                 defaultMessage: "Account's Users",
               })}
               <CreateUser btnstyle={{ float: 'right1' }} />
+              <PlusCircleOutlined
+                style={{ color: settings.primaryColor }}
+                onClick={() => {
+                  setIsCreateDrawerVisible(true);
+                }}
+              />
               <p style={{ float: 'right', display: 'inline-flex' }}>
                 {formatMessage({
                   id: 'core.pagination',
@@ -250,6 +294,33 @@ const UsersList = props => {
         visible={isDrawerVisible}
       >
         <EditUser selectedUser={selectedUser} />
+      </Drawer>
+      <Drawer
+        title={<b style={{ color: settings.primaryColor }}>Create user</b>}
+        width="50%"
+        placement="right"
+        onClose={onCloseCancel}
+        visible={isCreateDrawerVisible}
+        bodyStyle={{ paddingBottom: 80 }}
+        footer={
+          <div
+            style={{
+              textAlign: 'right',
+            }}
+          >
+            <Button onClick={onCloseCancel} style={{ marginRight: 8 }}>
+              Cancel
+            </Button>
+            <Button onClick={onCloseSubmit} type="primary">
+              Submit
+            </Button>
+          </div>
+        }
+      >
+        <CreateUserDrawer
+          formRef={formRef}
+          onFinish={onFinish}
+        />
       </Drawer>
     </Fragment>
   );

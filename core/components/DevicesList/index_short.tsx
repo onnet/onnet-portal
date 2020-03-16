@@ -125,10 +125,6 @@ const DevicesList = props => {
     },
   ];
 
-  const onDrawerClose = () => {
-    setIsEditDrawerVisible(false);
-  };
-
   function onDeviceEnableSwitch(checked, record) {
     confirm({
       title: (
@@ -170,6 +166,10 @@ const DevicesList = props => {
     } else {
       setIsPaginated(false);
     }
+  };
+
+  const onDrawerClose = () => {
+    setIsEditDrawerVisible(false);
   };
 
   const onCloseCancel = props => {
@@ -246,7 +246,7 @@ const DevicesList = props => {
         title={<b style={{ color: settings.primaryColor }}>Create device</b>}
         width="50%"
         placement="right"
-        onClose={onDrawerClose}
+        onClose={onCloseCancel}
         visible={isCreateDrawerVisible}
         bodyStyle={{ paddingBottom: 80 }}
         footer={

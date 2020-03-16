@@ -6,11 +6,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 const { Option } = Select;
 
 const CreateDeviceDrawer = props => {
-  const { formRef } = props;
-
-  const onFinish = values => {
-    console.log('Success:', values);
-  };
+  const { formRef, onFinish } = props;
 
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
