@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined, UserAddOutlined } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
@@ -246,9 +246,9 @@ const UsersList = props => {
                 id: 'reseller_portal.accounts_users',
                 defaultMessage: "Account's Users",
               })}
-              <CreateUser btnstyle={{ float: 'right1' }} />
-              <PlusCircleOutlined
-                style={{ color: settings.primaryColor }}
+       {/*       <CreateUser btnstyle={{ float: 'right1' }} /> */}
+              <UserAddOutlined
+                style={{ color: settings.primaryColor, marginLeft: '1em', }}
                 onClick={() => {
                   setIsCreateDrawerVisible(true);
                 }}
