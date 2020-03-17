@@ -296,7 +296,7 @@ const UsersList = props => {
         <EditUser selectedUser={selectedUser} />
       </Drawer>
       <Drawer
-        title={<b style={{ color: settings.primaryColor }}>Create user</b>}
+        title={<b style={{ color: settings.primaryColor }}>{formatMessage({ id: 'core.Create_user', defaultMessage: 'Create user' })}</b>}
         width="50%"
         placement="right"
         onClose={onCloseCancel}
@@ -309,10 +309,10 @@ const UsersList = props => {
             }}
           >
             <Button onClick={onCloseCancel} style={{ marginRight: 8 }}>
-              Cancel
+              {formatMessage({ id: 'core.Cancel', defaultMessage: 'Cancel' })}
             </Button>
             <Button onClick={onCloseSubmit} type="primary">
-              Submit
+              {formatMessage({ id: 'core.Submit', defaultMessage: 'Submit' })}
             </Button>
           </div>
         }

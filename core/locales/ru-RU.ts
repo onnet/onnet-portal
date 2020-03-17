@@ -5,6 +5,7 @@ export default {
   Confirm_password: 'Подтвердить пароль',
   Account_name: 'Учетная запись',
   Email_address: 'Эл. почта',
+  'core.Confirm_password': 'Подтвердить пароль',
   'core.email_address': 'Эл. почта',
   'core.T38': 'T.38',
   'core.No_owner': ' -No owner- ',
