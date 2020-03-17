@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-
+import * as _ from 'lodash';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
@@ -89,11 +89,13 @@ const AccountMainNumber = props => {
             showSearch
             defaultValue={mainNumber}
           >
-            {Object.keys(kz_account_numbers.data.numbers).map(number => (
-              <Select.Option value={number} key={number}>
-                {number}
-              </Select.Option>
-            ))}
+            {_.isUndefined(kz_account_numbers.data.numbers) ?
+	       _.keys(kz_account_numbers.data.numbers).map(number => (
+                 <Select.Option value={number} key={number}>
+                   {number}
+                 </Select.Option>
+               )) : null
+	    }
           </Select>
         </div>
       </Modal>

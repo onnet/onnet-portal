@@ -26,11 +26,21 @@ const Model: ModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
+      console.log('IAM kz_brief_devices payload: ', payload);
       const response = yield call(kzDevices, payload);
-      yield put({
-        type: 'update',
-        payload: response,
-      });
+      console.log('IAM kz_brief_devices response: ', response);
+      console.log('IAM kz_brief_devices response.status: ', response.status);
+      if (response.status === 'success') {
+        yield put({
+          type: 'update',
+          payload: response,
+	});
+      } else {
+        yield put({
+          type: 'update',
+	  payload: {data: [], status: response.status},
+	});
+      }
       //    const redux_state = window.g_app._store.getState();
       //    response.data.map(device =>
       //      window.g_app._store.dispatch({
@@ -49,6 +59,7 @@ const Model: ModelType = {
 
   reducers: {
     update(state, { payload }) {
+      console.log('IAM kz_brief_devices reducers update payload: ', payload);
       return { ...payload };
     },
   },
