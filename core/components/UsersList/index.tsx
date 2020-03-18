@@ -46,7 +46,9 @@ const UsersList = props => {
 
   const deleteChildUser = record => {
     confirm({
-      title: `Do you want to delete user ${record.username}?`,
+      title: `${formatMessage({ id: 'core.Do_you_want_to_delete_user',
+                                defaultMessage: 'Do you want to delete user' })}
+              ${record.username}?`,
       onOk() {
         kzUser({ method: 'DELETE', account_id: account.data.id, owner_id: record.id })
           .then(uRes => {
@@ -227,10 +229,17 @@ const UsersList = props => {
         account_id: account.data.id,
         data: userDataBag,
       }).then(uRes => {
+        console.log('kzUsers uRes: ', uRes);
         dispatch({
           type: 'kz_brief_users/refresh',
           payload: { account_id: account.data.id },
         });
+        setSelectedUser(uRes.data.id);
+        dispatch({
+          type: 'kz_full_users/refresh',
+          payload: { account_id: account.data.id, owner_id: uRes.data.id },
+        });
+        setIsDrawerVisible(true);
       });
       formRef.current.resetFields();
       setIsCreateDrawerVisible(false);
@@ -308,11 +317,8 @@ const UsersList = props => {
               textAlign: 'right',
             }}
           >
-            <Button onClick={onCloseCancel} style={{ marginRight: 8 }}>
-              {formatMessage({ id: 'core.Cancel', defaultMessage: 'Cancel' })}
-            </Button>
             <Button onClick={onCloseSubmit} type="primary">
-              {formatMessage({ id: 'core.Submit', defaultMessage: 'Submit' })}
+              {formatMessage({ id: 'core.Create_user', defaultMessage: 'Create user' })}
             </Button>
           </div>
         }
