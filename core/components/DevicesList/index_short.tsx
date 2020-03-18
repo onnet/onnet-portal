@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { DeleteOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
@@ -18,9 +18,12 @@ const DevicesList = props => {
   const [isEditDrawerVisible, setIsEditDrawerVisible] = useState(false);
   const [isCreateDrawerVisible, setIsCreateDrawerVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(false);
+  const [createDeviceType, setCreateDeviceType] = useState('sip_device');
 
   const { dispatch, settings, account, brief_devices, full_devices } = props;
-  const formRef = React.createRef();
+  const formRef_sip_device = React.createRef();
+  const formRef_sip_uri = React.createRef();
+  const formRef_cell_phone = React.createRef();
 
   useEffect(() => {
     if (brief_devices.data) {
@@ -172,12 +175,56 @@ const DevicesList = props => {
   };
 
   const onCloseCancel = () => {
-    formRef.current.resetFields();
+    formRef_sip_device.current.resetFields();
+    formRef_sip_uri.current.resetFields();
+    formRef_cell_phone.current.resetFields();
     setIsCreateDrawerVisible(false);
   };
 
   const onCloseSubmit = () => {
-    formRef.current.submit();
+    if (createDeviceType === 'sip_device') {
+      formRef_sip_device.current.submit();
+    } else if (createDeviceType === 'cell_phone') {
+      formRef_cell_phone.current.submit();
+    } else if (createDeviceType === 'sip_uri') {
+      formRef_sip_uri.current.submit();
+    }
+  };
+
+  let createDeviceButton = null;
+
+  console.log('createDeviceButton: ', createDeviceButton);
+
+  if (createDeviceType === 'sip_device') {
+    createDeviceButton = (
+      <Button onClick={onCloseSubmit} type="primary">
+        {formatMessage({ id: 'core.Create_sip_device', defaultMessage: 'Create SIP Device' })}
+      </Button>
+    );
+  } else if (createDeviceType === 'cell_phone') {
+    createDeviceButton = (
+      <Button onClick={onCloseSubmit} type="primary">
+        {formatMessage({ id: 'core.Create_cell_phone', defaultMessage: 'Create Cell Phone' })}
+      </Button>
+    );
+  } else if (createDeviceType === 'sip_uri') {
+    createDeviceButton = (
+      <Button onClick={onCloseSubmit} type="primary">
+        {formatMessage({ id: 'core.Create_sip_uri', defaultMessage: 'Create SIP URI' })}
+      </Button>
+    );
+  } else {
+    createDeviceButton = (
+      <Button onClick={onCloseSubmit} type="primary">
+        {formatMessage({ id: 'core.Create_device', defaultMessage: 'Create device' })}
+      </Button>
+    );
+  }
+
+  console.log('createDeviceButton: ', createDeviceButton);
+
+  const onDeviceCreateFinish = values => {
+    console.log('Success:', values);
   };
 
   return (
@@ -190,8 +237,8 @@ const DevicesList = props => {
                 id: 'reseller_portal.accounts_devices',
                 defaultMessage: "Account's Devices",
               })}
-              <PlusCircleOutlined
-                style={{ color: settings.primaryColor }}
+              <PlusOutlined
+                style={{ color: settings.primaryColor, marginLeft: '1em' }}
                 onClick={() => {
                   setIsCreateDrawerVisible(true);
                 }}
@@ -239,7 +286,11 @@ const DevicesList = props => {
         <EditDevice selectedDevice={selectedDevice} />
       </Drawer>
       <Drawer
-        title={<b style={{ color: settings.primaryColor }}>Create device</b>}
+        title={
+          <b style={{ color: settings.primaryColor }}>
+            {formatMessage({ id: 'core.Create_device', defaultMessage: 'Create device' })}
+          </b>
+        }
         width="50%"
         placement="right"
         onClose={onCloseCancel}
@@ -251,16 +302,17 @@ const DevicesList = props => {
               textAlign: 'right',
             }}
           >
-            <Button onClick={onCloseCancel} style={{ marginRight: 8 }}>
-              Cancel
-            </Button>
-            <Button onClick={onCloseSubmit} type="primary">
-              Submit
-            </Button>
+            {createDeviceButton}
           </div>
         }
       >
-        <CreateDeviceDrawer formRef={formRef} />
+        <CreateDeviceDrawer
+          formRef_sip_device={formRef_sip_device}
+          formRef_sip_uri={formRef_sip_uri}
+          formRef_cell_phone={formRef_cell_phone}
+          setCreateDeviceType={setCreateDeviceType}
+          onFinish={onDeviceCreateFinish}
+        />
       </Drawer>
     </Fragment>
   );
