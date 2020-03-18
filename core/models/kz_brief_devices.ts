@@ -34,12 +34,12 @@ const Model: ModelType = {
         yield put({
           type: 'update',
           payload: response,
-	});
+        });
       } else {
         yield put({
           type: 'update',
-	  payload: {data: [], status: response.status},
-	});
+          payload: { data: [], status: response.status },
+        });
       }
       //    const redux_state = window.g_app._store.getState();
       //    response.data.map(device =>

@@ -147,7 +147,7 @@ export default {
   Account_name: 'Account name',
   Email_address: 'Email address',
   'core.Confirm_password': 'Confirm passowrd',
-  'Confirm_password': 'Confirm passowrd',
+  Confirm_password: 'Confirm passowrd',
   'menu.account_portal': 'Account Portal',
   'menu.reseller_portal.settings': 'Reseller Settings',
   'menu.account_portal.settings': 'Account Settings',

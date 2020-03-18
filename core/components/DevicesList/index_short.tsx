@@ -5,7 +5,6 @@ import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
-import CreateDevice from './CreateDevice';
 import EditDevice from './EditDevice';
 import CreateDeviceDrawer from './CreateDeviceDrawer';
 import DeviceType from './DeviceType';
@@ -193,7 +192,6 @@ const DevicesList = props => {
                 id: 'reseller_portal.accounts_devices',
                 defaultMessage: "Account's Devices",
               })}
-              <CreateDevice btnstyle={{ float: 'left1' }} />
               <PlusCircleOutlined
                 style={{ color: settings.primaryColor }}
                 onClick={() => {

@@ -1,6 +1,12 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusCircleOutlined, UserAddOutlined } from '@ant-design/icons';
+import {
+  DeleteOutlined,
+  EditOutlined,
+  InfoCircleOutlined,
+  PlusCircleOutlined,
+  UserAddOutlined,
+} from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
@@ -46,8 +52,10 @@ const UsersList = props => {
 
   const deleteChildUser = record => {
     confirm({
-      title: `${formatMessage({ id: 'core.Do_you_want_to_delete_user',
-                                defaultMessage: 'Do you want to delete user' })}
+      title: `${formatMessage({
+        id: 'core.Do_you_want_to_delete_user',
+        defaultMessage: 'Do you want to delete user',
+      })}
               ${record.username}?`,
       onOk() {
         kzUser({ method: 'DELETE', account_id: account.data.id, owner_id: record.id })
@@ -215,34 +223,34 @@ const UsersList = props => {
   };
 
   const onFinish = values => {
-      const userDataBag = {
-        username: values.email,
-        first_name: values.first_name,
-        last_name: values.last_name,
-        enaled: 'true',
-        priv_level: 'admin',
-        email: values.email,
-        password: values.password,
-      };
-      kzUsers({
-        method: 'PUT',
-        account_id: account.data.id,
-        data: userDataBag,
-      }).then(uRes => {
-        console.log('kzUsers uRes: ', uRes);
-        dispatch({
-          type: 'kz_brief_users/refresh',
-          payload: { account_id: account.data.id },
-        });
-        setSelectedUser(uRes.data.id);
-        dispatch({
-          type: 'kz_full_users/refresh',
-          payload: { account_id: account.data.id, owner_id: uRes.data.id },
-        });
-        setIsDrawerVisible(true);
+    const userDataBag = {
+      username: values.email,
+      first_name: values.first_name,
+      last_name: values.last_name,
+      enaled: 'true',
+      priv_level: 'admin',
+      email: values.email,
+      password: values.password,
+    };
+    kzUsers({
+      method: 'PUT',
+      account_id: account.data.id,
+      data: userDataBag,
+    }).then(uRes => {
+      console.log('kzUsers uRes: ', uRes);
+      dispatch({
+        type: 'kz_brief_users/refresh',
+        payload: { account_id: account.data.id },
       });
-      formRef.current.resetFields();
-      setIsCreateDrawerVisible(false);
+      setSelectedUser(uRes.data.id);
+      dispatch({
+        type: 'kz_full_users/refresh',
+        payload: { account_id: account.data.id, owner_id: uRes.data.id },
+      });
+      setIsDrawerVisible(true);
+    });
+    formRef.current.resetFields();
+    setIsCreateDrawerVisible(false);
   };
 
   return (
@@ -255,9 +263,9 @@ const UsersList = props => {
                 id: 'reseller_portal.accounts_users',
                 defaultMessage: "Account's Users",
               })}
-       {/*       <CreateUser btnstyle={{ float: 'right1' }} /> */}
+              {/*       <CreateUser btnstyle={{ float: 'right1' }} /> */}
               <UserAddOutlined
-                style={{ color: settings.primaryColor, marginLeft: '1em', }}
+                style={{ color: settings.primaryColor, marginLeft: '1em' }}
                 onClick={() => {
                   setIsCreateDrawerVisible(true);
                 }}
@@ -305,7 +313,11 @@ const UsersList = props => {
         <EditUser selectedUser={selectedUser} />
       </Drawer>
       <Drawer
-        title={<b style={{ color: settings.primaryColor }}>{formatMessage({ id: 'core.Create_user', defaultMessage: 'Create user' })}</b>}
+        title={
+          <b style={{ color: settings.primaryColor }}>
+            {formatMessage({ id: 'core.Create_user', defaultMessage: 'Create user' })}
+          </b>
+        }
         width="50%"
         placement="right"
         onClose={onCloseCancel}
@@ -323,10 +335,7 @@ const UsersList = props => {
           </div>
         }
       >
-        <CreateUserDrawer
-          formRef={formRef}
-          onFinish={onFinish}
-        />
+        <CreateUserDrawer formRef={formRef} onFinish={onFinish} />
       </Drawer>
     </Fragment>
   );

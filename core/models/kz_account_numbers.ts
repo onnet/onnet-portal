@@ -40,7 +40,7 @@ const Model: ModelType = {
       } else {
         yield put({
           type: 'update',
-          payload: {data: [], status: response.status},
+          payload: { data: [], status: response.status },
         });
       }
     },

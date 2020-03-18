@@ -89,13 +89,13 @@ const AccountMainNumber = props => {
             showSearch
             defaultValue={mainNumber}
           >
-            {_.isUndefined(kz_account_numbers.data.numbers) ?
-	       _.keys(kz_account_numbers.data.numbers).map(number => (
-                 <Select.Option value={number} key={number}>
-                   {number}
-                 </Select.Option>
-               )) : null
-	    }
+            {_.isUndefined(kz_account_numbers.data.numbers)
+              ? _.keys(kz_account_numbers.data.numbers).map(number => (
+                  <Select.Option value={number} key={number}>
+                    {number}
+                  </Select.Option>
+                ))
+              : null}
           </Select>
         </div>
       </Modal>
