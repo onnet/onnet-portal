@@ -33,9 +33,8 @@ const DeviceAssignTo = props => {
       const ownerId = full_devices[device_id].data.owner_id;
       if (ownerId) {
         return `${full_users[ownerId].data.username} (${full_users[ownerId].data.first_name} ${full_users[ownerId].data.last_name})`;
-      } else {
-        return formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' });
       }
+      return formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' });
     } catch (e) {
       return formatMessage({ id: 'core.No_owner', defaultMessage: '-No owner-' });
     }

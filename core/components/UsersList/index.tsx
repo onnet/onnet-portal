@@ -4,14 +4,12 @@ import {
   DeleteOutlined,
   EditOutlined,
   InfoCircleOutlined,
-  PlusCircleOutlined,
   UserAddOutlined,
 } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
-import CreateUser from './CreateUser';
 import EditUser from './EditUser';
 import UserParagraph from './UserParagraph';
 import UserPrivLevel from './UserPrivLevel';
@@ -211,14 +209,12 @@ const UsersList = props => {
     setIsDrawerVisible(false);
   };
 
-  const onCloseCancel = props => {
-    console.log('onCloseCancel props: ', props);
+  const onCloseCancel = () => {
     formRef.current.resetFields();
     setIsCreateDrawerVisible(false);
   };
 
-  const onCloseSubmit = props => {
-    console.log('onCloseCancel props: ', props);
+  const onCloseSubmit = () => {
     formRef.current.submit();
   };
 

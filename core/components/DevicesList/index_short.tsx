@@ -171,14 +171,12 @@ const DevicesList = props => {
     setIsEditDrawerVisible(false);
   };
 
-  const onCloseCancel = props => {
-    console.log('onCloseCancel props: ', props);
+  const onCloseCancel = () => {
     formRef.current.resetFields();
     setIsCreateDrawerVisible(false);
   };
 
-  const onCloseSubmit = props => {
-    console.log('onCloseCancel props: ', props);
+  const onCloseSubmit = () => {
     formRef.current.submit();
   };
 

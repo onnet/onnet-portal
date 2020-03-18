@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Form, Row, Col, Input, Select, DatePicker } from 'antd';
+import { Form, Row, Col, Input } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
-
-const { Option } = Select;
 
 const CreateDeviceDrawer = props => {
   const { formRef } = props;

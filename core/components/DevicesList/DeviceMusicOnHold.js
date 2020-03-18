@@ -35,9 +35,8 @@ const DeviceMusicOnHold = props => {
       );
       if (mediaObj) {
         return mediaObj.name;
-      } else {
-        return formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' });
       }
+      return formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' });
     } catch (e) {
       return formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' });
     }
@@ -73,9 +72,6 @@ const DeviceMusicOnHold = props => {
 
   const onModalConfirm = () => {
     const mediaJObj = account_media.data.find(({ id }) => id === selectedId);
-    const currMediaName = mediaJObj
-      ? mediaJObj.name
-      : formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' });
     const mediaBag = mediaJObj ? { media_id: selectedId } : {};
     kzDevice({
       method: 'PATCH',
