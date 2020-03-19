@@ -27,7 +27,10 @@ const CreateDeviceDrawer = props => {
 
   return (
     <Tabs defaultActiveKey="sip_device" onChange={callback}>
-      <TabPane tab="SIP Device" key="sip_device">
+      <TabPane
+	tab={formatMessage({ id: 'core.SIP_Device', defaultMessage: 'SIP Device' })}
+	key="sip_device"
+      >
         <Form
           name="form_name"
           layout="vertical"
@@ -98,7 +101,10 @@ const CreateDeviceDrawer = props => {
           </Row>
         </Form>
       </TabPane>
-      <TabPane tab="Cell Phone" key="cell_phone">
+      <TabPane
+	tab={formatMessage({ id: 'core.Cell_Phone', defaultMessage: 'Cell Phone' })}
+	key="cell_phone"
+      >
         <Form
           layout="vertical"
           hideRequiredMark
@@ -153,7 +159,10 @@ const CreateDeviceDrawer = props => {
           </Row>
         </Form>
       </TabPane>
-      <TabPane tab="SIP URI" key="sip_uri">
+      <TabPane
+	tab={formatMessage({ id: 'core.SIP_URI', defaultMessage: 'SIP URI' })}
+        key="sip_uri"
+      >
         <Form
           name="form_sip_uri"
           layout="vertical"
@@ -166,6 +175,62 @@ const CreateDeviceDrawer = props => {
           <Form.Item name="device_type" style={{ display: 'none' }}>
             <Input />
           </Form.Item>
+          <Row gutter={24}>
+            <Col span={12} offset={6}>
+              <Form.Item
+                name="device_nickname"
+                label="Device nickname"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input device nickname!',
+                  },
+                ]}
+                hasFeedback
+              >
+                <Input
+                  style={inputStyle}
+                  placeholder={formatMessage({ id: 'core.Device_nickname', defaultMessage: 'Device nickname' })}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12} offset={6}>
+              <Form.Item
+                name="sip_uri"
+                label="SIP URI"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input sip uri!',
+                  },
+                ]}
+                hasFeedback
+              >
+                <Input
+                  style={inputStyle}
+                  placeholder={formatMessage({ id: 'core.SIP_URI', defaultMessage: 'SIP URI' })}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12} offset={6}>
+              <Form.Item
+                name="auth_ip_address"
+                label="Auth IP address"
+                rules={[
+                  {
+                    required: false,
+                    message: 'Auth IP address!',
+                  },
+                ]}
+                hasFeedback
+              >
+                <Input
+                  style={inputStyle}
+                  placeholder={formatMessage({ id: 'core.Auth_IP_address', defaultMessage: 'Auth IP address' })}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         </Form>
       </TabPane>
     </Tabs>
