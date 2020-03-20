@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
+import * as _ from 'lodash';
+import isIp from 'is-ip';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
@@ -8,7 +10,7 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import EditDevice from './EditDevice';
 import CreateDeviceDrawer from './CreateDeviceDrawer';
 import DeviceType from './DeviceType';
-import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevice, kzDevices } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { confirm } = Modal;
 
@@ -44,19 +46,20 @@ const DevicesList = props => {
     return null;
   }
 
-  const deleteChildDevice = record => {
+  const deleteChildDevice = (dev_id, dev_name, dev_username) => {
     confirm({
-      title: `Do you want to delete device ${record.username}?`,
+      title: `Delete device ${dev_name} ( ${dev_username} )?`,
       onOk() {
-        kzDevice({ method: 'DELETE', account_id: account.data.id, device_id: record.id })
+        kzDevice({ method: 'DELETE', account_id: account.data.id, device_id: dev_id })
           .then(uRes => {
             console.log(uRes);
             dispatch({
               type: 'kz_brief_devices/refresh',
               payload: { account_id: account.data.id },
             });
+            setIsEditDrawerVisible(false);
           })
-          .catch(() => console.log('Oops errors!', record));
+          .catch(() => console.log('Oops errors!', dev_id, dev_username));
       },
       onCancel() {},
     });
@@ -98,7 +101,7 @@ const DevicesList = props => {
     },
     {
       dataIndex: 'id',
-      key: 'edit_user',
+      key: 'edit_device',
       align: 'center',
       render: (text, record) => (
         <EditOutlined
@@ -116,12 +119,12 @@ const DevicesList = props => {
     },
     {
       dataIndex: 'id',
-      key: 'delete_user',
+      key: 'delete_device',
       align: 'center',
       render: (text, record) => (
         <DeleteOutlined
           style={{ color: settings.primaryColor }}
-          onClick={() => deleteChildDevice(record)}
+          onClick={() => deleteChildDevice(record.id, record.name, record.username)}
         />
       ),
     },
@@ -175,9 +178,9 @@ const DevicesList = props => {
   };
 
   const onCloseCancel = () => {
-    formRef_sip_device.current.resetFields();
-    formRef_sip_uri.current.resetFields();
-    formRef_cell_phone.current.resetFields();
+    if (formRef_sip_device.current) formRef_sip_device.current.resetFields();
+    if (formRef_sip_uri.current) formRef_sip_uri.current.resetFields();
+    if (formRef_cell_phone.current) formRef_cell_phone.current.resetFields();
     setIsCreateDrawerVisible(false);
   };
 
@@ -225,6 +228,50 @@ const DevicesList = props => {
 
   const onDeviceCreateFinish = values => {
     console.log('Success:', values);
+    let newDevice = {};
+    _.set(newDevice, 'device_type', values.device_type);
+    _.set(newDevice, 'name', values.device_nickname);
+    _.set(newDevice, 'accept_charges', true);
+    if (isIp(values.sip_ip_auth)) {
+      _.set(newDevice, 'sip.method', 'ip');
+      _.set(newDevice, 'sip.ip', values.sip_ip_auth);
+    } else {
+      _.set(newDevice, 'sip.method', 'password');
+      _.set(newDevice, 'sip.username', values.device_username);
+      _.set(newDevice, 'sip.password', values.device_password);
+    }
+    if (values.sip_uri) {
+      _.set(newDevice, 'sip.invite_format', 'route');
+      _.set(newDevice, 'sip.route', values.sip_uri);
+    } else {
+      _.set(newDevice, 'sip.invite_format', 'username');
+    }
+    if (values.redirect_number) {
+      _.set(newDevice, 'call_forward.enabled', true);
+      _.set(newDevice, 'call_forward.number', values.redirect_number);
+    }
+    console.log('values.sip_ip_auth:', values.sip_ip_auth);
+    console.log('isIp:', isIp(values.sip_ip_auth));
+    console.log('newDevice:', newDevice);
+
+    kzDevices({
+      method: 'PUT',
+      account_id: account.data.id,
+      data: newDevice,
+    }).then(uRes => {
+      console.log(uRes);
+      dispatch({
+        type: 'kz_brief_devices/refresh',
+        payload: { account_id: account.data.id },
+      });
+      setSelectedDevice(uRes.data.id);
+      dispatch({
+        type: 'kz_full_devices/refresh',
+        payload: { account_id: account.data.id, device_id: uRes.data.id },
+      });
+      setIsEditDrawerVisible(true);
+      onCloseCancel();
+    });
   };
 
   return (
@@ -272,10 +319,22 @@ const DevicesList = props => {
       <Drawer
         title={
           full_devices[selectedDevice] ? (
-            <b style={{ color: settings.primaryColor }}>
-              {' '}
-              {full_devices[selectedDevice].data.name}
-            </b>
+            <>
+              <b style={{ color: settings.primaryColor }}>
+                {' '}
+                {full_devices[selectedDevice].data.name}
+              </b>
+              <DeleteOutlined
+                style={{ color: settings.primaryColor, marginLeft: '0.5em' }}
+                onClick={() =>
+                  deleteChildDevice(
+                    full_devices[selectedDevice].data.id,
+                    full_devices[selectedDevice].data.name,
+                    full_devices[selectedDevice].data.username,
+                  )
+                }
+              />
+            </>
           ) : null
         }
         width="50%"

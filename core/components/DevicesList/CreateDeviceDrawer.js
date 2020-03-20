@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'dva';
 import { Form, Row, Col, Input, Tabs } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
+import isIp from 'is-ip';
+
+import cryptoRandomString from 'crypto-random-string';
 
 const { TabPane } = Tabs;
 
@@ -28,8 +31,8 @@ const CreateDeviceDrawer = props => {
   return (
     <Tabs defaultActiveKey="sip_device" onChange={callback}>
       <TabPane
-	tab={formatMessage({ id: 'core.SIP_Device', defaultMessage: 'SIP Device' })}
-	key="sip_device"
+        tab={formatMessage({ id: 'core.SIP_Device', defaultMessage: 'SIP Device' })}
+        key="sip_device"
       >
         <Form
           name="form_name"
@@ -38,7 +41,11 @@ const CreateDeviceDrawer = props => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           ref={formRef_sip_device}
-          initialValues={{ device_type: 'sip_device' }}
+          initialValues={{
+            device_type: 'sip_device',
+            device_username: `user_${cryptoRandomString(7)}`,
+            device_password: `${cryptoRandomString(12)}`,
+          }}
         >
           <Form.Item name="device_type" style={{ display: 'none' }}>
             <Input />
@@ -46,8 +53,11 @@ const CreateDeviceDrawer = props => {
           <Row gutter={24}>
             <Col span={12} offset={6}>
               <Form.Item
-                name="sip_device_nickname"
-                label={formatMessage({ id: 'core.Device_nickname', defaultMessage: 'Device nickname' })}
+                name="device_nickname"
+                label={formatMessage({
+                  id: 'core.Device_nickname',
+                  defaultMessage: 'Device nickname',
+                })}
                 rules={[
                   {
                     required: true,
@@ -65,7 +75,10 @@ const CreateDeviceDrawer = props => {
             <Col span={12} offset={6}>
               <Form.Item
                 name="device_username"
-                label={formatMessage({ id: 'core.Device_username', defaultMessage: 'Device username' })}
+                label={formatMessage({
+                  id: 'core.Device_username',
+                  defaultMessage: 'Device username',
+                })}
                 rules={[
                   {
                     required: true,
@@ -82,8 +95,11 @@ const CreateDeviceDrawer = props => {
             </Col>
             <Col span={12} offset={6}>
               <Form.Item
-                name="device_pasword"
-                label={formatMessage({ id: 'core.Device_password', defaultMessage: 'Device password' })}
+                name="device_password"
+                label={formatMessage({
+                  id: 'core.Device_password',
+                  defaultMessage: 'Device password',
+                })}
                 rules={[
                   {
                     required: true,
@@ -102,8 +118,8 @@ const CreateDeviceDrawer = props => {
         </Form>
       </TabPane>
       <TabPane
-	tab={formatMessage({ id: 'core.Cell_Phone', defaultMessage: 'Cell Phone' })}
-	key="cell_phone"
+        tab={formatMessage({ id: 'core.Cell_Phone', defaultMessage: 'Cell Phone' })}
+        key="cell_phone"
       >
         <Form
           layout="vertical"
@@ -120,7 +136,10 @@ const CreateDeviceDrawer = props => {
             <Col span={12} offset={6}>
               <Form.Item
                 name="device_nickname"
-                label={formatMessage({ id: 'core.Device_nickname', defaultMessage: 'Device nickname' })}
+                label={formatMessage({
+                  id: 'core.Device_nickname',
+                  defaultMessage: 'Device nickname',
+                })}
                 rules={[
                   {
                     required: true,
@@ -159,10 +178,7 @@ const CreateDeviceDrawer = props => {
           </Row>
         </Form>
       </TabPane>
-      <TabPane
-	tab={formatMessage({ id: 'core.SIP_URI', defaultMessage: 'SIP URI' })}
-        key="sip_uri"
-      >
+      <TabPane tab={formatMessage({ id: 'core.SIP_URI', defaultMessage: 'SIP URI' })} key="sip_uri">
         <Form
           name="form_sip_uri"
           layout="vertical"
@@ -179,7 +195,10 @@ const CreateDeviceDrawer = props => {
             <Col span={12} offset={6}>
               <Form.Item
                 name="device_nickname"
-                label={formatMessage({ id: 'core.Device_nickname', defaultMessage: 'Device nickname' })}
+                label={formatMessage({
+                  id: 'core.Device_nickname',
+                  defaultMessage: 'Device nickname',
+                })}
                 rules={[
                   {
                     required: true,
@@ -190,7 +209,10 @@ const CreateDeviceDrawer = props => {
               >
                 <Input
                   style={inputStyle}
-                  placeholder={formatMessage({ id: 'core.Device_nickname', defaultMessage: 'Device nickname' })}
+                  placeholder={formatMessage({
+                    id: 'core.Device_nickname',
+                    defaultMessage: 'Device nickname',
+                  })}
                 />
               </Form.Item>
             </Col>
@@ -214,7 +236,7 @@ const CreateDeviceDrawer = props => {
             </Col>
             <Col span={12} offset={6}>
               <Form.Item
-                name="auth_ip_address"
+                name="sip_ip_auth"
                 label={formatMessage({ id: 'core.Inbound_auth', defaultMessage: 'Inbound auth' })}
                 rules={[
                   {
@@ -226,7 +248,10 @@ const CreateDeviceDrawer = props => {
               >
                 <Input
                   style={inputStyle}
-                  placeholder={formatMessage({ id: 'core.Auth_IP_address', defaultMessage: 'Auth IP address' })}
+                  placeholder={formatMessage({
+                    id: 'core.Auth_IP_address',
+                    defaultMessage: 'Auth IP address',
+                  })}
                 />
               </Form.Item>
             </Col>
