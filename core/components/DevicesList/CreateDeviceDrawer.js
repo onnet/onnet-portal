@@ -47,7 +47,7 @@ const CreateDeviceDrawer = props => {
             <Col span={12} offset={6}>
               <Form.Item
                 name="sip_device_nickname"
-                label="Device nickname"
+                label={formatMessage({ id: 'core.Device_nickname', defaultMessage: 'Device nickname' })}
                 rules={[
                   {
                     required: true,
@@ -64,8 +64,8 @@ const CreateDeviceDrawer = props => {
             </Col>
             <Col span={12} offset={6}>
               <Form.Item
-                name="sip_device_username"
-                label="Device username"
+                name="device_username"
+                label={formatMessage({ id: 'core.Device_username', defaultMessage: 'Device username' })}
                 rules={[
                   {
                     required: true,
@@ -82,8 +82,8 @@ const CreateDeviceDrawer = props => {
             </Col>
             <Col span={12} offset={6}>
               <Form.Item
-                name="sip_device_pasword"
-                label="Device password"
+                name="device_pasword"
+                label={formatMessage({ id: 'core.Device_password', defaultMessage: 'Device password' })}
                 rules={[
                   {
                     required: true,
@@ -120,7 +120,7 @@ const CreateDeviceDrawer = props => {
             <Col span={12} offset={6}>
               <Form.Item
                 name="device_nickname"
-                label="Device nickname"
+                label={formatMessage({ id: 'core.Device_nickname', defaultMessage: 'Device nickname' })}
                 rules={[
                   {
                     required: true,
@@ -138,7 +138,7 @@ const CreateDeviceDrawer = props => {
             <Col span={12} offset={6}>
               <Form.Item
                 name="redirect_number"
-                label="Phone number"
+                label={formatMessage({ id: 'core.Phone_number', defaultMessage: 'Phone number' })}
                 rules={[
                   {
                     required: true,
@@ -179,7 +179,7 @@ const CreateDeviceDrawer = props => {
             <Col span={12} offset={6}>
               <Form.Item
                 name="device_nickname"
-                label="Device nickname"
+                label={formatMessage({ id: 'core.Device_nickname', defaultMessage: 'Device nickname' })}
                 rules={[
                   {
                     required: true,
@@ -215,7 +215,7 @@ const CreateDeviceDrawer = props => {
             <Col span={12} offset={6}>
               <Form.Item
                 name="auth_ip_address"
-                label="Auth IP address"
+                label={formatMessage({ id: 'core.Inbound_auth', defaultMessage: 'Inbound auth' })}
                 rules={[
                   {
                     required: false,
