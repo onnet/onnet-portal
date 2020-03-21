@@ -224,8 +224,6 @@ const DevicesList = props => {
     );
   }
 
-  console.log('createDeviceButton: ', createDeviceButton);
-
   const onDeviceCreateFinish = values => {
     console.log('Success:', values);
     let newDevice = {};
@@ -325,12 +323,13 @@ const DevicesList = props => {
                 {full_devices[selectedDevice].data.name}
               </b>
               <DeleteOutlined
-                style={{ color: settings.primaryColor, marginLeft: '0.5em' }}
+                className={styles.highlightColor}
+                style={{ marginLeft: '0.5em' }}
                 onClick={() =>
                   deleteChildDevice(
                     full_devices[selectedDevice].data.id,
                     full_devices[selectedDevice].data.name,
-                    full_devices[selectedDevice].data.username,
+                    full_devices[selectedDevice].data.sip.username,
                   )
                 }
               />
