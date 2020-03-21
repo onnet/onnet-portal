@@ -33,11 +33,7 @@ const DevicesList = props => {
     }
   }, [brief_devices]);
 
-  if (brief_devices.data) {
-    if (brief_devices.data.length === 0) {
-      return null;
-    }
-  } else {
+  if (!brief_devices.data) {
     return null;
   }
 

@@ -12,7 +12,7 @@ import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
-import EditDevice from './EditDevice';
+import EditDeviceDrawer from './EditDeviceDrawer';
 import CreateDeviceDrawer from './CreateDeviceDrawer';
 import DeviceType from './DeviceType';
 import { kzDevice, kzDevices } from '@/pages/onnet-portal/core/services/kazoo';
@@ -43,11 +43,7 @@ const DevicesList = props => {
     }
   }, [brief_devices]);
 
-  if (brief_devices.data) {
-    if (brief_devices.data.length === 0) {
-      return null;
-    }
-  } else {
+  if (!brief_devices.data) {
     return null;
   }
 
@@ -331,35 +327,11 @@ const DevicesList = props => {
           }
         />
       </Card>
-      <Drawer
-        title={
-          full_devices[selectedDevice] ? (
-            <>
-              <b style={{ color: settings.primaryColor }}>
-                {' '}
-                {full_devices[selectedDevice].data.name}
-              </b>
-              <DeleteOutlined
-                className={styles.highlightColor}
-                style={{ marginLeft: '0.5em' }}
-                onClick={() =>
-                  deleteChildDevice(
-                    full_devices[selectedDevice].data.id,
-                    full_devices[selectedDevice].data.name,
-                    full_devices[selectedDevice].data.sip.username,
-                  )
-                }
-              />
-            </>
-          ) : null
-        }
-        width="50%"
-        placement="right"
-        onClose={onDrawerClose}
-        visible={isEditDrawerVisible}
-      >
-        <EditDevice selectedDevice={selectedDevice} />
-      </Drawer>
+      <EditDeviceDrawer
+        selectedDevice={selectedDevice}
+        onDrawerClose={onDrawerClose}
+        isEditDrawerVisible={isEditDrawerVisible}
+      />
       <Drawer
         title={
           <b style={{ color: settings.primaryColor }}>
