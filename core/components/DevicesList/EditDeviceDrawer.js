@@ -19,6 +19,7 @@ const EditDeviceDrawer = props => {
     selectedDevice,
     onDrawerClose,
     isEditDrawerVisible,
+    deleteChildDevice,
   } = props;
 
   return (

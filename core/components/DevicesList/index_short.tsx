@@ -331,6 +331,7 @@ const DevicesList = props => {
         selectedDevice={selectedDevice}
         onDrawerClose={onDrawerClose}
         isEditDrawerVisible={isEditDrawerVisible}
+        deleteChildDevice={deleteChildDevice}
       />
       <Drawer
         title={
