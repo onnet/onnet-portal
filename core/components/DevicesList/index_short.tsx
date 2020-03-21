@@ -2,7 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
 import * as _ from 'lodash';
 import isIp from 'is-ip';
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+  ExclamationCircleOutlined,
+} from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
@@ -48,7 +53,19 @@ const DevicesList = props => {
 
   const deleteChildDevice = (dev_id, dev_name, dev_username) => {
     confirm({
-      title: `Delete device ${dev_name} ( ${dev_username} )?`,
+      title: `${formatMessage({
+        id: 'core.Do_you_want_to_delete_device',
+        defaultMessage: 'Do you want to delete device',
+      })}?`,
+      content: (
+        <span className={styles.highlightColor} style={{ textAlign: 'center', fontWeight: 'bold' }}>
+          {dev_name} ( {dev_username} )
+        </span>
+      ),
+      icon: <ExclamationCircleOutlined />,
+      okType: 'danger',
+      okText: formatMessage({ id: 'core.Yes', defaultMessage: 'Yes' }),
+      cancelText: formatMessage({ id: 'core.No', defaultMessage: 'No' }),
       onOk() {
         kzDevice({ method: 'DELETE', account_id: account.data.id, device_id: dev_id })
           .then(uRes => {
@@ -226,7 +243,7 @@ const DevicesList = props => {
 
   const onDeviceCreateFinish = values => {
     console.log('Success:', values);
-    let newDevice = {};
+    const newDevice = {};
     _.set(newDevice, 'device_type', values.device_type);
     _.set(newDevice, 'name', values.device_nickname);
     _.set(newDevice, 'accept_charges', true);

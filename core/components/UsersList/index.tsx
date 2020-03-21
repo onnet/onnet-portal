@@ -5,6 +5,7 @@ import {
   EditOutlined,
   InfoCircleOutlined,
   UserAddOutlined,
+  ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
@@ -53,8 +54,16 @@ const UsersList = props => {
       title: `${formatMessage({
         id: 'core.Do_you_want_to_delete_user',
         defaultMessage: 'Do you want to delete user',
-      })}
-              ${record.username}?`,
+      })}?`,
+      content: (
+        <span className={styles.highlightColor} style={{ textAlign: 'center', fontWeight: 'bold' }}>
+          {record.username} ( {record.first_name} {record.last_name} )
+        </span>
+      ),
+      icon: <ExclamationCircleOutlined />,
+      okType: 'danger',
+      okText: formatMessage({ id: 'core.Yes', defaultMessage: 'Yes' }),
+      cancelText: formatMessage({ id: 'core.No', defaultMessage: 'No' }),
       onOk() {
         kzUser({ method: 'DELETE', account_id: account.data.id, owner_id: record.id })
           .then(uRes => {
