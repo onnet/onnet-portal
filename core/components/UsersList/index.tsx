@@ -11,7 +11,7 @@ import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
-import EditUser from './EditUser';
+import EditUserDrawer from './EditUserDrawer';
 import UserParagraph from './UserParagraph';
 import UserPrivLevel from './UserPrivLevel';
 import CreateUserDrawer from './CreateUserDrawer';
@@ -301,22 +301,11 @@ const UsersList = props => {
           }
         />
       </Card>
-      <Drawer
-        title={
-          full_users[selectedUser] ? (
-            <b style={{ color: settings.primaryColor }}>
-              {' '}
-              {full_users[selectedUser].data.username}
-            </b>
-          ) : null
-        }
-        width="50%"
-        placement="right"
-        onClose={onDrawerClose}
-        visible={isDrawerVisible}
-      >
-        <EditUser selectedUser={selectedUser} />
-      </Drawer>
+      <EditUserDrawer
+        selectedUser={selectedUser}
+        onDrawerClose={onDrawerClose}
+        isDrawerVisible={isDrawerVisible}
+      />
       <Drawer
         title={
           <b style={{ color: settings.primaryColor }}>

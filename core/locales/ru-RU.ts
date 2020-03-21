@@ -86,6 +86,7 @@ export default {
   'core.Details': 'Подробно',
   'core.Yes': 'Да',
   'core.No': 'Нет',
+  'core.User_profile': 'Профиль пользователя',
   'core.Device_settings': 'Настройки устройства',
   'core.Do_you_want_to_delete_user': 'Вы хотите удалить пользователя',
   'core.Do_you_want_to_delete_device': 'Вы хотите удалить устройство',

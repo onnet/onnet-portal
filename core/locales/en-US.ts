@@ -83,6 +83,7 @@ export default {
   'core.Details': 'Details',
   'core.Yes': 'Yes',
   'core.No': 'No',
+  'core.User_profile': 'User profile',
   'core.Device_settings': 'Device settings',
   'core.Do_you_want_to_delete_user': 'Do you want to delete user',
   'core.Do_you_want_to_delete_device': 'Do you want to delete device',

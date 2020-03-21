@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import { LogoutOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
 
 import Avatar from './AvatarDropdown';
 import RsDemaskBtn from '@/pages/onnet-portal/reseller/portal/components/RsDemaskBtn';
@@ -17,7 +14,7 @@ export interface GlobalHeaderRightProps extends ConnectProps {
 }
 
 const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
-  const { dispatch, theme, layout, kz_account = {}, kz_login = {} } = props;
+  const { theme, layout, kz_account = {}, kz_login = {} } = props;
   let className = styles.right;
 
   if (theme === 'dark' && layout === 'topmenu') {
@@ -33,15 +30,6 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
       ) : null}
       <Avatar />
       <SelectLang className={styles.action} />
-      <Tooltip
-        title={formatMessage({
-          id: 'menu.account.logout',
-        })}
-      >
-        <span className={styles.action} onClick={() => dispatch({ type: 'kz_login/logout' })}>
-          <LogoutOutlined />
-        </span>
-      </Tooltip>
     </div>
   );
 };

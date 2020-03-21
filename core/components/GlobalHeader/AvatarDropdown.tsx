@@ -1,59 +1,57 @@
-import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import { FormattedMessage } from 'umi-plugin-react/locale';
-import React from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
+import EditUserDrawer from '@/pages/onnet-portal/core/components/UsersList/EditUserDrawer';
 
-import { ConnectProps, ConnectState } from '@/models/connect';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
-export interface GlobalHeaderRightProps extends ConnectProps {
-  kz_user?: any;
-  kz_account?: any;
-}
+const AvatarDropdown = props => {
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const { dispatch, kz_user_data = {}, kz_account_data = {} } = props;
 
-class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
-  onMenuClick = (event: ClickParam) => {
+  const onMenuClick = (event: ClickParam) => {
     const { key } = event;
     console.log('AvatarDropdown onMenuClick');
     console.log(event);
     console.log(key);
     if (key === 'logout') {
-      const { dispatch } = this.props;
       if (dispatch) {
         dispatch({
           type: 'kz_login/logout',
         });
       }
-
-      return;
+    } else if (key === 'user_profile') {
+      setIsDrawerVisible(true);
+    } else {
+      router.push(`/int/${key}`);
     }
-    router.push(`/int/${key}`);
   };
 
-  render(): React.ReactNode {
-    const { kz_user_data = {}, kz_account_data = {} } = this.props;
-    const menuHeaderDropdown = (
-      <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        <Menu.Item key="center">
-          <UserOutlined />
-          <FormattedMessage id="menu.account.center" defaultMessage="account center" />
-        </Menu.Item>
-        <Menu.Item key="settings">
-          <SettingOutlined />
-          <FormattedMessage id="menu.account.settings" defaultMessage="account settings" />
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="logout">
-          <LogoutOutlined />
-          <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
-        </Menu.Item>
-      </Menu>
-    );
-    return (
+  const menuHeaderDropdown = (
+    <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
+      <Menu.Item key="user_profile">
+        <UserOutlined />
+        <FormattedMessage id="core.User_profile" defaultMessage="User profile" />
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="logout">
+        <LogoutOutlined />
+        <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
+      </Menu.Item>
+    </Menu>
+  );
+
+  const onDrawerClose = () => {
+    setIsDrawerVisible(false);
+  };
+
+  return (
+    <>
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
           <Avatar
@@ -73,10 +71,16 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
           </span>
         </span>
       </HeaderDropdown>
-    );
-  }
-}
-export default connect(({ kz_user, kz_account }: ConnectState) => ({
+      <EditUserDrawer
+        selectedUser={kz_user_data.id}
+        onDrawerClose={onDrawerClose}
+        isDrawerVisible={isDrawerVisible}
+      />
+    </>
+  );
+};
+
+export default connect(({ kz_user, kz_account }) => ({
   kz_user_data: kz_user.data ? kz_user.data : {},
   kz_account_data: kz_account.data ? kz_account.data : {},
 }))(AvatarDropdown);
