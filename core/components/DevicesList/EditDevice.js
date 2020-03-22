@@ -8,6 +8,8 @@ import DeviceDiversion from './DeviceDiversion';
 import DeviceMedia from './DeviceMedia';
 import DeviceRestrictions from './DeviceRestrictions';
 import DeviceSettings from './DeviceSettings';
+import DeviceSIPURISettings from './DeviceSIPURISettings';
+import DeviceCellPhoneSettings from './DeviceCellPhoneSettings';
 
 const { Panel } = Collapse;
 
@@ -37,23 +39,50 @@ const EditDevice = props => {
         header={formatMessage({ id: 'core.Device_settings', defaultMessage: 'Device settings' })}
         key="20"
       >
-        <DeviceSettings device_id={selectedDevice} />
+        {(full_devices[selectedDevice].data.device_type === 'softphone'
+		|| full_devices[selectedDevice].data.device_type === 'sip_device'
+		|| full_devices[selectedDevice].data.device_type === 'fax')
+		? <DeviceSettings device_id={selectedDevice} /> : null
+	}
+        {(full_devices[selectedDevice].data.device_type === 'sip_uri') ? <DeviceSIPURISettings device_id={selectedDevice} /> : null}
+        {(full_devices[selectedDevice].data.device_type === 'cellphone') ? <DeviceCellPhoneSettings device_id={selectedDevice} /> : null}
       </Panel>
       <Panel header={formatMessage({ id: 'core.CID', defaultMessage: 'CID' })} key="21">
         <DeviceCID device_id={selectedDevice} />
       </Panel>
-      <Panel header={formatMessage({ id: 'core.Diversion', defaultMessage: 'Diversion' })} key="22">
-        <DeviceDiversion device_id={selectedDevice} />
-      </Panel>
-      <Panel header={formatMessage({ id: 'core.Media', defaultMessage: 'Media' })} key="23">
-        <DeviceMedia device_id={selectedDevice} />
-      </Panel>
-      <Panel
-        header={formatMessage({ id: 'core.Restrictions', defaultMessage: 'Restrictions' })}
-        key="25"
-      >
-        <DeviceRestrictions device_id={selectedDevice} />
-      </Panel>
+
+      {(full_devices[selectedDevice].data.device_type === 'softphone'
+	|| full_devices[selectedDevice].data.device_type === 'sip_device'
+	|| full_devices[selectedDevice].data.device_type === 'fax'
+       ) ?
+          <Panel header={formatMessage({ id: 'core.Diversion', defaultMessage: 'Diversion' })} key="22">
+            <DeviceDiversion device_id={selectedDevice} />
+          </Panel>
+        : null
+      }
+
+      {(full_devices[selectedDevice].data.device_type === 'softphone'
+	|| full_devices[selectedDevice].data.device_type === 'sip_device'
+	|| full_devices[selectedDevice].data.device_type === 'sip_uri'
+	|| full_devices[selectedDevice].data.device_type === 'fax'
+       ) ?
+          <Panel header={formatMessage({ id: 'core.Media', defaultMessage: 'Media' })} key="23">
+            <DeviceMedia device_id={selectedDevice} />
+          </Panel>
+        : null
+      }
+
+      {(full_devices[selectedDevice].data.device_type === 'softphone'
+	|| full_devices[selectedDevice].data.device_type === 'sip_device'
+	|| full_devices[selectedDevice].data.device_type === 'sip_uri'
+	|| full_devices[selectedDevice].data.device_type === 'fax'
+       ) ?
+          <Panel header={formatMessage({ id: 'core.Restrictions', defaultMessage: 'Restrictions' })} key="25" >
+            <DeviceRestrictions device_id={selectedDevice} />
+          </Panel>
+        : null
+      }
+
       <Panel header={formatMessage({ id: 'core.Details', defaultMessage: 'Details' })} key="24">
         <ReactJson src={full_devices[selectedDevice].data} {...defaultProps} />
       </Panel>
