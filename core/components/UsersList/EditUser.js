@@ -5,6 +5,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import UserPassword from './UserPassword';
 import UserCID from './UserCID';
 import UserDiversion from './UserDiversion';
+import UserDevices from './UserDevices';
 import UserMedia from './UserMedia';
 import UserRestrictions from './UserRestrictions';
 
@@ -33,7 +34,7 @@ const EditUser = props => {
             <UserMedia owner_id={selectedUser} />
           </Panel>
           <Panel header={formatMessage({ id: 'core.Devices', defaultMessage: 'Devices' })} key="24">
-            <p>`Hello21! ${full_users[selectedUser].data.username}`</p>
+            <UserDevices owner_id={selectedUser} />
           </Panel>
           <Panel
             header={formatMessage({ id: 'core.Restrictions', defaultMessage: 'Restrictions' })}

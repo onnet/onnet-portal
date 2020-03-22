@@ -79,7 +79,7 @@ const DeviceSetSelect = props => {
     });
   }
 
-  //  if (!kz_login.data.is_reseller) return fieldContent;
+  if (!kz_login.data.is_reseller && fieldKey === 'device_type') return fieldContent;
 
   return (
     <Dropdown overlay={menu} trigger={['click']}>

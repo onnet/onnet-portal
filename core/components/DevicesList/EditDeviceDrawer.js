@@ -2,19 +2,13 @@ import React from 'react';
 import { connect } from 'dva';
 import { Drawer } from 'antd';
 import EditDevice from './EditDevice';
-import {
-  DeleteOutlined,
-  EditOutlined,
-  PlusOutlined,
-  ExclamationCircleOutlined,
-} from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
 const EditDeviceDrawer = props => {
   const {
     settings,
-    full_users,
     full_devices,
     selectedDevice,
     onDrawerClose,
@@ -55,8 +49,7 @@ const EditDeviceDrawer = props => {
   );
 };
 
-export default connect(({ settings, kz_full_users, kz_full_devices }) => ({
+export default connect(({ settings, kz_full_devices }) => ({
   settings,
-  full_users: kz_full_users,
   full_devices: kz_full_devices,
 }))(EditDeviceDrawer);

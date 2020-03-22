@@ -84,7 +84,7 @@ const DevicesList = props => {
       dataIndex: 'owner_id',
       key: 'owner_id',
       align: 'center',
-      render: (text, record) =>
+      render: text =>
         full_users[text]
           ? `${full_users[text].data.username} (${full_users[text].data.first_name} ${full_users[text].data.last_name})`
           : null,
