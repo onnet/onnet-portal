@@ -3,16 +3,16 @@ import { connect } from 'dva';
 import { Spin, List } from 'antd';
 
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import AccountDetails from '../portal/AccountDetails';
+import UsersList from '@/pages/onnet-portal/core/components/UsersList';
 
 const ResellerSettings = props => {
-  const { kz_account } = props;
+  const { settings, kz_account } = props;
 
   if (!kz_account.data) {
     return <Spin />;
   }
 
-  const data = [<AccountDetails key="AccountDetails1" />, <AccountDetails key="AccountDetails2" />];
+  const data = [<UsersList key="UsersList1" />];
 
   return (
     <PageHeaderWrapper>
@@ -24,7 +24,7 @@ const ResellerSettings = props => {
           padding: '1em',
         }}
       >
-        Hello from Reseller Settings <b>{kz_account.data.name}</b>!
+        Hello <b style={{color: settings.primaryColor}}>{kz_account.data.name}</b>!
       </div>
 
       <List
@@ -36,6 +36,7 @@ const ResellerSettings = props => {
   );
 };
 
-export default connect(({ kz_account }) => ({
+export default connect(({ settings, kz_account }) => ({
+  settings,
   kz_account,
 }))(ResellerSettings);

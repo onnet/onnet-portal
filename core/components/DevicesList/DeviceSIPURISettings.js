@@ -11,7 +11,7 @@ import DeviceMusicOnHold from './DeviceMusicOnHold';
 import DeviceAssignTo from './DeviceAssignTo';
 import { AccountDialplans } from '@/pages/onnet-portal/core/services/kazoo';
 
-const DeviceSettings = props => {
+const DeviceSIPURISettings = props => {
   const [accountDialplans, setAccountDialplans] = useState({});
 
   const { device_id, account } = props;
@@ -154,4 +154,4 @@ const DeviceSettings = props => {
 
 export default connect(({ kz_account }) => ({
   account: kz_account,
-}))(DeviceSettings);
+}))(DeviceSIPURISettings);

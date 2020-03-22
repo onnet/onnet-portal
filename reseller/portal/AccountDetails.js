@@ -58,7 +58,7 @@ const AccountDetails = props => {
       value: (
         <Switch
           size="small"
-          checked={child_account.data ? child_account.data.is_reseller : false}
+          checked={_.get(child_account, 'data.is_reseller', false)}
           onChange={switchResellerStatus}
         />
       ),

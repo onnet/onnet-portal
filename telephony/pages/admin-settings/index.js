@@ -39,8 +39,6 @@ const AdminSettings = props => {
         columnClassName="my-masonry-grid_column"
       >
         <GeneralSettingsWidget key="GeneralSettingsWidgetKey" />
-        <UsersList key="UsersListKey" />
-        <DevicesList key="DevicesListKey" />
       </Masonry>
     </PageHeaderWrapper>
   );

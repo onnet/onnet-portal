@@ -17,27 +17,24 @@ const ResellerChildEditUser = props => {
   if (!child_full_users[selectedUser]) return null;
 
   return (
-    <Collapse accordion defaultActiveKey="1">
+    <Collapse accordion defaultActiveKey="2">
       <Panel header={formatMessage({ id: 'core.Telephony', defaultMessage: 'Telephony' })} key="1">
         <Collapse accordion>
-          <Panel header={formatMessage({ id: 'core.CID', defaultMessage: 'CID' })} key="21">
+          <Panel header={formatMessage({ id: 'core.CID', defaultMessage: 'CID' })} key="11">
             <ResellerUserCID owner_id={selectedUser} />
           </Panel>
           <Panel
             header={formatMessage({ id: 'core.Diversion', defaultMessage: 'Diversion' })}
-            key="22"
+            key="12"
           >
             <ResellerUserDiversion owner_id={selectedUser} />
           </Panel>
-          <Panel header={formatMessage({ id: 'core.Media', defaultMessage: 'Media' })} key="23">
+          <Panel header={formatMessage({ id: 'core.Media', defaultMessage: 'Media' })} key="13">
             <ResellerUserMedia owner_id={selectedUser} />
-          </Panel>
-          <Panel header={formatMessage({ id: 'core.Devices', defaultMessage: 'Devices' })} key="24">
-            <p>`Hello21! ${child_full_users[selectedUser].data.username}`</p>
           </Panel>
           <Panel
             header={formatMessage({ id: 'core.Restrictions', defaultMessage: 'Restrictions' })}
-            key="25"
+            key="14"
           >
             <ResellerUserRestrictions owner_id={selectedUser} />
           </Panel>

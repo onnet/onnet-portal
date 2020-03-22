@@ -2,6 +2,7 @@ export default {
   'menu.telephony': 'Телефония',
   'menu.telephony.callflow-builder': 'Маршрутизация',
   'menu.telephony.settings': 'Настройки',
+  'menu.telephony.general_settings': 'Общие настройки',
   'menu.telephony.devices': 'Устройства',
   'menu.telephony.users': 'Пользователи',
   'telephony.all_calls_recording': 'Запись всех разговоров',

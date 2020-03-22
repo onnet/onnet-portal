@@ -8,6 +8,7 @@ import DeviceDiversion from './DeviceDiversion';
 import DeviceMedia from './DeviceMedia';
 import DeviceRestrictions from './DeviceRestrictions';
 import DeviceSettings from './DeviceSettings';
+import DeviceSIPSettings from './DeviceSIPSettings';
 import DeviceSIPURISettings from './DeviceSIPURISettings';
 import DeviceCellPhoneSettings from './DeviceCellPhoneSettings';
 
