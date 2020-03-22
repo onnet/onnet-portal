@@ -170,6 +170,11 @@ const DevicesList = props => {
               type: 'kz_full_devices/refresh',
               payload: { account_id: account.data.id, device_id: record.id },
             });
+            dispatch({
+              type: 'kz_brief_devices/refresh',
+              payload: { account_id: account.data.id },
+              timeout: 1000,
+            });
           })
           .catch(() => console.log('Oops errors!', record));
       },
@@ -274,6 +279,7 @@ const DevicesList = props => {
       dispatch({
         type: 'kz_brief_devices/refresh',
         payload: { account_id: account.data.id },
+        timeout: 500,
       });
       setSelectedDevice(uRes.data.id);
       dispatch({

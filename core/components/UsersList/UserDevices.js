@@ -12,15 +12,14 @@ import EditDeviceDrawer from '../DevicesList/EditDeviceDrawer';
 const { confirm } = Modal;
 
 const UserDevices = props => {
-  const [isLoading, setIsLoading] = useState({});
-
+  const [brDevs, setBrDevs] = useState([]);
   const [isEditDrawerVisible, setIsEditDrawerVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(false);
 
   const { dispatch, settings, account, full_users, brief_devices, full_devices, owner_id } = props;
 
   useEffect(() => {
-    setIsLoading({});
+    if (brief_devices.data) setBrDevs(brief_devices.data);
   }, [full_users[owner_id], brief_devices, full_devices[selectedDevice]]);
 
   if (!full_users[owner_id]) return null;
@@ -30,9 +29,7 @@ const UserDevices = props => {
     textAlign: 'center',
   };
 
-  console.log('IAM _.filter(brief_devices.data: ', _.filter(brief_devices.data, { owner_id }));
-
-  const items = _.filter(brief_devices.data, { owner_id }).map(item => (
+  const items = _.filter(brDevs, { owner_id }).map(item => (
     <Card.Grid style={gridStyle} key={item.id}>
       <Card.Meta
         title={
@@ -55,11 +52,10 @@ const UserDevices = props => {
         description={
           <Switch
             key={item.id}
-            checkedChildren=" enabled "
-            unCheckedChildren=" disabled "
+            checkedChildren="enabled"
+            unCheckedChildren="disabled"
             checked={full_devices[item.id] ? full_devices[item.id].data.enabled : item.enabled}
             onChange={checked => onDeviceEnableSwitch(checked, item)}
-            loading={isLoading.PCMA}
           />
         }
       />
@@ -87,8 +83,7 @@ const UserDevices = props => {
           device_id: record.id,
           data: { enabled: checked },
         })
-          .then(uRes => {
-            console.log(uRes);
+          .then(() => {
             dispatch({
               type: 'kz_full_devices/refresh',
               payload: { account_id: account.data.id, device_id: record.id },
@@ -99,8 +94,6 @@ const UserDevices = props => {
       onCancel() {},
     });
   }
-
-  console.log('IAM items: ', items);
 
   const onDrawerClose = () => {
     setIsEditDrawerVisible(false);
@@ -123,8 +116,7 @@ const UserDevices = props => {
       cancelText: formatMessage({ id: 'core.No', defaultMessage: 'No' }),
       onOk() {
         kzDevice({ method: 'DELETE', account_id: account.data.id, device_id: dev_id })
-          .then(uRes => {
-            console.log(uRes);
+          .then(() => {
             dispatch({
               type: 'kz_brief_devices/refresh',
               payload: { account_id: account.data.id },

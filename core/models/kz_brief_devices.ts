@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from 'redux';
-import { EffectsCommandMap } from 'dva';
+import { EffectsCommandMap, saga } from 'dva';
 import { kzDevices } from '@/pages/onnet-portal/core/services/kazoo';
 
 export type Effect = (
@@ -25,11 +25,9 @@ const Model: ModelType = {
   state: {},
 
   effects: {
-    *refresh({ payload }, { call, put }) {
-      console.log('IAM kz_brief_devices payload: ', payload);
+    *refresh({ payload, timeout }, { call, put }) {
+      yield call(saga.delay, timeout || 0);
       const response = yield call(kzDevices, payload);
-      console.log('IAM kz_brief_devices response: ', response);
-      console.log('IAM kz_brief_devices response.status: ', response.status);
       if (response.status === 'success') {
         yield put({
           type: 'update',

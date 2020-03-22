@@ -73,12 +73,17 @@ const DeviceAssignTo = props => {
           account_id: account.data.id,
           device_id,
           data: _.omit(res.data, 'owner_id'),
-        }).then(() =>
+        }).then(() => {
           dispatch({
             type: 'kz_full_devices/refresh',
             payload: { account_id: account.data.id, device_id },
-          }),
-        );
+          });
+          dispatch({
+            type: 'kz_brief_devices/refresh',
+            payload: { account_id: account.data.id },
+            timeout: 1000,
+          });
+        });
       });
     } else {
       kzDevice({
@@ -86,12 +91,17 @@ const DeviceAssignTo = props => {
         account_id: account.data.id,
         device_id,
         data: { owner_id: selectedId },
-      }).then(() =>
+      }).then(() => {
         dispatch({
           type: 'kz_full_devices/refresh',
           payload: { account_id: account.data.id, device_id },
-        }),
-      );
+        });
+        dispatch({
+          type: 'kz_brief_devices/refresh',
+          payload: { account_id: account.data.id },
+          timeout: 1000,
+        });
+      });
     }
     setButtonVisible(false);
   };
