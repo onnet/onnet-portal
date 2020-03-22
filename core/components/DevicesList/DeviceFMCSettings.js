@@ -6,7 +6,7 @@ import DeviceSwitch from './DeviceSwitch';
 import DeviceSetSelect from './DeviceSetSelect';
 import DeviceAssignTo from './DeviceAssignTo';
 
-const DeviceCellPhoneSettings = props => {
+const DeviceFMCSettings = props => {
   const { device_id } = props;
 
   const tableData = [
@@ -57,94 +57,29 @@ const DeviceCellPhoneSettings = props => {
       ),
     },
     {
-      key: '21',
+      key: '6',
       name: formatMessage({
-        id: 'core.Redirect_calls_to',
-        defaultMessage: 'Redirect calls to',
+        id: 'core.Username',
+        defaultMessage: 'Username',
       }),
       value: (
         <DeviceParagraph
-          fieldKey="call_forward.number"
+          fieldKey="sip.username"
           device_id={device_id}
           style={{ marginBottom: '0' }}
-        />
-      ),
-    },
-
-    {
-      key: '31',
-      name: formatMessage({
-        id: 'core.Bypass_users_phones',
-        defaultMessage: "Bypass user's phones",
-      }),
-      value: (
-        <DeviceSwitch
-          fieldKey="call_forward.substitute"
-          device_id={device_id}
-          style={{ marginBottom: '0' }}
-          modal_title={formatMessage({
-            id: 'core.Bypass_users_phones',
-            defaultMessage: "Bypass user's phones",
-          })}
         />
       ),
     },
     {
-      key: '41',
+      key: '31',
       name: formatMessage({
-        id: 'core.RequireKeyPress',
-        defaultMessage: 'Require Key Press',
+        id: 'core.SIP_URI',
+        defaultMessage: 'SIP URI',
       }),
       value: (
-        <DeviceSwitch
-          fieldKey="call_forward.require_keypress"
-          device_id={device_id}
-          style={{ marginBottom: '0' }}
-          modal_title={formatMessage({
-            id: 'core.RequireKeyPress',
-            defaultMessage: 'Require Key Press',
-          })}
-        />
+        <DeviceParagraph fieldKey="sip.route" device_id={device_id} style={{ marginBottom: '0' }} />
       ),
     },
-
-    {
-      key: '51',
-      name: formatMessage({
-        id: 'core.KeepCallerID',
-        defaultMessage: 'Keep Caller ID',
-      }),
-      value: (
-        <DeviceSwitch
-          fieldKey="call_forward.keep_caller_id"
-          device_id={device_id}
-          style={{ marginBottom: '0' }}
-          modal_title={formatMessage({
-            id: 'core.KeepCallerID',
-            defaultMessage: 'Keep Caller ID',
-          })}
-        />
-      ),
-    },
-    {
-      key: '61',
-      name: formatMessage({
-        id: 'core.DirectCallsOnly',
-        defaultMessage: 'Direct Calls Only',
-      }),
-      value: (
-        <DeviceSwitch
-          fieldKey="call_forward.direct_calls_only"
-          device_id={device_id}
-          style={{ marginBottom: '0' }}
-          modal_title={formatMessage({
-            id: 'core.DirectCallsOnly',
-            defaultMessage: 'Direct Calls Only',
-          })}
-        />
-      ),
-    },
-
     {
       key: '4',
       name: formatMessage({
@@ -152,24 +87,6 @@ const DeviceCellPhoneSettings = props => {
         defaultMessage: 'Assign to',
       }),
       value: <DeviceAssignTo device_id={device_id} />,
-    },
-    {
-      key: '9',
-      name: formatMessage({
-        id: 'core.Record_calls',
-        defaultMessage: 'Record calls',
-      }),
-      value: (
-        <DeviceSwitch
-          fieldKey="record_call"
-          device_id={device_id}
-          style={{ marginBottom: '0' }}
-          modal_title={formatMessage({
-            id: 'core.Record_calls',
-            defaultMessage: 'Record calls',
-          })}
-        />
-      ),
     },
   ];
 
@@ -198,4 +115,4 @@ const DeviceCellPhoneSettings = props => {
   );
 };
 
-export default DeviceCellPhoneSettings;
+export default DeviceFMCSettings;

@@ -24,7 +24,7 @@ const ResellerSettings = props => {
           padding: '1em',
         }}
       >
-        Hello <b style={{color: settings.primaryColor}}>{kz_account.data.name}</b>!
+        Hello <b style={{ color: settings.primaryColor }}>{kz_account.data.name}</b>!
       </div>
 
       <List

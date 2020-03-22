@@ -257,6 +257,68 @@ const CreateDeviceDrawer = props => {
           </Row>
         </Form>
       </TabPane>
+      <TabPane tab={formatMessage({ id: 'core.FMC', defaultMessage: 'FMC' })} key="sip_fmc">
+        <Form
+          name="form_sip_fmc"
+          layout="vertical"
+          hideRequiredMark
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          ref={formRef_sip_uri}
+          initialValues={{ device_type: 'sip_fmc' }}
+        >
+          <Form.Item name="device_type" style={{ display: 'none' }}>
+            <Input />
+          </Form.Item>
+          <Row gutter={24}>
+            <Col span={12} offset={6}>
+              <Form.Item
+                name="device_nickname"
+                label={formatMessage({
+                  id: 'core.Device_nickname',
+                  defaultMessage: 'Device nickname',
+                })}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input device nickname!',
+                  },
+                ]}
+                hasFeedback
+              >
+                <Input
+                  style={inputStyle}
+                  placeholder={formatMessage({
+                    id: 'core.Device_nickname',
+                    defaultMessage: 'Device nickname',
+                  })}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12} offset={6}>
+              <Form.Item
+                name="redirect_number"
+                label={formatMessage({ id: 'core.Phone_number', defaultMessage: 'Phone number' })}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input number to redirect!',
+                  },
+                ]}
+                hasFeedback
+              >
+                <Input
+                  style={inputStyle}
+                  placeholder={formatMessage({
+                    id: 'core.Phone_number',
+                    defaultMessage: 'Phone number',
+                  })}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </TabPane>
     </Tabs>
   );
 };

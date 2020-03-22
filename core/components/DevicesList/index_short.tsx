@@ -234,6 +234,12 @@ const DevicesList = props => {
         {formatMessage({ id: 'core.Create_sip_uri', defaultMessage: 'Create SIP URI' })}
       </Button>
     );
+  } else if (createDeviceType === 'sip_fmc') {
+    createDeviceButton = (
+      <Button onClick={onCloseSubmit} type="primary">
+        {formatMessage({ id: 'core.Create_sip_fmc', defaultMessage: 'Create FMC Device' })}
+      </Button>
+    );
   } else {
     createDeviceButton = (
       <Button onClick={onCloseSubmit} type="primary">

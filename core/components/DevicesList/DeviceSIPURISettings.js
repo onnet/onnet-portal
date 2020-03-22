@@ -1,28 +1,13 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
-import React, { useState, useEffect } from 'react';
-import { connect } from 'dva';
+import React from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Table } from 'antd';
 import DeviceParagraph from './DeviceParagraph';
 import DeviceSwitch from './DeviceSwitch';
 import DeviceSetSelect from './DeviceSetSelect';
-import DeviceMusicOnHold from './DeviceMusicOnHold';
 import DeviceAssignTo from './DeviceAssignTo';
-import { AccountDialplans } from '@/pages/onnet-portal/core/services/kazoo';
 
 const DeviceSIPURISettings = props => {
-  const [accountDialplans, setAccountDialplans] = useState({});
-
-  const { device_id, account } = props;
-
-  useEffect(() => {
-    if (account.data) {
-      AccountDialplans({ account_id: account.data.id }).then(res => {
-        if (res.data) setAccountDialplans(res.data);
-      });
-    }
-  }, [account]);
+  const { device_id } = props;
 
   const tableData = [
     {
@@ -152,6 +137,4 @@ const DeviceSIPURISettings = props => {
   );
 };
 
-export default connect(({ kz_account }) => ({
-  account: kz_account,
-}))(DeviceSIPURISettings);
+export default DeviceSIPURISettings;

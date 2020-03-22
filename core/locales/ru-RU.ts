@@ -39,6 +39,7 @@ export default {
   'core.Create_device': 'Создать устройство',
   'core.Create_new_device': 'Создать устройство',
   'core.Create_sip_device': 'Создать SIP устройство',
+  'core.Create_sip_fmc': 'Создать FMC устройство',
   'core.SIP_device': 'SIP устройство',
   'core.SIP_Device': 'SIP устройство',
   'core.Device_username': 'Логин устройства',
