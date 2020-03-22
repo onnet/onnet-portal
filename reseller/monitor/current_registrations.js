@@ -135,12 +135,14 @@ class CurrentRegistrations extends Component {
         title: 'Account Name',
         dataIndex: 'account_name',
         key: 'account_name',
+        ellipsis: true,
         render: (text, record) => <AccountName realm={record.key.split('@').pop(-1)} />,
       },
       {
         title: 'Device',
         dataIndex: 'username',
         key: 'username',
+        ellipsis: true,
         ...this.getColumnSearchProps('username'),
       },
       {
@@ -155,13 +157,14 @@ class CurrentRegistrations extends Component {
         dataIndex: 'user_agent',
         key: 'user_agent',
         align: 'center',
+        ellipsis: true,
         ...this.getColumnSearchProps('user_agent'),
       },
       {
-        title: 'Details',
         dataIndex: 'details',
         key: 'details',
         align: 'center',
+        width: '5%',
         render: (text, record) => (
           <InfoCircleOutlined
             onClick={() => {
