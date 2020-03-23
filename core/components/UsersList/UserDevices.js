@@ -138,6 +138,7 @@ const UserDevices = props => {
         onDrawerClose={onDrawerClose}
         isEditDrawerVisible={isEditDrawerVisible}
         deleteChildDevice={deleteChildDevice}
+        disableAssignBtn
       />
     </Fragment>
   );

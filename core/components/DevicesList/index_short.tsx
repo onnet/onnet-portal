@@ -66,8 +66,7 @@ const DevicesList = props => {
       cancelText: formatMessage({ id: 'core.No', defaultMessage: 'No' }),
       onOk() {
         kzDevice({ method: 'DELETE', account_id: account.data.id, device_id: dev_id })
-          .then(uRes => {
-            console.log(uRes);
+          .then(() => {
             dispatch({
               type: 'kz_brief_devices/refresh',
               payload: { account_id: account.data.id },
@@ -166,8 +165,7 @@ const DevicesList = props => {
           device_id: record.id,
           data: { enabled: checked },
         })
-          .then(uRes => {
-            console.log(uRes);
+          .then(() => {
             dispatch({
               type: 'kz_full_devices/refresh',
               payload: { account_id: account.data.id, device_id: record.id },
@@ -185,7 +183,6 @@ const DevicesList = props => {
   }
 
   const handlePagination = e => {
-    console.log('handlePagination e: ', e);
     if (e) {
       setIsPaginated({ position: 'bottom' });
     } else {
@@ -215,8 +212,6 @@ const DevicesList = props => {
   };
 
   let createDeviceButton = null;
-
-  console.log('createDeviceButton: ', createDeviceButton);
 
   if (createDeviceType === 'sip_device') {
     createDeviceButton = (
@@ -274,8 +269,6 @@ const DevicesList = props => {
       _.set(newDevice, 'call_forward.enabled', true);
       _.set(newDevice, 'call_forward.number', values.redirect_number);
     }
-    console.log('values.sip_ip_auth:', values.sip_ip_auth);
-    console.log('isIp:', isIp(values.sip_ip_auth));
     console.log('newDevice:', newDevice);
 
     kzDevices({
@@ -283,7 +276,6 @@ const DevicesList = props => {
       account_id: account.data.id,
       data: newDevice,
     }).then(uRes => {
-      console.log(uRes);
       dispatch({
         type: 'kz_brief_devices/refresh',
         payload: { account_id: account.data.id },

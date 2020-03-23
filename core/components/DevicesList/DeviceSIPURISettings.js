@@ -7,7 +7,7 @@ import DeviceSetSelect from './DeviceSetSelect';
 import DeviceAssignTo from './DeviceAssignTo';
 
 const DeviceSIPURISettings = props => {
-  const { device_id } = props;
+  const { device_id, disableAssignBtn } = props;
 
   const tableData = [
     {
@@ -72,7 +72,7 @@ const DeviceSIPURISettings = props => {
         id: 'core.Assign_to',
         defaultMessage: 'Assign to',
       }),
-      value: <DeviceAssignTo device_id={device_id} />,
+      value: <DeviceAssignTo device_id={device_id} disableAssignBtn={disableAssignBtn} />,
     },
     {
       key: '9',

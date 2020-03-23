@@ -42,6 +42,7 @@ export default {
   'core.Create_sip_fmc': 'Create FMC device',
   'core.Create_sip_uri': 'Create SIP URI',
   'core.SIP_URI': 'SIP URI',
+  'core.FMC': 'FMC',
   'core.Auth_IP_address': 'Auth IP address',
   'core.Inbound_auth': 'Inbound auth',
   'core.Create_cell_phone': 'Create cell phone',

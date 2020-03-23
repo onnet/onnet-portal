@@ -26,7 +26,15 @@ const DeviceAssignTo = props => {
     }),
   );
 
-  const { dispatch, account, full_devices, brief_users, full_users, device_id } = props;
+  const {
+    dispatch,
+    account,
+    full_devices,
+    brief_users,
+    full_users,
+    device_id,
+    disableAssignBtn = false,
+  } = props;
 
   function currentDocValue() {
     try {
@@ -129,6 +137,8 @@ const DeviceAssignTo = props => {
       {user.username} {user.first_name ? `(${user.first_name} ${user.last_name})` : null}
     </Select.Option>
   ));
+
+  if (disableAssignBtn) return currentDocValue();
 
   return (
     <>

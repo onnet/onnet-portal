@@ -30,7 +30,7 @@ const defaultProps = {
 };
 
 const EditDevice = props => {
-  const { selectedDevice, full_devices } = props;
+  const { selectedDevice, full_devices, disableAssignBtn } = props;
 
   if (!selectedDevice) return null;
   if (!full_devices[selectedDevice]) return null;
@@ -42,15 +42,23 @@ const EditDevice = props => {
     full_devices[selectedDevice].data.device_type === 'sip_device' ||
     full_devices[selectedDevice].data.device_type === 'fax'
   ) {
-    devSettings = <DeviceSIPSettings device_id={selectedDevice} />;
+    devSettings = (
+      <DeviceSIPSettings device_id={selectedDevice} disableAssignBtn={disableAssignBtn} />
+    );
   } else if (full_devices[selectedDevice].data.device_type === 'sip_uri') {
-    devSettings = <DeviceSIPURISettings device_id={selectedDevice} />;
+    devSettings = (
+      <DeviceSIPURISettings device_id={selectedDevice} disableAssignBtn={disableAssignBtn} />
+    );
   } else if (full_devices[selectedDevice].data.device_type === 'cellphone') {
-    devSettings = <DeviceCellPhoneSettings device_id={selectedDevice} />;
+    devSettings = (
+      <DeviceCellPhoneSettings device_id={selectedDevice} disableAssignBtn={disableAssignBtn} />
+    );
   } else if (full_devices[selectedDevice].data.device_type === 'sip_fmc') {
-    devSettings = <DeviceFMCSettings device_id={selectedDevice} />;
+    devSettings = (
+      <DeviceFMCSettings device_id={selectedDevice} disableAssignBtn={disableAssignBtn} />
+    );
   } else {
-    devSettings = <DeviceSettings device_id={selectedDevice} />;
+    devSettings = <DeviceSettings device_id={selectedDevice} disableAssignBtn={disableAssignBtn} />;
   }
 
   return (

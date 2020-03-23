@@ -7,7 +7,7 @@ import DeviceSetSelect from './DeviceSetSelect';
 import DeviceAssignTo from './DeviceAssignTo';
 
 const DeviceFMCSettings = props => {
-  const { device_id } = props;
+  const { device_id, disableAssignBtn } = props;
 
   const tableData = [
     {
@@ -86,7 +86,7 @@ const DeviceFMCSettings = props => {
         id: 'core.Assign_to',
         defaultMessage: 'Assign to',
       }),
-      value: <DeviceAssignTo device_id={device_id} />,
+      value: <DeviceAssignTo device_id={device_id} disableAssignBtn={disableAssignBtn} />,
     },
   ];
 

@@ -14,7 +14,7 @@ import { AccountDialplans } from '@/pages/onnet-portal/core/services/kazoo';
 const DeviceSettings = props => {
   const [accountDialplans, setAccountDialplans] = useState({});
 
-  const { device_id, account } = props;
+  const { device_id, account, disableAssignBtn } = props;
 
   useEffect(() => {
     if (account.data) {
@@ -77,7 +77,7 @@ const DeviceSettings = props => {
         id: 'core.Assign_to',
         defaultMessage: 'Assign to',
       }),
-      value: <DeviceAssignTo device_id={device_id} />,
+      value: <DeviceAssignTo device_id={device_id} disableAssignBtn={disableAssignBtn} />,
     },
     {
       key: '5',

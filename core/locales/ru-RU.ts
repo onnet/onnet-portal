@@ -48,6 +48,7 @@ export default {
   'core.Auth_IP_address': 'Auth IP address',
   'core.Inbound_auth': 'Авторизация входящих вызовов',
   'core.SIP_URI': 'SIP URI',
+  'core.FMC': 'FMC',
   'core.Create_cell_phone': 'Создать мобильный телефон',
   'core.Cell_Phone': 'Мобильный телефон',
   'core.Phone_number': 'Номер телефона',

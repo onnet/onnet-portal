@@ -15,6 +15,7 @@ const EditDeviceDrawer = props => {
     onDrawerClose,
     isEditDrawerVisible,
     deleteChildDevice,
+    disableAssignBtn,
   } = props;
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
@@ -46,7 +47,7 @@ const EditDeviceDrawer = props => {
       onClose={onDrawerClose}
       visible={isEditDrawerVisible}
     >
-      <EditDevice selectedDevice={selectedDevice} />
+      <EditDevice selectedDevice={selectedDevice} disableAssignBtn={disableAssignBtn} />
     </Drawer>
   );
 };
