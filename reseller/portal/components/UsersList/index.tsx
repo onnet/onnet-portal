@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { useMediaQuery } from 'react-responsive';
 import { Drawer, Table, Card, Modal, Switch } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
@@ -20,6 +21,7 @@ const UsersList = props => {
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(false);
+  const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   useEffect(() => {
     if (brief_users.data) {
@@ -227,7 +229,7 @@ const UsersList = props => {
             </span>
           ) : null
         }
-        width="50%"
+        width={isSmallDevice ? '100%' : '50%'}
         placement="right"
         onClose={onDrawerClose}
         visible={isDrawerVisible}

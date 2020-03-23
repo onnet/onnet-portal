@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
+import { useMediaQuery } from 'react-responsive';
 import * as _ from 'lodash';
 import isIp from 'is-ip';
 import {
@@ -31,6 +32,7 @@ const DevicesList = props => {
   const formRef_sip_device = React.createRef();
   const formRef_sip_uri = React.createRef();
   const formRef_cell_phone = React.createRef();
+  const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   useEffect(() => {
     if (brief_devices.data) {
@@ -351,7 +353,7 @@ const DevicesList = props => {
             {formatMessage({ id: 'core.Create_device', defaultMessage: 'Create device' })}
           </b>
         }
-        width="50%"
+        width={isSmallDevice ? '100%' : '50%'}
         placement="right"
         onClose={onCloseCancel}
         visible={isCreateDrawerVisible}

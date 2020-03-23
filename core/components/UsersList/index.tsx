@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
+import { useMediaQuery } from 'react-responsive';
 import {
   DeleteOutlined,
   EditOutlined,
@@ -29,6 +30,7 @@ const UsersList = props => {
 
   const { dispatch, settings, account, brief_users, full_users } = props;
   const formRef = React.createRef();
+  const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   useEffect(() => {
     if (brief_users.data) {
@@ -312,7 +314,7 @@ const UsersList = props => {
             {formatMessage({ id: 'core.Create_user', defaultMessage: 'Create user' })}
           </b>
         }
-        width="50%"
+        width={isSmallDevice ? '100%' : '50%'}
         placement="right"
         onClose={onCloseCancel}
         visible={isCreateDrawerVisible}

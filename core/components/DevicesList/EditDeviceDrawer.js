@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
+import { useMediaQuery } from 'react-responsive';
 import { Drawer } from 'antd';
 import EditDevice from './EditDevice';
 import { DeleteOutlined } from '@ant-design/icons';
@@ -15,6 +16,7 @@ const EditDeviceDrawer = props => {
     isEditDrawerVisible,
     deleteChildDevice,
   } = props;
+  const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   return (
     <Drawer
@@ -39,7 +41,7 @@ const EditDeviceDrawer = props => {
           </>
         ) : null
       }
-      width="50%"
+      width={isSmallDevice ? '100%' : '50%'}
       placement="right"
       onClose={onDrawerClose}
       visible={isEditDrawerVisible}
