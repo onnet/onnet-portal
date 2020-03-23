@@ -4,6 +4,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import { Card, Switch } from 'antd';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 import * as _ from 'lodash';
+import { useMediaQuery } from 'react-responsive';
 
 import styles from '../style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
@@ -14,6 +15,7 @@ const UserMedia = props => {
   const [isLoading, setIsLoading] = useState({});
 
   const { dispatch, account, full_users, owner_id } = props;
+  const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   useEffect(() => {
     if (full_users[owner_id]) {
@@ -26,7 +28,7 @@ const UserMedia = props => {
   if (!full_users[owner_id]) return null;
 
   const gridStyle = {
-    width: '25%',
+    width: isSmallDevice ? '50%' : '25%',
     textAlign: 'center',
   };
 
