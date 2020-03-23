@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Collapse } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
+import ReactJson from 'react-json-view';
 import UserPassword from './UserPassword';
 import UserCID from './UserCID';
 import UserDiversion from './UserDiversion';
@@ -10,6 +11,20 @@ import UserMedia from './UserMedia';
 import UserRestrictions from './UserRestrictions';
 
 const { Panel } = Collapse;
+
+const defaultProps = {
+  theme: 'rjv-default',
+  collapsed: false,
+  collapseStringsAfter: 15,
+  onAdd: false,
+  onEdit: false,
+  onDelete: false,
+  displayObjectSize: false,
+  enableClipboard: false,
+  indentWidth: 4,
+  displayDataTypes: false,
+  iconStyle: 'triangle',
+};
 
 const EditUser = props => {
   const { selectedUser, full_users } = props;
@@ -49,6 +64,9 @@ const EditUser = props => {
         key="2"
       >
         <UserPassword owner_id={selectedUser} />
+      </Panel>
+      <Panel header={formatMessage({ id: 'core.Details', defaultMessage: 'Details' })} key="3">
+        <ReactJson src={full_users[selectedUser].data} {...defaultProps} />
       </Panel>
     </Collapse>
   );
