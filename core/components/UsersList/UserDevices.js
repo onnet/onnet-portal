@@ -5,8 +5,8 @@ import { Card, Switch, Badge, Modal } from 'antd';
 import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 import * as _ from 'lodash';
 import { EditOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { useMediaQuery } from 'react-responsive';
 import styles from '../style.less';
-import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import EditDeviceDrawer from '../DevicesList/EditDeviceDrawer';
 
 const { confirm } = Modal;
@@ -17,6 +17,7 @@ const UserDevices = props => {
   const [selectedDevice, setSelectedDevice] = useState(false);
 
   const { dispatch, settings, account, full_users, brief_devices, full_devices, owner_id } = props;
+  const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   useEffect(() => {
     if (brief_devices.data) setBrDevs(brief_devices.data);
@@ -25,7 +26,7 @@ const UserDevices = props => {
   if (!full_users[owner_id]) return null;
 
   const gridStyle = {
-    width: '50%',
+    width: isSmallDevice ? '100%' : '50%',
     textAlign: 'center',
   };
 
@@ -131,9 +132,7 @@ const UserDevices = props => {
 
   return (
     <Fragment>
-      <Card hoverable className={styles.card} {...cardProps}>
-        <Card.Meta description={<>{items}</>} />
-      </Card>
+      <Card.Meta description={<>{items}</>} />
       <EditDeviceDrawer
         selectedDevice={selectedDevice}
         onDrawerClose={onDrawerClose}

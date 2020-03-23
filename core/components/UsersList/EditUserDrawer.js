@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Drawer } from 'antd';
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from 'react-responsive';
 import EditUser from './EditUser';
 
 const EditUserDrawer = props => {
-
   const { settings, full_users, selectedUser, onDrawerClose, isDrawerVisible } = props;
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
