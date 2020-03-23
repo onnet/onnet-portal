@@ -12,7 +12,7 @@ const CreateDeviceDrawer = props => {
     setCreateDeviceType,
     formRef_sip_device,
     formRef_sip_uri,
-    formRef_cell_phone,
+    formRef_cellphone,
     onFinish,
   } = props;
 
@@ -118,15 +118,15 @@ const CreateDeviceDrawer = props => {
       </TabPane>
       <TabPane
         tab={formatMessage({ id: 'core.Cell_Phone', defaultMessage: 'Cell Phone' })}
-        key="cell_phone"
+        key="cellphone"
       >
         <Form
           layout="vertical"
           hideRequiredMark
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          ref={formRef_cell_phone}
-          initialValues={{ device_type: 'cell_phone' }}
+          ref={formRef_cellphone}
+          initialValues={{ device_type: 'cellphone' }}
         >
           <Form.Item name="device_type" style={{ display: 'none' }}>
             <Input />

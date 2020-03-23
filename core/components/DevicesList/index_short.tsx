@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { useMediaQuery } from 'react-responsive';
+import cryptoRandomString from 'crypto-random-string';
 import * as _ from 'lodash';
 import isIp from 'is-ip';
 import {
@@ -31,7 +32,7 @@ const DevicesList = props => {
   const { dispatch, settings, account, brief_devices, full_devices } = props;
   const formRef_sip_device = React.createRef();
   const formRef_sip_uri = React.createRef();
-  const formRef_cell_phone = React.createRef();
+  const formRef_cellphone = React.createRef();
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   useEffect(() => {
@@ -197,15 +198,15 @@ const DevicesList = props => {
   const onCloseCancel = () => {
     if (formRef_sip_device.current) formRef_sip_device.current.resetFields();
     if (formRef_sip_uri.current) formRef_sip_uri.current.resetFields();
-    if (formRef_cell_phone.current) formRef_cell_phone.current.resetFields();
+    if (formRef_cellphone.current) formRef_cellphone.current.resetFields();
     setIsCreateDrawerVisible(false);
   };
 
   const onCloseSubmit = () => {
     if (createDeviceType === 'sip_device') {
       formRef_sip_device.current.submit();
-    } else if (createDeviceType === 'cell_phone') {
-      formRef_cell_phone.current.submit();
+    } else if (createDeviceType === 'cellphone') {
+      formRef_cellphone.current.submit();
     } else if (createDeviceType === 'sip_uri') {
       formRef_sip_uri.current.submit();
     }
@@ -219,10 +220,10 @@ const DevicesList = props => {
         {formatMessage({ id: 'core.Create_sip_device', defaultMessage: 'Create SIP Device' })}
       </Button>
     );
-  } else if (createDeviceType === 'cell_phone') {
+  } else if (createDeviceType === 'cellphone') {
     createDeviceButton = (
       <Button onClick={onCloseSubmit} type="primary">
-        {formatMessage({ id: 'core.Create_cell_phone', defaultMessage: 'Create Cell Phone' })}
+        {formatMessage({ id: 'core.Create_cellphone', defaultMessage: 'Create Cell Phone' })}
       </Button>
     );
   } else if (createDeviceType === 'sip_uri') {
@@ -251,13 +252,15 @@ const DevicesList = props => {
     _.set(newDevice, 'device_type', values.device_type);
     _.set(newDevice, 'name', values.device_nickname);
     _.set(newDevice, 'accept_charges', true);
+    _.set(newDevice, 'suppress_unregister_notifications', true);
+    _.set(newDevice, 'register_overwrite_notify', true);
+    _.set(newDevice, 'sip.username', values.device_username || `user_${cryptoRandomString(7)}`);
+    _.set(newDevice, 'sip.password', values.device_password || `${cryptoRandomString(12)}`);
     if (isIp(values.sip_ip_auth)) {
       _.set(newDevice, 'sip.method', 'ip');
       _.set(newDevice, 'sip.ip', values.sip_ip_auth);
     } else {
       _.set(newDevice, 'sip.method', 'password');
-      _.set(newDevice, 'sip.username', values.device_username);
-      _.set(newDevice, 'sip.password', values.device_password);
     }
     if (values.sip_uri) {
       _.set(newDevice, 'sip.invite_format', 'route');
@@ -267,6 +270,8 @@ const DevicesList = props => {
     }
     if (values.redirect_number) {
       _.set(newDevice, 'call_forward.enabled', true);
+      _.set(newDevice, 'call_forward.keep_caller_id', false);
+      _.set(newDevice, 'call_forward.require_keypress', false);
       _.set(newDevice, 'call_forward.number', values.redirect_number);
     }
     console.log('newDevice:', newDevice);
@@ -363,7 +368,7 @@ const DevicesList = props => {
         <CreateDeviceDrawer
           formRef_sip_device={formRef_sip_device}
           formRef_sip_uri={formRef_sip_uri}
-          formRef_cell_phone={formRef_cell_phone}
+          formRef_cellphone={formRef_cellphone}
           setCreateDeviceType={setCreateDeviceType}
           onFinish={onDeviceCreateFinish}
         />

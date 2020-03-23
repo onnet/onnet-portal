@@ -45,7 +45,7 @@ export default {
   'core.FMC': 'FMC',
   'core.Auth_IP_address': 'Auth IP address',
   'core.Inbound_auth': 'Inbound auth',
-  'core.Create_cell_phone': 'Create cell phone',
+  'core.Create_cellphone': 'Create cellphone',
   'core.Cell_Phone': 'Cell Phone',
   'core.Cell_phone': 'Cell phone',
   'core.switch_on': 'Switch ON',

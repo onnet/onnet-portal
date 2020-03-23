@@ -49,7 +49,7 @@ export default {
   'core.Inbound_auth': 'Авторизация входящих вызовов',
   'core.SIP_URI': 'SIP URI',
   'core.FMC': 'FMC',
-  'core.Create_cell_phone': 'Создать мобильный телефон',
+  'core.Create_cellphone': 'Создать мобильный телефон',
   'core.Cell_Phone': 'Мобильный телефон',
   'core.Phone_number': 'Номер телефона',
   'core.switch_on': 'Включить',
