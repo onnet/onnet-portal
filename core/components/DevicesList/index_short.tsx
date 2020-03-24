@@ -324,6 +324,7 @@ const DevicesList = props => {
                   style={{ width: isSmallDevice ? '8em' : 'auto' }}
                   prefix={<SearchOutlined />}
                   allowClear
+                  size="small"
                   onChange={onSearchChange}
                 />
               </p>
