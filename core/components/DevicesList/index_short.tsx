@@ -29,6 +29,7 @@ const DevicesList = props => {
   const [isCreateDrawerVisible, setIsCreateDrawerVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(false);
   const [createDeviceType, setCreateDeviceType] = useState('sip_device');
+  const [searchString, setSearchString] = useState('');
 
   const { dispatch, settings, account, brief_devices, full_devices } = props;
   const formRef_sip_device = React.createRef();
@@ -38,7 +39,7 @@ const DevicesList = props => {
 
   useEffect(() => {
     if (brief_devices.data) {
-      setDataSource(brief_devices.data);
+     setDataSource(brief_devices.data);
     } else {
       dispatch({
         type: 'kz_brief_devices/refresh',
@@ -299,6 +300,17 @@ const DevicesList = props => {
 
   const onSearchChange = e => {
     console.log(e);
+    const { value } = e.target;
+    console.log('Value: ',value);
+      if (value.length > 1) {
+
+        const searchRes = _.filter(brief_devices.data, o =>
+          _.includes(_.toString(Object.values(o)).toLowerCase(), value.toLowerCase()),
+        );
+        setDataSource(searchRes);
+      } else {
+        setDataSource(brief_devices.data);
+      }
   };
 
   return (
