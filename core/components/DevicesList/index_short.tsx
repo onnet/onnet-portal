@@ -8,16 +8,17 @@ import {
   DeleteOutlined,
   EditOutlined,
   PlusOutlined,
-  SearchOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import { Drawer, Table, Card, Modal, Switch, Button, Input } from 'antd';
+import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
+import gh_styles from '@/pages/onnet-portal/core/components/HeaderSearch/globhead.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import EditDeviceDrawer from './EditDeviceDrawer';
 import CreateDeviceDrawer from './CreateDeviceDrawer';
 import DeviceType from './DeviceType';
+import HeaderSearch from '../HeaderSearch';
 import { kzDevice, kzDevices } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { confirm } = Modal;
@@ -297,9 +298,7 @@ const DevicesList = props => {
     });
   };
 
-  const onSearchChange = e => {
-    console.log(e);
-    const { value } = e.target;
+  const onSearchChange = value => {
     console.log('Value: ', value);
     if (value.length > 1) {
       const searchRes = _.filter(brief_devices.data, o =>
@@ -329,15 +328,14 @@ const DevicesList = props => {
                   setIsCreateDrawerVisible(true);
                 }}
               />
-              <p style={{ marginLeft: '3em', display: 'inline-flex' }}>
-                <Input
-                  style={{ width: isSmallDevice ? '8em' : 'auto' }}
-                  prefix={<SearchOutlined />}
-                  allowClear
-                  size="small"
-                  onChange={onSearchChange}
-                />
-              </p>
+              <HeaderSearch
+                className={`${gh_styles.action} ${gh_styles.search}`}
+                style={{ marginLeft: '1em', display: 'inline-flex' }}
+                onSearch={value => {
+                  console.log('input', value);
+                }}
+                onChange={onSearchChange}
+              />
               <p style={{ float: 'right', display: 'inline-flex' }}>
                 {!isSmallDevice
                   ? `${formatMessage({

@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { useMediaQuery } from 'react-responsive';
+import * as _ from 'lodash';
 import {
   DeleteOutlined,
   EditOutlined,
@@ -282,11 +283,12 @@ const UsersList = props => {
         <Card.Meta
           title={
             <Fragment>
-              {!isSmallDevice ?
-                formatMessage({
-                  id: 'reseller_portal.accounts_users',
-                  defaultMessage: "Account's Users",
-                }) : null}
+              {!isSmallDevice
+                ? formatMessage({
+                    id: 'reseller_portal.accounts_users',
+                    defaultMessage: "Account's Users",
+                  })
+                : null}
               <UserAddOutlined
                 style={{ color: settings.primaryColor, marginLeft: '1em' }}
                 onClick={() => {
