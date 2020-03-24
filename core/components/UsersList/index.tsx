@@ -218,6 +218,7 @@ const UsersList = props => {
 
   const onDrawerClose = () => {
     setIsDrawerVisible(false);
+    setSelectedUser(false);
   };
 
   const onCloseCancel = () => {

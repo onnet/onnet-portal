@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { useMediaQuery } from 'react-responsive';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { Drawer } from 'antd';
 import EditDevice from './EditDevice';
 import { DeleteOutlined } from '@ant-design/icons';
@@ -25,7 +26,7 @@ const EditDeviceDrawer = props => {
         full_devices[selectedDevice] ? (
           <>
             <b style={{ color: settings.primaryColor }}>
-              {' '}
+              {`${formatMessage({ id: 'core.Device', defaultMessage: 'Device' })}: `}
               {full_devices[selectedDevice].data.name}
             </b>
             <DeleteOutlined
