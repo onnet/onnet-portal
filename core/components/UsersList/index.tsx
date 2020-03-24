@@ -5,10 +5,11 @@ import {
   DeleteOutlined,
   EditOutlined,
   InfoCircleOutlined,
+  SearchOutlined,
   UserAddOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
+import { Drawer, Table, Card, Modal, Switch, Button, Input } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
@@ -261,29 +262,53 @@ const UsersList = props => {
     setIsCreateDrawerVisible(false);
   };
 
+  const onSearchChange = e => {
+    console.log(e);
+    const { value } = e.target;
+    console.log('Value: ', value);
+    if (value.length > 1) {
+      const searchRes = _.filter(brief_users.data, o =>
+        _.includes(_.toString(Object.values(o)).toLowerCase(), value.toLowerCase()),
+      );
+      setDataSource(searchRes);
+    } else {
+      setDataSource(brief_users.data);
+    }
+  };
+
   return (
     <Fragment>
       <Card hoverable className={styles.card} {...cardProps}>
         <Card.Meta
           title={
             <Fragment>
-              {formatMessage({
-                id: 'reseller_portal.accounts_users',
-                defaultMessage: "Account's Users",
-              })}
-              {/*       <CreateUser btnstyle={{ float: 'right1' }} /> */}
+              {!isSmallDevice ?
+                formatMessage({
+                  id: 'reseller_portal.accounts_users',
+                  defaultMessage: "Account's Users",
+                }) : null}
               <UserAddOutlined
                 style={{ color: settings.primaryColor, marginLeft: '1em' }}
                 onClick={() => {
                   setIsCreateDrawerVisible(true);
                 }}
               />
+              <p style={{ marginLeft: '3em', display: 'inline-flex' }}>
+                <Input
+                  style={{ width: isSmallDevice ? '8em' : 'auto' }}
+                  prefix={<SearchOutlined />}
+                  allowClear
+                  size="small"
+                  onChange={onSearchChange}
+                />
+              </p>
               <p style={{ float: 'right', display: 'inline-flex' }}>
-                {formatMessage({
-                  id: 'core.pagination',
-                  defaultMessage: 'pagination',
-                })}
-                :
+                {!isSmallDevice
+                  ? `${formatMessage({
+                      id: 'core.pagination',
+                      defaultMessage: 'pagination',
+                    })}:`
+                  : null}
                 <Switch
                   style={{ marginLeft: '1em', marginTop: '0.4em' }}
                   checked={!!isPaginated}
@@ -295,7 +320,7 @@ const UsersList = props => {
           }
           description={
             <Table
-              dataSource={brief_users.data}
+              dataSource={dataSource}
               columns={columns}
               pagination={isPaginated}
               size="small"
