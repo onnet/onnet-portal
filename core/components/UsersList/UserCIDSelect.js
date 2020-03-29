@@ -92,7 +92,7 @@ const UserCIDSelect = props => {
             showSearch
             defaultValue={mainNumber}
           >
-            {Object.keys(numbers.data.numbers).map(number => (
+            {_.keys(_.get(numbers, 'data.numbers', {})).map(number => (
               <Select.Option value={number} key={number}>
                 {number}
               </Select.Option>
