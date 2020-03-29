@@ -40,6 +40,11 @@ const AuthorityModel: AuthorityModelType = {
             ? ['child_account_selected']
             : []
           : [];
+        const brt_child_selected = redux_state.brt_child_account
+          ? redux_state.brt_child_account.data
+            ? ['brt_child_selected']
+            : []
+          : [];
         const lanbilling = redux_state.lb_account
           ? redux_state.lb_account.data
             ? ['lanbilling']
@@ -57,6 +62,7 @@ const AuthorityModel: AuthorityModelType = {
           lanbilling,
           telephony,
           account_id,
+          brt_child_selected,
         );
         if (!isArrayEqual(authority, redux_state.authority.currentAuthority)) {
           yield put({
