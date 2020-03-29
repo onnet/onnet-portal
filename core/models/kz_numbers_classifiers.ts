@@ -28,10 +28,17 @@ const KzNumbersClassifiersModel: KzNumbersClassifiersModelType = {
   effects: {
     *refresh({ payload }, { call, put }) {
       const response = yield call(numbersClassifiers, payload);
-      yield put({
-        type: 'update',
-        payload: response,
-      });
+      if (response.status === 'success') {
+        yield put({
+          type: 'update',
+          payload: response,
+        });
+      } else {
+        yield put({
+          type: 'update',
+          payload: { data: [], status: response.status },
+        });
+      }
     },
     *flush(_, { put }) {
       yield put({

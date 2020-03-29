@@ -100,7 +100,7 @@ const ResellerUserCIDSelect = props => {
             showSearch
             defaultValue={mainNumber}
           >
-            {Object.keys(child_numbers.data.numbers).map(number => (
+            {_.keys(_.get(child_numbers, 'data.numbers', {})).map(number => (
               <Select.Option value={number} key={number}>
                 {number}
               </Select.Option>
