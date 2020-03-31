@@ -25,3 +25,17 @@ export const masonryBreakpointCols = {
   2500: 2,
   1500: 1,
 };
+
+export const reactJsonProps = {
+  theme: 'rjv-default',
+  collapsed: false,
+  collapseStringsAfter: 15,
+  onAdd: false,
+  onEdit: false,
+  onDelete: false,
+  displayObjectSize: false,
+  enableClipboard: false,
+  indentWidth: 4,
+  displayDataTypes: false,
+  iconStyle: 'triangle',
+};
