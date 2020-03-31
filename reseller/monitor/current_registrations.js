@@ -2,33 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
 import { Tag, Button, Table, Modal, Input } from 'antd';
-
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-
 import Highlighter from 'react-highlight-words';
 import ReactJson from 'react-json-view';
 import AccountName from '@/pages/onnet-portal/core/components/account_name';
+import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 
 function info(reg_details) {
-  const defaultProps = {
-    theme: 'rjv-default',
-    collapsed: false,
-    collapseStringsAfter: 15,
-    onAdd: false,
-    onEdit: false,
-    onDelete: false,
-    displayObjectSize: false,
-    enableClipboard: false,
-    indentWidth: 4,
-    displayDataTypes: false,
-    iconStyle: 'triangle',
-  };
-
   Modal.info({
     title: 'Registration details',
     width: 'max-content',
     maskClosable: true,
-    content: <ReactJson src={reg_details} {...defaultProps} />,
+    content: <ReactJson src={reg_details} {...reactJsonProps} />,
     onOk() {},
   });
 }

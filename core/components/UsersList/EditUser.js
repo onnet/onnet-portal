@@ -10,22 +10,9 @@ import UserDiversion from './UserDiversion';
 import UserDevices from './UserDevices';
 import UserMedia from './UserMedia';
 import UserRestrictions from './UserRestrictions';
+import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 
 const { Panel } = Collapse;
-
-const defaultProps = {
-  theme: 'rjv-default',
-  collapsed: false,
-  collapseStringsAfter: 15,
-  onAdd: false,
-  onEdit: false,
-  onDelete: false,
-  displayObjectSize: false,
-  enableClipboard: false,
-  indentWidth: 4,
-  displayDataTypes: false,
-  iconStyle: 'triangle',
-};
 
 const EditUser = props => {
   const { selectedUser, full_users, account_numbers, brief_devices } = props;
@@ -76,7 +63,7 @@ const EditUser = props => {
         <UserPassword owner_id={selectedUser} />
       </Panel>
       <Panel header={formatMessage({ id: 'core.Details', defaultMessage: 'Details' })} key="3">
-        <ReactJson src={full_users[selectedUser].data} {...defaultProps} />
+        <ReactJson src={full_users[selectedUser].data} {...reactJsonProps} />
       </Panel>
     </Collapse>
   );

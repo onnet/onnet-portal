@@ -12,22 +12,9 @@ import DeviceSIPSettings from './DeviceSIPSettings';
 import DeviceSIPURISettings from './DeviceSIPURISettings';
 import DeviceCellPhoneSettings from './DeviceCellPhoneSettings';
 import DeviceFMCSettings from './DeviceFMCSettings';
+import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 
 const { Panel } = Collapse;
-
-const defaultProps = {
-  theme: 'rjv-default',
-  collapsed: false,
-  collapseStringsAfter: 15,
-  onAdd: false,
-  onEdit: false,
-  onDelete: false,
-  displayObjectSize: false,
-  enableClipboard: false,
-  indentWidth: 4,
-  displayDataTypes: false,
-  iconStyle: 'triangle',
-};
 
 const EditDevice = props => {
   const { selectedDevice, full_devices, disableAssignBtn } = props;
@@ -106,7 +93,7 @@ const EditDevice = props => {
       ) : null}
 
       <Panel header={formatMessage({ id: 'core.Details', defaultMessage: 'Details' })} key="24">
-        <ReactJson src={full_devices[selectedDevice].data} {...defaultProps} />
+        <ReactJson src={full_devices[selectedDevice].data} {...reactJsonProps} />
       </Panel>
     </Collapse>
   );
