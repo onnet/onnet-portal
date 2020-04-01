@@ -1,4 +1,5 @@
 import request from '../utils/request_kazoo';
+import { dateToGregorian } from '@/pages/onnet-portal/core/utils/subroutine';
 
 export const JSON_HEADERS = () => {
   const redux_state = window.g_app._store.getState();
@@ -28,6 +29,13 @@ export const MAYBE_SUPER_DUPER = () => {
   }
   return false;
 };
+
+
+export function timeRange(params) {
+  const TO_TIMESTAMP = params.created_to ? params.created_to : dateToGregorian(new Date());
+  const FROM_TIMESTAMP = params.created_from ? params.created_from : TO_TIMESTAMP - 7776000;
+  return `?created_from=${FROM_TIMESTAMP}&created_to=${TO_TIMESTAMP}`;
+}
 
 export function kzRequest(url, params: FormDataTyp): Promise<any> {
   let dataBag;
