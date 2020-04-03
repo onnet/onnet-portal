@@ -117,6 +117,7 @@ module.exports = {
         "no-console": "off",
         "no-nested-ternary": "off",
         "no-underscore-dangle": "off",
+        'import/no-extraneous-dependencies': 'off',
         "@typescript-eslint/camelcase": "off",
         "@typescript-eslint/consistent-type-assertions": "off",
   },
