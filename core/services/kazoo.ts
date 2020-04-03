@@ -30,7 +30,6 @@ export const MAYBE_SUPER_DUPER = () => {
   return false;
 };
 
-
 export function timeRange(params) {
   const TO_TIMESTAMP = params.created_to ? params.created_to : dateToGregorian(new Date());
   const FROM_TIMESTAMP = params.created_from ? params.created_from : TO_TIMESTAMP - 7776000;
