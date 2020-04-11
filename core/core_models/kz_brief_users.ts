@@ -1,6 +1,6 @@
 import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap } from 'dva';
-import { getUsers } from '@/pages/onnet-portal/core/services/kazoo';
+import { getUsers } from '../services/kazoo';
 
 export type Effect = (
   action: AnyAction,

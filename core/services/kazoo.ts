@@ -1,5 +1,5 @@
 import request from '../utils/request_kazoo';
-import { dateToGregorian } from '@/pages/onnet-portal/core/utils/subroutine';
+import { dateToGregorian } from '../utils/subroutine';
 
 export const JSON_HEADERS = () => {
   const redux_state = window.g_app._store.getState();

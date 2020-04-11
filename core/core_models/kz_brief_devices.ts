@@ -1,6 +1,6 @@
 import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap, saga } from 'dva';
-import { kzDevices } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevices } from '../services/kazoo';
 
 export type Effect = (
   action: AnyAction,

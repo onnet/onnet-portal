@@ -1,7 +1,7 @@
 import { AnyAction, Reducer } from 'redux';
 
 import { EffectsCommandMap } from 'dva';
-import { AccountMedia } from '@/pages/onnet-portal/core/services/kazoo';
+import { AccountMedia } from '../services/kazoo';
 
 export type Effect = (
   action: AnyAction,

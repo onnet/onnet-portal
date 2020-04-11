@@ -1,7 +1,7 @@
 import { AnyAction, Reducer } from 'redux';
 
 import { EffectsCommandMap } from 'dva';
-import { getResellerChildren } from '@/pages/onnet-portal/core/services/kazoo';
+import { getResellerChildren } from '../services/kazoo';
 
 export type Effect = (
   action: AnyAction,

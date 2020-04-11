@@ -1,7 +1,7 @@
 import { AnyAction, Reducer } from 'redux';
 
 import { EffectsCommandMap } from 'dva';
-import { lbAccountInfo } from '@/pages/onnet-portal/core/services/zzlb';
+import { lbAccountInfo } from '../services/zzlb';
 
 export type Effect = (
   action: AnyAction,

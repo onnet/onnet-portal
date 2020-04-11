@@ -1,7 +1,7 @@
 import { AnyAction, Reducer } from 'redux';
 
 import { EffectsCommandMap } from 'dva';
-import { kz_user_auth, checkCurrentAuthToken } from '@/pages/onnet-portal/core/services/kazoo';
+import { kz_user_auth, checkCurrentAuthToken } from '../services/kazoo';
 
 export function setUserLogin(payload) {
   return localStorage.setItem('userLogin', JSON.stringify(payload));
