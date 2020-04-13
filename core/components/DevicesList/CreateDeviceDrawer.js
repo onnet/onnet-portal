@@ -42,8 +42,8 @@ const CreateDeviceDrawer = props => {
           ref={formRef_sip_device}
           initialValues={{
             device_type: 'sip_device',
-            device_username: `user_${cryptoRandomString(7)}`,
-            device_password: `${cryptoRandomString(12)}`,
+            device_username: `user_${cryptoRandomString({length: 7})}`,
+            device_password: `${cryptoRandomString({length: 12})}`,
           }}
         >
           <Form.Item name="device_type" style={{ display: 'none' }}>

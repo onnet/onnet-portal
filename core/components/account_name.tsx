@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import useFetch from 'fetch-suspense';
-import { history, getDvaAppi, connect } from 'umi';
+import { history, getDvaApp, connect } from 'umi';
 import { Button } from 'antd';
 import { JSON_HEADERS } from '@/pages/onnet-portal/core/services/kazoo.ts';
 

@@ -256,8 +256,8 @@ const DevicesList = props => {
     _.set(newDevice, 'accept_charges', true);
     _.set(newDevice, 'suppress_unregister_notifications', true);
     _.set(newDevice, 'register_overwrite_notify', true);
-    _.set(newDevice, 'sip.username', values.device_username || `user_${cryptoRandomString(7)}`);
-    _.set(newDevice, 'sip.password', values.device_password || `${cryptoRandomString(12)}`);
+    _.set(newDevice, 'sip.username', values.device_username || `user_${cryptoRandomString({length: 7})}`);
+    _.set(newDevice, 'sip.password', values.device_password || `${cryptoRandomString({length: 12})}`);
     if (isIp(values.sip_ip_auth)) {
       _.set(newDevice, 'sip.method', 'ip');
       _.set(newDevice, 'sip.ip', values.sip_ip_auth);
