@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { getDvaApp } from 'umi';
+import { formatMessage, connect } from 'umi';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Table } from 'antd';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
@@ -26,7 +26,7 @@ const ResellerChildrenTable = props => {
           size="small"
           type="link"
           onClick={() => {
-            window.g_app._store.dispatch({
+            getDvaApp()._store.dispatch({
               type: 'child_account/refresh',
               payload: { account_id: record.id },
             });

@@ -2,9 +2,10 @@
  * request
  * api : https://github.com/umijs/umi-request
  */
+import { getDvaApp } from 'umi';
 import { extend } from 'umi-request';
 import { notification } from 'antd';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -42,10 +43,10 @@ const errorHandler = error => {
     //      message: `${url}`,
     //    });
     if (status === 401) {
-      const redux_state = window.g_app._store.getState();
+      const redux_state = getDvaApp()._store.getState();
       if (redux_state.kz_login.data) {
         console.log('About to dispatch kz_login/logout');
-        window.g_app._store.dispatch({ type: 'kz_login/logout' });
+        getDvaApp()._store.dispatch({ type: 'kz_login/logout' });
       } else {
         notification.error({
           message: formatMessage({ id: 'core.auth_error', defaultMessage: 'Error' }),

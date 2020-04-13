@@ -1,3 +1,4 @@
+import { getDvaApp } from 'umi';
 import React from 'react';
 // eslint-disable-next-line import/no-cycle
 import PromiseRender from './PromiseRender';
@@ -29,7 +30,7 @@ const checkPermissions = <T, K>(
     return target;
   }
 
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const currentAuthority = redux_state.authority ? redux_state.authority.currentAuthority : [];
   const authorityException = authority
     .filter(element => element.startsWith('!'))

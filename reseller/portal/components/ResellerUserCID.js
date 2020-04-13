@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { Table, Card } from 'antd';
 
 import RsChildUserParagraph from './RsChildUserParagraph';

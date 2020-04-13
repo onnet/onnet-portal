@@ -1,12 +1,6 @@
-import { AnyAction, Reducer } from 'redux';
-
+import { Effect, Reducer, getDvaApp } from 'umi';
 import { EffectsCommandMap } from 'dva';
 import { getUser } from '../services/kazoo';
-
-export type Effect = (
-  action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
-) => void;
 
 export interface KazooUserModelType {
   namespace: 'kz_user';
@@ -40,7 +34,7 @@ const KazooUserModel: KazooUserModelType = {
             },
           },
         });
-        window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
+        getDvaApp()._store.dispatch({ type: 'authority/refresh', payload: {} });
         return;
       }
       const response = yield call(getUser, payload);
@@ -55,7 +49,7 @@ const KazooUserModel: KazooUserModelType = {
           payload: {},
         });
       }
-      window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
+      getDvaApp()._store.dispatch({ type: 'authority/refresh', payload: {} });
     },
     *flush(_, { put }) {
       yield put({

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { Table } from 'antd';
 import UserParagraph from './UserParagraph';
 import UserSwitch from './UserSwitch';

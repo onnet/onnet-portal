@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import * as _ from 'lodash';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
 

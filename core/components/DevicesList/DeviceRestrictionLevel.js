@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'dva';
 import * as _ from 'lodash';
 
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 

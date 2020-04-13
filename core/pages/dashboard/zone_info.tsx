@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { connect } from 'dva';
-import router from 'umi/router';
-import Redirect from 'umi/redirect';
+import { Redirect, history } from 'umi';
 import JSONPretty from 'react-json-pretty';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Tabs, Card, Table, Typography, Spin } from 'antd';
@@ -21,7 +20,7 @@ const ZoneInfo = props => {
   useEffect(() => {
     if (kz_account.data) {
       if (!kz_account.data.superduper_admin) {
-        router.push('/int/dashboard');
+        history.push('/int/dashboard');
       }
     }
   }, [kz_account, kz_system_status]);
@@ -165,7 +164,7 @@ const ZoneInfo = props => {
   ];
 
   function callback(e) {
-    router.push({ pathname: '/int/zone', state: { zone: e } });
+    history.push({ pathname: '/int/zone', state: { zone: e } });
   }
 
   const items = list.map(item => (

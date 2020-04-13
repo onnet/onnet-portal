@@ -1,7 +1,8 @@
+import { getDvaApp } from 'umi';
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Select } from 'antd';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 
 const { Option } = Select;
 
@@ -14,7 +15,7 @@ function fetch(value, callback) {
   }
 
   function fake() {
-    const redux_state = window.g_app._store.getState();
+    const redux_state = getDvaApp()._store.getState();
     const data = [];
     redux_state.kz_children.data.forEach(d => {
       if (d.name.toLowerCase().includes(value.toLowerCase())) {
@@ -48,7 +49,7 @@ class ResellerChildSearch extends Component {
   };
 
   handleSelect = value => {
-    window.g_app._store.dispatch({
+    getDvaApp()._store.dispatch({
       type: 'child_account/refresh',
       payload: { account_id: value },
     });

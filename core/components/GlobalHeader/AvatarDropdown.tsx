@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu } from 'antd';
 import { ClickParam } from 'antd/es/menu';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import { connect } from 'dva';
-import router from 'umi/router';
+import { history, connect, FormattedMessage } from 'umi';
 import EditUserDrawer from '@/pages/onnet-portal/core/components/UsersList/EditUserDrawer';
 
 import HeaderDropdown from '../HeaderDropdown';
@@ -28,7 +26,7 @@ const AvatarDropdown = props => {
     } else if (key === 'user_profile') {
       setIsDrawerVisible(true);
     } else {
-      router.push(`/int/${key}`);
+      history.push(`/int/${key}`);
     }
   };
 

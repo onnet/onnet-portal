@@ -1,8 +1,9 @@
+import { getDvaApp } from 'umi';
 import request from '../utils/request_kazoo';
 import { JSON_HEADERS, PDF_HEADERS } from './kazoo';
 
 function accountsUrl(params) {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}`;
   console.log(url);

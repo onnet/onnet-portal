@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 import MoneyFormat from '@/pages/onnet-portal/core/components/MoneyFormat';
 import Highlighter from 'react-highlight-words';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 

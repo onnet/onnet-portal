@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { Card, Switch } from 'antd';
 import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
 import * as _ from 'lodash';

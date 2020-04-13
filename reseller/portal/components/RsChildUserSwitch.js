@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import * as _ from 'lodash';
 
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { Switch, Modal } from 'antd';
 
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';

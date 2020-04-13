@@ -1,8 +1,6 @@
 import md5 from 'md5';
 import React from 'react';
-import { connect } from 'dva';
-import Redirect from 'umi/redirect';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage, Redirect, connect } from 'umi';
 
 import { Card, Button, Input, Form } from 'antd';
 
@@ -33,13 +31,14 @@ const LoginForm = props => {
   };
 
   const onFinish = values => {
-    console.log('Success:', values);
+    console.log('kz_login IAM1:', kz_login);
+    console.log('SuccessIAM1:', values);
     const { username, password, accountname } = values;
     const hashedCreds = md5(`${username}:${password}`);
     const data = { credentials: hashedCreds, account_name: accountname, method: 'md5' };
     console.log(values);
     console.log(accountname);
-    console.log(data);
+    console.log('DataIAM1: ', data);
     dispatch({
       type: 'kz_login/login',
       payload: { data, type: 'account' },

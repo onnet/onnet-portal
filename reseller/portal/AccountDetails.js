@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'dva';
 import * as _ from 'lodash';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import funReactJson from '@/pages/onnet-portal/core/components/info_details';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Table, Button, Card, Switch, Typography } from 'antd';

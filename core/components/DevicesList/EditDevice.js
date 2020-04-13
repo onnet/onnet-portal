@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Collapse } from 'antd';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import ReactJson from 'react-json-view';
 import DeviceCID from './DeviceCID';
 import DeviceDiversion from './DeviceDiversion';

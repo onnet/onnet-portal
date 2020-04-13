@@ -1,7 +1,7 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
 
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 
 const MoneyFormat = props => {
   const { amount, prefix } = props;

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
 import { Table, Card } from 'antd';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import MoneyFormat from '@/pages/onnet-portal/core/components/MoneyFormat';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 

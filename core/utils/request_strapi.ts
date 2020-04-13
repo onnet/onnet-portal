@@ -2,6 +2,7 @@
  * request
  * api : https://github.com/umijs/umi-request
  */
+import { getDvaApp } from 'umi';
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 
@@ -36,7 +37,7 @@ const errorHandler = error => {
     });
     if (status === '401') {
       console.log('About to dispatch kz_login/logout');
-      window.g_app._store.dispatch({ type: 'kz_login/logout' });
+      getDvaApp()._store.dispatch({ type: 'kz_login/logout' });
     }
   }
   return response;

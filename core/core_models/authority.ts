@@ -1,11 +1,5 @@
-import { AnyAction, Reducer } from 'redux';
-import { EffectsCommandMap } from 'dva';
 import { isArrayEqual } from '../utils/subroutine';
-
-export type Effect = (
-  action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
-) => void;
+import { Effect, Reducer, getDvaApp } from 'umi';
 
 export interface AuthorityModelType {
   namespace: 'authority';
@@ -27,7 +21,7 @@ const AuthorityModel: AuthorityModelType = {
   effects: {
     *refresh(_, { put }) {
       try {
-        const redux_state = window.g_app._store.getState();
+        const redux_state = getDvaApp()._store.getState();
         const priv_level = redux_state.kz_user.data.priv_level
           ? [redux_state.kz_user.data.priv_level]
           : [];

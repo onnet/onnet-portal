@@ -1,8 +1,9 @@
+import { getDvaApp } from 'umi';
 import request from '../utils/request_kazoo';
 import { dateToGregorian } from '../utils/subroutine';
 
 export const JSON_HEADERS = () => {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   return {
     'Content-Type': 'application/json; charset=utf-8',
     Accept: 'application/json',
@@ -11,7 +12,7 @@ export const JSON_HEADERS = () => {
 };
 
 export const PDF_HEADERS = () => {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   return {
     'Content-Type': 'application/json; charset=utf-8',
     Accept: 'application/pdf',
@@ -20,7 +21,7 @@ export const PDF_HEADERS = () => {
 };
 
 export const MAYBE_SUPER_DUPER = () => {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   if (redux_state.kz_account.data) {
     if (redux_state.kz_account.data.superduper_admin) {
       return redux_state.kz_account.data.superduper_admin === true;
@@ -60,7 +61,7 @@ export function kzRequest(url, params: FormDataTyp): Promise<any> {
 }
 
 export async function kz_user_auth(params) {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const result = request(`${API_URL_V2}/user_auth`, {
     method: 'PUT',
@@ -70,7 +71,7 @@ export async function kz_user_auth(params) {
 }
 
 export async function getUser(params: FormDataTyp): Promise<any> {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/users/${params.owner_id}`;
   return request(url, {
@@ -80,7 +81,7 @@ export async function getUser(params: FormDataTyp): Promise<any> {
 }
 
 export async function getUsers(params: FormDataTyp): Promise<any> {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/users/`;
   return request(url, {
@@ -90,14 +91,14 @@ export async function getUsers(params: FormDataTyp): Promise<any> {
 }
 
 function userUrl(params) {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/users/${params.owner_id}`;
   return url;
 }
 
 function usersUrl(params) {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/users`;
   return url;
@@ -114,7 +115,7 @@ export function kzUser(params: FormDataTyp) {
 
 export function accountsUrl(params) {
   let url;
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   if (MAYBE_SUPER_DUPER() && params.method === 'PUT') {
     url = `${API_URL_V2}/accounts`;
@@ -144,14 +145,14 @@ export async function aGetAccount(params: FormDataTyp): Promise<any> {
 }
 
 export function resellerStatus(params) {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/reseller`;
   return kzRequest(url, params);
 }
 
 export async function getResellerChildren(params: FormDataTyp): Promise<any> {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/children`;
   return request(url, {
@@ -161,7 +162,7 @@ export async function getResellerChildren(params: FormDataTyp): Promise<any> {
 }
 
 export async function getResellerSIPRegistrations(params: FormDataTyp): Promise<any> {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = redux_state.kz_account.data.superduper_admin
     ? `${API_URL_V2}/registrations`
@@ -173,7 +174,7 @@ export async function getResellerSIPRegistrations(params: FormDataTyp): Promise<
 }
 
 export async function SIPRegistrationsCount(params: FormDataTyp): Promise<any> {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = redux_state.kz_account.data.superduper_admin
     ? `${API_URL_V2}/registrations/count`
@@ -185,7 +186,7 @@ export async function SIPRegistrationsCount(params: FormDataTyp): Promise<any> {
 }
 
 export function getResellerChannels(params: FormDataTyp): Promise<any> {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = redux_state.kz_account.data.superduper_admin
     ? `${API_URL_V2}/channels`
@@ -197,7 +198,7 @@ export function getResellerChannels(params: FormDataTyp): Promise<any> {
 }
 
 export async function checkCurrentAuthToken(): Promise<any> {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/auth/tokeninfo?token=${redux_state.kz_login.auth_token}`;
   return request(url, {
@@ -207,7 +208,7 @@ export async function checkCurrentAuthToken(): Promise<any> {
 }
 
 export async function kzSystemStatus(): Promise<any> {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/system_status`;
   return request(url, {
@@ -225,14 +226,14 @@ export function numbersClassifiers(params: FormDataTyp): Promise<any> {
 }
 
 function deviceUrl(params) {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/devices/${params.device_id}`;
   return url;
 }
 
 function devicesUrl(params) {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${params.account_id}/devices`;
   return url;

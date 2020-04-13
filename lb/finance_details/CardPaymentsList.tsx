@@ -2,7 +2,7 @@ import React from 'react';
 import NumberFormat from 'react-number-format';
 import { Table, Card } from 'antd';
 
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 

@@ -1,12 +1,6 @@
-import { AnyAction, Reducer } from 'redux';
-
+import { Effect, Reducer, getDvaApp } from 'umi';
 import { EffectsCommandMap } from 'dva';
 import { lbAccountInfo } from '../services/zzlb';
-
-export type Effect = (
-  action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
-) => void;
 
 export interface LbAccountModelType {
   namespace: 'lb_account';
@@ -27,7 +21,7 @@ const LbAccountModel: LbAccountModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const redux_state = window.g_app._store.getState();
+      const redux_state = getDvaApp()._store.getState();
       if (!redux_state.lb_account.disabled) {
         const response = yield call(lbAccountInfo, payload);
         if (response.status === 404) {
@@ -40,7 +34,7 @@ const LbAccountModel: LbAccountModelType = {
             type: 'update',
             payload: response,
           });
-          window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
+          getDvaApp()._store.dispatch({ type: 'authority/refresh', payload: {} });
         }
       }
     },

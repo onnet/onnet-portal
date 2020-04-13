@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { Table } from 'antd';
 import DeviceParagraph from './DeviceParagraph';
 import DeviceSwitch from './DeviceSwitch';

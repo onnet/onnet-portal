@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';

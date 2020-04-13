@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'dva';
-import router from 'umi/router';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { history } from 'umi';
+import { formatMessage } from 'umi';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Menu, Dropdown, Modal, message, Avatar, List } from 'antd';
 
@@ -92,9 +92,9 @@ const ResellerPortal = props => {
       type: 'child_numbers/flush',
     });
     if (child_account.data.is_reseller1) {
-      router.push('/int/reseller_portal/accounts');
+      history.push('/int/reseller_portal/accounts');
     } else {
-      router.push('/int/dashboard');
+      history.push('/int/dashboard');
     }
   }
 

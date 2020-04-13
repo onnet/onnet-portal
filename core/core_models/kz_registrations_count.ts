@@ -1,12 +1,6 @@
-import { AnyAction, Reducer } from 'redux';
-
+import { Effect, Reducer, getDvaApp } from 'umi';
 import { EffectsCommandMap } from 'dva';
 import { SIPRegistrationsCount } from '../services/kazoo';
-
-export type Effect = (
-  action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
-) => void;
 
 export interface RsRegistrationsCountModelType {
   namespace: 'kz_registrations_count';
@@ -27,7 +21,7 @@ const RsRegistrationsCountModel: RsRegistrationsCountModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const redux_state = window.g_app._store.getState();
+      const redux_state = getDvaApp()._store.getState();
       if (redux_state.kz_account.data) {
         const response = yield call(SIPRegistrationsCount, payload);
         yield put({

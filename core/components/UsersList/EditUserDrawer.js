@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Drawer } from 'antd';
 import { useMediaQuery } from 'react-responsive';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import * as _ from 'lodash';
 import EditUser from './EditUser';
 

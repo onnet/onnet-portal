@@ -5,7 +5,7 @@ import { Table, Card, Button, message } from 'antd';
 import { Form, Input } from 'formik-antd';
 import { Formik } from 'formik';
 import { createProformaInvoice, onbillsAttachment } from '@/pages/onnet-portal/core/services/zzapp';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import styles from '@/pages/onnet-portal/core/style.less';
 
 const CardWireTransfer = props => {

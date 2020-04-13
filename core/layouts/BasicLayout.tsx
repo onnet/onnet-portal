@@ -1,8 +1,3 @@
-/**
- * Ant Design Pro v4 use `@ant-design/pro-layout` to handle Layout.
- * You can view component api by:
- * https://github.com/ant-design/ant-design-pro-layout
- */
 import ProLayout, {
   MenuDataItem,
   BasicLayoutProps as ProLayoutProps,
@@ -10,9 +5,7 @@ import ProLayout, {
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
-import Link from 'umi/link';
-import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage, Link, connect } from 'umi';
 import Authorized from '../utils/Authorized';
 import RightContent from '../components/GlobalHeader/RightContent';
 

@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import useFetch from 'fetch-suspense';
-import { connect } from 'dva';
-import router from 'umi/router';
+import { history, getDvaAppi, connect } from 'umi';
 import { Button } from 'antd';
 import { JSON_HEADERS } from '@/pages/onnet-portal/core/services/kazoo.ts';
 
@@ -10,11 +9,11 @@ const MyLink = props => (
     size="small"
     type="link"
     onClick={() => {
-      window.g_app._store.dispatch({
+      getDvaApp()._store.dispatch({
         type: 'child_account/refresh',
         payload: { account_id: props.account_id },
       });
-      router.push('/int/reseller_portal/accounts');
+      history.push('/int/reseller_portal/accounts');
     }}
   >
     {props.children}
@@ -22,7 +21,7 @@ const MyLink = props => (
 );
 
 const FetchNameByAccount = account_id => {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${account_id}`;
   const response = useFetch(url, { method: 'GET', headers: JSON_HEADERS() });
@@ -42,7 +41,7 @@ const FetchNameByAccount = account_id => {
 };
 
 const MaybeFetchByNumber = number => {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const { account_id } = redux_state.kz_login.data;
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${account_id}/phone_numbers/${number}/identify`;
@@ -51,7 +50,7 @@ const MaybeFetchByNumber = number => {
 };
 
 const MaybeFetchByRealm = realm => {
-  const redux_state = window.g_app._store.getState();
+  const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/search?t=account&q=realm&v=${realm}`;
   const response = useFetch(url, { method: 'GET', headers: JSON_HEADERS() });

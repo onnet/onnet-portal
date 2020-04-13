@@ -1,3 +1,4 @@
+import { getDvaApp } from 'umi';
 import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap } from 'dva';
 
@@ -33,19 +34,19 @@ const Model: ModelType = {
       const owner_id = state.mask_history.children.owner_id
         ? state.mask_history.children.owner_id
         : state.kz_login.data.owner_id;
-      yield window.g_app._store.dispatch({
+      yield getDvaApp()._store.dispatch({
         type: 'lb_account/refresh',
         payload: { account_id },
       });
-      yield window.g_app._store.dispatch({
+      yield getDvaApp()._store.dispatch({
         type: 'kz_account/refresh',
         payload: { account_id },
       });
-      yield window.g_app._store.dispatch({
+      yield getDvaApp()._store.dispatch({
         type: 'kz_user/refresh',
         payload: { account_id, owner_id },
       });
-      yield window.g_app._store.dispatch({
+      yield getDvaApp()._store.dispatch({
         type: 'child_account/refresh',
         payload: { account_id: state.mask_history.account_id },
       });
@@ -54,7 +55,7 @@ const Model: ModelType = {
       });
     },
     *mask({ payload }, { put }) {
-      yield window.g_app._store.dispatch({
+      yield getDvaApp()._store.dispatch({
         type: 'lb_account/refresh',
         payload: { account_id: payload.account_id },
       });

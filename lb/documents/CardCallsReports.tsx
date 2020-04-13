@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Card } from 'antd';
 
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import Moment from 'react-moment';
 import LbDownloadDoc from './LbDownloadDoc';
 

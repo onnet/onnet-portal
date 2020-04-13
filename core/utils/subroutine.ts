@@ -1,10 +1,11 @@
+import { getDvaApp } from 'umi';
 import * as _ from 'lodash';
 
 export function runAndDispatch(fnName, dsName, params) {
   fnName(params).then(res => {
     console.log('res');
     console.log(res);
-    window.g_app._store.dispatch({
+    getDvaApp()._store.dispatch({
       type: dsName,
       payload: res,
     });

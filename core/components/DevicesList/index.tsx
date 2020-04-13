@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import * as _ from 'lodash';
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch } from 'antd';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import CreateDevice from './CreateDevice';

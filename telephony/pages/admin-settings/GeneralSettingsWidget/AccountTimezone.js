@@ -6,7 +6,7 @@ import { connect } from 'dva';
 import moment from 'moment';
 import 'moment-timezone';
 
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
 

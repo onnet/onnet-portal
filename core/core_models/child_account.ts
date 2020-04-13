@@ -1,11 +1,5 @@
-import { AnyAction, Reducer } from 'redux';
-import { EffectsCommandMap } from 'dva';
 import { aGetAccount } from '../services/kazoo';
-
-export type Effect = (
-  action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
-) => void;
+import { Effect, Reducer, getDvaApp } from 'umi';
 
 export interface ModelType {
   namespace: string;
@@ -31,16 +25,16 @@ const Model: ModelType = {
         type: 'update',
         payload: response,
       });
-      window.g_app._store.dispatch({ type: 'child_brief_users/refresh', payload });
-      window.g_app._store.dispatch({ type: 'child_numbers/refresh', payload });
-      window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
+      getDvaApp()._store.dispatch({ type: 'child_brief_users/refresh', payload });
+      getDvaApp()._store.dispatch({ type: 'child_numbers/refresh', payload });
+      getDvaApp()._store.dispatch({ type: 'authority/refresh', payload: {} });
     },
     *flush(_, { put }) {
       yield put({
         type: 'update',
         payload: {},
       });
-      window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
+      getDvaApp()._store.dispatch({ type: 'authority/refresh', payload: {} });
     },
   },
 

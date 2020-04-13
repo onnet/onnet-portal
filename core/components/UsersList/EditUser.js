@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Collapse } from 'antd';
 import * as _ from 'lodash';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import ReactJson from 'react-json-view';
 import UserPassword from './UserPassword';
 import UserCID from './UserCID';

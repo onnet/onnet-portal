@@ -1,3 +1,4 @@
+import { getDvaApp } from 'umi';
 import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap } from 'dva';
 import { getUsers } from '@/pages/onnet-portal/core/services/kazoo';
@@ -26,14 +27,14 @@ const Model: ModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const redux_state = window.g_app._store.getState();
+      const redux_state = getDvaApp()._store.getState();
       const response = yield call(getUsers, payload);
       yield put({
         type: 'update',
         payload: response,
       });
       response.data.map(user =>
-        window.g_app._store.dispatch({
+        getDvaApp()._store.dispatch({
           type: 'child_full_users/refresh',
           payload: { account_id: redux_state.child_account.data.id, owner_id: user.id },
         }),

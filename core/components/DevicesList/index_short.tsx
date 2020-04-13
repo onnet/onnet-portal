@@ -11,7 +11,7 @@ import {
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import styles from '@/pages/onnet-portal/core/style.less';
 import gh_styles from '@/pages/onnet-portal/core/components/HeaderSearch/globhead.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';

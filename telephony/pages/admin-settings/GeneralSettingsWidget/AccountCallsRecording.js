@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'dva';
 
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 import { Modal, Switch } from 'antd';
 
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';

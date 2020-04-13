@@ -1,12 +1,5 @@
-import { AnyAction, Reducer } from 'redux';
-
-import { EffectsCommandMap } from 'dva';
+import { Effect, Reducer, getDvaApp } from 'umi';
 import { aGetAccount } from '../services/kazoo';
-
-export type Effect = (
-  action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
-) => void;
 
 export interface KazooAccountModelType {
   namespace: 'kz_account';
@@ -27,19 +20,22 @@ const KazooAccountModel: KazooAccountModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
+
+    console.log('IAMMM  kz_account/refresh payload: ', payload);
+
       const response = yield call(aGetAccount, payload);
       yield put({
         type: 'update',
         payload: response,
       });
-      yield window.g_app._store.dispatch({
+      yield getDvaApp()._store.dispatch({
         type: 'lb_account/refresh',
         payload: { account_id: response.data.id },
       });
-      window.g_app._store.dispatch({ type: 'authority/refresh', payload: {} });
-      window.g_app._store.dispatch({ type: 'kz_brief_users/refresh', payload });
-      window.g_app._store.dispatch({ type: 'kz_brief_devices/refresh', payload });
-      window.g_app._store.dispatch({ type: 'kz_numbers/refresh', payload });
+      getDvaApp()._store.dispatch({ type: 'authority/refresh', payload: {} });
+      getDvaApp()._store.dispatch({ type: 'kz_brief_users/refresh', payload });
+      getDvaApp()._store.dispatch({ type: 'kz_brief_devices/refresh', payload });
+      getDvaApp()._store.dispatch({ type: 'kz_numbers/refresh', payload });
     },
     *flush(_, { put }) {
       yield put({

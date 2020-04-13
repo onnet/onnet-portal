@@ -3,8 +3,7 @@
 import React, { useEffect } from 'react';
 import Raphael from 'raphael';
 import { connect } from 'dva';
-import router from 'umi/router';
-import Redirect from 'umi/redirect';
+import { Redirect, history } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 const myGraph = (system_status, kz_registrations_count) =>
@@ -110,7 +109,7 @@ const SuperDuperDashboard = props => {
           });
           p.click(function() {
             console.log(`/dashboard/${values[j].label}`);
-            router.push({ pathname: '/int/zone', state: { zone: values[j].label } });
+            history.push({ pathname: '/int/zone', state: { zone: values[j].label } });
           });
           paper
             .text(
@@ -126,7 +125,7 @@ const SuperDuperDashboard = props => {
               'font-size': 20,
             })
             .click(function() {
-              router.push({ pathname: '/int/zone', state: { zone: values[j].label } });
+              history.push({ pathname: '/int/zone', state: { zone: values[j].label } });
             });
           paper
             .text(
@@ -142,7 +141,7 @@ const SuperDuperDashboard = props => {
               'font-size': 20,
             })
             .click(function() {
-              router.push({ pathname: '/int/zone', state: { zone: values[j].label } });
+              history.push({ pathname: '/int/zone', state: { zone: values[j].label } });
             });
           angle += angleplus;
         };
@@ -160,13 +159,13 @@ const SuperDuperDashboard = props => {
           .circle(cx, cy, r / 3)
           .attr({ fill: '#fff', stroke: '#fff', cursor: 'pointer' })
           .click(function() {
-            router.push(`/int/reseller_portal/monitor/sip_registrations`);
+            history.push(`/int/reseller_portal/monitor/sip_registrations`);
           });
         paper
           .text(cx, cy, `Registrations\n${total_reg_count}`)
           .attr({ 'font-size': '14', cursor: 'pointer' })
           .click(function() {
-            router.push(`/int/reseller_portal/monitor/sip_registrations`);
+            history.push(`/int/reseller_portal/monitor/sip_registrations`);
           });
       };
       document.getElementById('registrations_pie_div').innerHTML = '';

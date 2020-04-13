@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Form, Row, Col, Input } from 'antd';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi';
 
 const CreateDeviceDrawer = props => {
   const { formRef, onFinish } = props;
