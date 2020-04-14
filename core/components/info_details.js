@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
 import { Modal } from 'antd';
-import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
+import { reactJsonProps } from '../utils/props';
 
 export default function funReactJson(info_details) {
   Modal.info({
