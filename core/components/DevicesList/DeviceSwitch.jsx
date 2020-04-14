@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import { formatMessage } from 'umi';
 import { Switch, Modal } from 'antd';
 
-import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevice } from '../../services/kazoo';
 
 const { confirm } = Modal;
 

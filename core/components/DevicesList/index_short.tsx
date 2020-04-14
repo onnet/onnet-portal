@@ -12,14 +12,14 @@ import {
 } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import { formatMessage } from 'umi';
-import styles from '@/pages/onnet-portal/core/style.less';
-import gh_styles from '@/pages/onnet-portal/core/components/HeaderSearch/globhead.less';
-import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+import styles from '../../style.less';
+import gh_styles from '../../components/HeaderSearch/globhead.less';
+import { cardProps } from '../../utils/props';
 import EditDeviceDrawer from './EditDeviceDrawer';
 import CreateDeviceDrawer from './CreateDeviceDrawer';
 import DeviceType from './DeviceType';
 import HeaderSearch from '../HeaderSearch';
-import { kzDevice, kzDevices } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevice, kzDevices } from '../../services/kazoo';
 
 const { confirm } = Modal;
 

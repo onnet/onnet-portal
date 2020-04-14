@@ -2,12 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi';
 import { Card, Switch } from 'antd';
-import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzUser } from '../../services/kazoo';
 import * as _ from 'lodash';
 import { useMediaQuery } from 'react-responsive';
 
 import styles from '../style.less';
-import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+import { cardProps } from '../../utils/props';
 
 const UserMedia = props => {
   const [audioCodecs, setAudioCodecs] = useState([]);

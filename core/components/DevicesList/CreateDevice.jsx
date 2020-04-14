@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi';
-import { kzDevices } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevices } from '../../services/kazoo';
 
 import { PlusOutlined } from '@ant-design/icons';
 

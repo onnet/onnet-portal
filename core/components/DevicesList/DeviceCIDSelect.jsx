@@ -8,7 +8,7 @@ import { formatMessage } from 'umi';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
 
-import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevice } from '../../services/kazoo';
 
 const CIDSelect = props => {
   const [tzButtonVisible, setTzButtonVisible] = useState(false);

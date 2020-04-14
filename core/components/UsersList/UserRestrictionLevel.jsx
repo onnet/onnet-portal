@@ -8,7 +8,7 @@ import { formatMessage } from 'umi';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 
-import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzUser } from '../../services/kazoo';
 
 const { confirm } = Modal;
 

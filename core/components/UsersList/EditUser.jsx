@@ -10,7 +10,7 @@ import UserDiversion from './UserDiversion';
 import UserDevices from './UserDevices';
 import UserMedia from './UserMedia';
 import UserRestrictions from './UserRestrictions';
-import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
+import { reactJsonProps } from '../../utils/props';
 
 const { Panel } = Collapse;
 

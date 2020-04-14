@@ -9,7 +9,7 @@ import DeviceSwitch from './DeviceSwitch';
 import DeviceSetSelect from './DeviceSetSelect';
 import DeviceMusicOnHold from './DeviceMusicOnHold';
 import DeviceAssignTo from './DeviceAssignTo';
-import { AccountDialplans } from '@/pages/onnet-portal/core/services/kazoo';
+import { AccountDialplans } from '../../services/kazoo';
 
 const DeviceSIPSettings = props => {
   const [accountDialplans, setAccountDialplans] = useState({});

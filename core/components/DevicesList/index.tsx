@@ -4,13 +4,13 @@ import * as _ from 'lodash';
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch } from 'antd';
 import { formatMessage } from 'umi';
-import styles from '@/pages/onnet-portal/core/style.less';
-import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+import styles from '../../style.less';
+import { cardProps } from '../../utils/props';
 import CreateDevice from './CreateDevice';
 import EditDevice from './EditDevice';
 import DeviceType from './DeviceType';
-import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
-import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
+import info_details_fun from '../../components/info_details';
+import { kzDevice } from '../../services/kazoo';
 
 const { confirm } = Modal;
 

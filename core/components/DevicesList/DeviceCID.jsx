@@ -5,7 +5,7 @@ import { Table, Card } from 'antd';
 import DeviceParagraph from './DeviceParagraph';
 import DeviceCIDSelect from './DeviceCIDSelect';
 import styles from '../style.less';
-import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+import { cardProps } from '../../utils/props';
 
 const DeviceCID = props => {
   const { device_id } = props;

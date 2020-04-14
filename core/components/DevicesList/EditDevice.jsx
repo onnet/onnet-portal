@@ -12,7 +12,7 @@ import DeviceSIPSettings from './DeviceSIPSettings';
 import DeviceSIPURISettings from './DeviceSIPURISettings';
 import DeviceCellPhoneSettings from './DeviceCellPhoneSettings';
 import DeviceFMCSettings from './DeviceFMCSettings';
-import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
+import { reactJsonProps } from '../../utils/props';
 
 const { Panel } = Collapse;
 

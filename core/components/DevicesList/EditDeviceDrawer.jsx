@@ -6,7 +6,7 @@ import { Drawer } from 'antd';
 import EditDevice from './EditDevice';
 import { DeleteOutlined } from '@ant-design/icons';
 
-import styles from '@/pages/onnet-portal/core/style.less';
+import styles from '../../style.less';
 
 const EditDeviceDrawer = props => {
   const {

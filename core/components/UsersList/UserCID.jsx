@@ -5,7 +5,7 @@ import { Table, Card } from 'antd';
 import UserParagraph from './UserParagraph';
 import UserCIDSelect from './UserCIDSelect';
 import styles from '../style.less';
-import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+import { cardProps } from '../../utils/props';
 
 const UserCID = props => {
   const { owner_id } = props;

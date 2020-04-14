@@ -7,7 +7,7 @@ import { formatMessage } from 'umi';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
 
-import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevice } from '../../services/kazoo';
 
 const DeviceAssignTo = props => {
   const [buttonVisible, setButtonVisible] = useState(false);

@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi';
 import { Card, Switch, Badge, Modal } from 'antd';
-import { kzDevice } from '@/pages/onnet-portal/core/services/kazoo';
+import { kzDevice } from '../../services/kazoo';
 import * as _ from 'lodash';
 import { EditOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { useMediaQuery } from 'react-responsive';
