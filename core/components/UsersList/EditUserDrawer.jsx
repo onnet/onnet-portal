@@ -1,14 +1,14 @@
 import React from 'react';
-import { connect } from 'dva';
 import { Drawer } from 'antd';
 import { useMediaQuery } from 'react-responsive';
-import { formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
 import EditUser from './EditUser';
 
 const EditUserDrawer = props => {
   const { settings, full_users, selectedUser, onDrawerClose, isDrawerVisible } = props;
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
+  const { formatMessage } = useIntl();
 
   return (
     <Drawer
