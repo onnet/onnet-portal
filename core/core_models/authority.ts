@@ -26,6 +26,7 @@ const AuthorityModel: AuthorityModelType = {
           ? [redux_state.kz_user.data.priv_level]
           : [];
         const reseller = redux_state.kz_account.data.is_reseller ? ['reseller'] : [];
+        const login_as_master = redux_state.kz_login.data.is_master_account ? ['login_as_master'] : [];
         const superduper_admin = redux_state.kz_account.data.superduper_admin
           ? ['superduper_admin']
           : [];
@@ -51,6 +52,7 @@ const AuthorityModel: AuthorityModelType = {
         const account_id = redux_state.kz_account.data ? [redux_state.kz_account.data.id] : [];
         const authority = priv_level.concat(
           reseller,
+          login_as_master,
           superduper_admin,
           child_account_selected,
           lanbilling,
