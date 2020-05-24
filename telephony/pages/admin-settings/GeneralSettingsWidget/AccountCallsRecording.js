@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React from 'react';
-import { connect } from 'dva';
-
-import { formatMessage } from 'umi';
+import { connect,formatMessage } from 'umi';
 import { Modal, Switch } from 'antd';
 
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';

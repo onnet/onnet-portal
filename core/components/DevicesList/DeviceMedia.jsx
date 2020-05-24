@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect } from 'dva';
-import { formatMessage } from 'umi';
+import { connect, formatMessage } from 'umi';
 import { Card, Switch } from 'antd';
 import { kzDevice } from '../../services/kazoo';
 import * as _ from 'lodash';

@@ -1,9 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect } from 'dva';
+import { connect, formatMessage } from 'umi';
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useMediaQuery } from 'react-responsive';
 import { Drawer, Table, Card, Modal, Switch } from 'antd';
-import { formatMessage } from 'umi';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import ResellerCreateUser from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateUser';

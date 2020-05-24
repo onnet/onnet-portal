@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect } from 'dva';
-
+import { connect, formatMessage } from 'umi';
 import moment from 'moment';
 import 'moment-timezone';
 
-import { formatMessage } from 'umi';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
 

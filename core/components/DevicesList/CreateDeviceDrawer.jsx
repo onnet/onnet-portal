@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'dva';
+import { connect, formatMessage } from 'umi';
 import { Form, Row, Col, Input, Tabs } from 'antd';
-import { formatMessage } from 'umi';
 
 import cryptoRandomString from 'crypto-random-string';
 

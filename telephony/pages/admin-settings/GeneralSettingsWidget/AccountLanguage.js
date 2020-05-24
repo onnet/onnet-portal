@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React from 'react';
-import { connect } from 'dva';
-
-import { formatMessage } from 'umi';
+import { connect, formatMessage } from 'umi';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 
