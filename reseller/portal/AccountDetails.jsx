@@ -1,7 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
-import { connect } from 'dva';
+import { formatMessage, connect } from 'umi';
 import * as _ from 'lodash';
-import { formatMessage } from 'umi';
 import funReactJson from '@/pages/onnet-portal/core/components/info_details';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Table, Button, Card, Switch, Typography } from 'antd';

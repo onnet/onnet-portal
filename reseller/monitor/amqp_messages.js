@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { connect } from 'dva';
+import { connect } from 'umi';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Table, Tag, Modal } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';

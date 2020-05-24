@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'dva';
+import { connect } from 'umi';
 import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
 import { Tag, Button, Table, Modal, Input } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';

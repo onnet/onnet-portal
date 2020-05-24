@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'dva';
+import { formatMessage, connect } from 'umi';
 import moment from 'moment';
 import Masonry from 'react-masonry-css';
-import { formatMessage } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, DatePicker } from 'antd';
 import styles from '../style.less';

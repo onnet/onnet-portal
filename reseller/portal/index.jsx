@@ -1,7 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
-import { connect } from 'dva';
-import { history } from 'umi';
-import { formatMessage } from 'umi';
+import { formatMessage, connect, history } from 'umi';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Menu, Dropdown, Modal, message, Avatar, List } from 'antd';
 

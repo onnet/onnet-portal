@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'dva';
+import { connect } from 'umi';
 
 import SelectLang from '../components/SelectLang';
 import styles from './LoginLayout.less';

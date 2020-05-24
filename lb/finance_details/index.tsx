@@ -1,7 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
-import { connect } from 'dva';
+import { formatMessage, connect } from 'umi';
 import NumberFormat from 'react-number-format';
-import { formatMessage } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Row, Col } from 'antd';
 import styles from '../style.less';

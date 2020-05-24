@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect } from 'dva';
+import { connect } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Spin } from 'antd';
 import Masonry from 'react-masonry-css';

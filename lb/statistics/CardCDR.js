@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'dva';
+import { formatMessage, connect } from 'umi';
 import { SearchOutlined } from '@ant-design/icons';
 import { Card, Button, Table, Input, Switch } from 'antd';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import MoneyFormat from '@/pages/onnet-portal/core/components/MoneyFormat';
 import Highlighter from 'react-highlight-words';
-import { formatMessage } from 'umi';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 

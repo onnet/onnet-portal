@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'dva';
+import { formatMessage, connect } from 'umi';
 import { Table, Tag, Card } from 'antd';
-import { formatMessage } from 'umi';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 import styles from '@/pages/onnet-portal/core/style.less';

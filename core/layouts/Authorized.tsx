@@ -1,6 +1,5 @@
 import React from 'react';
-import Redirect from 'umi/redirect';
-import { connect } from 'dva';
+import { Redirect, connect } from 'umi';
 import pathToRegexp from 'path-to-regexp';
 import Authorized from '../utils/Authorized';
 
