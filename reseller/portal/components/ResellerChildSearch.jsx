@@ -1,8 +1,6 @@
-import { getDvaApp } from 'umi';
+import { getDvaApp, formatMessage, connect } from 'umi';
 import React, { Component } from 'react';
-import { connect } from 'dva';
 import { Select } from 'antd';
-import { formatMessage } from 'umi';
 
 const { Option } = Select;
 
