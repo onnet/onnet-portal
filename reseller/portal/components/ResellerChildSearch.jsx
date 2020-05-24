@@ -1,4 +1,4 @@
-import { getDvaApp, formatMessage, connect } from 'umi';
+import { getDvaApp, useIntl, connect } from 'umi';
 import React, { Component } from 'react';
 import { Select } from 'antd';
 
@@ -56,6 +56,7 @@ class ResellerChildSearch extends Component {
 
   render() {
     const options = this.state.data.map(d => <Option key={d.id}>{d.name}</Option>);
+    const { formatMessage } = useIntl();
     return (
       <Select
         key="ResellerChildSearchKey"

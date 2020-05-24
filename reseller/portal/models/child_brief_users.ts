@@ -36,7 +36,7 @@ const Model: ModelType = {
       response.data.map(user =>
         getDvaApp()._store.dispatch({
           type: 'child_full_users/refresh',
-          payload: { account_id: redux_state.child_account.data.id, owner_id: user.id },
+          payload: { account_id: redux_state.child_account?.data?.id, owner_id: user.id },
         }),
       );
     },
