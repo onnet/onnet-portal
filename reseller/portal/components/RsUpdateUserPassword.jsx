@@ -20,13 +20,13 @@ const UpdatePassword = props => {
   const handleSubmit = values => {
     kzUser({
       method: 'PATCH',
-      account_id: child_account.data.id,
+      account_id: child_account.data?.id,
       owner_id,
       data: { password: values.password },
     }).then(() => {
       dispatch({
         type: 'child_full_users/refresh',
-        payload: { account_id: child_account.data.id, owner_id },
+        payload: { account_id: child_account.data?.id, owner_id },
       });
       message.info(
         `Password for ${child_full_users[owner_id].data.username} successfully updated.`,

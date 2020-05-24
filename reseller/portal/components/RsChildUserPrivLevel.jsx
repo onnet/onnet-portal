@@ -31,13 +31,13 @@ const RsChildUserPrivLevel = props => {
       onOk() {
         kzUser({
           method: 'PATCH',
-          account_id: child_account.data.id,
+          account_id: child_account.data?.id,
           owner_id,
           data: { priv_level: key },
         }).then(() =>
           dispatch({
             type: 'child_full_users/refresh',
-            payload: { account_id: child_account.data.id, owner_id },
+            payload: { account_id: child_account.data?.id, owner_id },
           }),
         );
       },

@@ -38,13 +38,13 @@ const RsChildUserRestrictionLevel = props => {
         console.log('data: ', data);
         kzUser({
           method: 'PATCH',
-          account_id: child_account.data.id,
+          account_id: child_account.data?.id,
           owner_id,
           data,
         }).then(() =>
           dispatch({
             type: 'child_full_users/refresh',
-            payload: { account_id: child_account.data.id, owner_id },
+            payload: { account_id: child_account.data?.id, owner_id },
           }),
         );
       },

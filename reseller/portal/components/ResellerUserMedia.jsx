@@ -33,7 +33,7 @@ const ResellerUserMedia = props => {
     setIsLoading({ [codec]: true });
     kzUser({
       method: 'GET',
-      account_id: child_account.data.id,
+      account_id: child_account.data?.id,
       owner_id,
     }).then(resp => {
       const codecsList = _.get(resp, `data.media.${media}.codecs`, []);
@@ -47,13 +47,13 @@ const ResellerUserMedia = props => {
       _.set(data, `media.${media}.codecs`, newCodecsList);
       kzUser({
         method: 'PATCH',
-        account_id: child_account.data.id,
+        account_id: child_account.data?.id,
         owner_id,
         data,
       }).then(() =>
         dispatch({
           type: 'child_full_users/refresh',
-          payload: { account_id: child_account.data.id, owner_id },
+          payload: { account_id: child_account.data?.id, owner_id },
         }),
       );
     });
