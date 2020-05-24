@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect } from 'dva';
+import { connect, formatMessage } from 'umi';
 import { useMediaQuery } from 'react-responsive';
 import cryptoRandomString from 'crypto-random-string';
 import * as _ from 'lodash';
@@ -11,7 +11,6 @@ import {
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
-import { formatMessage } from 'umi';
 import styles from '../../style.less';
 import gh_styles from '../../components/HeaderSearch/globhead.less';
 import { cardProps } from '../../utils/props';

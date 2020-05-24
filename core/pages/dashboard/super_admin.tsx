@@ -2,8 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Raphael from 'raphael';
-import { connect } from 'dva';
-import { Redirect, history } from 'umi';
+import { connect, Redirect, history } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 const myGraph = (system_status, kz_registrations_count) =>

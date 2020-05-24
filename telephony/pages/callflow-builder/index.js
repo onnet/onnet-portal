@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'dva';
+import { connect } from 'umi';
 import { Tag } from 'antd';
 
 import { PageHeaderWrapper } from '@ant-design/pro-layout';

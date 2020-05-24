@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'dva';
 import { Collapse } from 'antd';
-import { formatMessage } from 'umi';
+import { connect,formatMessage } from 'umi';
 import * as _ from 'lodash';
 
 import RsUpdateUserPassword from '@/pages/onnet-portal/reseller/portal/components/RsUpdateUserPassword';

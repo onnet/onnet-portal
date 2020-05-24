@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'dva';
-import { formatMessage } from 'umi';
+import { connect, formatMessage } from 'umi';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 import { RedoOutlined } from '@ant-design/icons';

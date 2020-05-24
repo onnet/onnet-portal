@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-
-import { connect } from 'dva';
-import { Redirect, history } from 'umi';
+import { connect, Redirect, history } from 'umi';
 import JSONPretty from 'react-json-pretty';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Tabs, Card, Table, Typography, Spin } from 'antd';

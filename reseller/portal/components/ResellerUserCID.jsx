@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
-import { connect } from 'dva';
-import { formatMessage } from 'umi';
+import { connect, formatMessage } from 'umi';
 import { Table, Card } from 'antd';
-
 import RsChildUserParagraph from './RsChildUserParagraph';
 import ResellerUserCIDSelect from './ResellerUserCIDSelect';
 import styles from '../style.less';

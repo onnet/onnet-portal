@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'dva';
+import { connect, formatMessage } from 'umi';
 import { useMediaQuery } from 'react-responsive';
-import { formatMessage } from 'umi';
 import { Drawer } from 'antd';
 import EditDevice from './EditDevice';
 import { DeleteOutlined } from '@ant-design/icons';

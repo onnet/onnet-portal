@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { connect } from 'dva';
-import { formatMessage } from 'umi';
+import { connect,formatMessage } from 'umi';
 import { kzAccount, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
 import { Form, Button, Modal, Input, Row, Col } from 'antd';

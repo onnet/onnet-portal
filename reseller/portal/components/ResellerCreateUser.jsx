@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { connect } from 'dva';
-import { formatMessage } from 'umi';
+import { connect,formatMessage } from 'umi';
 import { kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
 import { UserAddOutlined } from '@ant-design/icons';

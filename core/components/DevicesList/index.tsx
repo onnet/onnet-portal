@@ -1,9 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect } from 'dva';
+import { connect, formatMessage } from 'umi';
 import * as _ from 'lodash';
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch } from 'antd';
-import { formatMessage } from 'umi';
 import styles from '../../style.less';
 import { cardProps } from '../../utils/props';
 import CreateDevice from './CreateDevice';

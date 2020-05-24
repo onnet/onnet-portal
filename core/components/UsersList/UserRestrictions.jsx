@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect } from 'dva';
+import { connect } from 'umi';
 import * as _ from 'lodash';
 import { Table } from 'antd';
 import UserRestrictionLevel from './UserRestrictionLevel';

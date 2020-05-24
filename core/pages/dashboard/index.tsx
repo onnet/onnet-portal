@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'dva';
+import { connect } from 'umi';
 import { Spin } from 'antd';
 import SuperDuperDashboard from './super_admin';
 import ResellerDashboard from './reseller';
