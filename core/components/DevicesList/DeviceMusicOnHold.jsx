@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
@@ -26,6 +26,7 @@ const DeviceMusicOnHold = props => {
   );
 
   const { dispatch, account, full_devices, account_media, device_id } = props;
+  const { formatMessage } = useIntl();
 
   function currentDocValue() {
     try {

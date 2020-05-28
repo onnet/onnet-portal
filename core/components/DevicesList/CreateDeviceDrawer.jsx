@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Form, Row, Col, Input, Tabs } from 'antd';
 
 import cryptoRandomString from 'crypto-random-string';
@@ -20,6 +20,7 @@ const CreateDeviceDrawer = props => {
   };
 
   const inputStyle = { maxWidth: '100%' };
+  const { formatMessage } = useIntl();
 
   function callback(key) {
     console.log(key);

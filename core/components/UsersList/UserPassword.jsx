@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { kzUser } from '../../services/kazoo';
 
 import { RedoOutlined } from '@ant-design/icons';
@@ -16,6 +16,8 @@ const UserPassword = props => {
   useEffect(() => {
     forceUpdate({});
   }, []);
+
+  const { formatMessage } = useIntl();
 
   const handleSubmit = values => {
     kzUser({

@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Card, Switch } from 'antd';
 import { kzUser } from '../../services/kazoo';
 import * as _ from 'lodash';
@@ -23,6 +23,8 @@ const UserMedia = props => {
     }
     setIsLoading({});
   }, [full_users[owner_id]]);
+
+  const { formatMessage } = useIntl();
 
   if (!full_users[owner_id]) return null;
 

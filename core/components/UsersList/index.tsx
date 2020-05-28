@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect,formatMessage } from 'umi';
+import { connect,useIntl } from 'umi';
 import { useMediaQuery } from 'react-responsive';
 import * as _ from 'lodash';
 import {
@@ -43,6 +43,8 @@ const UsersList = props => {
       });
     }
   }, [brief_users]);
+
+  const { formatMessage } = useIntl();
 
   if (brief_users.data) {
     if (brief_users.data.length === 0) {

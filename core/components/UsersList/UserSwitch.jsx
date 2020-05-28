@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import * as _ from 'lodash';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Switch, Modal } from 'antd';
 
 import { kzUser } from '../../services/kazoo';
@@ -19,6 +19,8 @@ const UserSwitch = props => {
       setFieldContent(_.get(full_users[owner_id].data, fieldKey));
     }
   }, [full_users[owner_id]]);
+
+  const { formatMessage } = useIntl();
 
   function onSwitchChange(value) {
     confirm({

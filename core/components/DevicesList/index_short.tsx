@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { useMediaQuery } from 'react-responsive';
 import cryptoRandomString from 'crypto-random-string';
 import * as _ from 'lodash';
@@ -50,6 +50,8 @@ const DevicesList = props => {
   if (!brief_devices.data) {
     return null;
   }
+
+  const { formatMessage } = useIntl();
 
   const deleteChildDevice = (dev_id, dev_name, dev_username) => {
     confirm({

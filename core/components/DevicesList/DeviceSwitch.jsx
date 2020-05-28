@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
 import { Switch, Modal } from 'antd';
 
@@ -19,6 +19,8 @@ const DeviceSwitch = props => {
       setFieldContent(_.get(full_devices[device_id].data, fieldKey));
     }
   }, [full_devices[device_id]]);
+
+  const { formatMessage } = useIntl();
 
   function onSwitchChange(value) {
     confirm({

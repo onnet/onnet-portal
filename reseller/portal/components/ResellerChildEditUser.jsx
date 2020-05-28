@@ -1,6 +1,6 @@
 import React from 'react';
 import { Collapse } from 'antd';
-import { connect,formatMessage } from 'umi';
+import { connect,useIntl } from 'umi';
 import * as _ from 'lodash';
 
 import RsUpdateUserPassword from '@/pages/onnet-portal/reseller/portal/components/RsUpdateUserPassword';
@@ -13,6 +13,7 @@ const { Panel } = Collapse;
 
 const ResellerChildEditUser = props => {
   const { selectedUser, child_full_users, child_numbers } = props;
+  const { formatMessage } = useIntl();
 
   if (!selectedUser) return null;
   if (!child_full_users[selectedUser]) return null;

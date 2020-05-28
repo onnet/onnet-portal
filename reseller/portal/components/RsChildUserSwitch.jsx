@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'umi';
 import * as _ from 'lodash';
 
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 import { Switch, Modal } from 'antd';
 
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
@@ -21,6 +21,8 @@ const RsChildUserSwitch = props => {
       setFieldContent(_.get(child_full_users[owner_id].data, fieldKey));
     }
   }, [child_full_users[owner_id]]);
+
+  const { formatMessage } = useIntl();
 
   function onSwitchChange(value) {
     confirm({

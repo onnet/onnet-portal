@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 import { Table } from 'antd';
 import DeviceParagraph from './DeviceParagraph';
 import DeviceSwitch from './DeviceSwitch';
@@ -8,6 +8,7 @@ import DeviceAssignTo from './DeviceAssignTo';
 
 const DeviceSIPURISettings = props => {
   const { device_id, disableAssignBtn } = props;
+  const { formatMessage } = useIntl();
 
   const tableData = [
     {

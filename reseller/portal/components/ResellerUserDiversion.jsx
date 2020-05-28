@@ -2,13 +2,14 @@
 
 import React from 'react';
 
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 import { Table } from 'antd';
 import RsChildUserParagraph from './RsChildUserParagraph';
 import RsChildUserSwitch from './RsChildUserSwitch';
 
 const ResellerUserDiversion = props => {
   const { owner_id } = props;
+  const { formatMessage } = useIntl();
 
   const tableData = [
     {

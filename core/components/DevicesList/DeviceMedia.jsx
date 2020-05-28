@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Card, Switch } from 'antd';
 import { kzDevice } from '../../services/kazoo';
 import * as _ from 'lodash';
@@ -25,6 +25,8 @@ const DeviceMedia = props => {
   }, [full_devices[device_id]]);
 
   if (!full_devices[device_id]) return null;
+
+  const { formatMessage } = useIntl();
 
   const gridStyle = {
     width: isSmallDevice ? '50%' : '25%',

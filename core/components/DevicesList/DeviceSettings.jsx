@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Table } from 'antd';
 import DeviceParagraph from './DeviceParagraph';
 import DeviceSwitch from './DeviceSwitch';
@@ -22,6 +22,8 @@ const DeviceSettings = props => {
       });
     }
   }, [account]);
+
+  const { formatMessage } = useIntl();
 
   const tableData = [
     {

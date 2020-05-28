@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Table, Card } from 'antd';
 import RsChildUserParagraph from './RsChildUserParagraph';
 import ResellerUserCIDSelect from './ResellerUserCIDSelect';
@@ -8,6 +8,7 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 const ResellerUserCID = props => {
   const { owner_id } = props;
+  const { formatMessage } = useIntl();
 
   const tableDataInternal = [
     {

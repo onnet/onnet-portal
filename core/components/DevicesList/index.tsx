@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch } from 'antd';
@@ -35,6 +35,8 @@ const DevicesList = props => {
   if (!brief_devices.data) {
     return null;
   }
+
+  const { formatMessage } = useIntl();
 
   const deleteChildDevice = record => {
     confirm({

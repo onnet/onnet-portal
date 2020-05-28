@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 
@@ -11,6 +11,7 @@ const { confirm } = Modal;
 
 const UserPrivLevel = props => {
   const { dispatch, account, full_users, owner_id } = props;
+  const { formatMessage } = useIntl();
 
   const menuUserPrivLevels = (
     <Menu selectedKeys={[]} onClick={onUserPrivilegeSelect}>

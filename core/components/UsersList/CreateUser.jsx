@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { connect,formatMessage } from 'umi';
+import { connect,useIntl } from 'umi';
 import { kzUsers } from '../../services/kazoo';
 
 import { UserAddOutlined } from '@ant-design/icons';
@@ -15,6 +15,7 @@ const UserCreateForm = props => {
     forceUpdate({});
   }, []);
 
+  const { formatMessage } = useIntl();
   const inputStyle = { maxWidth: '15em' };
 
   return (

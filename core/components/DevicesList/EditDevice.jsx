@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Collapse } from 'antd';
 import ReactJson from 'react-json-view';
 import DeviceCID from './DeviceCID';
@@ -21,6 +21,7 @@ const EditDevice = props => {
   if (!selectedDevice) return null;
   if (!full_devices[selectedDevice]) return null;
 
+  const { formatMessage } = useIntl();
   let devSettings = null;
 
   if (

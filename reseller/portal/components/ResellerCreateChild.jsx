@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { connect,formatMessage } from 'umi';
+import { connect,useIntl } from 'umi';
 import { kzAccount, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
 import { Form, Button, Modal, Input, Row, Col } from 'antd';
@@ -12,6 +12,8 @@ const CollectionCreateForm = props => {
   useEffect(() => {
     forceUpdate({});
   }, []);
+
+  const { formatMessage } = useIntl();
 
   const inputStyle = { maxWidth: '15em' };
 

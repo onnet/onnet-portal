@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Card, Switch } from 'antd';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 import * as _ from 'lodash';
@@ -21,6 +21,8 @@ const ResellerUserMedia = props => {
     }
     setIsLoading({});
   }, [child_full_users[owner_id]]);
+
+  const { formatMessage } = useIntl();
 
   if (!child_full_users[owner_id]) return null;
 

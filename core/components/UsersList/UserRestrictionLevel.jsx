@@ -2,7 +2,7 @@
 
 import React from 'react';
 import * as _ from 'lodash';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 
@@ -12,6 +12,7 @@ const { confirm } = Modal;
 
 const UserRestrictionLevel = props => {
   const { dispatch, account, owner_id, classifier, text } = props;
+  const { formatMessage } = useIntl();
 
   const menuUserPrivLevels = (
     <Menu selectedKeys={[]} onClick={onUserRestrictionSelect}>

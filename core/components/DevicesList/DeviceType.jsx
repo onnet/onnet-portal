@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
@@ -12,6 +12,7 @@ const { confirm } = Modal;
 
 const DeviceType = props => {
   const { dispatch, account, kz_login, device_id, text } = props;
+  const { formatMessage } = useIntl();
 
   const menuDevicePrivLevels = (
     <Menu selectedKeys={[]} onClick={onDeviceRestrictionSelect}>

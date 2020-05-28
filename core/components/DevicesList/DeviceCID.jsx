@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 import { Table, Card } from 'antd';
 
 import DeviceParagraph from './DeviceParagraph';
@@ -9,6 +9,7 @@ import { cardProps } from '../../utils/props';
 
 const DeviceCID = props => {
   const { device_id } = props;
+  const { formatMessage } = useIntl();
 
   const tableDataInternal = [
     {

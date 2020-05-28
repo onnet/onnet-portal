@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { useMediaQuery } from 'react-responsive';
 import { Drawer } from 'antd';
 import EditDevice from './EditDevice';
@@ -18,6 +18,7 @@ const EditDeviceDrawer = props => {
     disableAssignBtn,
   } = props;
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
+  const { formatMessage } = useIntl();
 
   return (
     <Drawer

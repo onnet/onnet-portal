@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getDvaApp } from 'umi';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Table } from 'antd';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
@@ -15,6 +15,8 @@ const ResellerChildrenTable = props => {
       setDataSource(kz_children.data);
     }
   }, [kz_children]);
+
+  const { formatMessage } = useIntl();
 
   const columns = [
     {

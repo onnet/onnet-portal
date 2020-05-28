@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { kzDevices } from '../../services/kazoo';
 
 import { PlusOutlined } from '@ant-design/icons';
@@ -16,6 +16,7 @@ const DeviceCreateForm = props => {
   }, []);
 
   const inputStyle = { maxWidth: '15em' };
+  const { formatMessage } = useIntl();
 
   return (
     <Modal

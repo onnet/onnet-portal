@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect,formatMessage } from 'umi';
+import { connect,useIntl } from 'umi';
 import { Card, Switch, Badge, Modal } from 'antd';
 import { kzDevice } from '../../services/kazoo';
 import * as _ from 'lodash';
@@ -21,6 +21,8 @@ const UserDevices = props => {
   useEffect(() => {
     if (brief_devices.data) setBrDevs(brief_devices.data);
   }, [full_users[owner_id], brief_devices, full_devices[selectedDevice]]);
+
+  const { formatMessage } = useIntl();
 
   if (!full_users[owner_id]) return null;
 

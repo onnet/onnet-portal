@@ -1,7 +1,7 @@
 import React from 'react';
 import { Collapse } from 'antd';
 import * as _ from 'lodash';
-import { connect,formatMessage } from 'umi';
+import { connect,useIntl } from 'umi';
 import ReactJson from 'react-json-view';
 import UserPassword from './UserPassword';
 import UserCID from './UserCID';
@@ -18,6 +18,8 @@ const EditUser = props => {
 
   if (!selectedUser) return null;
   if (!full_users[selectedUser]) return null;
+
+  const { formatMessage } = useIntl();
 
   return (
     <Collapse accordion defaultActiveKey="1">

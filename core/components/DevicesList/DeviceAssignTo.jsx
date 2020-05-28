@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
@@ -34,6 +34,8 @@ const DeviceAssignTo = props => {
     device_id,
     disableAssignBtn = false,
   } = props;
+
+  const { formatMessage } = useIntl();
 
   function currentDocValue() {
     try {

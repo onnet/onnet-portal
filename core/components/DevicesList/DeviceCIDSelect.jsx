@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
@@ -24,6 +24,7 @@ const CIDSelect = props => {
   );
 
   const { dispatch, account, full_devices, numbers, fieldKey, device_id, modal_title } = props;
+  const { formatMessage } = useIntl();
 
   function NumberToShow() {
     try {
