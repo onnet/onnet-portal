@@ -1,6 +1,6 @@
 import md5 from 'md5';
 import React from 'react';
-import { formatMessage, Redirect, connect } from 'umi';
+import { useIntl, Redirect, connect } from 'umi';
 
 import { Card, Button, Input, Form } from 'antd';
 
@@ -25,6 +25,8 @@ const LoginForm = props => {
   if (kz_login.status === 'success') {
     return <Redirect to="/dashboard" />;
   }
+
+  const { formatMessage } = useIntl();
 
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);

@@ -5,13 +5,14 @@ import { Table, Card, Button, message } from 'antd';
 import { Form, Input } from 'formik-antd';
 import { Formik } from 'formik';
 import { createProformaInvoice, onbillsAttachment } from '@/pages/onnet-portal/core/services/zzapp';
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 import styles from '@/pages/onnet-portal/core/style.less';
 
 const CardWireTransfer = props => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { account_id } = props;
+  const { formatMessage } = useIntl();
 
   function validateNaN(value) {
     let error;

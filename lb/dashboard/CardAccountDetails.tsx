@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import { Table, Card } from 'antd';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
@@ -11,6 +11,8 @@ const CardAccountDetails = props => {
   if (!lb_account.data.account_info) {
     return null;
   }
+
+  const { formatMessage } = useIntl();
 
   const tableData = [
     {

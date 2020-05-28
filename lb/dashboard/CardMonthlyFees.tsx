@@ -1,11 +1,12 @@
 import React from 'react';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import { Table, Card } from 'antd';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 const CardMonthlyFees = props => {
   const { lb_account = { data: {} } } = props;
+  const { formatMessage } = useIntl();
 
   if (lb_account.data.monthly_fees) {
     if (lb_account.data.monthly_fees.length === 0) {

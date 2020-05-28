@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import moment from 'moment';
 import Masonry from 'react-masonry-css';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
@@ -46,6 +46,8 @@ const LbFinanceDetails = props => {
       });
     }
   }, [kz_account]);
+
+  const { formatMessage } = useIntl();
 
   const extraContent = (
     <div className={styles.extraContent}>

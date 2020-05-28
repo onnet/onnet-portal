@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
@@ -40,6 +40,8 @@ const LbStatistics = props => {
       });
     }
   }, [kz_account]);
+
+  const { formatMessage } = useIntl();
 
   const handleCallsDirection = e => {
     dispatch({ type: 'lb_statistics/is_loading' });

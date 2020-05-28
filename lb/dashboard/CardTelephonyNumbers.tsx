@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import { Table, Tag, Card } from 'antd';
 import { findNumbers } from 'libphonenumber-js';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
@@ -9,6 +9,7 @@ import styles from '../style.less';
 
 const CardTelephonyNumbers = props => {
   const { lb_account = { data: {} }, settings = {} } = props;
+  const { formatMessage } = useIntl();
 
   if (lb_account.data.phone_numbers_by_tariff) {
     if (lb_account.data.phone_numbers_by_tariff.length === 0) {

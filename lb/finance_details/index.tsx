@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import NumberFormat from 'react-number-format';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Row, Col } from 'antd';
@@ -21,6 +21,8 @@ const LbFinanceDetails = props => {
       });
     }
   }, [kz_account]);
+
+  const { formatMessage } = useIntl();
 
   const extraContent = (
     <div className={styles.extraContent}>

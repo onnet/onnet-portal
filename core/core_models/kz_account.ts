@@ -30,7 +30,7 @@ const KazooAccountModel: KazooAccountModelType = {
       });
       yield getDvaApp()._store.dispatch({
         type: 'lb_account/refresh',
-        payload: { account_id: response.data.id },
+        payload: { account_id: response.data?.id },
       });
       getDvaApp()._store.dispatch({ type: 'authority/refresh', payload: {} });
       getDvaApp()._store.dispatch({ type: 'kz_brief_users/refresh', payload });

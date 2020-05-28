@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import { Table, Tag, Card } from 'antd';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
@@ -7,6 +7,7 @@ import styles from '@/pages/onnet-portal/core/style.less';
 
 const CardInternet = props => {
   const { lb_account = { data: {} }, settings = {} } = props;
+  const { formatMessage } = useIntl();
 
   if (lb_account.data.ip_addresses_by_tariff) {
     if (lb_account.data.ip_addresses_by_tariff.length === 0) {

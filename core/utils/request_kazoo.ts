@@ -5,7 +5,7 @@
 import { getDvaApp } from 'umi';
 import { extend } from 'umi-request';
 import { notification } from 'antd';
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -48,6 +48,7 @@ const errorHandler = error => {
         console.log('About to dispatch kz_login/logout');
         getDvaApp()._store.dispatch({ type: 'kz_login/logout' });
       } else {
+        const { formatMessage } = useIntl();
         notification.error({
           message: formatMessage({ id: 'core.auth_error', defaultMessage: 'Error' }),
           description: formatMessage({

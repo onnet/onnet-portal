@@ -1,10 +1,11 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
 
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 
 const MoneyFormat = props => {
   const { amount, prefix } = props;
+  const { formatMessage } = useIntl();
 
   return (
     <NumberFormat

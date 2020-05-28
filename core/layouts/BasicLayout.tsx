@@ -5,7 +5,7 @@ import ProLayout, {
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
-import { formatMessage, Link, connect } from 'umi';
+import { useIntl, Link, connect } from 'umi';
 import Authorized from '../utils/Authorized';
 import RightContent from '../components/GlobalHeader/RightContent';
 
@@ -40,6 +40,7 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
 const footerRender = () => <span />;
 
 const breadcrumbRender = (routers = []) => {
+  const { formatMessage } = useIntl();
   const pathList = [
     {
       path: '//dashboard',
@@ -114,6 +115,8 @@ const BasicLayout: React.FC = props => {
       console.log('kz_login.data yet...');
     };
   }, [kz_account, kz_user, authority]);
+
+  const { formatMessage } = useIntl();
 
   const handleMenuCollapse = (payload: boolean): void =>
     dispatch &&

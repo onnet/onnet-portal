@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import { SearchOutlined } from '@ant-design/icons';
 import { Card, Button, Table, Input, Switch } from 'antd';
 import Moment from 'react-moment';
@@ -36,6 +36,8 @@ const CardCDR = props => {
       }
     }
   }, [lb_statistics]);
+
+  const { formatMessage } = useIntl();
 
   const handlePagination = e => {
     console.log('handlePagination e: ', e);

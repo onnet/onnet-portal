@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Card } from 'antd';
 
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 import Moment from 'react-moment';
 import LbDownloadDoc from './LbDownloadDoc';
 
@@ -9,6 +9,7 @@ import styles from '@/pages/onnet-portal/core/style.less';
 
 const CardCallsReports = props => {
   const { calls_reports_pdf, account_id } = props;
+  const { formatMessage } = useIntl();
 
   const columns = [
     {

@@ -2,12 +2,13 @@ import React from 'react';
 import NumberFormat from 'react-number-format';
 import { Table, Card } from 'antd';
 
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
 const CardPaymentsList = props => {
   const { lb_account } = props;
+  const { formatMessage } = useIntl();
 
   const columns = [
     {

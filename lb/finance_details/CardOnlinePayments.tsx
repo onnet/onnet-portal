@@ -3,7 +3,7 @@ import { Table, Card, Button, message } from 'antd';
 import { Form, Input } from 'formik-antd';
 import { Formik } from 'formik';
 
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 
 import { yandexMoneyPayment } from '@/pages/onnet-portal/core/services/zzapp';
 
@@ -21,6 +21,7 @@ function validateNaN(value) {
 
 const CardOnlinePayments = props => {
   const { lb_account, account_id } = props;
+  const { formatMessage } = useIntl();
 
   const tableDataDengiOnline = [
     {

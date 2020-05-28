@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
-import { formatMessage, connect } from 'umi';
+import { useIntl, connect } from 'umi';
 import * as _ from 'lodash';
 import funReactJson from '@/pages/onnet-portal/core/components/info_details';
 import { InfoCircleOutlined } from '@ant-design/icons';
@@ -24,6 +24,8 @@ const AccountDetails = props => {
       });
     }
   }, [kz_account]);
+
+  const { formatMessage } = useIntl();
 
   function switchResellerStatus(checked) {
     if (checked) {

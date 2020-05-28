@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
-import { formatMessage, connect, history } from 'umi';
+import { useIntl, connect, history } from 'umi';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Menu, Dropdown, Modal, message, Avatar, List } from 'antd';
 
@@ -28,6 +28,8 @@ const ResellerPortal = props => {
       });
     }
   }, [kz_account]);
+
+  const { formatMessage } = useIntl();
 
   const menu = (
     <Menu onClick={handleMenuClick}>

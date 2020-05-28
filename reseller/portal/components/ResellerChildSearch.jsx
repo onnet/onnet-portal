@@ -1,13 +1,13 @@
 import { getDvaApp, useIntl, connect } from 'umi';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Select } from 'antd';
 
 const { Option } = Select;
-const { formatMessage } = useIntl();
 
 let timeout;
 
 function fetch(value, callback) {
+
   if (timeout) {
     clearTimeout(timeout);
     timeout = null;
@@ -27,42 +27,50 @@ function fetch(value, callback) {
   timeout = setTimeout(fake, 300);
 }
 
-class ResellerChildSearch extends Component {
-  state = {
-    data: [],
-    value: undefined,
-    loading: false,
-  };
+const ResellerChildSearch = props => {
 
-  handleSearch = value => {
-    this.setState({ loading: true });
+  const [data, setData] = useState([]);
+  const [value, setValue] = useState(undefined);
+  const [loading, setLoading] = useState(false);
+
+  const { dispatch } = props;
+
+  const { formatMessage } = useIntl();
+
+  const handleSearch = value => {
+    setLoading(true);
     if (value) {
-      fetch(value, data => this.setState({ data, loading: false }));
+      fetch(value, data => {
+	      setData(data);
+	      setLoading(false)
+      });
     } else {
-      this.setState({ data: [], loading: false });
+      setData([]);
+      setLoading(false);
     }
   };
 
-  handleChange = value => {
-    this.setState({ value });
+  const handleChange = value => {
+    setValue(value);
   };
 
-  handleSelect = value => {
-    getDvaApp()._store.dispatch({
+  const handleSelect = value => {
+    dispatch({
       type: 'child_account/refresh',
       payload: { account_id: value },
     });
-    this.setState({ data: [], value: undefined, loading: false });
+    setData([]);
+    setLoading(false);
+    setValue(undefined);
   };
 
-  render() {
-    const options = this.state.data.map(d => <Option key={d.id}>{d.name}</Option>);
+    const options = data.map(d => <Option key={d.id}>{d.name}</Option>);
     return (
       <Select
         key="ResellerChildSearchKey"
         showSearch
-        loading={this.state.loading}
-        value={this.state.value}
+        loading={loading}
+        value={value}
         placeholder={formatMessage({
           id: 'reseller_portal.account_lookup',
           defaultMessage: 'Account Lookup',
@@ -71,19 +79,16 @@ class ResellerChildSearch extends Component {
         defaultActiveFirstOption={false}
         showArrow={false}
         filterOption={false}
-        onSearch={this.handleSearch}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
+        onSearch={handleSearch}
+        onChange={handleChange}
+        onSelect={handleSelect}
         notFoundContent={null}
       >
         {options}
       </Select>
     );
-  }
 }
 
-export default connect(({ kz_login, kz_account, kz_children }) => ({
-  kz_login,
-  kz_account,
+export default connect(({ kz_children }) => ({
   kz_children,
 }))(ResellerChildSearch);
