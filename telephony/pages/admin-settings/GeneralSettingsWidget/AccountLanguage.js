@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 
@@ -12,6 +12,7 @@ const { confirm } = Modal;
 
 const AccountLanguage = props => {
   const { kz_account } = props;
+  const { formatMessage } = useIntl();
 
   const menuAccountLanguage = (
     <Menu selectedKeys={[]} onClick={onAccountLanguageSelect}>

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { formatMessage } from 'umi';
+import { useIntl } from 'umi';
 import { Table, Card } from 'antd';
 
 import AccountTimezone from './AccountTimezone';
@@ -16,6 +16,7 @@ import AccountDialplan from './AccountDialplan';
 import styles from '../../style.less';
 
 const GeneralSettingsWidget = () => {
+  const { formatMessage } = useIntl();
   const tableData = [
     {
       key: '1',

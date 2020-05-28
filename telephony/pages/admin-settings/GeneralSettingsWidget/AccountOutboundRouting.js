@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
@@ -59,6 +59,8 @@ const AccountOutboundRouting = props => {
       }
     }
   }, [kz_account, kz_cf_list, kz_cf_details]);
+
+  const { formatMessage } = useIntl();
 
   if (!kz_cf_list.data) return null;
 

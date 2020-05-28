@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React from 'react';
-import { connect,formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Modal, Switch } from 'antd';
 
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
@@ -11,6 +11,7 @@ const { confirm } = Modal;
 
 const AccountCallsRecording = props => {
   const { kz_account } = props;
+  const { formatMessage } = useIntl();
 
   function onCallRecordingSwitch(checked) {
     confirm({

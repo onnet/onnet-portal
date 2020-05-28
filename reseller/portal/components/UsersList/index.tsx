@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useMediaQuery } from 'react-responsive';
 import { Drawer, Table, Card, Modal, Switch } from 'antd';
@@ -35,6 +35,8 @@ const UsersList = props => {
   } else {
     return null;
   }
+
+  const { formatMessage } = useIntl();
 
   const deleteChildUser = record => {
     confirm({

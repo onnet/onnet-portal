@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect, formatMessage } from 'umi';
+import { connect, useIntl } from 'umi';
 import moment from 'moment';
 import 'moment-timezone';
 
@@ -34,6 +34,8 @@ const AccountTimezone = props => {
       );
     }
   }, [kz_account]);
+
+  const { formatMessage } = useIntl();
 
   const onTimezoneSelect = event => {
     console.log('onTimezoneSelect event: ', event);
