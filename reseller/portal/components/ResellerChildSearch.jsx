@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Select } from 'antd';
 
 const { Option } = Select;
+const { formatMessage } = useIntl();
 
 let timeout;
 
@@ -56,7 +57,6 @@ class ResellerChildSearch extends Component {
 
   render() {
     const options = this.state.data.map(d => <Option key={d.id}>{d.name}</Option>);
-    const { formatMessage } = useIntl();
     return (
       <Select
         key="ResellerChildSearchKey"
