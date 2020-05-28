@@ -12,6 +12,8 @@ import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const AccountTimezone = props => {
+
+  const { formatMessage } = useIntl();
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
   const [timezone, setTimezone] = useState('');
   const [modalTitle, setModalTitle] = useState(
@@ -34,8 +36,6 @@ const AccountTimezone = props => {
       );
     }
   }, [kz_account]);
-
-  const { formatMessage } = useIntl();
 
   const onTimezoneSelect = event => {
     console.log('onTimezoneSelect event: ', event);

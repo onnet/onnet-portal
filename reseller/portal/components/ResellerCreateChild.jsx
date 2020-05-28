@@ -167,7 +167,7 @@ const ResellerCreateChild = props => {
   const [visible, setVisible] = useState(false);
 
   const { dispatch, kz_account } = props;
-
+  const { formatMessage } = useIntl();
   const formRef = React.createRef();
 
   const showModal = () => {

@@ -186,6 +186,7 @@ const ResellerCreateUser = props => {
   const [visible, setVisible] = useState(false);
 
   const { dispatch, child_account } = props;
+  const { formatMessage } = useIntl();
 
   const formRef = React.createRef();
 

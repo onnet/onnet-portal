@@ -29,12 +29,12 @@ const errorHandler = error => {
   const { response, data } = error;
   if (response && response.status) {
     const { status, url } = response;
-    const selectedText = data.data
-      ? data.data.message
-        ? data.data.message
-        : data.message
-      : data.message
-      ? data.message
+    const selectedText = data?.data
+      ? data?.data?.message
+        ? data?.data?.message
+        : data?.message
+      : data?.message
+      ? data?.message
       : codeMessage[response.status];
     const errorText = `${status}: ${selectedText}`;
     console.log(`Request error: ${url}`, errorText);

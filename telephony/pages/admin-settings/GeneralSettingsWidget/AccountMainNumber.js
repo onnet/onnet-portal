@@ -10,6 +10,7 @@ import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const AccountMainNumber = props => {
+  const { formatMessage } = useIntl();
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
   const [mainNumber, setMainNumber] = useState(
     formatMessage({
@@ -49,8 +50,6 @@ const AccountMainNumber = props => {
       );
     }
   }, [kz_account]);
-
-  const { formatMessage } = useIntl();
 
   const onMainNumberSelect = event => {
     console.log('onMainNumberSelect event: ', event);

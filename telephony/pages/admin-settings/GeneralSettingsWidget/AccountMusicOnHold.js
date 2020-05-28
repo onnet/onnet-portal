@@ -11,21 +11,22 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 const { confirm } = Modal;
 
 const AccountMusicOnHold = props => {
-  const [mediaName, setMediaName] = useState('');
 
+  const { formatMessage } = useIntl();
+  const [mediaName, setMediaName] = useState('');
   const { dispatch, account, account_media } = props;
 
   useEffect(() => {
     if (!account_media.data) {
       dispatch({
         type: 'kz_account_media/refresh',
-        payload: { method: 'GET', account_id: account.data.id },
+        payload: { method: 'GET', account_id: account?.data?.id },
       });
     }
 
     if (account.data && account_media.data) {
       const mediaObj = account_media.data.find(
-        ({ id }) => id === account.data.music_on_hold.media_id,
+        ({ id }) => id === account.data.music_on_hold?.media_id,
       );
       if (mediaObj) {
         setMediaName(mediaObj.name);
@@ -36,8 +37,6 @@ const AccountMusicOnHold = props => {
       }
     }
   }, [account, account_media]);
-
-  const { formatMessage } = useIntl();
 
   if (!account_media.data) return null;
 

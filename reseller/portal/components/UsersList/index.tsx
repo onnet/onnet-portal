@@ -16,6 +16,7 @@ const { confirm } = Modal;
 
 const UsersList = props => {
   const { dispatch, settings, account, brief_users, full_users } = props;
+  const { formatMessage } = useIntl();
 
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
@@ -36,7 +37,6 @@ const UsersList = props => {
     return null;
   }
 
-  const { formatMessage } = useIntl();
 
   const deleteChildUser = record => {
     confirm({
