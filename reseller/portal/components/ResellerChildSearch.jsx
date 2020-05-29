@@ -17,7 +17,7 @@ function fetch(value, callback) {
     const redux_state = getDvaApp()._store.getState();
     const data = [];
     redux_state.kz_children.data.forEach(d => {
-      if (d.name.toLowerCase().includes(value.toLowerCase())) {
+      if (_.toString(Object.values(d)).toLowerCase().includes(value.toLowerCase())) {
         data.push(d);
       }
     });
