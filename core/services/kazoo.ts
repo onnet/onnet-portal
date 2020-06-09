@@ -20,6 +20,15 @@ export const PDF_HEADERS = () => {
   };
 };
 
+export const CSV_HEADERS = () => {
+  const redux_state = getDvaApp()._store.getState();
+  return {
+    'Content-Type': 'application/json; charset=utf-8',
+    Accept: 'text/csv',
+    'X-Auth-Token': redux_state.kz_login.auth_token,
+  };
+};
+
 export const MAYBE_SUPER_DUPER = () => {
   const redux_state = getDvaApp()._store.getState();
   if (redux_state.kz_account.data) {
