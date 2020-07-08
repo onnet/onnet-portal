@@ -5,7 +5,6 @@
 import { getDvaApp } from 'umi';
 import { extend } from 'umi-request';
 import { notification } from 'antd';
-import { useIntl } from 'umi';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -38,23 +37,16 @@ const errorHandler = error => {
       : codeMessage[response.status];
     const errorText = `${status}: ${selectedText}`;
     console.log(`Request error: ${url}`, errorText);
-    //    notification.error({
-    //      description: errorText,
-    //      message: `${url}`,
-    //    });
     if (status === 401) {
       const redux_state = getDvaApp()._store.getState();
-      if (redux_state.kz_login.data) {
+      if (redux_state.kz_login?.data) {
         console.log('About to dispatch kz_login/logout');
         getDvaApp()._store.dispatch({ type: 'kz_login/logout' });
       } else {
-        const { formatMessage } = useIntl();
+        console.log('About to throw error..');
         notification.error({
-          message: formatMessage({ id: 'core.auth_error', defaultMessage: 'Error' }),
-          description: formatMessage({
-            id: 'core.please_try_again',
-            defaultMessage: 'Please try again',
-          }),
+          message: 'Error',
+          description: 'Please try again',
         });
       }
     }
