@@ -45,7 +45,7 @@ const errorHandler = error => {
       } else {
         console.log('About to throw error..');
         notification.error({
-          message: 'Error',
+          message: selectedText,
           description: 'Please try again',
         });
       }
