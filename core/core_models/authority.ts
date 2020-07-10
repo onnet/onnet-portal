@@ -70,8 +70,8 @@ const AuthorityModel: AuthorityModelType = {
           account_id,
           brt_child_selected,
         );
-console.log("isArrayEqual: ", isArrayEqual(authority, redux_state.authority.currentAuthority));
-console.log("_isEqual: ", _.isEqual(authority, redux_state.authority.currentAuthority));
+//console.log("isArrayEqual: ", isArrayEqual(authority, redux_state.authority.currentAuthority));
+//console.log("_isEqual: ", _.isEqual(authority, redux_state.authority.currentAuthority));
         if (!isArrayEqual(authority, redux_state.authority.currentAuthority)) {
           yield put({
             type: 'update',
