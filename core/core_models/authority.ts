@@ -1,5 +1,5 @@
-import { isArrayEqual } from '../utils/subroutine';
 import { Effect, Reducer, getDvaApp } from 'umi';
+import { isArrayEqual } from '../utils/subroutine';
 
 export interface AuthorityModelType {
   namespace: 'authority';

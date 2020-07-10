@@ -1,5 +1,5 @@
-import { aGetAccount } from '../services/kazoo';
 import { Effect, Reducer, getDvaApp } from 'umi';
+import { aGetAccount } from '../services/kazoo';
 
 export interface ModelType {
   namespace: string;

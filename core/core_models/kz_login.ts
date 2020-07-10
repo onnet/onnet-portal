@@ -1,5 +1,4 @@
-import { Reducer, Effect, getDvaApp } from 'umi';
-
+import { getDvaApp } from 'umi';
 import { kz_user_auth, checkCurrentAuthToken } from '../services/kazoo';
 
 export function setUserLogin(payload) {

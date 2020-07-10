@@ -1,10 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { connect, useIntl } from 'umi';
-import { kzDevices } from '../../services/kazoo';
-
-import { PlusOutlined } from '@ant-design/icons';
-
 import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { kzDevices } from '../../services/kazoo';
 
 const DeviceCreateForm = props => {
   const [, forceUpdate] = useState();
@@ -187,6 +185,8 @@ const CreateDevice = props => {
   const { dispatch, kz_account } = props;
 
   const formRef = React.createRef();
+
+  const { formatMessage } = useIntl();
 
   const showModal = () => {
     setVisible(true);

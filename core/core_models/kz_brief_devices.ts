@@ -1,5 +1,5 @@
-import { Effect, Reducer, getDvaApp } from 'umi';
-import { EffectsCommandMap, saga } from 'dva';
+import { Effect, Reducer } from 'umi';
+import { saga } from 'dva';
 import { kzDevices } from '../services/kazoo';
 
 export interface ModelType {
@@ -34,13 +34,6 @@ const Model: ModelType = {
           payload: { data: [], status: response.status },
         });
       }
-      //    const redux_state = getDvaApp()._store.getState();
-      //    response.data.map(device =>
-      //      getDvaApp()._store.dispatch({
-      //        type: 'kz_full_devices/refresh',
-      //        payload: { account_id: redux_state.kz_account.data.id, device_id: device.id },
-      //      }),
-      //    );
     },
     *flush(_, { put }) {
       yield put({

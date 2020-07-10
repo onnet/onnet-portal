@@ -17,11 +17,11 @@ const { Panel } = Collapse;
 
 const EditDevice = props => {
   const { selectedDevice, full_devices, disableAssignBtn } = props;
+  const { formatMessage } = useIntl();
 
   if (!selectedDevice) return null;
   if (!full_devices[selectedDevice]) return null;
 
-  const { formatMessage } = useIntl();
   let devSettings = null;
 
   if (

@@ -3,8 +3,8 @@ import { useIntl, connect } from 'umi';
 import NumberFormat from 'react-number-format';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Row, Col } from 'antd';
-import styles from '../style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+import styles from '../style.less';
 
 import CardPaymentsList from './CardPaymentsList';
 import CardOnlinePayments from './CardOnlinePayments';

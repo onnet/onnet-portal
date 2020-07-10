@@ -9,6 +9,8 @@ import { Button, Select, Modal } from 'antd';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 const ResellerUserCIDSelect = props => {
+  const { formatMessage } = useIntl();
+
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
   const [mainNumber, setMainNumber] = useState(
     formatMessage({
@@ -32,8 +34,6 @@ const ResellerUserCIDSelect = props => {
     owner_id,
     modal_title,
   } = props;
-
-  const { formatMessage } = useIntl();
 
   function NumberToShow() {
     try {

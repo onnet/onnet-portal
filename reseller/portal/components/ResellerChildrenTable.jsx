@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { getDvaApp } from 'umi';
 import { useIntl, connect } from 'umi';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Table } from 'antd';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 
 const ResellerChildrenTable = props => {
-  const { settings, kz_children } = props;
+  const { dispatch, settings, kz_children } = props;
 
   const [dataSource, setDataSource] = useState([]);
 
@@ -28,7 +27,7 @@ const ResellerChildrenTable = props => {
           size="small"
           type="link"
           onClick={() => {
-            getDvaApp()._store.dispatch({
+            dispatch({
               type: 'child_account/refresh',
               payload: { account_id: record.id },
             });
