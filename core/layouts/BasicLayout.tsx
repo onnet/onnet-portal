@@ -39,7 +39,7 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
 
 const footerRender = () => <span />;
 
-const breadcrumbRender = (routers = []) => {
+const BreadcrumbRender = (routers = []) => {
   const { formatMessage } = useIntl();
   const pathList = [
     {
@@ -137,7 +137,7 @@ const BasicLayout: React.FC = props => {
 
           return <Link to={menuItemProps.path}>{defaultDom}</Link>;
         }}
-        breadcrumbRender={breadcrumbRender}
+        breadcrumbRender={BreadcrumbRender}
         itemRender={(route, params, routes, paths) => {
           const first = routes.indexOf(route) === 0;
           return first ? (

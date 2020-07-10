@@ -38,11 +38,11 @@ const ResellerChildSearch = props => {
 
   const { formatMessage } = useIntl();
 
-  const handleSearch = value => {
+  const handleSearch = val => {
     setLoading(true);
-    if (value) {
-      fetch(value, data => {
-	      setData(data);
+    if (val) {
+      fetch(val, dat => {
+	      setData(dat);
 	      setLoading(false)
       });
     } else {
@@ -51,14 +51,14 @@ const ResellerChildSearch = props => {
     }
   };
 
-  const handleChange = value => {
-    setValue(value);
+  const handleChange = val => {
+    setValue(val);
   };
 
-  const handleSelect = value => {
+  const handleSelect = val => {
     dispatch({
       type: 'child_account/refresh',
-      payload: { account_id: value },
+      payload: { account_id: val },
     });
     setData([]);
     setLoading(false);
