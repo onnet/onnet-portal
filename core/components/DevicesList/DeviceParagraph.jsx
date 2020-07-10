@@ -6,7 +6,7 @@ import { kzDevice } from '../../services/kazoo';
 
 const { Paragraph } = Typography;
 
-const DeviceParagraph = props => {
+const DeviceParagraph = (props) => {
   const [fieldContent, setFieldContent] = useState('Loading...');
 
   const { dispatch, account, full_devices, device_id, fieldKey } = props;
@@ -21,7 +21,7 @@ const DeviceParagraph = props => {
     <Paragraph
       style={props.style}
       editable={{
-        onChange: updatedText => {
+        onChange: (updatedText) => {
           if (fieldContent !== updatedText) {
             const data = {};
             _.set(data, fieldKey, updatedText);

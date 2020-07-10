@@ -7,7 +7,7 @@ import UserCIDSelect from './UserCIDSelect';
 import styles from '../style.less';
 import { cardProps } from '../../utils/props';
 
-const UserCID = props => {
+const UserCID = (props) => {
   const { owner_id } = props;
   const { formatMessage } = useIntl();
 

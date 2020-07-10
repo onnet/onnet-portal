@@ -19,19 +19,11 @@ const CardProps = {
   style: { marginBottom: 24 },
 };
 
-const LbFinanceDetails = props => {
+const LbFinanceDetails = (props) => {
   const { dispatch, lb_documents = {}, kz_account } = props;
 
-  const [selectedMonth, setSelectedMonth] = useState(
-    moment()
-      .subtract(1, 'months')
-      .format('MM'),
-  );
-  const [selectedYear, setSelectedYear] = useState(
-    moment()
-      .subtract(1, 'months')
-      .format('YYYY'),
-  );
+  const [selectedMonth, setSelectedMonth] = useState(moment().subtract(1, 'months').format('MM'));
+  const [selectedYear, setSelectedYear] = useState(moment().subtract(1, 'months').format('YYYY'));
 
   useEffect(() => {
     if (kz_account.data) {
@@ -56,7 +48,7 @@ const LbFinanceDetails = props => {
           defaultValue={moment(`${selectedYear}/${selectedMonth}`, monthFormat)}
           format={monthFormat}
           allowClear={false}
-          onChange={date => {
+          onChange={(date) => {
             setSelectedMonth(date.format('MM'));
             setSelectedYear(date.format('YYYY'));
             dispatch({

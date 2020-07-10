@@ -7,7 +7,7 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const { Paragraph } = Typography;
 
-const RsChildAccountParagraph = props => {
+const RsChildAccountParagraph = (props) => {
   const [fieldContent, setFieldContent] = useState('Loading...');
 
   const { child_account } = props;
@@ -22,7 +22,7 @@ const RsChildAccountParagraph = props => {
     <Paragraph
       style={props.style}
       editable={{
-        onChange: updatedText => {
+        onChange: (updatedText) => {
           if (fieldContent !== updatedText) {
             const data = {};
             _.set(data, props.fieldKey, updatedText);

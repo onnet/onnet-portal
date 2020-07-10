@@ -10,7 +10,7 @@ import { kzUser } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const UserRestrictionLevel = props => {
+const UserRestrictionLevel = (props) => {
   const { dispatch, account, owner_id, classifier, text } = props;
   const { formatMessage } = useIntl();
 

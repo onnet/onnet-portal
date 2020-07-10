@@ -15,7 +15,7 @@ import { reactJsonProps } from '../../utils/props';
 
 const { Panel } = Collapse;
 
-const EditDevice = props => {
+const EditDevice = (props) => {
   const { selectedDevice, full_devices, disableAssignBtn } = props;
   const { formatMessage } = useIntl();
 

@@ -6,7 +6,7 @@ import cryptoRandomString from 'crypto-random-string';
 
 const { TabPane } = Tabs;
 
-const CreateDeviceDrawer = props => {
+const CreateDeviceDrawer = (props) => {
   const {
     setCreateDeviceType,
     formRef_sip_device,
@@ -15,7 +15,7 @@ const CreateDeviceDrawer = props => {
     onFinish,
   } = props;
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
@@ -42,8 +42,8 @@ const CreateDeviceDrawer = props => {
           ref={formRef_sip_device}
           initialValues={{
             device_type: 'sip_device',
-            device_username: `user_${cryptoRandomString({length: 7})}`,
-            device_password: `${cryptoRandomString({length: 12})}`,
+            device_username: `user_${cryptoRandomString({ length: 7 })}`,
+            device_password: `${cryptoRandomString({ length: 12 })}`,
           }}
         >
           <Form.Item name="device_type" style={{ display: 'none' }}>

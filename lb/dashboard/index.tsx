@@ -10,7 +10,7 @@ import CardMonthlyFees from './CardMonthlyFees';
 import CardTelephonyNumbers from './CardTelephonyNumbers';
 import CardInternet from './CardInternet';
 
-const LBAccountDashboard = props => {
+const LBAccountDashboard = (props) => {
   const { dispatch, kz_account, lb_account } = props;
 
   useEffect(() => {

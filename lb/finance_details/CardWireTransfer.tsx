@@ -8,7 +8,7 @@ import { createProformaInvoice, onbillsAttachment } from '@/pages/onnet-portal/c
 import { useIntl } from 'umi';
 import styles from '@/pages/onnet-portal/core/style.less';
 
-const CardWireTransfer = props => {
+const CardWireTransfer = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { account_id } = props;
@@ -42,7 +42,7 @@ const CardWireTransfer = props => {
         <Fragment>
           <Formik
             initialValues={{}}
-            onSubmit={values => {
+            onSubmit={(values) => {
               console.log(values);
               setIsLoading(true);
               createProformaInvoice({
@@ -51,10 +51,10 @@ const CardWireTransfer = props => {
                   amount: values.invoice_sum,
                 },
               })
-                .then(res => {
+                .then((res) => {
                   console.log('createProformaInvoice res: ', res);
                   console.log('createProformaInvoice id: ', res.data.id);
-                  onbillsAttachment({ account_id, doc_id: res.data.id }).then(att_res => {
+                  onbillsAttachment({ account_id, doc_id: res.data.id }).then((att_res) => {
                     if (att_res.size > 0) {
                       download(att_res, `${res.data.id}.pdf`, 'application/pdf');
                       setIsLoading(false);
@@ -64,7 +64,7 @@ const CardWireTransfer = props => {
                     }
                   });
                 })
-                .catch(error => {
+                .catch((error) => {
                   console.log(error);
                   setIsLoading(false);
                   message.error('Something went wrong.');

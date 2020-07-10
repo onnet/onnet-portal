@@ -3,7 +3,7 @@ import { connect } from 'umi';
 import { UserDeleteOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
-const ResellerChildFlush = props => {
+const ResellerChildFlush = (props) => {
   const { dispatch, child_account } = props;
 
   const clearRsChild = () => {

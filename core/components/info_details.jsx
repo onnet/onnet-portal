@@ -13,7 +13,7 @@ export default function funReactJson(info_details) {
   });
 }
 
-export const modalReactJson = props => {
+export const modalReactJson = (props) => {
   const { info_details } = props;
   return Modal.info({
     title: 'Details',

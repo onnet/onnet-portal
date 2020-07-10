@@ -13,7 +13,7 @@ import { kzDevice } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const DevicesList = props => {
+const DevicesList = (props) => {
   const { formatMessage } = useIntl();
 
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
@@ -38,12 +38,12 @@ const DevicesList = props => {
     return null;
   }
 
-  const deleteChildDevice = record => {
+  const deleteChildDevice = (record) => {
     confirm({
       title: `Do you want to delete device ${record.username}?`,
       onOk() {
         kzDevice({ method: 'DELETE', account_id: account.data.id, device_id: record.id })
-          .then(uRes => {
+          .then((uRes) => {
             console.log(uRes);
             dispatch({
               type: 'kz_brief_devices/refresh',
@@ -65,7 +65,7 @@ const DevicesList = props => {
         <Switch
           size="small"
           checked={record.enabled}
-          onChange={checked => onDeviceEnableSwitch(checked, record)}
+          onChange={(checked) => onDeviceEnableSwitch(checked, record)}
         />
       ),
     },
@@ -85,7 +85,7 @@ const DevicesList = props => {
       dataIndex: 'owner_id',
       key: 'owner_id',
       align: 'center',
-      render: text =>
+      render: (text) =>
         full_users[text]
           ? `${full_users[text].data.username} (${full_users[text].data.first_name} ${full_users[text].data.last_name})`
           : null,
@@ -94,7 +94,7 @@ const DevicesList = props => {
       title: formatMessage({ id: 'core.CID', defaultMessage: 'CID' }),
       key: 'device_cid',
       align: 'center',
-      render: record => {
+      render: (record) => {
         console.log('IAM!!! CID field record', record);
         console.log('IAM!!! full_devices[record.id]', full_devices[record.id]);
         const InternalCIDNumber = _.get(full_devices[record.id], 'data.caller_id.internal.number');
@@ -147,7 +147,7 @@ const DevicesList = props => {
       render: (text, record) => (
         <InfoCircleOutlined
           style={{ color: settings.primaryColor }}
-          onClick={event => {
+          onClick={(event) => {
             console.log('event', event);
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
@@ -183,7 +183,7 @@ const DevicesList = props => {
           device_id: record.id,
           data: { enabled: checked },
         })
-          .then(uRes => {
+          .then((uRes) => {
             console.log(uRes);
             dispatch({
               type: 'kz_full_devices/refresh',
@@ -196,7 +196,7 @@ const DevicesList = props => {
     });
   }
 
-  const handlePagination = e => {
+  const handlePagination = (e) => {
     console.log('handlePagination e: ', e);
     if (e) {
       setIsPaginated({ position: 'bottom' });
@@ -237,7 +237,7 @@ const DevicesList = props => {
               columns={columns}
               pagination={isPaginated}
               size="small"
-              rowKey={record => record.id}
+              rowKey={(record) => record.id}
             />
           }
         />

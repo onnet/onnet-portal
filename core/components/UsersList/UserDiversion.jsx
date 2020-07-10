@@ -5,7 +5,7 @@ import { Table } from 'antd';
 import UserParagraph from './UserParagraph';
 import UserSwitch from './UserSwitch';
 
-const UserDiversion = props => {
+const UserDiversion = (props) => {
   const { owner_id } = props;
   const { formatMessage } = useIntl();
 

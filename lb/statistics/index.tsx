@@ -12,7 +12,7 @@ import CardCDR from './CardCDR';
 
 const dayFormat = 'YYYY/MM/DD';
 
-const LbStatistics = props => {
+const LbStatistics = (props) => {
   const { dispatch, lb_statistics, lb_account, kz_account } = props;
 
   const [selectedYear, setSelectedYear] = useState(moment().format('YYYY'));
@@ -42,7 +42,7 @@ const LbStatistics = props => {
 
   const { formatMessage } = useIntl();
 
-  const handleCallsDirection = e => {
+  const handleCallsDirection = (e) => {
     dispatch({ type: 'lb_statistics/is_loading' });
     console.log('handleCallsDirection value: ', e.target.value);
     setCallsDirection(e.target.value);
@@ -63,7 +63,7 @@ const LbStatistics = props => {
     });
   };
 
-  const handleCallsType = e => {
+  const handleCallsType = (e) => {
     dispatch({ type: 'lb_statistics/is_loading' });
     console.log('handleCallsType value: ', e.target.value);
     setCallsType(e.target.value);
@@ -108,7 +108,7 @@ const LbStatistics = props => {
             displayType="text"
             thousandSeparator=" "
             decimalScale={2}
-            renderText={value => <div>{value} руб.</div>}
+            renderText={(value) => <div>{value} руб.</div>}
           />
         ) : null}
       </div>
@@ -135,7 +135,7 @@ const LbStatistics = props => {
                   )}
                   format={dayFormat}
                   allowClear={false}
-                  onChange={date => {
+                  onChange={(date) => {
                     setSelectedDay(date.format('DD'));
                     setSelectedMonth(date.format('MM'));
                     setSelectedYear(date.format('YYYY'));

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Collapse } from 'antd';
 import * as _ from 'lodash';
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import ReactJson from 'react-json-view';
 import UserPassword from './UserPassword';
 import UserCID from './UserCID';
@@ -13,7 +13,7 @@ import { reactJsonProps } from '../../utils/props';
 
 const { Panel } = Collapse;
 
-const EditUser = props => {
+const EditUser = (props) => {
   const { selectedUser, full_users, account_numbers, brief_devices } = props;
   const { formatMessage } = useIntl();
 

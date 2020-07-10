@@ -6,7 +6,7 @@ import RsChildUserParagraph from './RsChildUserParagraph';
 import ResellerUserCIDSelect from './ResellerUserCIDSelect';
 import styles from '../style.less';
 
-const ResellerUserCID = props => {
+const ResellerUserCID = (props) => {
   const { owner_id } = props;
   const { formatMessage } = useIntl();
 

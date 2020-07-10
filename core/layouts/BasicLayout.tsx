@@ -32,7 +32,7 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
  */
 
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
-  menuList.map(item => {
+  menuList.map((item) => {
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
@@ -54,7 +54,7 @@ const BreadcrumbRender = (routers = []) => {
   return pathList;
 };
 
-const BasicLayout: React.FC = props => {
+const BasicLayout: React.FC = (props) => {
   const {
     dispatch,
     children,
@@ -149,7 +149,7 @@ const BasicLayout: React.FC = props => {
         footerRender={footerRender}
         menuDataRender={menuDataRender}
         formatMessage={formatMessage}
-        rightContentRender={rightProps => <RightContent {...rightProps} />}
+        rightContentRender={(rightProps) => <RightContent {...rightProps} />}
         {...props}
         {...settings}
       >
@@ -157,7 +157,7 @@ const BasicLayout: React.FC = props => {
       </ProLayout>
       <SettingDrawer
         settings={settings}
-        onSettingChange={config =>
+        onSettingChange={(config) =>
           dispatch({
             type: 'settings/changeSetting',
             payload: config,

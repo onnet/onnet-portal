@@ -6,7 +6,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import EditDevice from './EditDevice';
 import styles from '../../style.less';
 
-const EditDeviceDrawer = props => {
+const EditDeviceDrawer = (props) => {
   const {
     settings,
     full_devices,

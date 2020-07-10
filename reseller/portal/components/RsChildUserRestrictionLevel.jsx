@@ -8,7 +8,7 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { confirm } = Modal;
 
-const RsChildUserRestrictionLevel = props => {
+const RsChildUserRestrictionLevel = (props) => {
   const { dispatch, child_account, owner_id, classifier, text } = props;
   const { formatMessage } = useIntl();
 

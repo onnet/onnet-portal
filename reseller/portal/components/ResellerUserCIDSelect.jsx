@@ -8,7 +8,7 @@ import { Button, Select, Modal } from 'antd';
 
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
-const ResellerUserCIDSelect = props => {
+const ResellerUserCIDSelect = (props) => {
   const { formatMessage } = useIntl();
 
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
@@ -54,7 +54,7 @@ const ResellerUserCIDSelect = props => {
     }
   }, [child_full_users[owner_id]]);
 
-  const onMainNumberSelect = event => {
+  const onMainNumberSelect = (event) => {
     setMainNumber(event);
   };
 
@@ -100,7 +100,7 @@ const ResellerUserCIDSelect = props => {
             showSearch
             defaultValue={mainNumber}
           >
-            {_.keys(_.get(child_numbers, 'data.numbers', {})).map(number => (
+            {_.keys(_.get(child_numbers, 'data.numbers', {})).map((number) => (
               <Select.Option value={number} key={number}>
                 {number}
               </Select.Option>

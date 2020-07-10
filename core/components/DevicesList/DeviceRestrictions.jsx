@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { Table } from 'antd';
 import DeviceRestrictionLevel from './DeviceRestrictionLevel';
 
-const DeviceRestrictions = props => {
+const DeviceRestrictions = (props) => {
   const [tableData, setTableData] = useState([]);
 
   const { dispatch, account, full_devices, kz_numbers_classifiers, device_id } = props;
@@ -19,7 +19,7 @@ const DeviceRestrictions = props => {
       });
     } else if (full_devices[device_id]) {
       const jobj = _.get(full_devices[device_id].data, 'call_restriction', {});
-      const TabDat = Object.keys(kz_numbers_classifiers.data).map(key => ({
+      const TabDat = Object.keys(kz_numbers_classifiers.data).map((key) => ({
         key,
         action: jobj[key] ? jobj[key].action : null,
       }));

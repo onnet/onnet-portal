@@ -7,7 +7,7 @@ import DeviceCIDSelect from './DeviceCIDSelect';
 import styles from '../style.less';
 import { cardProps } from '../../utils/props';
 
-const DeviceCID = props => {
+const DeviceCID = (props) => {
   const { device_id } = props;
   const { formatMessage } = useIntl();
 

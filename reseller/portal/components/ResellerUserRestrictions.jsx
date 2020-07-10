@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { Table } from 'antd';
 import RsChildUserRestrictionLevel from './RsChildUserRestrictionLevel';
 
-const ResellerUserRestrictions = props => {
+const ResellerUserRestrictions = (props) => {
   const [tableData, setTableData] = useState([]);
 
   const { dispatch, child_account, child_full_users, kz_numbers_classifiers, owner_id } = props;
@@ -19,7 +19,7 @@ const ResellerUserRestrictions = props => {
       });
     } else if (child_full_users[owner_id]) {
       const jobj = _.get(child_full_users[owner_id].data, 'call_restriction', {});
-      const TabDat = Object.keys(kz_numbers_classifiers.data).map(key => ({
+      const TabDat = Object.keys(kz_numbers_classifiers.data).map((key) => ({
         key,
         action: jobj[key] ? jobj[key].action : null,
       }));

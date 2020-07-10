@@ -3,7 +3,7 @@ import NumberFormat from 'react-number-format';
 
 import { useIntl } from 'umi';
 
-const MoneyFormat = props => {
+const MoneyFormat = (props) => {
   const { amount, prefix } = props;
   const { formatMessage } = useIntl();
 
@@ -14,7 +14,7 @@ const MoneyFormat = props => {
       thousandSeparator=" "
       decimalScale={2}
       fixedDecimalScale
-      renderText={value => (
+      renderText={(value) => (
         <span>
           {prefix}
           {value} {formatMessage({ id: 'reseller_portal.rub_short', defaultMessage: 'rub.' })}

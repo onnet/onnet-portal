@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import styles from '@/pages/onnet-portal/core/style.less';
 import LbDownloadDoc from './LbDownloadDoc';
 
-const CardCallsReports = props => {
+const CardCallsReports = (props) => {
   const { calls_reports_pdf, account_id } = props;
   const { formatMessage } = useIntl();
 
@@ -13,7 +13,7 @@ const CardCallsReports = props => {
     {
       title: formatMessage({ id: 'reseller_portal.Period', defaultMessage: 'Period' }),
       dataIndex: 'period',
-      render: text => (
+      render: (text) => (
         <Moment parse="YYYY-M" format="YYYY-MM">
           {' '}
           {text}{' '}
@@ -31,7 +31,7 @@ const CardCallsReports = props => {
       title: '',
       dataIndex: '',
       key: 'x',
-      render: record => <LbDownloadDoc account_id={account_id} record={record} />,
+      render: (record) => <LbDownloadDoc account_id={account_id} record={record} />,
     },
   ];
 
@@ -55,9 +55,9 @@ const CardCallsReports = props => {
             columns={columns}
             pagination={false}
             size="small"
-            rowKey={record => record.order_id.toString() + record.order_num.toString()}
+            rowKey={(record) => record.order_id.toString() + record.order_num.toString()}
             onRow={(record, rowIndex) => ({
-              onClick: event => {
+              onClick: (event) => {
                 console.log('Clicked row event: ', event);
                 console.log('Clicked row rowIndex: ', rowIndex);
                 console.log('Clicked row record: ', record);

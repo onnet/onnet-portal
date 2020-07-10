@@ -7,7 +7,7 @@ import { kzUser } from '../../services/kazoo';
 import styles from '../style.less';
 import { cardProps } from '../../utils/props';
 
-const UserMedia = props => {
+const UserMedia = (props) => {
   const [audioCodecs, setAudioCodecs] = useState([]);
   const [videoCodecs, setVideoCodecs] = useState([]);
   const [isLoading, setIsLoading] = useState({});
@@ -38,7 +38,7 @@ const UserMedia = props => {
       method: 'GET',
       account_id: account.data.id,
       owner_id,
-    }).then(resp => {
+    }).then((resp) => {
       const codecsList = _.get(resp, `data.media.${media}.codecs`, []);
       let newCodecsList = [];
       if (_.get(resp, `data.media.${media}.codecs`, []).includes(codec)) {
@@ -81,7 +81,7 @@ const UserMedia = props => {
                   checkedChildren="PCMA"
                   unCheckedChildren="PCMA"
                   checked={audioCodecs.includes('PCMA')}
-                  onChange={checked => onCodecChange(checked, 'audio', 'PCMA')}
+                  onChange={(checked) => onCodecChange(checked, 'audio', 'PCMA')}
                   loading={isLoading.PCMA}
                 />
               </Card.Grid>
@@ -90,7 +90,7 @@ const UserMedia = props => {
                   checkedChildren="PCMU"
                   unCheckedChildren="PCMU"
                   checked={audioCodecs.includes('PCMU')}
-                  onChange={checked => onCodecChange(checked, 'audio', 'PCMU')}
+                  onChange={(checked) => onCodecChange(checked, 'audio', 'PCMU')}
                   loading={isLoading.PCMU}
                 />
               </Card.Grid>
@@ -99,7 +99,7 @@ const UserMedia = props => {
                   checkedChildren="G722"
                   unCheckedChildren="G722"
                   checked={audioCodecs.includes('G722')}
-                  onChange={checked => onCodecChange(checked, 'audio', 'G722')}
+                  onChange={(checked) => onCodecChange(checked, 'audio', 'G722')}
                   loading={isLoading.G722}
                 />
               </Card.Grid>
@@ -108,7 +108,7 @@ const UserMedia = props => {
                   checkedChildren="OPUS"
                   unCheckedChildren="OPUS"
                   checked={audioCodecs.includes('OPUS')}
-                  onChange={checked => onCodecChange(checked, 'audio', 'OPUS')}
+                  onChange={(checked) => onCodecChange(checked, 'audio', 'OPUS')}
                   loading={isLoading.OPUS}
                 />
               </Card.Grid>
@@ -133,7 +133,7 @@ const UserMedia = props => {
                   checkedChildren="VP8"
                   unCheckedChildren="VP8"
                   checked={videoCodecs.includes('VP8')}
-                  onChange={checked => onCodecChange(checked, 'video', 'VP8')}
+                  onChange={(checked) => onCodecChange(checked, 'video', 'VP8')}
                   loading={isLoading.VP8}
                 />
               </Card.Grid>
@@ -142,7 +142,7 @@ const UserMedia = props => {
                   checkedChildren="H264"
                   unCheckedChildren="H264"
                   checked={videoCodecs.includes('H264')}
-                  onChange={checked => onCodecChange(checked, 'video', 'H264')}
+                  onChange={(checked) => onCodecChange(checked, 'video', 'H264')}
                   loading={isLoading.H264}
                 />
               </Card.Grid>
@@ -151,7 +151,7 @@ const UserMedia = props => {
                   checkedChildren="H263"
                   unCheckedChildren="H263"
                   checked={videoCodecs.includes('H263')}
-                  onChange={checked => onCodecChange(checked, 'video', 'H263')}
+                  onChange={(checked) => onCodecChange(checked, 'video', 'H263')}
                   loading={isLoading.H263}
                 />
               </Card.Grid>
@@ -160,7 +160,7 @@ const UserMedia = props => {
                   checkedChildren="H261"
                   unCheckedChildren="H261"
                   checked={videoCodecs.includes('H261')}
-                  onChange={checked => onCodecChange(checked, 'video', 'H261')}
+                  onChange={(checked) => onCodecChange(checked, 'video', 'H261')}
                   loading={isLoading.H261}
                 />
               </Card.Grid>

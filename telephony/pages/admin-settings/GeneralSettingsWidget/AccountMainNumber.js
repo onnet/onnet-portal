@@ -9,7 +9,7 @@ import { Button, Select, Modal } from 'antd';
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
-const AccountMainNumber = props => {
+const AccountMainNumber = (props) => {
   const { formatMessage } = useIntl();
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
   const [mainNumber, setMainNumber] = useState(
@@ -51,7 +51,7 @@ const AccountMainNumber = props => {
     }
   }, [kz_account]);
 
-  const onMainNumberSelect = event => {
+  const onMainNumberSelect = (event) => {
     console.log('onMainNumberSelect event: ', event);
     setMainNumber(event);
   };
@@ -90,7 +90,7 @@ const AccountMainNumber = props => {
             defaultValue={mainNumber}
           >
             {_.isUndefined(kz_account_numbers.data.numbers)
-              ? _.keys(kz_account_numbers.data.numbers).map(number => (
+              ? _.keys(kz_account_numbers.data.numbers).map((number) => (
                   <Select.Option value={number} key={number}>
                     {number}
                   </Select.Option>

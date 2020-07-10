@@ -6,7 +6,7 @@ import { RedoOutlined } from '@ant-design/icons';
 
 import { Form, Button, Input, message } from 'antd';
 
-const UpdatePassword = props => {
+const UpdatePassword = (props) => {
   const [, forceUpdate] = useState();
 
   const { dispatch, owner_id, child_account, child_full_users } = props;
@@ -19,7 +19,7 @@ const UpdatePassword = props => {
 
   const { formatMessage } = useIntl();
 
-  const handleSubmit = values => {
+  const handleSubmit = (values) => {
     kzUser({
       method: 'PATCH',
       account_id: child_account.data?.id,

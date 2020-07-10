@@ -10,14 +10,14 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const { confirm } = Modal;
 
-const AccountDialplan = props => {
+const AccountDialplan = (props) => {
   const [accountDialplans, setAccountDialplans] = useState({});
 
   const { kz_account } = props;
 
   useEffect(() => {
     if (kz_account.data) {
-      AccountDialplans({ account_id: kz_account.data.id }).then(res => {
+      AccountDialplans({ account_id: kz_account.data.id }).then((res) => {
         if (res.data) setAccountDialplans(res.data);
       });
     }
@@ -27,7 +27,7 @@ const AccountDialplan = props => {
 
   const menuAccountDialplan = (
     <Menu selectedKeys={[]} onClick={onAccountDialplanSelect}>
-      {Object.keys(accountDialplans).map(dpKey => (
+      {Object.keys(accountDialplans).map((dpKey) => (
         <Menu.Item key={dpKey}>{dpKey}</Menu.Item>
       ))}
     </Menu>

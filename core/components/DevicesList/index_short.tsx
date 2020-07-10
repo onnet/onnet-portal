@@ -22,7 +22,7 @@ import { kzDevice, kzDevices } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const DevicesList = props => {
+const DevicesList = (props) => {
   const { formatMessage } = useIntl();
 
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
@@ -92,7 +92,7 @@ const DevicesList = props => {
         <Switch
           size="small"
           checked={full_devices[record.id] ? full_devices[record.id].data.enabled : record.enabled}
-          onChange={checked => onDeviceEnableSwitch(checked, record)}
+          onChange={(checked) => onDeviceEnableSwitch(checked, record)}
         />
       ),
     },
@@ -186,7 +186,7 @@ const DevicesList = props => {
     });
   }
 
-  const handlePagination = e => {
+  const handlePagination = (e) => {
     if (e) {
       setIsPaginated({ position: 'bottom' });
     } else {
@@ -249,7 +249,7 @@ const DevicesList = props => {
     );
   }
 
-  const onDeviceCreateFinish = values => {
+  const onDeviceCreateFinish = (values) => {
     console.log('Success:', values);
     const newDevice = {};
     _.set(newDevice, 'device_type', values.device_type);
@@ -257,8 +257,16 @@ const DevicesList = props => {
     _.set(newDevice, 'accept_charges', true);
     _.set(newDevice, 'suppress_unregister_notifications', true);
     _.set(newDevice, 'register_overwrite_notify', true);
-    _.set(newDevice, 'sip.username', values.device_username || `user_${cryptoRandomString({length: 7})}`);
-    _.set(newDevice, 'sip.password', values.device_password || `${cryptoRandomString({length: 12})}`);
+    _.set(
+      newDevice,
+      'sip.username',
+      values.device_username || `user_${cryptoRandomString({ length: 7 })}`,
+    );
+    _.set(
+      newDevice,
+      'sip.password',
+      values.device_password || `${cryptoRandomString({ length: 12 })}`,
+    );
     if (isIp(values.sip_ip_auth)) {
       _.set(newDevice, 'sip.method', 'ip');
       _.set(newDevice, 'sip.ip', values.sip_ip_auth);
@@ -283,7 +291,7 @@ const DevicesList = props => {
       method: 'PUT',
       account_id: account.data.id,
       data: newDevice,
-    }).then(uRes => {
+    }).then((uRes) => {
       dispatch({
         type: 'kz_brief_devices/refresh',
         payload: { account_id: account.data.id },
@@ -299,10 +307,10 @@ const DevicesList = props => {
     });
   };
 
-  const onSearchChange = value => {
+  const onSearchChange = (value) => {
     console.log('Value: ', value);
     if (value.length > 1) {
-      const searchRes = _.filter(brief_devices.data, o =>
+      const searchRes = _.filter(brief_devices.data, (o) =>
         _.includes(_.toString(Object.values(o)).toLowerCase(), value.toLowerCase()),
       );
       setDataSource(searchRes);
@@ -332,7 +340,7 @@ const DevicesList = props => {
               <HeaderSearch
                 className={`${gh_styles.action} ${gh_styles.search}`}
                 style={{ marginLeft: '1em', display: 'inline-flex' }}
-                onSearch={value => {
+                onSearch={(value) => {
                   console.log('input', value);
                 }}
                 onChange={onSearchChange}
@@ -359,7 +367,7 @@ const DevicesList = props => {
               columns={columns}
               pagination={isPaginated}
               size="small"
-              rowKey={record => record.id}
+              rowKey={(record) => record.id}
             />
           }
         />

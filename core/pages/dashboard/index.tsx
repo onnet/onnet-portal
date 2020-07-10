@@ -6,13 +6,13 @@ import SuperDuperDashboard from './super_admin';
 import ResellerDashboard from './reseller';
 import AccountDashboard from './account';
 
-const DashboardSelector = props => {
+const DashboardSelector = (props) => {
   const { kz_login, kz_account = {}, lb_account = {} } = props;
 
   const [isReseller, setIsReseller] = useState(false);
   const [isSuperDuperAdmin, setIsSuperDuperAdmin] = useState(false);
 
-console.log('IAM1');
+  console.log('IAM1');
 
   useEffect(() => {
     if (kz_account.data) {
@@ -30,24 +30,24 @@ console.log('IAM1');
     }
   }, [kz_login, kz_account, lb_account]);
 
-console.log('IAM2');
+  console.log('IAM2');
   if (kz_account.data) {
-console.log('IAM3');
+    console.log('IAM3');
     if (isSuperDuperAdmin) {
-console.log('IAM4');
+      console.log('IAM4');
       return <SuperDuperDashboard />;
     }
 
     if (isReseller) {
-console.log('IAM5');
+      console.log('IAM5');
       return <ResellerDashboard />;
     }
 
-console.log('IAM6');
+    console.log('IAM6');
     return lb_account.data ? <LBAccountDashboard /> : <AccountDashboard />;
   }
 
-console.log('IAM7 kz_account: ', kz_account);
+  console.log('IAM7 kz_account: ', kz_account);
   return (
     <div
       style={{

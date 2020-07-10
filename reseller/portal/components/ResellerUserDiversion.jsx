@@ -7,7 +7,7 @@ import { Table } from 'antd';
 import RsChildUserParagraph from './RsChildUserParagraph';
 import RsChildUserSwitch from './RsChildUserSwitch';
 
-const ResellerUserDiversion = props => {
+const ResellerUserDiversion = (props) => {
   const { owner_id } = props;
   const { formatMessage } = useIntl();
 

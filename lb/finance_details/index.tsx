@@ -10,7 +10,7 @@ import CardPaymentsList from './CardPaymentsList';
 import CardOnlinePayments from './CardOnlinePayments';
 import CardWireTransfer from './CardWireTransfer';
 
-const LbFinanceDetails = props => {
+const LbFinanceDetails = (props) => {
   const { dispatch, lb_account, kz_account } = props;
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const LbFinanceDetails = props => {
             displayType="text"
             thousandSeparator=" "
             decimalScale={2}
-            renderText={value => <div>{value} руб.</div>}
+            renderText={(value) => <div>{value} руб.</div>}
           />
         ) : null}
       </div>

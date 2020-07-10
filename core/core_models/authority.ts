@@ -27,18 +27,20 @@ const AuthorityModel: AuthorityModelType = {
           ? [redux_state.kz_user.data.priv_level]
           : [];
         const reseller = redux_state.kz_account.data.is_reseller ? ['reseller'] : [];
-        const login_as_master = redux_state.kz_login.data.is_master_account ? ['login_as_master'] : [];
-        const show_reseller_portal =
-          (redux_state.kz_login.data.is_master_account && redux_state.kz_account.data.is_reseller)
-          ? ['show_reseller_portal']
+        const login_as_master = redux_state.kz_login.data.is_master_account
+          ? ['login_as_master']
           : [];
+        const show_reseller_portal =
+          redux_state.kz_login.data.is_master_account && redux_state.kz_account.data.is_reseller
+            ? ['show_reseller_portal']
+            : [];
         const superduper_admin = redux_state.kz_account.data.superduper_admin
           ? ['superduper_admin']
           : [];
         const consumer =
-          (!redux_state.kz_account.data.superduper_admin && !redux_state.kz_account.data.is_reseller)
-          ? ['consumer']
-          : [];
+          !redux_state.kz_account.data.superduper_admin && !redux_state.kz_account.data.is_reseller
+            ? ['consumer']
+            : [];
         const child_account_selected = redux_state.child_account
           ? redux_state.child_account.data
             ? ['child_account_selected']
@@ -71,8 +73,8 @@ const AuthorityModel: AuthorityModelType = {
           account_id,
           brt_child_selected,
         );
-// console.log("isArrayEqual: ", isArrayEqual(authority, redux_state.authority.currentAuthority));
-// console.log("_.isEqual: ", isEqual(authority, redux_state.authority.currentAuthority));
+        // console.log("isArrayEqual: ", isArrayEqual(authority, redux_state.authority.currentAuthority));
+        // console.log("_.isEqual: ", isEqual(authority, redux_state.authority.currentAuthority));
         if (!isEqual(authority, redux_state.authority.currentAuthority)) {
           yield put({
             type: 'update',

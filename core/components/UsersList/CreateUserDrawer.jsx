@@ -1,12 +1,12 @@
 import React from 'react';
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Form, Row, Col, Input } from 'antd';
 
-const CreateDeviceDrawer = props => {
+const CreateDeviceDrawer = (props) => {
   const { formRef, onFinish } = props;
   const { formatMessage } = useIntl();
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 

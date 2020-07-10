@@ -7,7 +7,7 @@ import { Table } from 'antd';
 import DeviceParagraph from './DeviceParagraph';
 import DeviceSwitch from './DeviceSwitch';
 
-const DeviceDiversion = props => {
+const DeviceDiversion = (props) => {
   const { device_id } = props;
   const { formatMessage } = useIntl();
 

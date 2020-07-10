@@ -4,7 +4,7 @@ import { Table, Card } from 'antd';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
-const CardMonthlyFees = props => {
+const CardMonthlyFees = (props) => {
   const { lb_account = { data: {} } } = props;
   const { formatMessage } = useIntl();
 
@@ -63,7 +63,7 @@ const CardMonthlyFees = props => {
             columns={columns}
             pagination={false}
             size="small"
-            rowKey={record =>
+            rowKey={(record) =>
               record.fee_name.replace(/[^A-Za-z0-9]/g, '') + record.quantity + record.cost
             }
           />

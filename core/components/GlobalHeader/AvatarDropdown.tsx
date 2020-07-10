@@ -8,7 +8,7 @@ import EditUserDrawer from '@/pages/onnet-portal/core/components/UsersList/EditU
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
-const AvatarDropdown = props => {
+const AvatarDropdown = (props) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const { dispatch, kz_user_data = {}, kz_account_data = {} } = props;
 

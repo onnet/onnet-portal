@@ -3,7 +3,7 @@ import { connect } from 'umi';
 import { Spin } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-const AccountDashboard = props => {
+const AccountDashboard = (props) => {
   const { kz_account } = props;
 
   if (!kz_account.data) {

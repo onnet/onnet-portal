@@ -4,7 +4,7 @@ import { RedoOutlined } from '@ant-design/icons';
 import { Form, Button, Input, message } from 'antd';
 import { kzUser } from '../../services/kazoo';
 
-const UserPassword = props => {
+const UserPassword = (props) => {
   const [, forceUpdate] = useState();
 
   const { dispatch, owner_id, account, full_users } = props;
@@ -17,7 +17,7 @@ const UserPassword = props => {
 
   const { formatMessage } = useIntl();
 
-  const handleSubmit = values => {
+  const handleSubmit = (values) => {
     kzUser({
       method: 'PATCH',
       account_id: account.data.id,

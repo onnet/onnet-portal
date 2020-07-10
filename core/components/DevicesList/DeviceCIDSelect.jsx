@@ -8,7 +8,7 @@ import { Button, Select, Modal } from 'antd';
 
 import { kzDevice } from '../../services/kazoo';
 
-const CIDSelect = props => {
+const CIDSelect = (props) => {
   const { formatMessage } = useIntl();
 
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
@@ -46,7 +46,7 @@ const CIDSelect = props => {
     }
   }, [full_devices[device_id]]);
 
-  const onMainNumberSelect = event => {
+  const onMainNumberSelect = (event) => {
     setMainNumber(event);
   };
 
@@ -92,7 +92,7 @@ const CIDSelect = props => {
             showSearch
             defaultValue={mainNumber}
           >
-            {Object.keys(numbers.data.numbers).map(number => (
+            {Object.keys(numbers.data.numbers).map((number) => (
               <Select.Option value={number} key={number}>
                 {number}
               </Select.Option>

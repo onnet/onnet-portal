@@ -9,7 +9,7 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { confirm } = Modal;
 
-const RsChildUserSwitch = props => {
+const RsChildUserSwitch = (props) => {
   const [fieldContent, setFieldContent] = useState(false);
 
   const { dispatch, child_account, child_full_users, owner_id, fieldKey, modal_title } = props;
@@ -52,7 +52,7 @@ const RsChildUserSwitch = props => {
   }
 
   return (
-    <Switch size="small" checked={fieldContent} onChange={checked => onSwitchChange(checked)} />
+    <Switch size="small" checked={fieldContent} onChange={(checked) => onSwitchChange(checked)} />
   );
 };
 

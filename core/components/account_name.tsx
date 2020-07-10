@@ -4,7 +4,7 @@ import { history, getDvaApp, connect } from 'umi';
 import { Button } from 'antd';
 import { JSON_HEADERS } from '@/pages/onnet-portal/core/services/kazoo.ts';
 
-const MyLink = props => (
+const MyLink = (props) => (
   <Button
     size="small"
     type="link"
@@ -20,7 +20,7 @@ const MyLink = props => (
   </Button>
 );
 
-const FetchNameByAccount = account_id => {
+const FetchNameByAccount = (account_id) => {
   const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/accounts/${account_id}`;
@@ -40,7 +40,7 @@ const FetchNameByAccount = account_id => {
   );
 };
 
-const MaybeFetchByNumber = number => {
+const MaybeFetchByNumber = (number) => {
   const redux_state = getDvaApp()._store.getState();
   const { account_id } = redux_state.kz_login.data;
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
@@ -49,7 +49,7 @@ const MaybeFetchByNumber = number => {
   return response.data.account_id ? response.data.account_id : 'N/A';
 };
 
-const MaybeFetchByRealm = realm => {
+const MaybeFetchByRealm = (realm) => {
   const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const url = `${API_URL_V2}/search?t=account&q=realm&v=${realm}`;
@@ -65,7 +65,7 @@ const MaybeFetchByRealm = realm => {
   );
 };
 
-const MyFetchingComponent = params => {
+const MyFetchingComponent = (params) => {
   if (params.account_id) {
     return FetchNameByAccount(params.account_id);
   }
@@ -100,7 +100,7 @@ const MyFetchingComponent = params => {
   return 'No param found';
 };
 
-const AccountName = props => {
+const AccountName = (props) => {
   const { kz_cache } = props;
 
   return (

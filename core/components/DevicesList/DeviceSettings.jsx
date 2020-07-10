@@ -10,14 +10,14 @@ import DeviceMusicOnHold from './DeviceMusicOnHold';
 import DeviceAssignTo from './DeviceAssignTo';
 import { AccountDialplans } from '../../services/kazoo';
 
-const DeviceSettings = props => {
+const DeviceSettings = (props) => {
   const [accountDialplans, setAccountDialplans] = useState({});
 
   const { device_id, account, disableAssignBtn } = props;
 
   useEffect(() => {
     if (account.data) {
-      AccountDialplans({ account_id: account.data.id }).then(res => {
+      AccountDialplans({ account_id: account.data.id }).then((res) => {
         if (res.data) setAccountDialplans(res.data);
       });
     }
@@ -164,7 +164,7 @@ const DeviceSettings = props => {
         <DeviceSetSelect
           device_id={device_id}
           title={formatMessage({ id: 'core.Dialplan', defaultMessage: 'Dialplan' })}
-          menu_items={Object.keys(accountDialplans).map(dpKey => ({ key: [dpKey], text: dpKey }))}
+          menu_items={Object.keys(accountDialplans).map((dpKey) => ({ key: [dpKey], text: dpKey }))}
           fieldKey="dial_plan.system[0]"
         />
       ),

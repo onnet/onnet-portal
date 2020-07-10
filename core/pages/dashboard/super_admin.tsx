@@ -7,7 +7,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 const myGraph = (system_status, kz_registrations_count) =>
   system_status.data
-    ? Object.keys(system_status.data).map(zone => {
+    ? Object.keys(system_status.data).map((zone) => {
         if (system_status.data[zone].kamailio) {
           const regs = Object.values(system_status.data[zone].kamailio).reduce(
             (acc, val) => acc + val.roles.Registrar.Registrations,
@@ -37,7 +37,7 @@ const myGraph = (system_status, kz_registrations_count) =>
       })
     : [];
 
-const SuperDuperDashboard = props => {
+const SuperDuperDashboard = (props) => {
   const {
     dispatch,
     kz_login = {},
@@ -53,7 +53,7 @@ const SuperDuperDashboard = props => {
       kz_registrations_count.data
     ) {
       // eslint-disable-next-line no-undef
-      Raphael.fn.pieChart = function(cx, cy, r, values, stroke, total_reg_count) {
+      Raphael.fn.pieChart = function (cx, cy, r, values, stroke, total_reg_count) {
         const paper = this;
         const rad = Math.PI / 180;
 
@@ -85,7 +85,7 @@ const SuperDuperDashboard = props => {
 
         let angle = 0;
         let total = 0;
-        const process = function(j) {
+        const process = function (j) {
           const { value } = values[j];
           const angleplus = (360 * value) / total;
           const popangle = angle + angleplus / 2;
@@ -101,12 +101,12 @@ const SuperDuperDashboard = props => {
             stroke,
             'stroke-width': 3,
           });
-          p.mouseover(function() {
+          p.mouseover(function () {
             p.stop().animate({ transform: `s1.1 1.1 ${cx} ${cy}` }, ms, 'elastic');
-          }).mouseout(function() {
+          }).mouseout(function () {
             p.stop().animate({ transform: '' }, ms, 'elastic');
           });
-          p.click(function() {
+          p.click(function () {
             console.log(`/dashboard/${values[j].label}`);
             history.push({ pathname: '/int/zone', state: { zone: values[j].label } });
           });
@@ -123,7 +123,7 @@ const SuperDuperDashboard = props => {
               cursor: 'pointer',
               'font-size': 20,
             })
-            .click(function() {
+            .click(function () {
               history.push({ pathname: '/int/zone', state: { zone: values[j].label } });
             });
           paper
@@ -139,7 +139,7 @@ const SuperDuperDashboard = props => {
               cursor: 'pointer',
               'font-size': 20,
             })
-            .click(function() {
+            .click(function () {
               history.push({ pathname: '/int/zone', state: { zone: values[j].label } });
             });
           angle += angleplus;
@@ -157,13 +157,13 @@ const SuperDuperDashboard = props => {
         paper
           .circle(cx, cy, r / 3)
           .attr({ fill: '#fff', stroke: '#fff', cursor: 'pointer' })
-          .click(function() {
+          .click(function () {
             history.push(`/int/reseller_portal/monitor/sip_registrations`);
           });
         paper
           .text(cx, cy, `Registrations\n${total_reg_count}`)
           .attr({ 'font-size': '14', cursor: 'pointer' })
-          .click(function() {
+          .click(function () {
             history.push(`/int/reseller_portal/monitor/sip_registrations`);
           });
       };

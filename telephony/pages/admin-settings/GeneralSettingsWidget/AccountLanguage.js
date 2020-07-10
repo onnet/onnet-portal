@@ -10,7 +10,7 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const { confirm } = Modal;
 
-const AccountLanguage = props => {
+const AccountLanguage = (props) => {
   const { kz_account } = props;
   const { formatMessage } = useIntl();
 

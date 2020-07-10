@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import styles from '@/pages/onnet-portal/core/style.less';
 import LbDownloadDoc from './LbDownloadDoc';
 
-const CardProforma = props => {
+const CardProforma = (props) => {
   const { proformas, account_id } = props;
   const { formatMessage } = useIntl();
 
@@ -21,7 +21,7 @@ const CardProforma = props => {
       title: formatMessage({ id: 'reseller_portal.Date', defaultMessage: 'Date' }),
       dataIndex: 'order_date',
       key: 'order_date',
-      render: text => (
+      render: (text) => (
         <Moment parse="YYYY-M-D" format="YYYY-MM-DD">
           {' '}
           {text}{' '}
@@ -39,7 +39,7 @@ const CardProforma = props => {
       title: '',
       dataIndex: '',
       key: 'x',
-      render: record => <LbDownloadDoc account_id={account_id} record={record} />,
+      render: (record) => <LbDownloadDoc account_id={account_id} record={record} />,
     },
   ];
 
@@ -60,7 +60,7 @@ const CardProforma = props => {
             columns={columns}
             pagination={false}
             size="small"
-            rowKey={record => record.order_id.toString() + record.order_num.toString()}
+            rowKey={(record) => record.order_id.toString() + record.order_num.toString()}
           />
         }
       />

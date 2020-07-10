@@ -19,7 +19,7 @@ const tailLayout = {
   },
 };
 
-const LoginForm = props => {
+const LoginForm = (props) => {
   const { dispatch, kz_login } = props;
   const { formatMessage } = useIntl();
 
@@ -27,11 +27,11 @@ const LoginForm = props => {
     return <Redirect to="/dashboard" />;
   }
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
-  const onFinish = values => {
+  const onFinish = (values) => {
     console.log('kz_login IAM1:', kz_login);
     console.log('SuccessIAM1:', values);
     const { username, password, accountname } = values;

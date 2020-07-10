@@ -12,7 +12,7 @@ import styles from './style.less';
 const { Title, Text } = Typography;
 const { TabPane } = Tabs;
 
-const ZoneInfo = props => {
+const ZoneInfo = (props) => {
   const { dispatch, settings, kz_login, kz_account = {}, kz_system_status = {}, location } = props;
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const ZoneInfo = props => {
     : [];
   const list = kapps.concat(kamailios);
 
-  const getDataSource = item => {
+  const getDataSource = (item) => {
     if (item.node.includes('kamailio')) {
       return [
         {
@@ -123,7 +123,7 @@ const ZoneInfo = props => {
         {
           key: '7',
           name: 'Kapps',
-          value: item.kapps.map(kapp => `${kapp} `),
+          value: item.kapps.map((kapp) => `${kapp} `),
         },
         {
           key: '8',
@@ -138,7 +138,7 @@ const ZoneInfo = props => {
     return [];
   };
 
-  const select_avatar_img = item => {
+  const select_avatar_img = (item) => {
     if (item.node.includes('kamailio')) {
       return '/icons/kamailioicon.svg';
     }
@@ -165,7 +165,7 @@ const ZoneInfo = props => {
     history.push({ pathname: '/int/zone', state: { zone: e } });
   }
 
-  const items = list.map(item => (
+  const items = list.map((item) => (
     <Card hoverable className={styles.card} key={item.node}>
       <Card.Meta
         avatar={<img alt="" className={styles.cardAvatar} src={select_avatar_img(item)} />}
@@ -198,7 +198,7 @@ const ZoneInfo = props => {
           {kz_system_status.data
             ? Object.keys(kz_system_status.data)
                 .reverse()
-                .map(z => <TabPane key={z} tab={z} />)
+                .map((z) => <TabPane key={z} tab={z} />)
             : null}
         </Tabs>,
       ]}

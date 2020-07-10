@@ -7,7 +7,7 @@ import Masonry from 'react-masonry-css';
 import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 import GeneralSettingsWidget from './GeneralSettingsWidget';
 
-const AdminSettings = props => {
+const AdminSettings = (props) => {
   const { dispatch, kz_account } = props;
 
   useEffect(() => {

@@ -19,7 +19,7 @@ function validateNaN(value) {
   return error;
 }
 
-const CardOnlinePayments = props => {
+const CardOnlinePayments = (props) => {
   const { lb_account, account_id } = props;
   const { formatMessage } = useIntl();
 
@@ -41,7 +41,7 @@ const CardOnlinePayments = props => {
         <Fragment>
           <Formik
             initialValues={{}}
-            onSubmit={values => {
+            onSubmit={(values) => {
               console.log(values);
             }}
           >
@@ -100,7 +100,7 @@ const CardOnlinePayments = props => {
         <Fragment>
           <Formik
             initialValues={{}}
-            onSubmit={values => {
+            onSubmit={(values) => {
               console.log(values);
               yandexMoneyPayment({
                 account_id,
@@ -110,7 +110,7 @@ const CardOnlinePayments = props => {
                     `${lb_account.data.main_agrm.agrm_num} ${lb_account.data.main_agrm.agrm_date}`,
                   ),
                 },
-              }).then(res => {
+              }).then((res) => {
                 console.log('yandexMoneyPayment: ', res.data.payment_url);
                 window.location.href = res.data.payment_url;
               });

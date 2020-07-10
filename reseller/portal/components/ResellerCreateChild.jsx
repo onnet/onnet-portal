@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import { kzAccount, kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
 import { Form, Button, Modal, Input, Row, Col } from 'antd';
 
-const CollectionCreateForm = props => {
+const CollectionCreateForm = (props) => {
   const [, forceUpdate] = useState();
 
   const { formRef, visible, onCancel, onCreate } = props;
@@ -163,7 +163,7 @@ const CollectionCreateForm = props => {
   );
 };
 
-const ResellerCreateChild = props => {
+const ResellerCreateChild = (props) => {
   const [visible, setVisible] = useState(false);
 
   const { dispatch, kz_account } = props;
@@ -178,11 +178,11 @@ const ResellerCreateChild = props => {
     setVisible(false);
   };
 
-  const handleCreate = prps => {
+  const handleCreate = (prps) => {
     console.log('Handle Create: ');
     console.log(prps);
 
-    formRef.current.validateFields().then(values => {
+    formRef.current.validateFields().then((values) => {
       console.log('Received values of form: ', values);
       const accountDataBag = { name: values.name, username: { billing: { email: values.email } } };
       const userDataBag = {
@@ -200,9 +200,9 @@ const ResellerCreateChild = props => {
         method: 'PUT',
         account_id: kz_account.data.id,
         data: accountDataBag,
-      }).then(res => {
+      }).then((res) => {
         console.log(res);
-        kzUsers({ method: 'PUT', account_id: res.data.id, data: userDataBag }).then(uRes => {
+        kzUsers({ method: 'PUT', account_id: res.data.id, data: userDataBag }).then((uRes) => {
           console.log(uRes);
           dispatch({
             type: 'child_account/refresh',

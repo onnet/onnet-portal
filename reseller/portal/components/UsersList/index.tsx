@@ -14,7 +14,7 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { confirm } = Modal;
 
-const UsersList = props => {
+const UsersList = (props) => {
   const { dispatch, settings, account, brief_users, full_users } = props;
   const { formatMessage } = useIntl();
 
@@ -37,13 +37,12 @@ const UsersList = props => {
     return null;
   }
 
-
-  const deleteChildUser = record => {
+  const deleteChildUser = (record) => {
     confirm({
       title: `Do you want to delete user ${record.username}?`,
       onOk() {
         kzUser({ method: 'DELETE', account_id: account.data.id, owner_id: record.id })
-          .then(uRes => {
+          .then((uRes) => {
             console.log(uRes);
             dispatch({
               type: 'child_brief_users/refresh',
@@ -65,7 +64,7 @@ const UsersList = props => {
         <Switch
           size="small"
           checked={full_users[record.id] ? full_users[record.id].data.enabled : false}
-          onChange={checked => onUserEnableSwitch(checked, record)}
+          onChange={(checked) => onUserEnableSwitch(checked, record)}
         />
       ),
     },
@@ -145,7 +144,7 @@ const UsersList = props => {
       render: (text, record) => (
         <InfoCircleOutlined
           style={{ color: settings.primaryColor }}
-          onClick={event => {
+          onClick={(event) => {
             console.log('event', event);
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
@@ -181,7 +180,7 @@ const UsersList = props => {
           owner_id: record.id,
           data: { enabled: checked },
         })
-          .then(uRes => {
+          .then((uRes) => {
             console.log(uRes);
             dispatch({
               type: 'child_full_users/refresh',
@@ -213,7 +212,7 @@ const UsersList = props => {
               columns={columns}
               pagination={false}
               size="small"
-              rowKey={record => record.id}
+              rowKey={(record) => record.id}
             />
           }
         />

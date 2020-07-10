@@ -6,7 +6,7 @@ import { kzUser } from '../../services/kazoo';
 
 const { Paragraph } = Typography;
 
-const UserParagraph = props => {
+const UserParagraph = (props) => {
   const [fieldContent, setFieldContent] = useState('Loading...');
 
   const { dispatch, account, full_users, owner_id, fieldKey } = props;
@@ -21,7 +21,7 @@ const UserParagraph = props => {
     <Paragraph
       style={props.style}
       editable={{
-        onChange: updatedText => {
+        onChange: (updatedText) => {
           if (fieldContent !== updatedText) {
             const data = {};
             _.set(data, fieldKey, updatedText);

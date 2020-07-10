@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { Table } from 'antd';
 import UserRestrictionLevel from './UserRestrictionLevel';
 
-const UserRestrictions = props => {
+const UserRestrictions = (props) => {
   const [tableData, setTableData] = useState([]);
 
   const { dispatch, account, full_users, kz_numbers_classifiers, owner_id } = props;
@@ -19,7 +19,7 @@ const UserRestrictions = props => {
       });
     } else if (full_users[owner_id]) {
       const jobj = _.get(full_users[owner_id].data, 'call_restriction', {});
-      const TabDat = Object.keys(kz_numbers_classifiers.data).map(key => ({
+      const TabDat = Object.keys(kz_numbers_classifiers.data).map((key) => ({
         key,
         action: jobj[key] ? jobj[key].action : null,
       }));

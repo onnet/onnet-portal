@@ -10,7 +10,7 @@ import { kzDevice } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const DeviceRestrictionLevel = props => {
+const DeviceRestrictionLevel = (props) => {
   const { dispatch, account, device_id, classifier, text } = props;
   const { formatMessage } = useIntl();
 

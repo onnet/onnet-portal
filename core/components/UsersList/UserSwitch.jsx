@@ -9,7 +9,7 @@ import { kzUser } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const UserSwitch = props => {
+const UserSwitch = (props) => {
   const [fieldContent, setFieldContent] = useState(false);
 
   const { dispatch, account, full_users, owner_id, fieldKey, modal_title } = props;
@@ -52,7 +52,7 @@ const UserSwitch = props => {
   }
 
   return (
-    <Switch size="small" checked={fieldContent} onChange={checked => onSwitchChange(checked)} />
+    <Switch size="small" checked={fieldContent} onChange={(checked) => onSwitchChange(checked)} />
   );
 };
 

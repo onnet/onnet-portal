@@ -4,7 +4,7 @@ import { connect } from 'umi';
 import SelectLang from '../components/SelectLang';
 import styles from './LoginLayout.less';
 
-const LoginLayout: React.SFC = props => {
+const LoginLayout: React.SFC = (props) => {
   const { children } = props;
 
   return (

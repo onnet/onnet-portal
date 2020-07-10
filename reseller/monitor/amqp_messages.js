@@ -16,7 +16,7 @@ function info(reg_details) {
   });
 }
 
-const CurrentMessages = props => {
+const CurrentMessages = (props) => {
   const { dispatch, kz_login, settings } = props;
   const [rows, setRows] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
@@ -27,17 +27,17 @@ const CurrentMessages = props => {
   useEffect(() => {
     setIsMounted(true);
 
-    connection.onerror = error => {
+    connection.onerror = (error) => {
       console.log(`WebSocket Error ${error}`);
     };
 
-    connection.onclose = e => {
+    connection.onclose = (e) => {
       console.log('connection closed');
       console.log(e.code, e.reason);
       console.log(e);
     };
 
-    connection.onopen = e => {
+    connection.onopen = (e) => {
       console.log('on ws open');
       console.log(e);
       connection.send(
@@ -53,7 +53,7 @@ const CurrentMessages = props => {
       );
     };
 
-    connection.onmessage = evt => {
+    connection.onmessage = (evt) => {
       if (isMounted) {
         const jsdata = JSON.parse(evt.data);
         if (jsdata.status !== 'error' && jsdata.action === 'event') {
@@ -123,7 +123,7 @@ const CurrentMessages = props => {
       render: (text, record) => (
         <Fragment>
           <InfoCircleOutlined
-            onClick={event => {
+            onClick={(event) => {
               console.log('IAMS INFO OnClick');
               console.log(event);
               console.log(record);

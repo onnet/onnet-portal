@@ -6,7 +6,7 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
-const CardBillingDetails = props => {
+const CardBillingDetails = (props) => {
   const { lb_account } = props;
   const { formatMessage } = useIntl();
 

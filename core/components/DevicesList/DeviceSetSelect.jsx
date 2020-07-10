@@ -11,7 +11,7 @@ import { kzDevice } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const DeviceSetSelect = props => {
+const DeviceSetSelect = (props) => {
   const [fieldContent, setFieldContent] = useState('Loading...');
 
   const {
@@ -39,7 +39,7 @@ const DeviceSetSelect = props => {
 
   const menu = (
     <Menu selectedKeys={[]} onClick={onDeviceRestrictionSelect}>
-      {menu_items.map(item => (
+      {menu_items.map((item) => (
         <Menu.Item key={item.key}>{item.text}</Menu.Item>
       ))}
     </Menu>

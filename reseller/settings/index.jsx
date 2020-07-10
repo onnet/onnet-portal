@@ -5,7 +5,7 @@ import { Spin, List } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import UsersList from '@/pages/onnet-portal/core/components/UsersList';
 
-const ResellerSettings = props => {
+const ResellerSettings = (props) => {
   const { settings, kz_account } = props;
 
   if (!kz_account.data) {
@@ -30,7 +30,7 @@ const ResellerSettings = props => {
       <List
         grid={{ gutter: 24, xxl: 2, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
         dataSource={data}
-        renderItem={item => <List.Item>{item}</List.Item>}
+        renderItem={(item) => <List.Item>{item}</List.Item>}
       />
     </PageHeaderWrapper>
   );

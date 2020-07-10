@@ -20,8 +20,7 @@ const KazooAccountModel: KazooAccountModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-
-    console.log('IAMMM  kz_account/refresh payload: ', payload);
+      console.log('IAMMM  kz_account/refresh payload: ', payload);
 
       const response = yield call(aGetAccount, payload);
       yield put({

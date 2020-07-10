@@ -10,8 +10,7 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const { confirm } = Modal;
 
-const AccountMusicOnHold = props => {
-
+const AccountMusicOnHold = (props) => {
   const { formatMessage } = useIntl();
   const [mediaName, setMediaName] = useState('');
   const { dispatch, account, account_media } = props;
@@ -45,7 +44,7 @@ const AccountMusicOnHold = props => {
       <Menu.Item key="">
         {formatMessage({ id: 'telephony.default_music', defaultMessage: 'Default music' })}
       </Menu.Item>
-      {account_media.data.map(media => (
+      {account_media.data.map((media) => (
         <Menu.Item key={media.id}>{media.name}</Menu.Item>
       ))}
     </Menu>

@@ -24,13 +24,13 @@ const codeMessage = {
   504: '网关超时。',
 };
 
-const errorHandler = error => {
+const errorHandler = (error) => {
   const { response, data } = error;
   if (response && response.status) {
     const { status, url } = response;
-    const errorText = `${status}: ${data.data.message ||
-      data.message ||
-      codeMessage[response.status]}`;
+    const errorText = `${status}: ${
+      data.data.message || data.message || codeMessage[response.status]
+    }`;
     notification.error({
       description: errorText,
       message: `${url}`,

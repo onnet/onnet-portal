@@ -6,7 +6,7 @@ import DeviceSwitch from './DeviceSwitch';
 import DeviceSetSelect from './DeviceSetSelect';
 import DeviceAssignTo from './DeviceAssignTo';
 
-const DeviceFMCSettings = props => {
+const DeviceFMCSettings = (props) => {
   const { device_id, disableAssignBtn } = props;
   const { formatMessage } = useIntl();
 

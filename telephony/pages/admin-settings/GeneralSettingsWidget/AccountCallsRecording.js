@@ -9,7 +9,7 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const { confirm } = Modal;
 
-const AccountCallsRecording = props => {
+const AccountCallsRecording = (props) => {
   const { kz_account } = props;
   const { formatMessage } = useIntl();
 

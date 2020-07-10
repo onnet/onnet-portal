@@ -5,7 +5,7 @@ import Authorized from '../utils/Authorized';
 
 const getRouteAuthority = (path: string, routeData) => {
   let authorities: string[] | string | undefined;
-  routeData.forEach(route => {
+  routeData.forEach((route) => {
     // match prefix
     if (pathToRegexp(`${route.path}(.*)`).test(path)) {
       // exact match

@@ -5,7 +5,7 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
-const CardAccountDetails = props => {
+const CardAccountDetails = (props) => {
   const { lb_account = { data: {} } } = props;
   const { formatMessage } = useIntl();
 
@@ -24,7 +24,7 @@ const CardAccountDetails = props => {
       name: 'Email',
       value: lb_account.data.account_info.emails ? (
         <Fragment>
-          {lb_account.data.account_info.emails.map(email => (
+          {lb_account.data.account_info.emails.map((email) => (
             <Fragment key={`fragmentkey${email.replace(/[^A-Za-z0-9]/g, '')}`}>
               <span key={`spankey${email.replace(/[^A-Za-z0-9]/g, '')}`}>{email} </span>
             </Fragment>
@@ -37,7 +37,7 @@ const CardAccountDetails = props => {
       name: 'Phone',
       value: lb_account.data.account_info.phones ? (
         <Fragment>
-          {lb_account.data.account_info.phones.map(phone => (
+          {lb_account.data.account_info.phones.map((phone) => (
             <Fragment key={`fragmentkey${phone.replace(/[^A-Za-z0-9]/g, '')}`}>
               <span key={`spankey${phone.replace(/[^A-Za-z0-9]/g, '')}`}>{phone} </span>
             </Fragment>

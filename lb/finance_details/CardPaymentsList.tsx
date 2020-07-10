@@ -6,7 +6,7 @@ import { useIntl } from 'umi';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
-const CardPaymentsList = props => {
+const CardPaymentsList = (props) => {
   const { lb_account } = props;
   const { formatMessage } = useIntl();
 
@@ -35,7 +35,7 @@ const CardPaymentsList = props => {
           displayType="text"
           thousandSeparator=" "
           decimalScale={2}
-          renderText={value => (
+          renderText={(value) => (
             <div>
               {value} руб.
               <small> (с учетом НДС)</small>
@@ -85,7 +85,7 @@ const CardPaymentsList = props => {
             pagination
             showHeader
             size="small"
-            rowKey={record =>
+            rowKey={(record) =>
               record.amount.toString().replace(/[^A-Za-z0-9]/g, '') +
               record.pay_date.replace(/[^A-Za-z0-9]/g, '') +
               record.comment.replace(/[^A-Za-z0-9]/g, '')

@@ -33,17 +33,17 @@ const checkPermissions = <T, K>(
   const redux_state = getDvaApp()._store.getState();
   const currentAuthority = redux_state.authority ? redux_state.authority.currentAuthority : [];
   const authorityException = authority
-    .filter(element => element.startsWith('!'))
-    .map(elem => elem.substring(1));
+    .filter((element) => element.startsWith('!'))
+    .map((elem) => elem.substring(1));
 
   if (Array.isArray(authority)) {
     if (Array.isArray(currentAuthority)) {
-      if (currentAuthority.some(item => authorityException.includes(item))) {
+      if (currentAuthority.some((item) => authorityException.includes(item))) {
         return Exception;
       }
     }
     if (Array.isArray(currentAuthority)) {
-      if (currentAuthority.some(item => authority.includes(item))) {
+      if (currentAuthority.some((item) => authority.includes(item))) {
         return target;
       }
     } else if (authority.includes(currentAuthority)) {
@@ -54,7 +54,7 @@ const checkPermissions = <T, K>(
   // string 处理
   if (typeof authority === 'string') {
     if (Array.isArray(currentAuthority)) {
-      if (currentAuthority.some(item => authority === item)) {
+      if (currentAuthority.some((item) => authority === item)) {
         return target;
       }
     } else if (authority === currentAuthority) {

@@ -9,7 +9,7 @@ import { kzUser } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const UserPrivLevel = props => {
+const UserPrivLevel = (props) => {
   const { dispatch, account, full_users, owner_id } = props;
   const { formatMessage } = useIntl();
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect, history } from 'umi';
 import { Button } from 'antd';
 
-const RsDemaskBtn = props => {
+const RsDemaskBtn = (props) => {
   const { dispatch } = props;
 
   return (

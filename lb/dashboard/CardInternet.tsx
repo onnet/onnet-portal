@@ -5,7 +5,7 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
-const CardInternet = props => {
+const CardInternet = (props) => {
   const { lb_account = { data: {} }, settings = {} } = props;
   const { formatMessage } = useIntl();
 
@@ -29,7 +29,7 @@ const CardInternet = props => {
       dataIndex: 'vg_id_numbers',
       key: 'vg_id_numbers',
       render: (text, row, index) =>
-        row.vg_id_ip_addresses.map(ip_address => (
+        row.vg_id_ip_addresses.map((ip_address) => (
           <Tag key={index} color={settings.primaryColor} style={{ margin: '0.5em' }}>
             {ip_address}
           </Tag>

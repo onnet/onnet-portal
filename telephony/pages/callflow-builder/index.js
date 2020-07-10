@@ -4,7 +4,7 @@ import { Tag } from 'antd';
 
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-const CallflowBuilder = props => {
+const CallflowBuilder = (props) => {
   const { kz_account } = props;
 
   return (

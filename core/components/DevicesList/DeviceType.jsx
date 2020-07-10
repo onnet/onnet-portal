@@ -10,7 +10,7 @@ import { kzDevice } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const DeviceType = props => {
+const DeviceType = (props) => {
   const { dispatch, account, kz_login, device_id, text } = props;
   const { formatMessage } = useIntl();
 

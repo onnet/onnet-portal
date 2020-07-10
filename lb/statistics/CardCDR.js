@@ -9,7 +9,7 @@ import Highlighter from 'react-highlight-words';
 
 import styles from '@/pages/onnet-portal/core/style.less';
 
-const CardCDR = props => {
+const CardCDR = (props) => {
   let searchInput;
 
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
@@ -39,7 +39,7 @@ const CardCDR = props => {
 
   const { formatMessage } = useIntl();
 
-  const handlePagination = e => {
+  const handlePagination = (e) => {
     console.log('handlePagination e: ', e);
     if (e) {
       setIsPaginated({ position: 'bottom' });
@@ -53,21 +53,21 @@ const CardCDR = props => {
     setSearchText(selectedKeys[0]);
   };
 
-  const handleReset = clearFilters => {
+  const handleReset = (clearFilters) => {
     clearFilters();
     setSearchText('');
   };
 
-  const getColumnSearchProps = dataIndex => ({
+  const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
         <Input
-          ref={node => {
+          ref={(node) => {
             searchInput = node;
           }}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys, confirm)}
           style={{ width: 188, marginBottom: 8, display: 'block' }}
         />
@@ -85,18 +85,17 @@ const CardCDR = props => {
         </Button>
       </div>
     ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    filterIcon: (filtered) => (
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+    ),
     onFilter: (value, record) =>
-      record[dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase()),
-    onFilterDropdownVisibleChange: visible => {
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
         setTimeout(() => searchInput.select());
       }
     },
-    render: text => (
+    render: (text) => (
       <Highlighter
         highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
         searchWords={[searchText]}
@@ -110,7 +109,7 @@ const CardCDR = props => {
     {
       title: formatMessage({ id: 'reseller_portal.Start_time', defaultMessage: 'Start time' }),
       dataIndex: 'timefrom',
-      render: text => <Moment format="YYYY-MM-DD HH:mm:ss">{text}</Moment>,
+      render: (text) => <Moment format="YYYY-MM-DD HH:mm:ss">{text}</Moment>,
       key: 'timefrom',
     },
     {
@@ -204,13 +203,13 @@ const CardCDR = props => {
             pagination={isPaginated}
             loading={lb_statistics.is_loading}
             size="small"
-            rowKey={record =>
+            rowKey={(record) =>
               record.timefrom.toString().replace(/[^A-Za-z0-9]/g, '') +
               record.numfrom.toString().replace(/[^A-Za-z0-9]/g, '') +
               record.numto.toString().replace(/[^A-Za-z0-9]/g, '')
             }
             onRow={(record, rowIndex) => ({
-              onClick: event => {
+              onClick: (event) => {
                 console.log('Clicked row event: ', event);
                 console.log('Clicked row rowIndex: ', rowIndex);
                 console.log('Clicked row record: ', record);

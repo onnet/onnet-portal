@@ -11,8 +11,7 @@ import { Button, Select, Modal } from 'antd';
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
-const AccountTimezone = props => {
-
+const AccountTimezone = (props) => {
   const { formatMessage } = useIntl();
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
   const [timezone, setTimezone] = useState('');
@@ -37,7 +36,7 @@ const AccountTimezone = props => {
     }
   }, [kz_account]);
 
-  const onTimezoneSelect = event => {
+  const onTimezoneSelect = (event) => {
     console.log('onTimezoneSelect event: ', event);
     setTimezone(event);
   };
@@ -75,7 +74,7 @@ const AccountTimezone = props => {
             showSearch
             defaultValue={kz_account.data ? kz_account.data.timezone : null}
           >
-            {moment.tz.names().map(tzname => (
+            {moment.tz.names().map((tzname) => (
               <Select.Option value={tzname} key={tzname}>
                 {' '}
                 {tzname}{' '}

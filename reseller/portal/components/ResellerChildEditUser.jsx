@@ -1,6 +1,6 @@
 import React from 'react';
 import { Collapse } from 'antd';
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
 
 import RsUpdateUserPassword from '@/pages/onnet-portal/reseller/portal/components/RsUpdateUserPassword';
@@ -11,7 +11,7 @@ import ResellerUserRestrictions from '@/pages/onnet-portal/reseller/portal/compo
 
 const { Panel } = Collapse;
 
-const ResellerChildEditUser = props => {
+const ResellerChildEditUser = (props) => {
   const { selectedUser, child_full_users, child_numbers } = props;
   const { formatMessage } = useIntl();
 

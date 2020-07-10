@@ -8,7 +8,7 @@ import { Button, Select, Modal } from 'antd';
 
 import { kzDevice } from '../../services/kazoo';
 
-const DeviceAssignTo = props => {
+const DeviceAssignTo = (props) => {
   const { formatMessage } = useIntl();
 
   const [buttonVisible, setButtonVisible] = useState(false);
@@ -76,7 +76,7 @@ const DeviceAssignTo = props => {
         method: 'GET',
         account_id: account.data.id,
         device_id,
-      }).then(res => {
+      }).then((res) => {
         kzDevice({
           method: 'POST',
           account_id: account.data.id,
@@ -115,7 +115,7 @@ const DeviceAssignTo = props => {
     setButtonVisible(false);
   };
 
-  const onSelect = event => {
+  const onSelect = (event) => {
     setSelectedId(event);
     setDataForSelect(fullSelectList);
   };
@@ -126,14 +126,14 @@ const DeviceAssignTo = props => {
     setButtonVisible(false);
   };
 
-  const selectSearch = val => {
-    const searchRes = _.filter(fullSelectList, o =>
+  const selectSearch = (val) => {
+    const searchRes = _.filter(fullSelectList, (o) =>
       _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()),
     );
     setDataForSelect(searchRes);
   };
 
-  const options = dataForSelect.map(user => (
+  const options = dataForSelect.map((user) => (
     <Select.Option value={user.id} key={user.id}>
       {user.username} {user.first_name ? `(${user.first_name} ${user.last_name})` : null}
     </Select.Option>

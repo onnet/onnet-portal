@@ -8,7 +8,7 @@ import { Button, Select, Modal } from 'antd';
 
 import { kzDevice } from '../../services/kazoo';
 
-const DeviceMusicOnHold = props => {
+const DeviceMusicOnHold = (props) => {
   const { formatMessage } = useIntl();
 
   const [buttonVisible, setButtonVisible] = useState(false);
@@ -88,7 +88,7 @@ const DeviceMusicOnHold = props => {
     setButtonVisible(false);
   };
 
-  const onSelect = event => {
+  const onSelect = (event) => {
     setSelectedId(event);
     setDataForSelect(fullSelectList);
   };
@@ -99,14 +99,14 @@ const DeviceMusicOnHold = props => {
     setButtonVisible(false);
   };
 
-  const selectSearch = val => {
-    const searchRes = _.filter(fullSelectList, o =>
+  const selectSearch = (val) => {
+    const searchRes = _.filter(fullSelectList, (o) =>
       _.includes(_.toString(Object.values(o)).toLowerCase(), val.toLowerCase()),
     );
     setDataForSelect(searchRes);
   };
 
-  const options = dataForSelect.map(media => (
+  const options = dataForSelect.map((media) => (
     <Select.Option value={media.id} key={media.id}>
       {media.name}
     </Select.Option>

@@ -4,7 +4,7 @@ import { UserAddOutlined } from '@ant-design/icons';
 import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
 import { kzUsers } from '../../services/kazoo';
 
-const UserCreateForm = props => {
+const UserCreateForm = (props) => {
   const [, forceUpdate] = useState();
 
   const { formRef, visible, onCancel, onCreate } = props;
@@ -179,7 +179,7 @@ const UserCreateForm = props => {
   );
 };
 
-const CreateUser = props => {
+const CreateUser = (props) => {
   const { formatMessage } = useIntl();
   const [visible, setVisible] = useState(false);
 
@@ -196,12 +196,12 @@ const CreateUser = props => {
   };
 
   //  handleCreate = () => {
-  const handleCreate = prps => {
+  const handleCreate = (prps) => {
     console.log('Handle Create: ');
     console.log(prps);
     console.log('formRef: ', formRef);
 
-    formRef.current.validateFields().then(values => {
+    formRef.current.validateFields().then((values) => {
       console.log('Validate OK:', values);
       const userDataBag = {
         username: values.email,
@@ -218,7 +218,7 @@ const CreateUser = props => {
         method: 'PUT',
         account_id: kz_account.data.id,
         data: userDataBag,
-      }).then(uRes => {
+      }).then((uRes) => {
         console.log(uRes);
         dispatch({
           type: 'kz_brief_users/refresh',

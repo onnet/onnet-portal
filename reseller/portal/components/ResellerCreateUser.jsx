@@ -1,12 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import { kzUsers } from '@/pages/onnet-portal/core/services/kazoo';
 
 import { UserAddOutlined } from '@ant-design/icons';
 
 import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
 
-const UserCreateForm = props => {
+const UserCreateForm = (props) => {
   const [, forceUpdate] = useState();
 
   const { formRef, visible, onCancel, onCreate } = props;
@@ -182,7 +182,7 @@ const UserCreateForm = props => {
   );
 };
 
-const ResellerCreateUser = props => {
+const ResellerCreateUser = (props) => {
   const [visible, setVisible] = useState(false);
 
   const { dispatch, child_account } = props;
@@ -199,12 +199,12 @@ const ResellerCreateUser = props => {
   };
 
   //  handleCreate = () => {
-  const handleCreate = prps => {
+  const handleCreate = (prps) => {
     console.log('Handle Create: ');
     console.log(prps);
     console.log('formRef: ', formRef);
 
-    formRef.current.validateFields().then(values => {
+    formRef.current.validateFields().then((values) => {
       console.log('Validate OK:', values);
       const userDataBag = {
         username: values.email,
@@ -221,7 +221,7 @@ const ResellerCreateUser = props => {
         method: 'PUT',
         account_id: child_account.data.id,
         data: userDataBag,
-      }).then(uRes => {
+      }).then((uRes) => {
         console.log(uRes);
         dispatch({
           type: 'child_brief_users/refresh',

@@ -9,7 +9,7 @@ import { kzDevice } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const DeviceSwitch = props => {
+const DeviceSwitch = (props) => {
   const [fieldContent, setFieldContent] = useState(false);
 
   const { dispatch, account, full_devices, device_id, fieldKey, modal_title } = props;
@@ -52,7 +52,7 @@ const DeviceSwitch = props => {
   }
 
   return (
-    <Switch size="small" checked={fieldContent} onChange={checked => onSwitchChange(checked)} />
+    <Switch size="small" checked={fieldContent} onChange={(checked) => onSwitchChange(checked)} />
   );
 };
 

@@ -39,17 +39,17 @@ class CurrentCalls extends React.Component {
       this.initCurCalls();
     }
 
-    connection.onerror = error => {
+    connection.onerror = (error) => {
       console.log(`WebSocket Error ${error}`);
     };
 
-    connection.onclose = e => {
+    connection.onclose = (e) => {
       console.log('connection closed');
       console.log(e.code, e.reason);
       console.log(e);
     };
 
-    connection.onopen = e => {
+    connection.onopen = (e) => {
       console.log('on ws open');
       console.log(e);
       connection.send(
@@ -64,7 +64,7 @@ class CurrentCalls extends React.Component {
       );
     };
 
-    connection.onmessage = evt => {
+    connection.onmessage = (evt) => {
       const jsdata = JSON.parse(evt.data);
       if (jsdata.status !== 'error') {
         switch (jsdata.name) {
@@ -72,9 +72,9 @@ class CurrentCalls extends React.Component {
             if (jsdata.data.call_direction === 'inbound') {
               console.log('CHANNEL_CREATE');
               console.log(jsdata);
-              const cr_index = this.state.rows.findIndex(x => x.key === jsdata.data.call_id);
+              const cr_index = this.state.rows.findIndex((x) => x.key === jsdata.data.call_id);
               if (cr_index === -1) {
-                this.setState(prevState => {
+                this.setState((prevState) => {
                   const joined = prevState.rows.concat({
                     key: jsdata.data.call_id,
                     start_date: (
@@ -102,7 +102,7 @@ class CurrentCalls extends React.Component {
           case 'CHANNEL_ANSWER': {
             console.log('CHANNEL_ANSWER');
             console.log(jsdata);
-            const ans_index = this.state.rows.findIndex(x => x.key === jsdata.data.call_id);
+            const ans_index = this.state.rows.findIndex((x) => x.key === jsdata.data.call_id);
             if (ans_index !== -1) {
               const answered_call = {
                 key: jsdata.data.call_id,
@@ -123,7 +123,7 @@ class CurrentCalls extends React.Component {
                   </Moment>
                 ),
               };
-              this.setState(prevState => {
+              this.setState((prevState) => {
                 const slicedArray = prevState.rows.slice();
                 slicedArray.splice(ans_index, 1, answered_call);
                 return { rows: slicedArray };
@@ -132,8 +132,8 @@ class CurrentCalls extends React.Component {
             break;
           }
           case 'CHANNEL_DESTROY': {
-            this.setState(prevState => {
-              const newrows = prevState.rows.filter(obj => obj.key !== jsdata.data.call_id);
+            this.setState((prevState) => {
+              const newrows = prevState.rows.filter((obj) => obj.key !== jsdata.data.call_id);
               return { rows: newrows };
             });
             break;
@@ -160,12 +160,12 @@ class CurrentCalls extends React.Component {
     const reqPayload = this.props.kz_account.data
       ? { account_id: this.props.kz_account.data.id }
       : {};
-    getResellerChannels(reqPayload).then(respCurCalls => {
+    getResellerChannels(reqPayload).then((respCurCalls) => {
       if (respCurCalls.data) {
         const stateCandidate = respCurCalls.data
-          .filter(value => value.direction === 'inbound')
+          .filter((value) => value.direction === 'inbound')
           .sort((a, b) => (a.timestamp > b.timestamp ? 1 : -1))
-          .map(call => {
+          .map((call) => {
             console.log('initCurCalls call');
             console.log(call);
             const callerID = call.caller_id_number;

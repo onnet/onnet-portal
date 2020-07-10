@@ -13,7 +13,7 @@ export interface GlobalHeaderRightProps extends ConnectProps {
   layout: 'sidemenu' | 'topmenu';
 }
 
-const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
+const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
   const { theme, layout, kz_account = {}, kz_login = {} } = props;
   let className = styles.right;
 

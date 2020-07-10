@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import { Card, Switch, Badge, Modal } from 'antd';
 import * as _ from 'lodash';
 import { EditOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
@@ -10,7 +10,7 @@ import EditDeviceDrawer from '../DevicesList/EditDeviceDrawer';
 
 const { confirm } = Modal;
 
-const UserDevices = props => {
+const UserDevices = (props) => {
   const [brDevs, setBrDevs] = useState([]);
   const [isEditDrawerVisible, setIsEditDrawerVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(false);
@@ -31,7 +31,7 @@ const UserDevices = props => {
     textAlign: 'center',
   };
 
-  const items = _.filter(brDevs, { owner_id }).map(item => (
+  const items = _.filter(brDevs, { owner_id }).map((item) => (
     <Card.Grid style={gridStyle} key={item.id}>
       <Card.Meta
         title={
@@ -57,7 +57,7 @@ const UserDevices = props => {
             checkedChildren="enabled"
             unCheckedChildren="disabled"
             checked={full_devices[item.id] ? full_devices[item.id].data.enabled : item.enabled}
-            onChange={checked => onDeviceEnableSwitch(checked, item)}
+            onChange={(checked) => onDeviceEnableSwitch(checked, item)}
           />
         }
       />

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 
@@ -10,7 +10,7 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { confirm } = Modal;
 
-const RsChildUserPrivLevel = props => {
+const RsChildUserPrivLevel = (props) => {
   const { dispatch, child_account, child_full_users, owner_id } = props;
   const { formatMessage } = useIntl();
 

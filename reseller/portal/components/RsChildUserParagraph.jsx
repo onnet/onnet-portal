@@ -6,7 +6,7 @@ import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
 
 const { Paragraph } = Typography;
 
-const RsChildUserParagraph = props => {
+const RsChildUserParagraph = (props) => {
   const [fieldContent, setFieldContent] = useState('Loading...');
 
   const { dispatch, child_account, child_full_users, owner_id, fieldKey } = props;
@@ -21,7 +21,7 @@ const RsChildUserParagraph = props => {
     <Paragraph
       style={props.style}
       editable={{
-        onChange: updatedText => {
+        onChange: (updatedText) => {
           if (fieldContent !== updatedText) {
             const data = {};
             _.set(data, fieldKey, updatedText);

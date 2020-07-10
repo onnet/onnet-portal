@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import * as _ from 'lodash';
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Select, Modal } from 'antd';
 
 import { kzUser } from '../../services/kazoo';
 
-const UserCIDSelect = props => {
+const UserCIDSelect = (props) => {
   const { formatMessage } = useIntl();
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
   const [mainNumber, setMainNumber] = useState(
@@ -45,7 +45,7 @@ const UserCIDSelect = props => {
     }
   }, [full_users[owner_id]]);
 
-  const onMainNumberSelect = event => {
+  const onMainNumberSelect = (event) => {
     setMainNumber(event);
   };
 
@@ -91,7 +91,7 @@ const UserCIDSelect = props => {
             showSearch
             defaultValue={mainNumber}
           >
-            {_.keys(_.get(numbers, 'data.numbers', {})).map(number => (
+            {_.keys(_.get(numbers, 'data.numbers', {})).map((number) => (
               <Select.Option value={number} key={number}>
                 {number}
               </Select.Option>

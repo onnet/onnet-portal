@@ -6,13 +6,13 @@ import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 
 const { Paragraph } = Typography;
 
-const AccountParagraph = props => {
+const AccountParagraph = (props) => {
   const { kz_account } = props;
 
   return (
     <Paragraph
       editable={{
-        onChange: updatedText => {
+        onChange: (updatedText) => {
           console.log(`updatedText ${updatedText}`);
           console.log(`props.currentText ${props.currentText}`);
           console.log(props.currentText !== updatedText);

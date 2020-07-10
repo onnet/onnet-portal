@@ -4,7 +4,7 @@ import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { kzDevices } from '../../services/kazoo';
 
-const DeviceCreateForm = props => {
+const DeviceCreateForm = (props) => {
   const [, forceUpdate] = useState();
 
   const { formRef, visible, onCancel, onCreate } = props;
@@ -179,7 +179,7 @@ const DeviceCreateForm = props => {
   );
 };
 
-const CreateDevice = props => {
+const CreateDevice = (props) => {
   const [visible, setVisible] = useState(false);
 
   const { dispatch, kz_account } = props;
@@ -197,12 +197,12 @@ const CreateDevice = props => {
   };
 
   //  handleCreate = () => {
-  const handleCreate = prps => {
+  const handleCreate = (prps) => {
     console.log('Handle Create: ');
     console.log(prps);
     console.log('formRef: ', formRef);
 
-    formRef.current.validateFields().then(values => {
+    formRef.current.validateFields().then((values) => {
       console.log('Validate OK:', values);
       const userDataBag = {
         username: values.email,
@@ -219,7 +219,7 @@ const CreateDevice = props => {
         method: 'PUT',
         account_id: kz_account.data.id,
         data: userDataBag,
-      }).then(uRes => {
+      }).then((uRes) => {
         console.log(uRes);
         dispatch({
           type: 'kz_brief_devices/refresh',

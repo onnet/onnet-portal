@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import { useMediaQuery } from 'react-responsive';
 import * as _ from 'lodash';
 import {
@@ -22,7 +22,7 @@ import { kzUser, kzUsers } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
-const UsersList = props => {
+const UsersList = (props) => {
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
@@ -54,7 +54,7 @@ const UsersList = props => {
     return null;
   }
 
-  const deleteChildUser = record => {
+  const deleteChildUser = (record) => {
     confirm({
       title: `${formatMessage({
         id: 'core.Do_you_want_to_delete_user',
@@ -71,7 +71,7 @@ const UsersList = props => {
       cancelText: formatMessage({ id: 'core.No', defaultMessage: 'No' }),
       onOk() {
         kzUser({ method: 'DELETE', account_id: account.data.id, owner_id: record.id })
-          .then(uRes => {
+          .then((uRes) => {
             console.log(uRes);
             dispatch({
               type: 'kz_brief_users/refresh',
@@ -93,7 +93,7 @@ const UsersList = props => {
         <Switch
           size="small"
           checked={full_users[record.id] ? full_users[record.id].data.enabled : false}
-          onChange={checked => onUserEnableSwitch(checked, record)}
+          onChange={(checked) => onUserEnableSwitch(checked, record)}
         />
       ),
     },
@@ -165,7 +165,7 @@ const UsersList = props => {
       render: (text, record) => (
         <InfoCircleOutlined
           style={{ color: settings.primaryColor }}
-          onClick={event => {
+          onClick={(event) => {
             console.log('event', event);
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
@@ -197,7 +197,7 @@ const UsersList = props => {
           owner_id: record.id,
           data: { enabled: checked },
         })
-          .then(uRes => {
+          .then((uRes) => {
             console.log(uRes);
             dispatch({
               type: 'kz_full_users/refresh',
@@ -210,7 +210,7 @@ const UsersList = props => {
     });
   }
 
-  const handlePagination = e => {
+  const handlePagination = (e) => {
     console.log('handlePagination e: ', e);
     if (e) {
       setIsPaginated({ position: 'bottom' });
@@ -233,7 +233,7 @@ const UsersList = props => {
     formRef.current.submit();
   };
 
-  const onFinish = values => {
+  const onFinish = (values) => {
     const userDataBag = {
       username: values.email,
       first_name: values.first_name,
@@ -247,7 +247,7 @@ const UsersList = props => {
       method: 'PUT',
       account_id: account.data.id,
       data: userDataBag,
-    }).then(uRes => {
+    }).then((uRes) => {
       console.log('kzUsers uRes: ', uRes);
       dispatch({
         type: 'kz_brief_users/refresh',
@@ -264,12 +264,12 @@ const UsersList = props => {
     setIsCreateDrawerVisible(false);
   };
 
-  const onSearchChange = e => {
+  const onSearchChange = (e) => {
     console.log(e);
     const { value } = e.target;
     console.log('Value: ', value);
     if (value.length > 1) {
-      const searchRes = _.filter(brief_users.data, o =>
+      const searchRes = _.filter(brief_users.data, (o) =>
         _.includes(_.toString(Object.values(o)).toLowerCase(), value.toLowerCase()),
       );
       setDataSource(searchRes);
@@ -327,7 +327,7 @@ const UsersList = props => {
               columns={columns}
               pagination={isPaginated}
               size="small"
-              rowKey={record => record.id}
+              rowKey={(record) => record.id}
             />
           }
         />

@@ -17,7 +17,7 @@ import UsersList from './components/UsersList';
 
 const { confirm } = Modal;
 
-const ResellerPortal = props => {
+const ResellerPortal = (props) => {
   const { dispatch, kz_account, child_account, child_brief_users } = props;
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const ResellerPortal = props => {
             },
           ]
             .concat(child_brief_users.data)
-            .map(u => (
+            .map((u) => (
               <Menu.Item
                 key={u.id}
                 account_id={child_account.data.id}
@@ -104,7 +104,7 @@ const ResellerPortal = props => {
       content: `Account ID: ${child_account.data.id}`,
       onOk() {
         kzAccount({ method: 'DELETE', account_id: child_account.data.id })
-          .then(delRes => {
+          .then((delRes) => {
             console.log(delRes);
             dispatch({
               type: 'child_account/flush',
@@ -188,7 +188,7 @@ const ResellerPortal = props => {
           <List
             grid={{ gutter: 24, xxl: 2, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
             dataSource={data}
-            renderItem={item => <List.Item>{item}</List.Item>}
+            renderItem={(item) => <List.Item>{item}</List.Item>}
           />
         </Fragment>
       ) : (

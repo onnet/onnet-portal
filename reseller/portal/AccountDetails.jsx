@@ -13,7 +13,7 @@ import RsChildAccountParagraph from './components/RsChildAccountParagraph';
 
 const { Text } = Typography;
 
-const AccountDetails = props => {
+const AccountDetails = (props) => {
   const { dispatch, kz_account, child_account } = props;
 
   useEffect(() => {

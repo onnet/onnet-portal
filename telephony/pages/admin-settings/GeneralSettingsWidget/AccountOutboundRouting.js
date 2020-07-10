@@ -11,7 +11,7 @@ import { AccountCallflow } from '../../../services/kazoo-telephony';
 
 const { confirm } = Modal;
 
-const AccountOutboundRouting = props => {
+const AccountOutboundRouting = (props) => {
   const { formatMessage } = useIntl();
 
   const [noMatchId, SetNoMatchId] = useState(false);

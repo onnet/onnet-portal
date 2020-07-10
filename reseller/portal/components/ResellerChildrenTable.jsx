@@ -4,7 +4,7 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Table } from 'antd';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
 
-const ResellerChildrenTable = props => {
+const ResellerChildrenTable = (props) => {
   const { dispatch, settings, kz_children } = props;
 
   const [dataSource, setDataSource] = useState([]);
@@ -65,7 +65,7 @@ const ResellerChildrenTable = props => {
       render: (text, record) => (
         <InfoCircleOutlined
           style={{ color: settings.primaryColor }}
-          onClick={event => {
+          onClick={(event) => {
             console.log('event', event);
             const result = dataSource.find(({ id }) => id === record.id);
             console.log('result', result);
