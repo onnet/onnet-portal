@@ -1,10 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { connect,useIntl } from 'umi';
-import { kzUsers } from '../../services/kazoo';
-
 import { UserAddOutlined } from '@ant-design/icons';
-
 import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
+import { kzUsers } from '../../services/kazoo';
 
 const UserCreateForm = props => {
   const [, forceUpdate] = useState();

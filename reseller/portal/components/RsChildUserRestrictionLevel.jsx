@@ -1,10 +1,6 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import React from 'react';
-import { connect } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
-
-import { useIntl } from 'umi';
 import { DownOutlined } from '@ant-design/icons';
 import { Modal, Dropdown, Menu } from 'antd';
 
