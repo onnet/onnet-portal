@@ -21,12 +21,11 @@ const tailLayout = {
 
 const LoginForm = props => {
   const { dispatch, kz_login } = props;
+  const { formatMessage } = useIntl();
 
   if (kz_login.status === 'success') {
     return <Redirect to="/dashboard" />;
   }
-
-  const { formatMessage } = useIntl();
 
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);

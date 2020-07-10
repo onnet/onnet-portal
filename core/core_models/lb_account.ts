@@ -1,5 +1,4 @@
 import { Effect, Reducer, getDvaApp } from 'umi';
-import { EffectsCommandMap } from 'dva';
 import { lbAccountInfo } from '../services/zzlb';
 
 export interface LbAccountModelType {

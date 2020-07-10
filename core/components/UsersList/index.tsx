@@ -17,7 +17,7 @@ import EditUserDrawer from './EditUserDrawer';
 import UserParagraph from './UserParagraph';
 import UserPrivLevel from './UserPrivLevel';
 import CreateUserDrawer from './CreateUserDrawer';
-import info_details_fun from '../../components/info_details';
+import info_details_fun from '../info_details';
 import { kzUser, kzUsers } from '../../services/kazoo';
 
 const { confirm } = Modal;

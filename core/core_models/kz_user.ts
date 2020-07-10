@@ -1,5 +1,4 @@
 import { Effect, Reducer, getDvaApp } from 'umi';
-import { EffectsCommandMap } from 'dva';
 import { getUser } from '../services/kazoo';
 
 export interface KazooUserModelType {

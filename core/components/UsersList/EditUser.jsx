@@ -15,11 +15,10 @@ const { Panel } = Collapse;
 
 const EditUser = props => {
   const { selectedUser, full_users, account_numbers, brief_devices } = props;
+  const { formatMessage } = useIntl();
 
   if (!selectedUser) return null;
   if (!full_users[selectedUser]) return null;
-
-  const { formatMessage } = useIntl();
 
   return (
     <Collapse accordion defaultActiveKey="1">

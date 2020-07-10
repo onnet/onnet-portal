@@ -7,12 +7,11 @@ import styles from '@/pages/onnet-portal/core/style.less';
 
 const CardAccountDetails = props => {
   const { lb_account = { data: {} } } = props;
+  const { formatMessage } = useIntl();
 
   if (!lb_account.data.account_info) {
     return null;
   }
-
-  const { formatMessage } = useIntl();
 
   const tableData = [
     {

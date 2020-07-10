@@ -1,5 +1,4 @@
 import { Effect, Reducer } from 'umi';
-import { EffectsCommandMap } from 'dva';
 import { kzSystemStatus } from '../services/kazoo';
 
 export interface KzSystemStatusModelType {

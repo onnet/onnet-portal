@@ -1,6 +1,4 @@
 import { Effect, Reducer } from 'umi';
-
-import { EffectsCommandMap } from 'dva';
 import { aGetAccount } from '../services/kazoo';
 
 export interface KzooCacheModelType {
