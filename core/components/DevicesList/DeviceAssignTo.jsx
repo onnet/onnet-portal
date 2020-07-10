@@ -9,6 +9,8 @@ import { Button, Select, Modal } from 'antd';
 import { kzDevice } from '../../services/kazoo';
 
 const DeviceAssignTo = props => {
+  const { formatMessage } = useIntl();
+
   const [buttonVisible, setButtonVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
   const [dataForSelect, setDataForSelect] = useState([]);
@@ -34,8 +36,6 @@ const DeviceAssignTo = props => {
     device_id,
     disableAssignBtn = false,
   } = props;
-
-  const { formatMessage } = useIntl();
 
   function currentDocValue() {
     try {

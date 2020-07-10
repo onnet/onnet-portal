@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { connect,useIntl } from 'umi';
+import { connect, useIntl } from 'umi';
 import { UserAddOutlined } from '@ant-design/icons';
 import { Form, Tooltip, Button, Modal, Input, Row, Col } from 'antd';
 import { kzUsers } from '../../services/kazoo';
@@ -180,6 +180,7 @@ const UserCreateForm = props => {
 };
 
 const CreateUser = props => {
+  const { formatMessage } = useIntl();
   const [visible, setVisible] = useState(false);
 
   const { dispatch, kz_account } = props;

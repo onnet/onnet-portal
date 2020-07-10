@@ -8,12 +8,14 @@ import { cardProps } from '../../utils/props';
 import CreateDevice from './CreateDevice';
 import EditDevice from './EditDevice';
 import DeviceType from './DeviceType';
-import info_details_fun from '../../components/info_details';
+import info_details_fun from '../info_details';
 import { kzDevice } from '../../services/kazoo';
 
 const { confirm } = Modal;
 
 const DevicesList = props => {
+  const { formatMessage } = useIntl();
+
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSource, setDataSource] = useState([]);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
@@ -35,8 +37,6 @@ const DevicesList = props => {
   if (!brief_devices.data) {
     return null;
   }
-
-  const { formatMessage } = useIntl();
 
   const deleteChildDevice = record => {
     confirm({

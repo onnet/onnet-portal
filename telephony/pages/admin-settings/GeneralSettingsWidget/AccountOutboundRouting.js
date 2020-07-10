@@ -12,6 +12,8 @@ import { AccountCallflow } from '../../../services/kazoo-telephony';
 const { confirm } = Modal;
 
 const AccountOutboundRouting = props => {
+  const { formatMessage } = useIntl();
+
   const [noMatchId, SetNoMatchId] = useState(false);
   const [currRoutingMode, SetCurrRoutingMode] = useState('');
 
@@ -59,8 +61,6 @@ const AccountOutboundRouting = props => {
       }
     }
   }, [kz_account, kz_cf_list, kz_cf_details]);
-
-  const { formatMessage } = useIntl();
 
   if (!kz_cf_list.data) return null;
 

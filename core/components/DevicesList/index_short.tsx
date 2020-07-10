@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import { Drawer, Table, Card, Modal, Switch, Button } from 'antd';
 import styles from '../../style.less';
-import gh_styles from '../../components/HeaderSearch/globhead.less';
+import gh_styles from '../HeaderSearch/globhead.less';
 import { cardProps } from '../../utils/props';
 import EditDeviceDrawer from './EditDeviceDrawer';
 import CreateDeviceDrawer from './CreateDeviceDrawer';
@@ -23,6 +23,8 @@ import { kzDevice, kzDevices } from '../../services/kazoo';
 const { confirm } = Modal;
 
 const DevicesList = props => {
+  const { formatMessage } = useIntl();
+
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSource, setDataSource] = useState([]);
   const [isEditDrawerVisible, setIsEditDrawerVisible] = useState(false);
@@ -50,8 +52,6 @@ const DevicesList = props => {
   if (!brief_devices.data) {
     return null;
   }
-
-  const { formatMessage } = useIntl();
 
   const deleteChildDevice = (dev_id, dev_name, dev_username) => {
     confirm({

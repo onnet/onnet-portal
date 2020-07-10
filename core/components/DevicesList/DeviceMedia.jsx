@@ -1,14 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect, useIntl } from 'umi';
 import { Card, Switch } from 'antd';
-import { kzDevice } from '../../services/kazoo';
 import * as _ from 'lodash';
 import { useMediaQuery } from 'react-responsive';
-
+import { kzDevice } from '../../services/kazoo';
 import styles from '../style.less';
 import { cardProps } from '../../utils/props';
 
 const DeviceMedia = props => {
+  const { formatMessage } = useIntl();
+
   const [audioCodecs, setAudioCodecs] = useState([]);
   const [videoCodecs, setVideoCodecs] = useState([]);
   const [isLoading, setIsLoading] = useState({});
@@ -25,8 +26,6 @@ const DeviceMedia = props => {
   }, [full_devices[device_id]]);
 
   if (!full_devices[device_id]) return null;
-
-  const { formatMessage } = useIntl();
 
   const gridStyle = {
     width: isSmallDevice ? '50%' : '25%',

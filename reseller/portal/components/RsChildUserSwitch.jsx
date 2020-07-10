@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useState, useEffect } from 'react';
-import { connect } from 'umi';
+import { connect, useIntl } from 'umi';
 import * as _ from 'lodash';
-
-import { useIntl } from 'umi';
 import { Switch, Modal } from 'antd';
 
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';

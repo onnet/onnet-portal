@@ -9,6 +9,8 @@ import { Button, Select, Modal } from 'antd';
 import { kzDevice } from '../../services/kazoo';
 
 const DeviceMusicOnHold = props => {
+  const { formatMessage } = useIntl();
+
   const [buttonVisible, setButtonVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
   const [dataForSelect, setDataForSelect] = useState([]);
@@ -26,7 +28,6 @@ const DeviceMusicOnHold = props => {
   );
 
   const { dispatch, account, full_devices, account_media, device_id } = props;
-  const { formatMessage } = useIntl();
 
   function currentDocValue() {
     try {

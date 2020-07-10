@@ -9,6 +9,8 @@ import { Button, Select, Modal } from 'antd';
 import { kzDevice } from '../../services/kazoo';
 
 const CIDSelect = props => {
+  const { formatMessage } = useIntl();
+
   const [tzButtonVisible, setTzButtonVisible] = useState(false);
   const [mainNumber, setMainNumber] = useState(
     formatMessage({
@@ -24,7 +26,6 @@ const CIDSelect = props => {
   );
 
   const { dispatch, account, full_devices, numbers, fieldKey, device_id, modal_title } = props;
-  const { formatMessage } = useIntl();
 
   function NumberToShow() {
     try {
