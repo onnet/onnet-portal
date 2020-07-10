@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'umi';
 import { Spin } from 'antd';
+import LBAccountDashboard from '@/pages/onnet-portal/lb/dashboard';
 import SuperDuperDashboard from './super_admin';
 import ResellerDashboard from './reseller';
 import AccountDashboard from './account';
-import LBAccountDashboard from '@/pages/onnet-portal/lb/dashboard';
 
 const DashboardSelector = props => {
   const { kz_login, kz_account = {}, lb_account = {} } = props;

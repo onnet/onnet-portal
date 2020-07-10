@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { connect, useIntl } from 'umi';
 import { Table, Card } from 'antd';
+import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import RsChildUserParagraph from './RsChildUserParagraph';
 import ResellerUserCIDSelect from './ResellerUserCIDSelect';
 import styles from '../style.less';
-import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 const ResellerUserCID = props => {
   const { owner_id } = props;

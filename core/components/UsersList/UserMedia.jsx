@@ -1,10 +1,9 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect, useIntl } from 'umi';
 import { Card, Switch } from 'antd';
-import { kzUser } from '../../services/kazoo';
 import * as _ from 'lodash';
 import { useMediaQuery } from 'react-responsive';
-
+import { kzUser } from '../../services/kazoo';
 import styles from '../style.less';
 import { cardProps } from '../../utils/props';
 

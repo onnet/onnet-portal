@@ -1,10 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect,useIntl } from 'umi';
 import { Card, Switch, Badge, Modal } from 'antd';
-import { kzDevice } from '../../services/kazoo';
 import * as _ from 'lodash';
 import { EditOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { useMediaQuery } from 'react-responsive';
+import { kzDevice } from '../../services/kazoo';
 import styles from '../style.less';
 import EditDeviceDrawer from '../DevicesList/EditDeviceDrawer';
 

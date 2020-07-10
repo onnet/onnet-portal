@@ -1,11 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import * as _ from 'lodash';
 import { connect, useIntl } from 'umi';
 import { Card, Switch } from 'antd';
 import { kzUser } from '@/pages/onnet-portal/core/services/kazoo';
-import * as _ from 'lodash';
-
-import styles from '../style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+import styles from '../style.less';
 
 const ResellerUserMedia = props => {
   const [audioCodecs, setAudioCodecs] = useState([]);

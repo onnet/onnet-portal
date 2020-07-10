@@ -4,9 +4,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import Masonry from 'react-masonry-css';
-
-import GeneralSettingsWidget from './GeneralSettingsWidget';
 import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
+import GeneralSettingsWidget from './GeneralSettingsWidget';
 
 const AdminSettings = props => {
   const { dispatch, kz_account } = props;

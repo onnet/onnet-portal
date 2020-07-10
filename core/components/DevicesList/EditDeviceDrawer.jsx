@@ -2,9 +2,8 @@ import React from 'react';
 import { connect, useIntl } from 'umi';
 import { useMediaQuery } from 'react-responsive';
 import { Drawer } from 'antd';
-import EditDevice from './EditDevice';
 import { DeleteOutlined } from '@ant-design/icons';
-
+import EditDevice from './EditDevice';
 import styles from '../../style.less';
 
 const EditDeviceDrawer = props => {

@@ -8,9 +8,9 @@ import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/
 import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
 import ResellerCreateChild from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateChild';
 import ResellerCreateUser from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateUser';
+import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import ResellerChildrenTable from './components/ResellerChildrenTable';
 import RsChildAccountParagraph from './components/RsChildAccountParagraph';
-import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 
 import AccountDetails from './AccountDetails';
 import UsersList from './components/UsersList';

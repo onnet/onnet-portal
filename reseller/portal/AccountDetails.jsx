@@ -5,11 +5,11 @@ import funReactJson from '@/pages/onnet-portal/core/components/info_details';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Table, Button, Card, Switch, Typography } from 'antd';
 
-import RsChildAccountParagraph from './components/RsChildAccountParagraph';
-import styles from './style.less';
 import { resellerStatus } from '@/pages/onnet-portal/core/services/kazoo';
 import { runAndDispatch } from '@/pages/onnet-portal/core/utils/subroutine';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
+import styles from './style.less';
+import RsChildAccountParagraph from './components/RsChildAccountParagraph';
 
 const { Text } = Typography;
 

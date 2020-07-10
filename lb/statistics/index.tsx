@@ -6,10 +6,9 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Row, Col, DatePicker, Radio } from 'antd';
+import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import styles from '../style.less';
 import CardCDR from './CardCDR';
-
-import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 const dayFormat = 'YYYY/MM/DD';
 

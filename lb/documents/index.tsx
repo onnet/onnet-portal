@@ -4,9 +4,8 @@ import moment from 'moment';
 import Masonry from 'react-masonry-css';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Button, DatePicker } from 'antd';
-import styles from '../style.less';
 import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
-
+import styles from '../style.less';
 import CardProforma from './CardProforma';
 import CardActs from './CardActs';
 import CardVatInvoices from './CardVatInvoices';

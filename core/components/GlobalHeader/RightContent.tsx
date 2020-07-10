@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'umi';
 import { ConnectProps, ConnectState } from '@/models/connect';
 
-import Avatar from './AvatarDropdown';
 import RsDemaskBtn from '@/pages/onnet-portal/reseller/portal/components/RsDemaskBtn';
 import SelectLang from '../SelectLang';
+import Avatar from './AvatarDropdown';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';

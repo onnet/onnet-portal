@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useIntl } from 'umi';
-import { kzUser } from '../../services/kazoo';
-
 import { RedoOutlined } from '@ant-design/icons';
-
 import { Form, Button, Input, message } from 'antd';
+import { kzUser } from '../../services/kazoo';
 
 const UserPassword = props => {
   const [, forceUpdate] = useState();

@@ -1,11 +1,9 @@
 import React from 'react';
 import { Table, Card } from 'antd';
-
 import { useIntl } from 'umi';
 import Moment from 'react-moment';
-import LbDownloadDoc from './LbDownloadDoc';
-
 import styles from '@/pages/onnet-portal/core/style.less';
+import LbDownloadDoc from './LbDownloadDoc';
 
 const CardCallsReports = props => {
   const { calls_reports_pdf, account_id } = props;

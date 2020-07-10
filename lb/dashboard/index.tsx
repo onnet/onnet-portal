@@ -3,14 +3,12 @@ import { connect } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Spin } from 'antd';
 import Masonry from 'react-masonry-css';
-
+import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 import CardAccountDetails from './CardAccountDetails';
 import CardBillingDetails from './CardBillingDetails';
 import CardMonthlyFees from './CardMonthlyFees';
 import CardTelephonyNumbers from './CardTelephonyNumbers';
 import CardInternet from './CardInternet';
-
-import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 
 const LBAccountDashboard = props => {
   const { dispatch, kz_account, lb_account } = props;
