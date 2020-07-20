@@ -20,6 +20,7 @@ const KazooUserModel: KazooUserModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
+  console.log("kz_users model payload.owner_id: ", payload.owner_id);
       if (payload.owner_id === 'no_user_defined') {
         yield put({
           type: 'update',
