@@ -25,7 +25,7 @@ const Model: ModelType = {
   effects: {
     *refresh({ payload }, { call, put }) {
       const response = yield call(AccountNumbers, { ...payload, method: 'GET' });
-      if (response.status === 'success') {
+      if (response?.status === 'success') {
         yield put({
           type: 'update',
           payload: response,
@@ -33,7 +33,7 @@ const Model: ModelType = {
       } else {
         yield put({
           type: 'update',
-          payload: { data: [], status: response.status },
+          payload: { data: [], status: response?.status },
         });
       }
     },

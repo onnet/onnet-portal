@@ -37,7 +37,7 @@ const KazooUserModel: KazooUserModelType = {
         return;
       }
       const response = yield call(getUser, payload);
-      if (response.status === 'success') {
+      if (response?.status === 'success') {
         yield put({
           type: 'update',
           payload: response,

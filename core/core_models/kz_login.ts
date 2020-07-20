@@ -16,7 +16,7 @@ const KazooLoginModel = {
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(kz_user_auth, payload);
-      if (response && response.status === 'success') {
+      if (response?.status === 'success') {
         yield put({
           type: 'changeLoginStatus',
           payload: response,
@@ -33,7 +33,7 @@ const KazooLoginModel = {
     },
     *check_auth(_, { call, put }) {
       const response = yield call(checkCurrentAuthToken);
-      if (response && response.status !== 'success') {
+      if (response?.status !== 'success') {
         yield put({
           type: 'changeLoginStatus',
           payload: { currentAuthority: null },

@@ -23,7 +23,7 @@ const Model: ModelType = {
     *refresh({ payload, timeout }, { call, put }) {
       yield call(saga.delay, timeout || 0);
       const response = yield call(kzDevices, payload);
-      if (response.status === 'success') {
+      if (response?.status === 'success') {
         yield put({
           type: 'update',
           payload: response,
@@ -31,7 +31,7 @@ const Model: ModelType = {
       } else {
         yield put({
           type: 'update',
-          payload: { data: [], status: response.status },
+          payload: { data: [], status: response?.status },
         });
       }
     },

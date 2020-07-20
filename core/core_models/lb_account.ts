@@ -23,7 +23,7 @@ const LbAccountModel: LbAccountModelType = {
       const redux_state = getDvaApp()._store.getState();
       if (!redux_state.lb_account.disabled) {
         const response = yield call(lbAccountInfo, payload);
-        if (response.status === 404) {
+        if (response?.status === 404) {
           yield put({
             type: 'update',
             payload: { disabled: true },
