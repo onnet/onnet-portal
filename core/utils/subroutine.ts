@@ -42,7 +42,7 @@ export function dateToGregorian(date) {
 export function branchEndObjects(obj, acc) {
     for(var k in obj) {
         if(depthOf(obj[k]) > 1) {
-          printValues(obj[k], acc);
+          branchEndObjects(obj[k], acc);
         } else {
           if (obj[k].nomenclature_key) acc.push(obj[k]);
         };
