@@ -61,6 +61,11 @@ const AuthorityModel: AuthorityModelType = {
             ? []
             : ['telephony'];
         const account_id = redux_state.kz_account.data ? [redux_state.kz_account.data.id] : [];
+
+	// One more dirty hack 17e3d20d5343462f15f7563f3b6f388e
+     if (account_id == '17e3d20d5343462f15f7563f3b6f388e')   
+	     const authority = ['faceless_sub_sub']
+     else 
         const authority = priv_level.concat(
           reseller,
           login_as_master,
