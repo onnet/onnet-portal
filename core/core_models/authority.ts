@@ -51,6 +51,8 @@ const AuthorityModel: AuthorityModelType = {
             ? ['brt_child_selected']
             : []
           : [];
+        const brt_user_roles = redux_state.brt_user?.roles
+          ? redux_state.brt_user.roles : [];
         const lanbilling = redux_state.lb_account
           ? redux_state.lb_account.data
             ? ['lanbilling']
@@ -62,23 +64,23 @@ const AuthorityModel: AuthorityModelType = {
             : ['telephony'];
         const account_id = redux_state.kz_account.data ? [redux_state.kz_account.data.id] : [];
 
-	// One more dirty hack 17e3d20d5343462f15f7563f3b6f388e
-	let authority;
-     if (account_id == '17e3d20d5343462f15f7563f3b6f388e')   
-	authority = ['faceless_sub_sub'];
-     else 
-        authority = priv_level.concat(
-          reseller,
-          login_as_master,
-          show_reseller_portal,
-          superduper_admin,
-          consumer,
-          child_account_selected,
-          lanbilling,
-          telephony,
-          account_id,
-          brt_child_selected,
-        );
+        // One more dirty hack 17e3d20d5343462f15f7563f3b6f388e
+        let authority;
+        if (account_id == '17e3d20d5343462f15f7563f3b6f388e') authority = ['faceless_sub_sub'];
+        else
+          authority = priv_level.concat(
+            reseller,
+            login_as_master,
+            show_reseller_portal,
+            superduper_admin,
+            consumer,
+            child_account_selected,
+            brt_child_selected,
+            brt_user_roles,
+            lanbilling,
+            telephony,
+            account_id,
+          );
         // console.log("isArrayEqual: ", isArrayEqual(authority, redux_state.authority.currentAuthority));
         // console.log("_.isEqual: ", isEqual(authority, redux_state.authority.currentAuthority));
         if (!isEqual(authority, redux_state.authority.currentAuthority)) {
