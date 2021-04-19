@@ -8,6 +8,7 @@ import ResellerUserCID from '@/pages/onnet-portal/reseller/portal/components/Res
 import ResellerUserDiversion from '@/pages/onnet-portal/reseller/portal/components/ResellerUserDiversion';
 import ResellerUserMedia from '@/pages/onnet-portal/reseller/portal/components/ResellerUserMedia';
 import ResellerUserRestrictions from '@/pages/onnet-portal/reseller/portal/components/ResellerUserRestrictions';
+import ResellerUserRoles from '@/pages/onnet-portal/reseller/portal/components/ResellerUserRoles';
 
 const { Panel } = Collapse;
 
@@ -53,6 +54,9 @@ const ResellerChildEditUser = (props) => {
       >
         <RsUpdateUserPassword owner_id={selectedUser} />
       </Panel>
+            <Panel header={formatMessage({ id: 'core.UserRoles', defaultMessage: 'User roles' })} key="31">
+              <ResellerUserRoles owner_id={selectedUser} />
+            </Panel>
     </Collapse>
   );
 };
