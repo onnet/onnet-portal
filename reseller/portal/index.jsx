@@ -135,27 +135,15 @@ const ResellerPortal = (props) => {
       {child_account.data ? (
         <Fragment>
           <div style={{ backgroundColor: 'white', display: 'flow-root', marginBottom: '2em' }}>
-            <Button
-              key="test1122"
-              type="link"
-              style={{ float: 'left', margin: '1em', display: 'flex' }}
+            <span
+              style={{ float: 'left', display: 'flex' }}
             >
-              <Avatar
-                shape="square"
-                src={
-                  child_account.data.name
-                    ? `https://api.adorable.io/avatars/24/${encodeURIComponent(
-                        child_account.data.name,
-                      )}.png`
-                    : 'https://api.adorable.io/avatars/24/justfunnyaccount.png'
-                }
-              />
               <RsChildAccountParagraph
                 fieldKey="name"
-                style={{ fontSize: '1.5em', paddingLeft: '1em' }}
+                style={{ fontSize: '1.5em', marginBottom: '0', paddingLeft: '1em', paddingTop: '.5em' }}
                 currentText={child_account.data ? child_account.data.name : 'Loading...'}
               />
-            </Button>
+            </span>
             <Button
               key="buttonkey3"
               type="danger"
