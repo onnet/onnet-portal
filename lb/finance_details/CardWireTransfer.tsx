@@ -157,13 +157,6 @@ const CardWireTransfer = (props) => {
   return (
     <Card className={styles.card} {...props}>
       <Card.Meta
-        avatar={
-          <img
-            alt=""
-            className={styles.cardAvatar}
-            src="https://api.adorable.io/avatars/24/CardWireTransfer.png"
-          />
-        }
         title={formatMessage({
           id: 'reseller_portal.Wiretransfer',
           defaultMessage: 'Wire transfer',

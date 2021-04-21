@@ -40,13 +40,6 @@ const CardInternet = (props) => {
   return (
     <Card className={styles.card} {...cardProps}>
       <Card.Meta
-        avatar={
-          <img
-            alt=""
-            className={styles.cardAvatar}
-            src="https://api.adorable.io/avatars/24/CardInternet.png"
-          />
-        }
         title={formatMessage({ id: 'reseller_portal.Internet', defaultMessage: 'Internet' })}
         description={
           <Table

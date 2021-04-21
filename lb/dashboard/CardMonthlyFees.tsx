@@ -46,13 +46,6 @@ const CardMonthlyFees = (props) => {
   return (
     <Card className={styles.card} {...cardProps}>
       <Card.Meta
-        avatar={
-          <img
-            alt=""
-            className={styles.cardAvatar}
-            src="https://api.adorable.io/avatars/24/CardMonthlyFees.png"
-          />
-        }
         title={formatMessage({
           id: 'reseller_portal.Current_month_services_incl_VAT',
           defaultMessage: 'Current month services, RUB (incl VAT)',

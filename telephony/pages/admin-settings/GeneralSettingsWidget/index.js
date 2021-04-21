@@ -94,13 +94,6 @@ const GeneralSettingsWidget = () => {
   return (
     <Card hoverable className={styles.card}>
       <Card.Meta
-        avatar={
-          <img
-            alt=""
-            className={styles.cardAvatar}
-            src="https://api.adorable.io/avatars/24/generalsettings.png"
-          />
-        }
         title={formatMessage({
           id: 'telephony.general_settings',
           defaultMessage: 'General settings',

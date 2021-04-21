@@ -168,13 +168,6 @@ const CardCDR = (props) => {
   return (
     <Card className={styles.card}>
       <Card.Meta
-        avatar={
-          <img
-            alt=""
-            className={styles.cardAvatar}
-            src="https://api.adorable.io/avatars/24/CardCDR.png"
-          />
-        }
         title={
           <span>
             {formatMessage({

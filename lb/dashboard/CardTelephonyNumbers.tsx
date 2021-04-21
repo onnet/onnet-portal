@@ -49,13 +49,6 @@ const CardTelephonyNumbers = (props) => {
   return (
     <Card className={styles.card} {...cardProps}>
       <Card.Meta
-        avatar={
-          <img
-            alt=""
-            className={styles.cardAvatar}
-            src="https://api.adorable.io/avatars/24/CardTelephonyNumbers.png"
-          />
-        }
         title={formatMessage({ id: 'reseller_portal.Telephony', defaultMessage: 'Telephony' })}
         description={
           <Table

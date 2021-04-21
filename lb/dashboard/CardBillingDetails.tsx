@@ -60,13 +60,6 @@ const CardBillingDetails = (props) => {
   return (
     <Card className={styles.card} {...cardProps}>
       <Card.Meta
-        avatar={
-          <img
-            alt=""
-            className={styles.cardAvatar}
-            src="https://api.adorable.io/avatars/24/billingdetails.png"
-          />
-        }
         title={formatMessage({ id: 'reseller_portal.Account', defaultMessage: 'Account' })}
         description={
           <Table

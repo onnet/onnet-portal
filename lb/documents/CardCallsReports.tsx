@@ -38,13 +38,6 @@ const CardCallsReports = (props) => {
   return (
     <Card className={styles.card} {...props}>
       <Card.Meta
-        avatar={
-          <img
-            alt=""
-            className={styles.cardAvatar}
-            src="https://api.adorable.io/avatars/24/CardCallsReports.png"
-          />
-        }
         title={formatMessage({
           id: 'reseller_portal.Calls_report',
           defaultMessage: 'Calls report',

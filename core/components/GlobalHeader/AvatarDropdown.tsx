@@ -52,16 +52,6 @@ const AvatarDropdown = (props) => {
     <>
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar
-            size="small"
-            className={styles.avatar}
-            src={
-              kz_user_data.id
-                ? `https://api.adorable.io/avatars/24/${encodeURIComponent(kz_user_data.id)}.png`
-                : 'https://api.adorable.io/avatars/24/justfunnyaccount.png'
-            }
-            alt="avatar"
-          />
           <span className={styles.name}>
             {kz_user_data.first_name ? `${kz_user_data.first_name} ` : ' '}
             {kz_user_data.last_name ? kz_user_data.last_name : ' '}
