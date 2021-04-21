@@ -135,12 +135,15 @@ const ResellerPortal = (props) => {
       {child_account.data ? (
         <Fragment>
           <div style={{ backgroundColor: 'white', display: 'flow-root', marginBottom: '2em' }}>
-            <span
-              style={{ float: 'left', display: 'flex' }}
-            >
+            <span style={{ float: 'left', display: 'flex' }}>
               <RsChildAccountParagraph
                 fieldKey="name"
-                style={{ fontSize: '1.5em', marginBottom: '0', paddingLeft: '1em', paddingTop: '.5em' }}
+                style={{
+                  fontSize: '1.5em',
+                  marginBottom: '0',
+                  paddingLeft: '1em',
+                  paddingTop: '.5em',
+                }}
                 currentText={child_account.data ? child_account.data.name : 'Loading...'}
               />
             </span>

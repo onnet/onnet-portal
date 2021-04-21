@@ -51,8 +51,7 @@ const AuthorityModel: AuthorityModelType = {
             ? ['brt_child_selected']
             : []
           : [];
-        const brt_user_roles = redux_state.brt_user?.roles
-          ? redux_state.brt_user.roles : [];
+        const brt_user_roles = redux_state.brt_user?.roles ? redux_state.brt_user.roles : [];
         const lanbilling = redux_state.lb_account
           ? redux_state.lb_account.data
             ? ['lanbilling']

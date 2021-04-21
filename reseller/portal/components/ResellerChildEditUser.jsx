@@ -54,9 +54,12 @@ const ResellerChildEditUser = (props) => {
       >
         <RsUpdateUserPassword owner_id={selectedUser} />
       </Panel>
-            <Panel header={formatMessage({ id: 'core.UserRoles', defaultMessage: 'User roles' })} key="31">
-              <ResellerUserRoles owner_id={selectedUser} />
-            </Panel>
+      <Panel
+        header={formatMessage({ id: 'core.UserRoles', defaultMessage: 'User roles' })}
+        key="31"
+      >
+        <ResellerUserRoles owner_id={selectedUser} />
+      </Panel>
     </Collapse>
   );
 };
