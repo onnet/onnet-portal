@@ -52,6 +52,7 @@ const AuthorityModel: AuthorityModelType = {
             : []
           : [];
         const brt_user_roles = redux_state.brt_user?.roles ? redux_state.brt_user.roles : [];
+        const tos_www = redux_state.brt_user?.contact ? ['tos_www'] : [];
         const lanbilling = redux_state.lb_account
           ? redux_state.lb_account.data
             ? ['lanbilling']
@@ -76,6 +77,7 @@ const AuthorityModel: AuthorityModelType = {
             child_account_selected,
             brt_child_selected,
             brt_user_roles,
+            tos_www,
             lanbilling,
             telephony,
             account_id,
