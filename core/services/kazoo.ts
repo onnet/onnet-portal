@@ -29,6 +29,15 @@ export const CSV_HEADERS = () => {
   };
 };
 
+export const ANY_HEADERS = (props) => {
+  const redux_state = getDvaApp()._store.getState();
+  return {
+    'Content-Type': props.content_type,
+    'Accept': props.accept,
+    'X-Auth-Token': redux_state.kz_login.auth_token,
+  };
+};
+
 export const MAYBE_SUPER_DUPER = () => {
   const redux_state = getDvaApp()._store.getState();
   if (redux_state.kz_account.data) {
