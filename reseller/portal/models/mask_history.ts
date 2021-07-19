@@ -50,6 +50,10 @@ const Model: ModelType = {
         type: 'child_account/refresh',
         payload: { account_id: state.mask_history.account_id },
       });
+      yield getDvaApp()._store.dispatch({
+        type: 'brt_child_account/refresh',
+        payload: { account_id: state.mask_history.account_id },
+      });
       yield put({
         type: 'levelup',
       });
