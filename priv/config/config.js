@@ -36,9 +36,8 @@ export default defineConfig({
   theme: {
     'primary-color': defaultSettings.primaryColor,
     'secondary-color': '#3E7A8C',
-    'layout-header-background': '#E86110',
-  //  'layout-sider-background': '#E86110',
-    'menu-dark-inline-submenu-bg': '#3E7A8C',
+    'layout-header-background': defaultSettings.layoutHeaderBackground,
+    'menu-dark-inline-submenu-bg': defaultSettings.menuDarkInlineSubmenuBg',
   },
   // esbuild is father build tools
   // https://umijs.org/plugins/plugin-esbuild

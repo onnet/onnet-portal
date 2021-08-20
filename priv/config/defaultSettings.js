@@ -1,9 +1,8 @@
 const Settings = {
   navTheme: 'dark',
-  // 拂晓蓝
   primaryColor: '#E86110',
   layoutHeaderBackground: '#E86110',
-  menuDarkSubmenuBg: '#3E7A8C',
+  menuDarkInlineSubmenuBg: '#3E7A8C',
   layout: 'side',
   contentWidth: 'Fluid',
   fixedHeader: false,
