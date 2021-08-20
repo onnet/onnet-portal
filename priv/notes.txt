@@ -1,49 +1,12 @@
 cp document.ejs ../
 
-config.ts:
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-  exportStatic: true,
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-defaultSettings.ts:
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-export default {
-  navTheme: 'dark',
-  //  primaryColor: '#1890FF',
-  primaryColor: '#972925',
-  layout: 'sidemenu',
-  contentWidth: 'Fluid',
-  fixedHeader: false,
-  autoHideHeader: false,
-  fixSiderbar: false,
-  colorWeak: false,
-  menu: {
-    locale: true,
-  },
-  title: 'OKUI2-UI',
-  pwa: false,
-  iconfontUrl: '',
-  //  crossbarUrlV2: 'https://kz533.onnet.su:8443/v2',
-  //  blackholeUrl: 'wss://kz533.onnet.su:7777/',
-      crossbarUrlV2: 'https://kz5131.onnet.su:8443/v2',
-      blackholeUrl: 'wss://kz5131.onnet.su:7777/',
-  //   crossbarUrlV2: 'http://localhost:8000/v2',
-  //  blackholeUrl: 'ws://localhost:5555/',
-  //  crossbarUrlV2: 'http://46.148.199.2:8000/v2',
-  //  blackholeUrl: 'ws://46.148.199.2:5555/',
-  //  crossbarUrlV2: 'https://rastapi.onnet.su:8443/v2',
-  //  blackholeUrl: 'wss://rastapi.onnet.su:7777/',
-} as DefaultSettings;
-
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 in ./src/models run:
 
 ln -s ../pages/onnet-portal/core/models ./onnet-portal/core
-ln -s ../pages/onnet-portal/reseller/models ./onnet-portal/reseller
-ln -s ../pages/onnet-portal/telephony/models ./onnet-portal/telephony
-ln -s ../pages/onnet-portal/lb/models ./onnet-portal/lb
+//ln -s ../pages/onnet-portal/reseller/models ./onnet-portal/reseller
+//ln -s ../pages/onnet-portal/telephony/models ./onnet-portal/telephony
+//ln -s ../pages/onnet-portal/lb/models ./onnet-portal/lb
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 in ./.eslintrc.js
