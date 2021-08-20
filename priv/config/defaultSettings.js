@@ -10,7 +10,7 @@ const Settings = {
   colorWeak: false,
   title: 'OnNet Portal',
   pwa: false,
-//  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+  //  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: '',
   crossbarUrlV2: 'http://kz533.onnet.su:8000/v2',
   blackholeUrl: 'ws://kz533.onnet.su:5555/',

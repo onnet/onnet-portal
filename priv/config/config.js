@@ -10,12 +10,12 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
-//  layout: {
-    // https://umijs.org/zh-CN/plugins/plugin-layout
-//    locale: true,
-//    siderWidth: 208,
-//    ...defaultSettings,
-//  },
+  //  layout: {
+  // https://umijs.org/zh-CN/plugins/plugin-layout
+  //    locale: true,
+  //    siderWidth: 208,
+  //    ...defaultSettings,
+  //  },
   // https://umijs.org/zh-CN/plugins/plugin-locale
   locale: {
     // default zh-CN
@@ -37,14 +37,14 @@ export default defineConfig({
     'primary-color': defaultSettings.primaryColor,
     'secondary-color': '#3E7A8C',
     'layout-header-background': defaultSettings.layoutHeaderBackground,
-    'menu-dark-inline-submenu-bg': defaultSettings.menuDarkInlineSubmenuBg',
+    'menu-dark-inline-submenu-bg': defaultSettings.menuDarkInlineSubmenuBg,
   },
   // esbuild is father build tools
   // https://umijs.org/plugins/plugin-esbuild
   esbuild: {},
   title: false,
   ignoreMomentLocale: true,
-//  proxy: proxy[REACT_APP_ENV || 'dev'],
+  //  proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
   },

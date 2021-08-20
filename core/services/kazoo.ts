@@ -24,7 +24,7 @@ export const CSV_HEADERS = () => {
   const redux_state = getDvaApp()._store.getState();
   return {
     'Content-Type': 'application/json; charset=utf-8',
-    'Accept': 'text/csv',
+    Accept: 'text/csv',
     'X-Auth-Token': redux_state.kz_login.auth_token,
   };
 };
@@ -33,7 +33,7 @@ export const ANY_HEADERS = (props) => {
   const redux_state = getDvaApp()._store.getState();
   return {
     'Content-Type': props.content_type,
-    'Accept': props.accept,
+    Accept: props.accept,
     'X-Auth-Token': redux_state.kz_login.auth_token,
   };
 };

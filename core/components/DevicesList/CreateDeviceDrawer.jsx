@@ -7,13 +7,8 @@ import cryptoRandomString from 'crypto-random-string';
 const { TabPane } = Tabs;
 
 const CreateDeviceDrawer = (props) => {
-  const {
-    setCreateDeviceType,
-    formRef_sip_device,
-    formRef_sip_uri,
-    formRef_cellphone,
-    onFinish,
-  } = props;
+  const { setCreateDeviceType, formRef_sip_device, formRef_sip_uri, formRef_cellphone, onFinish } =
+    props;
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
