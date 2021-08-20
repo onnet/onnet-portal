@@ -17,14 +17,14 @@ const ZoneInfo = (props) => {
 
   useEffect(() => {
     if (kz_account.data) {
-      if (!kz_account.data.superduper_admin) {
+      if (!kz_account?.data?.superduper_admin) {
         history.push('/int/dashboard');
       }
     }
   }, [kz_account, kz_system_status]);
 
   if (kz_system_status.data) {
-    if (!kz_system_status.data[location.state.zone]) {
+    if (!kz_system_status.data[location?.state?.zone]) {
       console.log(
         'Absent zone name. Redirecting to dashboard. kz_system_status: ',
         kz_system_status,
@@ -34,7 +34,7 @@ const ZoneInfo = (props) => {
   } else {
     dispatch({
       type: 'kz_system_status/refresh',
-      payload: { account_id: kz_login.data.account_id },
+      payload: { account_id: kz_login?.data?.account_id },
     });
     return (
       <div
