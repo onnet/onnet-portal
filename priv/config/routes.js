@@ -8,9 +8,9 @@ export default [
   { path: '/dashboard', redirect: '/int/dashboard' },
   {
     path: '/int',
-    component: './onnet-portal/core/layouts/BasicLayout',
-    Routes: ['src/pages/onnet-portal/core/layouts/Authorized'],
-    authority: ['admin', 'user', 'reseller'],
+    component: '@/pages/onnet-portal/core/layouts/BasicLayout',
+    Routes: ['@/pages/onnet-portal/core/layouts/Authorized'],
+    authority: ['admin', 'consumer', 'reseller'],
     routes: [
       {
         name: 'dashboard',

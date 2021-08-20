@@ -27,15 +27,6 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
     [path: string]: MenuDataItem;
   };
 };
-/**
- * use Authorized check all menu item
- */
-
-const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
-  menuList.map((item) => {
-    const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
-    return Authorized.check(item.authority, localItem, null) as MenuDataItem;
-  });
 
 const footerRender = () => <span />;
 
@@ -65,6 +56,16 @@ const BasicLayout: React.FC = (props) => {
     kz_registrations_count,
     authority,
   } = props;
+
+/**
+ * use Authorized check all menu item
+ */
+
+const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
+  menuList.map((item) => {
+    const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
+    return Authorized.check(item.authority, localItem, null) as MenuDataItem;
+  });
 
   useEffect(() => {
     if (kz_login.data) {

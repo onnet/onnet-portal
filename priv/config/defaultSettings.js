@@ -12,7 +12,7 @@ const Settings = {
   pwa: false,
   //  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: '',
-  crossbarUrlV2: 'http://kz533.onnet.su:8000/v2',
-  blackholeUrl: 'ws://kz533.onnet.su:5555/',
+  crossbarUrlV2: 'http://kz536.onnet.su:8000/v2',
+  blackholeUrl: 'ws://kz536.onnet.su:5555/',
 };
 export default Settings;
