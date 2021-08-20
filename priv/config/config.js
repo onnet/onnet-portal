@@ -1,9 +1,8 @@
 // https://umijs.org/config/
 import { defineConfig } from 'umi';
 import { join } from 'path';
-import defaultSettings from '../src/pages/onnet-portal/priv/config/defaultSettings';
-import proxy from './proxy';
-import routes from '../src/pages/onnet-portal/priv/config/routes';
+import defaultSettings from './defaultSettings';
+import routes from './routes';
 const { REACT_APP_ENV } = process.env;
 export default defineConfig({
   hash: true,
@@ -36,36 +35,27 @@ export default defineConfig({
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': defaultSettings.primaryColor,
+    'secondary-color': '#3E7A8C',
+    'layout-header-background': '#E86110',
+  //  'layout-sider-background': '#E86110',
+    'menu-dark-inline-submenu-bg': '#3E7A8C',
   },
   // esbuild is father build tools
   // https://umijs.org/plugins/plugin-esbuild
   esbuild: {},
   title: false,
   ignoreMomentLocale: true,
-  proxy: proxy[REACT_APP_ENV || 'dev'],
+//  proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
   },
   // Fast Refresh 热更新
   fastRefresh: {},
-  openAPI: [
-    {
-      requestLibPath: "import { request } from 'umi'",
-      // 或者使用在线的版本
-      // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
-      schemaPath: join(__dirname, 'oneapi.json'),
-      mock: false,
-    },
-    {
-      requestLibPath: "import { request } from 'umi'",
-      schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
-      projectName: 'swagger',
-    },
-  ],
   nodeModulesTransform: {
     type: 'none',
   },
-//  mfsu: {},
+  mfsu: {},
   webpack5: {},
   exportStatic: {},
+  //  extraBabelPlugins: ['transform-remove-console'],
 });
