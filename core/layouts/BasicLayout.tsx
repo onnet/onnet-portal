@@ -57,15 +57,15 @@ const BasicLayout: React.FC = (props) => {
     authority,
   } = props;
 
-/**
- * use Authorized check all menu item
- */
+  /**
+   * use Authorized check all menu item
+   */
 
-const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
-  menuList.map((item) => {
-    const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
-    return Authorized.check(item.authority, localItem, null) as MenuDataItem;
-  });
+  const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
+    menuList.map((item) => {
+      const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
+      return Authorized.check(item.authority, localItem, null) as MenuDataItem;
+    });
 
   useEffect(() => {
     if (kz_login.data) {

@@ -1,4 +1,5 @@
-import { AnyAction, Reducer } from 'redux';
+import { AnyAction, Effect, Reducer, getDvaApp } from 'umi';
+
 import { EffectsCommandMap } from 'dva';
 import { AccountNumbers } from '@/pages/onnet-portal/core/services/kazoo';
 
@@ -38,6 +39,7 @@ const Model: ModelType = {
           payload: { data: [], status: response.status },
         });
       }
+      getDvaApp()._store.dispatch({ type: 'authority/refresh', payload: {} });
     },
     *flush(_, { put }) {
       yield put({

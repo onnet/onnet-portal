@@ -52,7 +52,8 @@ export const MAYBE_SUPER_DUPER = () => {
 export function timeRange(params) {
   const lookup_field = params.lookup_field ? params.lookup_field : 'created';
   const TO_TIMESTAMP = params.created_to ? params.created_to : dateToGregorian(new Date());
-  const FROM_TIMESTAMP = params.created_from ? params.created_from : TO_TIMESTAMP - 7776000;
+  //  const FROM_TIMESTAMP = params.created_from ? params.created_from : TO_TIMESTAMP - 7776000;
+  const FROM_TIMESTAMP = params.created_from ? params.created_from : TO_TIMESTAMP - 75600;
   return `?${lookup_field}_from=${FROM_TIMESTAMP}&${lookup_field}_to=${TO_TIMESTAMP}`;
 }
 

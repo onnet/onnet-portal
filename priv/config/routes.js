@@ -20,39 +20,98 @@ export default [
       },
       { path: '/int/zone', component: './onnet-portal/core/pages/dashboard/zone_info' },
       {
+        name: 'accounts',
+        path: '/int/accounts',
+        component: './onnet-portal/reseller/portal',
+        authority: ['reseller', '!child_account_selected'],
+        icon: 'dashboard',
+      },
+      {
+        name: 'accounts',
+        path: '/int/accounts',
+        authority: ['child_account_selected'],
+        icon: 'dashboard',
+        routes: [
+          {
+            name: 'account_details',
+            path: '/int/accounts/account',
+            component: './onnet-portal/reseller/portal',
+          },
+          {
+            path: '/int/accounts/telephony',
+            name: 'telephony',
+            icon: 'phone',
+            authority: ['child_telephony'],
+            routes: [
+              {
+                name: 'settings',
+                path: '/int/accounts/telephony/admin-settings',
+                component: './onnet-portal/telephony/pages/admin-settings',
+                authority: ['child_telephony'],
+              },
+              {
+                name: 'statistics',
+                path: '/int/accounts/telephony/statistics',
+                component: './onnet-portal/telephony/pages/statistics',
+                authority: ['child_telephony'],
+              },
+              {
+                name: 'current_calls',
+                path: '/int/accounts/telephony/calls',
+                component: './onnet-portal/reseller/monitor/current_calls',
+              },
+              {
+                name: 'current_sip_registrations',
+                path: '/int/accounts/telephony/sip_registrations',
+                component: './onnet-portal/reseller/monitor/current_registrations',
+              },
+            ],
+          },
+        ],
+      },
+      {
         name: 'reseller_portal',
         path: '/int/reseller_portal',
         icon: 'account-book',
         authority: ['superduper_admin', 'reseller', '!354c50fb268bf2da40e317dee90f7de3'],
         routes: [
           {
-            name: 'accounts',
-            path: '/int/reseller_portal/accounts',
-            component: './onnet-portal/reseller/portal',
-          },
-          {
-            name: 'settings',
+            name: 'reseller_settings',
             path: '/int/reseller_portal/settings',
             component: './onnet-portal/reseller/settings',
           },
           {
-            name: 'monitor',
-            path: '/int/reseller_portal/monitor', // icon: 'user',
+            path: '/int/telephony',
+            name: 'telephony',
+            icon: 'phone',
+            authority: ['child_telephony'],
             routes: [
+              {
+                name: 'settings',
+                path: '/int/telephony/admin-settings',
+                component: './onnet-portal/telephony/pages/admin-settings',
+                authority: ['child_telephony'],
+              },
               {
                 name: 'current_calls',
                 path: '/int/reseller_portal/monitor/calls',
                 component: './onnet-portal/reseller/monitor/current_calls',
               },
               {
-                name: 'amqp_messages',
-                path: '/int/reseller_portal/monitor/amqp',
-                component: './onnet-portal/reseller/monitor/amqp_messages',
-              },
-              {
                 name: 'current_sip_registrations',
                 path: '/int/reseller_portal/monitor/sip_registrations',
                 component: './onnet-portal/reseller/monitor/current_registrations',
+              },
+            ],
+          },
+          {
+            name: 'monitor',
+            path: '/int/reseller_portal/monitor', // icon: 'user',
+            routes: [
+              {
+                name: 'amqp_messages',
+                path: '/int/reseller_portal/monitor/amqp',
+                component: './onnet-portal/reseller/monitor/amqp_messages',
               },
             ],
           },
@@ -99,6 +158,12 @@ export default [
             name: 'callflow-builder',
             path: '/int/telephony/callflow-builder',
             component: './onnet-portal/telephony/pages/callflow-builder',
+            authority: ['telephony'],
+          },
+          {
+            name: 'statistics',
+            path: '/int/telephony/statistics',
+            component: './onnet-portal/telephony/pages/statistics',
             authority: ['telephony'],
           },
         ],

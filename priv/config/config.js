@@ -53,7 +53,7 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  mfsu: {},
+  //  mfsu: {},
   webpack5: {},
   exportStatic: {},
   //  extraBabelPlugins: ['transform-remove-console'],

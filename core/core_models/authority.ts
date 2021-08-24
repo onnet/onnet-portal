@@ -60,7 +60,9 @@ const AuthorityModel: AuthorityModelType = {
           : [];
         const telephony =
           redux_state.kz_account.data.is_reseller || redux_state.kz_account.data.superduper_admin
-            ? []
+            ? redux_state.child_numbers?.page_size
+              ? ['child_telephony']
+              : []
             : ['telephony'];
         const account_id = redux_state.kz_account.data ? [redux_state.kz_account.data.id] : [];
 
