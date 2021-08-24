@@ -39,15 +39,17 @@ const DevicesList = (props) => {
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   useEffect(() => {
-    if (brief_devices.data) {
-      setDataSource(brief_devices.data);
-    } else {
-      dispatch({
-        type: 'kz_brief_devices/refresh',
-        payload: { account_id: account.data.id },
-      });
+    if (account.data) {
+      if (brief_devices.data) {
+        setDataSource(brief_devices.data);
+      } else {
+        dispatch({
+          type: 'kz_brief_devices/refresh',
+          payload: { account_id: account.data.id },
+        });
+      }
     }
-  }, [brief_devices]);
+  }, [brief_devices, account]);
 
   if (!brief_devices.data) {
     return null;

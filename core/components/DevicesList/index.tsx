@@ -95,8 +95,6 @@ const DevicesList = (props) => {
       key: 'device_cid',
       align: 'center',
       render: (record) => {
-        console.log('IAM!!! CID field record', record);
-        console.log('IAM!!! full_devices[record.id]', full_devices[record.id]);
         const InternalCIDNumber = _.get(full_devices[record.id], 'data.caller_id.internal.number');
         const ExternalCIDNumber = _.get(full_devices[record.id], 'data.caller_id.external.number');
         if (InternalCIDNumber && ExternalCIDNumber) {

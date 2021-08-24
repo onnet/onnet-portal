@@ -159,6 +159,12 @@ export default [
             component: './onnet-portal/telephony/pages/admin-settings',
             authority: ['telephony'],
           },
+              {
+                name: 'devices',
+                path: '/int/telephony/devices',
+                component: './onnet-portal/telephony/pages/devices',
+                authority: ['telephony'],
+              },
           {
             name: 'callflow-builder',
             path: '/int/telephony/callflow-builder',

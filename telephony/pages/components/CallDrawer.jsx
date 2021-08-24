@@ -39,14 +39,14 @@ const CallDrawer = (props) => {
     console.log('Inside useEffect selectedCall', selectedCall);
     if (kz_account.data) {
       console.log('Inside useEffect 2');
-      if (child_account.data && selectedCall.id) setCallLegsState();
+      if (((kz_account?.data?.is_reseller && child_account.data) || kz_account?.data) && selectedCall.id) setCallLegsState();
     }
   }, [kz_account, child_account, selectedCall]);
 
   function setCallLegsState() {
     setCallLegs([]);
     AccountCdrLegs({
-      account_id: child_account.data.id,
+      account_id: kz_account.data.is_reseller ? child_account.data.id : kz_account.data.id,
       call_id: selectedCall.id,
       method: 'GET',
     })

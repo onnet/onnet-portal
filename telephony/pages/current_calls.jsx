@@ -34,7 +34,6 @@ const CurrentCalls = (props) => {
   const { auth_token } = kz_login;
 
   useEffect(() => {
-
     ws.current = new WebSocket(settings.blackholeUrl);
 
     ws.current.onerror = (error) => {
@@ -56,7 +55,6 @@ const CurrentCalls = (props) => {
     if (!ws.current) return;
 
     if (kz_account.data) {
-
       ws.current.onopen = (e) => {
         console.log('on ws open');
         console.log(e);
@@ -73,7 +71,6 @@ const CurrentCalls = (props) => {
       };
 
       initCurCalls();
-
     }
   }, [kz_account]);
 
@@ -82,89 +79,89 @@ const CurrentCalls = (props) => {
 
     if (kz_account.data) {
       ws.current.onmessage = (evt) => {
-          const jsdata = JSON.parse(evt.data);
-          if (jsdata.status !== 'error') {
-            switch (jsdata.name) {
-              case 'CHANNEL_CREATE':
-                if (jsdata.data.call_direction === 'inbound') {
-                  console.log('CHANNEL_CREATE');
-                  console.log(jsdata);
-                  const cr_index = rows.findIndex((x) => x.key === jsdata.data.call_id);
-                  if (cr_index === -1) {
-                    setRows(() => {
-                      const joined = rows.concat({
-                        key: jsdata.data.call_id,
-                        start_date: (
-                          <Moment format="YYYY-MM-DD HH:mm">
-                            {subr.gregorianToDate(jsdata.data.timestamp)}
-                          </Moment>
-                        ),
-                        account_name: (
-                          <AccountName account_id={jsdata.data.custom_channel_vars.account_id} />
-                        ),
-                        caller_id_number: jsdata.data.caller_id_number,
-                        callee_id_number: get_calee_id_number(jsdata.data),
-                        status: 'connecting',
-                        duration: (
-                          <Moment durationFromNow interval={1000}>
-                            {subr.gregorianToDate(jsdata.data.timestamp)}
-                          </Moment>
-                        ),
-                      });
-                      return joined;
-                    });
-                  }
-                }
-                break;
-              case 'CHANNEL_ANSWER': {
-                console.log('CHANNEL_ANSWER');
+        const jsdata = JSON.parse(evt.data);
+        if (jsdata.status !== 'error') {
+          switch (jsdata.name) {
+            case 'CHANNEL_CREATE':
+              if (jsdata.data.call_direction === 'inbound') {
+                console.log('CHANNEL_CREATE');
                 console.log(jsdata);
-                const ans_index = rows.findIndex((x) => x.key === jsdata.data.call_id);
-                if (ans_index !== -1) {
-                  const answered_call = {
-                    key: jsdata.data.call_id,
-                    start_date: (
-                      <Moment format="YYYY-MM-DD HH:mm">
-                        {subr.gregorianToDate(jsdata.data.timestamp)}
-                      </Moment>
-                    ),
-                    account_name: (
-                      <AccountName account_id={jsdata.data.custom_channel_vars.account_id} />
-                    ),
-                    caller_id_number: jsdata.data.caller_id_number,
-                    callee_id_number: get_calee_id_number(jsdata.data),
-                    status: 'answered',
-                    duration: (
-                      <Moment durationFromNow interval={1000}>
-                        {subr.gregorianToDate(jsdata.data.timestamp)}
-                      </Moment>
-                    ),
-                  };
+                const cr_index = rows.findIndex((x) => x.key === jsdata.data.call_id);
+                if (cr_index === -1) {
                   setRows(() => {
-                    const slicedArray = rows.slice();
-                    slicedArray.splice(ans_index, 1, answered_call);
-                    return slicedArray;
+                    const joined = rows.concat({
+                      key: jsdata.data.call_id,
+                      start_date: (
+                        <Moment format="YYYY-MM-DD HH:mm">
+                          {subr.gregorianToDate(jsdata.data.timestamp)}
+                        </Moment>
+                      ),
+                      account_name: (
+                        <AccountName account_id={jsdata.data.custom_channel_vars.account_id} />
+                      ),
+                      caller_id_number: jsdata.data.caller_id_number,
+                      callee_id_number: get_calee_id_number(jsdata.data),
+                      status: 'connecting',
+                      duration: (
+                        <Moment durationFromNow interval={1000}>
+                          {subr.gregorianToDate(jsdata.data.timestamp)}
+                        </Moment>
+                      ),
+                    });
+                    return joined;
                   });
                 }
-                break;
               }
-              case 'CHANNEL_DESTROY': {
+              break;
+            case 'CHANNEL_ANSWER': {
+              console.log('CHANNEL_ANSWER');
+              console.log(jsdata);
+              const ans_index = rows.findIndex((x) => x.key === jsdata.data.call_id);
+              if (ans_index !== -1) {
+                const answered_call = {
+                  key: jsdata.data.call_id,
+                  start_date: (
+                    <Moment format="YYYY-MM-DD HH:mm">
+                      {subr.gregorianToDate(jsdata.data.timestamp)}
+                    </Moment>
+                  ),
+                  account_name: (
+                    <AccountName account_id={jsdata.data.custom_channel_vars.account_id} />
+                  ),
+                  caller_id_number: jsdata.data.caller_id_number,
+                  callee_id_number: get_calee_id_number(jsdata.data),
+                  status: 'answered',
+                  duration: (
+                    <Moment durationFromNow interval={1000}>
+                      {subr.gregorianToDate(jsdata.data.timestamp)}
+                    </Moment>
+                  ),
+                };
                 setRows(() => {
-                  const newrows = rows.filter((obj) => obj.key !== jsdata.data.call_id);
-                  return newrows;
+                  const slicedArray = rows.slice();
+                  slicedArray.splice(ans_index, 1, answered_call);
+                  return slicedArray;
                 });
-                break;
               }
-              default:
-                console.log('No action for event');
-                console.log(jsdata);
-                console.log(evt);
+              break;
             }
-          } else if (jsdata.data.errors[0].startsWith('failed to authenticate token')) {
-            console.log(jsdata.data.errors[0]);
-            dispatch({ type: 'kz_login/logout' });
+            case 'CHANNEL_DESTROY': {
+              setRows(() => {
+                const newrows = rows.filter((obj) => obj.key !== jsdata.data.call_id);
+                return newrows;
+              });
+              break;
+            }
+            default:
+              console.log('No action for event');
+              console.log(jsdata);
+              console.log(evt);
           }
-      }
+        } else if (jsdata.data.errors[0].startsWith('failed to authenticate token')) {
+          console.log(jsdata.data.errors[0]);
+          dispatch({ type: 'kz_login/logout' });
+        }
+      };
     }
   }, [kz_account, rows]);
 

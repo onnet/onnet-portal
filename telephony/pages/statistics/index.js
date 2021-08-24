@@ -36,7 +36,8 @@ const Statistics = (props) => {
 
   useEffect(() => {
     if (kz_account.data) {
-      if (child_account.data) setCallsState();
+      if ((kz_account?.data?.is_reseller && child_account.data) || kz_account?.data)
+	    setCallsState();
       dispatch({
         type: 'kz_children/refresh',
         payload: { account_id: kz_account.data.id, method: 'GET' },
@@ -50,7 +51,7 @@ const Statistics = (props) => {
     setDataCallsQty(0);
     setDataSource([]);
     AccountCdrInteraction({
-      account_id: child_account.data.id,
+      account_id: kz_account.data.is_reseller ? child_account.data.id : kz_account.data.id,
       created_to: dateToGregorian(createdTo.toDate()),
       created_from: dateToGregorian(createdFrom.toDate()),
       method: 'GET',
@@ -130,9 +131,13 @@ const Statistics = (props) => {
         ) : null
       }
       key="pagewrapper"
-      extra={[<ResellerChildFlush key="extraFlush" />, <ResellerChildSearch key="extraSearch" />]}
+      extra={
+        kz_account?.data?.is_reseller
+          ? [<ResellerChildFlush key="extraFlush" />, <ResellerChildSearch key="extraSearch" />]
+          : null
+      }
     >
-      {child_account.data ? (
+      {(kz_account?.data?.is_reseller && child_account.data) || kz_account?.data ? (
         <Fragment>
           <Card hoverable className={styles.card} {...cardProps}>
             <Card.Meta
@@ -202,9 +207,9 @@ const Statistics = (props) => {
             isCallDrawerVisible={isCallDrawerVisible}
           />
         </Fragment>
-      ) : (
+      ) : kz_account?.data?.is_reseller ? (
         <ResellerChildrenTable />
-      )}
+      ) : null}
     </PageHeaderWrapper>
   );
 };
