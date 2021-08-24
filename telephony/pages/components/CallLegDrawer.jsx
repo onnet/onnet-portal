@@ -21,23 +21,23 @@ const CallLegDrawer = (props) => {
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
   const { formatMessage } = useIntl();
 
-//  useEffect(() => {
-//    if (kz_account.data && selectedAction.event_doc_id) setActionState();
-//  }, [kz_account, selectedAction]);
-//
-//  function setActionState() {
-//    setActionData({});
-//    AccountCdrLeg({
-//      account_id: kz_account.data.id,
-//      call: selectedCallLeg.id,
-//      method: 'GET',
-//    })
- //     .then((resp) => {
-//        console.log('AccountCdrLeg resp: ', resp);
-//        setCallLegData(resp.data);
-//      })
-//      .catch(() => console.log('Oops errors!'));
-//  }
+  //  useEffect(() => {
+  //    if (kz_account.data && selectedAction.event_doc_id) setActionState();
+  //  }, [kz_account, selectedAction]);
+  //
+  //  function setActionState() {
+  //    setActionData({});
+  //    AccountCdrLeg({
+  //      account_id: kz_account.data.id,
+  //      call: selectedCallLeg.id,
+  //      method: 'GET',
+  //    })
+  //     .then((resp) => {
+  //        console.log('AccountCdrLeg resp: ', resp);
+  //        setCallLegData(resp.data);
+  //      })
+  //      .catch(() => console.log('Oops errors!'));
+  //  }
 
   return (
     <Drawer

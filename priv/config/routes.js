@@ -58,12 +58,12 @@ export default [
               {
                 name: 'current_calls',
                 path: '/int/accounts/telephony/calls',
-                component: './onnet-portal/reseller/monitor/current_calls',
+                component: './onnet-portal/telephony/pages/current_calls',
               },
               {
                 name: 'current_sip_registrations',
                 path: '/int/accounts/telephony/sip_registrations',
-                component: './onnet-portal/reseller/monitor/current_registrations',
+                component: './onnet-portal/telephony/pages/current_registrations',
               },
             ],
           },
@@ -73,7 +73,12 @@ export default [
         name: 'reseller_portal',
         path: '/int/reseller_portal',
         icon: 'account-book',
-        authority: ['superduper_admin', 'reseller', '!354c50fb268bf2da40e317dee90f7de3'],
+        authority: [
+          'superduper_admin',
+          'reseller',
+          '!child_account_selected',
+          '!354c50fb268bf2da40e317dee90f7de3',
+        ],
         routes: [
           {
             name: 'reseller_settings',
@@ -95,12 +100,12 @@ export default [
               {
                 name: 'current_calls',
                 path: '/int/reseller_portal/monitor/calls',
-                component: './onnet-portal/reseller/monitor/current_calls',
+                component: './onnet-portal/telephony/pages/current_calls',
               },
               {
                 name: 'current_sip_registrations',
                 path: '/int/reseller_portal/monitor/sip_registrations',
-                component: './onnet-portal/reseller/monitor/current_registrations',
+                component: './onnet-portal/telephony/pages/current_registrations',
               },
             ],
           },

@@ -1,4 +1,3 @@
-
 export function caller_number(obj) {
   let caller_number;
   if (obj.caller_id_number) {
@@ -18,5 +17,3 @@ export function callee_number(obj) {
   }
   return callee_number;
 }
-
-

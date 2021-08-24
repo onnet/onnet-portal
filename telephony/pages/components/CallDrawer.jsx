@@ -12,7 +12,7 @@ import { AccountCdrLegs } from '@/pages/onnet-portal/telephony/services/kazoo-te
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import styles from '@/pages/onnet-portal/core/style.less';
 import CallLegDrawer from './CallLegDrawer';
-import {caller_number, callee_number} from '../../utils/subroutine.ts';
+import { caller_number, callee_number } from '../../utils/subroutine.ts';
 
 const { Panel } = Collapse;
 
@@ -44,27 +44,32 @@ const CallDrawer = (props) => {
   }, [kz_account, child_account, selectedCall]);
 
   function setCallLegsState() {
-        setCallLegs([]);
-        AccountCdrLegs({
-          account_id: child_account.data.id,
-          call_id: selectedCall.id,
-          method: 'GET',
-        })
-          .then((resp) => {
-            console.log('AccountCdrLegs resp: ', resp);
-            setCallLegs(resp.data);
-          })
-          .catch(() => console.log('Oops errors!'));
+    setCallLegs([]);
+    AccountCdrLegs({
+      account_id: child_account.data.id,
+      call_id: selectedCall.id,
+      method: 'GET',
+    })
+      .then((resp) => {
+        console.log('AccountCdrLegs resp: ', resp);
+        setCallLegs(resp.data);
+      })
+      .catch(() => console.log('Oops errors!'));
   }
 
   const items = callLegs
     .filter((value) => !value.channel_is_loopback)
     .map((leg) => (
       <Timeline.Item key={leg.id}>
-        <Moment format="YYYY-MM-DD HH:mm:ss.SSS">{moment(leg.channel_created_time/1000)}</Moment>
-	    {' ('}
-	    { (leg.billing_seconds > 0) ? <span style={{ color: settings.primaryColor }}>{leg.billing_seconds}</span> : leg.billing_seconds  }/{ leg.duration_seconds }
-	    {') '}
+        <Moment format="YYYY-MM-DD HH:mm:ss.SSS">{moment(leg.channel_created_time / 1000)}</Moment>
+        {' ('}
+        {leg.billing_seconds > 0 ? (
+          <span style={{ color: settings.primaryColor }}>{leg.billing_seconds}</span>
+        ) : (
+          leg.billing_seconds
+        )}
+        /{leg.duration_seconds}
+        {') '}
         <span
           style={{ cursor: 'pointer', color: settings.primaryColor }}
           onClick={() => {
@@ -73,16 +78,20 @@ const CallDrawer = (props) => {
             setIsSelectedLegDrawerVisible(true);
           }}
         >
-          {
-		  leg.call_direction == 'outbound' ?
-		  <>{leg.switch_hostname} {' -> '} {leg.user_agent ? leg.user_agent : _.split(leg.to, '@')[0]}</>
-		  :
-		  <>{leg.user_agent} {' -> '} {leg.switch_hostname}</>
-          }
+          {leg.call_direction == 'outbound' ? (
+            <>
+              {leg.switch_hostname} {' -> '}{' '}
+              {leg.user_agent ? leg.user_agent : _.split(leg.to, '@')[0]}
+            </>
+          ) : (
+            <>
+              {leg.user_agent} {' -> '} {leg.switch_hostname}
+            </>
+          )}
         </span>
-	    {' ('}
-	    { leg.hangup_cause }
-	    {') '}
+        {' ('}
+        {leg.hangup_cause}
+        {') '}
       </Timeline.Item>
     ));
 
@@ -97,12 +106,18 @@ const CallDrawer = (props) => {
         title={
           selectedCall ? (
             <>
-                <small><Moment format="YYYY-MM-DD HH:mm:ss">{gregorianToDate(selectedCall.timestamp)}</Moment></small>
-		  {' '}
+              <small>
+                <Moment format="YYYY-MM-DD HH:mm:ss">
+                  {gregorianToDate(selectedCall.timestamp)}
+                </Moment>
+              </small>{' '}
               <b style={{ color: settings.primaryColor }}>
-                { ` ${caller_number(selectedCall)} -> ${callee_number(selectedCall)} ` }
+                {` ${caller_number(selectedCall)} -> ${callee_number(selectedCall)} `}
               </b>
-               <small> { `( ${selectedCall.billing_seconds} / ${selectedCall.duration_seconds} )` }</small>
+              <small>
+                {' '}
+                {`( ${selectedCall.billing_seconds} / ${selectedCall.duration_seconds} )`}
+              </small>
             </>
           ) : null
         }
@@ -142,9 +157,7 @@ const CallDrawer = (props) => {
             key="3"
           >
             <Card hoverable className={styles.card} {...cardProps} key="craneoperations">
-              <Card.Meta
-                description={<ReactJson src={selectedCall} {...reactJsonProps} />}
-              />
+              <Card.Meta description={<ReactJson src={selectedCall} {...reactJsonProps} />} />
             </Card>
           </Panel>
         </Collapse>

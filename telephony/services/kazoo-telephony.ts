@@ -16,6 +16,5 @@ export function AccountCdrInteraction(params: FormDataTyp): Promise<any> {
 }
 
 export function AccountCdrLegs(params: FormDataTyp): Promise<any> {
-  return kzRequest(
-    `${accountsUrl(params)}/cdrs/legs/${params.call_id}`, params);
+  return kzRequest(`${accountsUrl(params)}/cdrs/legs/${params.call_id}`, params);
 }

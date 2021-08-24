@@ -112,52 +112,48 @@ const ResellerChildrenTable = (props) => {
     }
   };
 
-
   return (
-      <Card hoverable className={styles.card} {...cardProps}>
-        <Card.Meta
-          title={
-            <>
-              <HeaderSearch
-                className={`${gh_styles.action} ${gh_styles.search}`}
-                style={{ marginLeft: '1em', display: 'inline-flex' }}
-                onSearch={(value) => {
-                  console.log('input', value);
-                }}
-                onChange={onSearchChange}
+    <Card hoverable className={styles.card} {...cardProps}>
+      <Card.Meta
+        title={
+          <>
+            <HeaderSearch
+              className={`${gh_styles.action} ${gh_styles.search}`}
+              style={{ marginLeft: '1em', display: 'inline-flex' }}
+              onSearch={(value) => {
+                console.log('input', value);
+              }}
+              onChange={onSearchChange}
+            />
+            <p style={{ float: 'right', display: 'inline-flex' }}>
+              {!isSmallDevice
+                ? `${formatMessage({
+                    id: 'core.pagination',
+                    defaultMessage: 'pagination',
+                  })}: `
+                : null}
+              <Switch
+                style={{ marginLeft: '1em', marginTop: '0.4em' }}
+                checked={!!isPaginated}
+                onChange={handlePagination}
+                size="small"
               />
-              <p style={{ float: 'right', display: 'inline-flex' }}>
-                {!isSmallDevice
-                  ? `${formatMessage({
-                      id: 'core.pagination',
-                      defaultMessage: 'pagination',
-                    })}: `
-                  : null}
-                <Switch
-                  style={{ marginLeft: '1em', marginTop: '0.4em' }}
-                  checked={!!isPaginated}
-                  onChange={handlePagination}
-                  size="small"
-                />
-              </p>
-            </>
-          }
-
-	  description={
-
-    <Table
-      dataSource={dataSource}
-      rowKey="id"
-      columns={columns}
-      pagination={{ position: 'both' }}
-      bordered
-      //          loading={dataSourceLoading}
-      style={{ backgroundColor: 'white' }}
-    />
-          }
-        />
-      </Card>
-
+            </p>
+          </>
+        }
+        description={
+          <Table
+            dataSource={dataSource}
+            rowKey="id"
+            columns={columns}
+            pagination={{ position: 'both' }}
+            bordered
+            //          loading={dataSourceLoading}
+            style={{ backgroundColor: 'white' }}
+          />
+        }
+      />
+    </Card>
   );
 };
 

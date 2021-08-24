@@ -36,5 +36,5 @@ export default {
   'telephony.From': 'От',
   'telephony.To': 'Куда',
   'telephony.Duration': 'Длит.',
-
+  'telephony.Current_calls': 'Текущие вызовы',
 };

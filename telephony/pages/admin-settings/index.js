@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useEffect } from 'react';
-import { connect } from 'umi';
+import { connect, useIntl } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import Masonry from 'react-masonry-css';
 import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 import GeneralSettingsWidget from './GeneralSettingsWidget';
 
 const AdminSettings = (props) => {
-  const { dispatch, kz_account } = props;
+  const { dispatch, kz_account, child_account } = props;
+
+  const { formatMessage } = useIntl();
 
   useEffect(() => {
     if (kz_account.data) {
@@ -28,7 +30,13 @@ const AdminSettings = (props) => {
   }, [kz_account]);
 
   return (
-    <PageHeaderWrapper>
+    <PageHeaderWrapper
+      title={
+        child_account.data
+          ? child_account?.data?.name
+          : formatMessage({ id: 'telephony.Statistics', defaultMessage: 'Statistics' })
+      }
+    >
       <Masonry
         breakpointCols={masonryBreakpointCols}
         className="my-masonry-grid"
@@ -40,6 +48,7 @@ const AdminSettings = (props) => {
   );
 };
 
-export default connect(({ kz_account }) => ({
+export default connect(({ kz_account, child_account }) => ({
   kz_account,
+  child_account,
 }))(AdminSettings);

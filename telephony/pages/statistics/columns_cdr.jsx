@@ -3,7 +3,7 @@ import { getDvaApp } from 'umi';
 import Moment from 'react-moment';
 import { gregorianToDate } from '@/pages/onnet-portal/core/utils/subroutine';
 import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
-import {caller_number, callee_number} from '../../utils/subroutine.ts';
+import { caller_number, callee_number } from '../../utils/subroutine.ts';
 
 const redux_state = getDvaApp()._store.getState();
 
@@ -33,15 +33,15 @@ export const columns = (onDrawerOpen, formatMessage) => [
     key: 'call_duration',
     align: 'center',
     render: (text, record) => (
-	    <div>{ record.billing_seconds } / { record.duration_seconds }</div>
+      <div>
+        {record.billing_seconds} / {record.duration_seconds}
+      </div>
     ),
   },
   {
     key: 'call_recording',
     align: 'center',
-    render: (text, record) => (
-	    <div>-</div>
-    ),
+    render: (text, record) => <div>-</div>,
   },
   {
     dataIndex: 'call_details',

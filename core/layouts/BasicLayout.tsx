@@ -68,7 +68,7 @@ const BasicLayout: React.FC = (props) => {
     });
 
   useEffect(() => {
-    if (kz_login.data) {
+    if (kz_login?.data) {
       if (dispatch) {
         if (!kz_account.data) {
           dispatch({

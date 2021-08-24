@@ -36,4 +36,5 @@ export default {
   'telephony.From': 'From',
   'telephony.To': 'To',
   'telephony.Duration': 'Duration',
+  'telephony.Current_calls': 'Current calls',
 };

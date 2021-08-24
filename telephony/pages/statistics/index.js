@@ -14,6 +14,7 @@ import gh_styles from '@/pages/onnet-portal/core/components/HeaderSearch/globhea
 import CallDrawer from '../components/CallDrawer';
 import { columns } from './columns_cdr';
 import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
+import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
 import ResellerChildrenTable from '@/pages/onnet-portal/reseller/portal/components/ResellerChildrenTable';
 import { dateToGregorian } from '@/pages/onnet-portal/core/utils/subroutine';
 
@@ -66,7 +67,7 @@ const Statistics = (props) => {
 
   const onSearchChange = (value) => {
     if (value.length > 1) {
-	    console.log("onSearchChange dataCalls: ", dataCalls); 
+      console.log('onSearchChange dataCalls: ', dataCalls);
       const searchRes = _.filter(dataCalls, (o) =>
         _.includes(_.toString(Object.values(o)).toLowerCase(), value.toLowerCase()),
       );
@@ -114,7 +115,7 @@ const Statistics = (props) => {
     <PageHeaderWrapper
       title={
         child_account.data
-          ? child_account?.data?.mdm_stakeholder?.name
+          ? child_account?.data?.name
           : formatMessage({ id: 'telephony.Statistics', defaultMessage: 'Statistics' })
       }
       subTitle={
@@ -129,7 +130,7 @@ const Statistics = (props) => {
         ) : null
       }
       key="pagewrapper"
-      extra={[<ResellerChildFlush key="extraFlush" />]}
+      extra={[<ResellerChildFlush key="extraFlush" />, <ResellerChildSearch key="extraSearch" />]}
     >
       {child_account.data ? (
         <Fragment>
@@ -137,22 +138,24 @@ const Statistics = (props) => {
             <Card.Meta
               title={
                 <Fragment>
-		                        {!isSmallDevice ? (
-                    <>
-                      <span style={{ marginLeft: '0.5em', display: 'inline-flex' }}>
-                        {formatMessage({
-                          id: 'core.Date',
-                          defaultMessage: 'Date',
-                        })}
-                      </span>{' '}
-                      <DatePicker
-                        format="DD.MM.YYYY"
-                        style={{ marginLeft: '1em', display: 'inline-flex' }}
-                        onChange={onDateChange}
-                        defaultValue={createdFrom}
-                      />
-                    </>
-                  ) : null}
+                  <>
+                    {!isSmallDevice ? (
+                      <>
+                        <span style={{ marginLeft: '0.5em', display: 'inline-flex' }}>
+                          {formatMessage({
+                            id: 'core.Date',
+                            defaultMessage: 'Date',
+                          })}
+                        </span>{' '}
+                      </>
+                    ) : null}
+                    <DatePicker
+                      format="DD.MM.YYYY"
+                      style={{ marginLeft: '1em', display: 'inline-flex' }}
+                      onChange={onDateChange}
+                      defaultValue={createdFrom}
+                    />
+                  </>
 
                   <HeaderSearch
                     className={`${gh_styles.action} ${gh_styles.search}`}
