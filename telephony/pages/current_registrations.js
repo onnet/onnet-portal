@@ -52,22 +52,9 @@ const CurrentRegistrations = (props) => {
       method: 'GET',
     })
       .then((resp) => {
-        console.log('getSIPRegistrations resp: ', resp);
-        console.log('getSIPRegistrations resp.data: ', resp.data);
-    //    let formattedRegs;
-    //    formattedRegs = resp.data.map((u, i) => ({
-    //      key: `idx_${i}_reg_${u.username}@${u.realm}`,
-    //      username: `${u.username}@${u.realm}`,
-    //      source_ip: u.source_ip,
-    //      user_agent: u.user_agent,
-    //      account_name: u.account_name,
-    //      realm: u.realm,
-    //    }));
-    //    console.log('getSIPRegistrations formattedRegs: ', formattedRegs);
         setDataRegistrationsQty(resp.data.length);
         setDataRegistrations(resp.data);
         setDataSource(resp.data);
-     //   setDataSource(formattedRegs);
         setDataSourceLoading(false);
       })
       .catch(() => console.log('Oops errors!'));
@@ -84,12 +71,13 @@ const CurrentRegistrations = (props) => {
   };
 
   const countSelectedRegs = () => {
-    if (currentTableLength) {
-      return `Registrations amount: ${currentTableLength}`;
-    }
-    return dataRegistrations.length > 0
-      ? `Registrations amount: ${dataRegistrations.length}`
-      : 'No registrations found!';
+    const dsLength = dataSource.length;
+    if (dsLength == 0) return 'No registrations found!';
+
+    const drLength = dataRegistrations.length;
+    if (drLength == dsLength) return `Registrations amount: ${drLength}`;
+
+    return `Registrations selected: ${dsLength} / ${drLength}`;
   };
 
   const columns0 =
@@ -138,19 +126,6 @@ const CurrentRegistrations = (props) => {
       render: (text, record) => (
         <InfoCircleOutlined
           onClick={() => {
-      //      const result = dataRegistrations.find(
-      //        ({ username, realm }) => {
-//		  console.log("account_name onClick find username: ", username);
-//		  console.log("account_name onClick find realm: ", realm);
-//		  console.log("account_name onClick find ${username}@${realm}: ", `${username}@${realm}`);
-//		  console.log("account_name onClick find record.username: ", record.username);
-//		  console.log("account_name onClick find compare: ", `${username}@${realm}` === record.username);
-//		   return   `${username}@${realm}` === record.username;
-//	      }
- //           );
-//		  console.log("account_name onClick record: ", record);
-//		  console.log("account_name onClick result: ", result);
-//		  console.log("account_name onClick dataRegistrations: ", dataRegistrations);
             onDrawerOpen(record);
           }}
         />
@@ -241,11 +216,10 @@ const CurrentRegistrations = (props) => {
                 }}
                 footer={countSelectedRegs}
                 style={{ backgroundColor: 'white' }}
-		                rowKey={(record) =>
-              record.event_timestamp.toString().replace(/[^A-Za-z0-9]/g, '') +
-              record.call_id.replace(/[^A-Za-z0-9]/g, '')
-            }
-
+                rowKey={(record) =>
+                  record.event_timestamp.toString().replace(/[^A-Za-z0-9]/g, '') +
+                  record.call_id.replace(/[^A-Za-z0-9]/g, '')
+                }
               />
             }
           />
