@@ -10,7 +10,7 @@ const CallflowBuilder = (props) => {
   return (
     <PageHeaderWrapper>
       <div>
-        Hello from Callflow Builder for <Tag>{kz_account.data.name}</Tag>!
+        Hello from Callflow Builder for <Tag>{kz_account?.data?.name}</Tag>!
       </div>
     </PageHeaderWrapper>
   );

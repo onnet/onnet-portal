@@ -183,6 +183,14 @@ const ZoneInfo = (props) => {
     </Card>
   ));
 
+const pie_tab = (kz_system_status.data?.length > 1) ? <TabPane key={'pie'} tab={'pie'} /> : [];
+  const my_tabs =
+          kz_system_status.data
+            ? Object.keys(kz_system_status.data)
+                .reverse()
+                .map((z) => <TabPane key={z} tab={z} />)
+            : null;
+
   return (
     <PageHeaderWrapper
       title={
@@ -195,11 +203,7 @@ const ZoneInfo = (props) => {
       }
       extra={[
         <Tabs defaultActiveKey={location.state.zone} onChange={callback} key="zones_tabs">
-          {kz_system_status.data
-            ? Object.keys(kz_system_status.data)
-                .reverse()
-                .map((z) => <TabPane key={z} tab={z} />)
-            : null}
+            {[...pie_tab, ...my_tabs]}
         </Tabs>,
       ]}
     >

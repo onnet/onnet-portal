@@ -86,25 +86,25 @@ export default [
             component: './onnet-portal/reseller/settings',
           },
           {
-            path: '/int/telephony',
+            path: '/int/reseller_portal/telephony',
             name: 'telephony',
             icon: 'phone',
-            authority: ['child_telephony'],
+  //          authority: ['telephony'],
             routes: [
               {
                 name: 'settings',
-                path: '/int/telephony/admin-settings',
+                path: '/int/reseller_portal/telephony/admin-settings',
                 component: './onnet-portal/telephony/pages/admin-settings',
-                authority: ['child_telephony'],
+   //             authority: ['child_telephony'],
               },
               {
                 name: 'current_calls',
-                path: '/int/reseller_portal/monitor/calls',
+                path: '/int/reseller_portal/telephony/calls',
                 component: './onnet-portal/telephony/pages/current_calls',
               },
               {
                 name: 'current_sip_registrations',
-                path: '/int/reseller_portal/monitor/sip_registrations',
+                path: '/int/reseller_portal/telephony/sip_registrations',
                 component: './onnet-portal/telephony/pages/current_registrations',
               },
             ],
