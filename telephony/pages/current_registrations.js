@@ -5,11 +5,9 @@ import { Tag, Button, Table, Modal, Input, Switch, Card } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import HeaderSearch from '@/pages/onnet-portal/core/components/HeaderSearch';
 import Highlighter from 'react-highlight-words';
-import ReactJson from 'react-json-view';
 import { useMediaQuery } from 'react-responsive';
 import gh_styles from '@/pages/onnet-portal/core/components/HeaderSearch/globhead.less';
 import AccountName from '@/pages/onnet-portal/core/components/account_name';
-import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
 import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
 import { getSIPRegistrations } from '@/pages/onnet-portal/core/services/kazoo';
@@ -17,18 +15,8 @@ import RegistrationDetailsDrawer from './components/RegistrationDetailsDrawer.js
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
-function info(reg_details) {
-  Modal.info({
-    title: 'Registration details',
-    width: 'max-content',
-    maskClosable: true,
-    content: <ReactJson src={reg_details} {...reactJsonProps} />,
-    onOk() {},
-  });
-}
-
 const CurrentRegistrations = (props) => {
-  const { dispatch, kz_login, kz_account, rs_registrations, settings, child_account } = props;
+  const { dispatch, kz_login, kz_account, settings, child_account } = props;
   const [searchText, setSearchText] = useState('');
   const [currentTableLength, setCurrentTableLength] = useState(0);
 
@@ -37,7 +25,7 @@ const CurrentRegistrations = (props) => {
   const [dataRegistrations, setDataRegistrations] = useState([]);
   const [dataRegistrationsQty, setDataRegistrationsQty] = useState(0);
   const [isRegistrationDrawerVisible, setIsRegistrationDrawerVisible] = useState(false);
-  const [selectedRegistration, setSelectedRegistration] = useState(false);
+  const [selectedRegistration, setSelectedRegistration] = useState({});
   const [dataSourceLoading, setDataSourceLoading] = useState(false);
 
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
@@ -66,68 +54,24 @@ const CurrentRegistrations = (props) => {
       .then((resp) => {
         console.log('getSIPRegistrations resp: ', resp);
         console.log('getSIPRegistrations resp.data: ', resp.data);
-        let formattedRegs;
-        formattedRegs = resp.data.map((u, i) => ({
-          key: `idx_${i}_reg_${u.username}@${u.realm}`,
-          username: `${u.username}@${u.realm}`,
-          source_ip: u.source_ip,
-          user_agent: u.user_agent,
-        }));
-        console.log('getSIPRegistrations formattedRegs: ', formattedRegs);
+    //    let formattedRegs;
+    //    formattedRegs = resp.data.map((u, i) => ({
+    //      key: `idx_${i}_reg_${u.username}@${u.realm}`,
+    //      username: `${u.username}@${u.realm}`,
+    //      source_ip: u.source_ip,
+    //      user_agent: u.user_agent,
+    //      account_name: u.account_name,
+    //      realm: u.realm,
+    //    }));
+    //    console.log('getSIPRegistrations formattedRegs: ', formattedRegs);
         setDataRegistrationsQty(resp.data.length);
         setDataRegistrations(resp.data);
-        setDataSource(formattedRegs);
+        setDataSource(resp.data);
+     //   setDataSource(formattedRegs);
         setDataSourceLoading(false);
       })
       .catch(() => console.log('Oops errors!'));
   }
-
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={(node) => {
-            searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => handleSearch(selectedKeys, confirm)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Button
-          type="primary"
-          onClick={() => handleSearch(selectedKeys, confirm)}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          Search
-        </Button>
-        <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-          Reset
-        </Button>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => searchInput.select());
-      }
-    },
-    render: (text) => (
-      <Highlighter
-        highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-        searchWords={[searchText]}
-        autoEscape
-        textToHighlight={text.toString()}
-      />
-    ),
-  });
 
   const handleSearch = (selectedKeys, confirm) => {
     confirm();
@@ -143,8 +87,8 @@ const CurrentRegistrations = (props) => {
     if (currentTableLength) {
       return `Registrations amount: ${currentTableLength}`;
     }
-    return rs_registrations?.data
-      ? `Registrations amount: ${rs_registrations.data.length}`
+    return dataRegistrations.length > 0
+      ? `Registrations amount: ${dataRegistrations.length}`
       : 'No registrations found!';
   };
 
@@ -156,7 +100,12 @@ const CurrentRegistrations = (props) => {
             dataIndex: 'account_name',
             key: 'account_name',
             ellipsis: true,
-            render: (text, record) => <AccountName realm={record.key?.split('@').pop(-1)} />,
+            render: (text, record) =>
+              record.account_name ? (
+                record.account_name
+              ) : (
+                <AccountName realm={record.realm} record={record} text={text} />
+              ),
           },
         ]
       : [];
@@ -167,14 +116,12 @@ const CurrentRegistrations = (props) => {
       dataIndex: 'username',
       key: 'username',
       ellipsis: true,
-      ...getColumnSearchProps('username'),
     },
     {
       title: 'IP Address',
       dataIndex: 'source_ip',
       key: 'source_ip',
       align: 'center',
-      ...getColumnSearchProps('source_ip'),
     },
     {
       title: 'User Agent',
@@ -182,7 +129,6 @@ const CurrentRegistrations = (props) => {
       key: 'user_agent',
       align: 'center',
       ellipsis: true,
-      ...getColumnSearchProps('user_agent'),
     },
     {
       dataIndex: 'details',
@@ -192,11 +138,20 @@ const CurrentRegistrations = (props) => {
       render: (text, record) => (
         <InfoCircleOutlined
           onClick={() => {
-            const result = dataRegistrations.find(
-              ({ username, realm }) => `${username}@${realm}` === record.username,
-            );
-            onDrawerOpen(result);
-            //        info(result);
+      //      const result = dataRegistrations.find(
+      //        ({ username, realm }) => {
+//		  console.log("account_name onClick find username: ", username);
+//		  console.log("account_name onClick find realm: ", realm);
+//		  console.log("account_name onClick find ${username}@${realm}: ", `${username}@${realm}`);
+//		  console.log("account_name onClick find record.username: ", record.username);
+//		  console.log("account_name onClick find compare: ", `${username}@${realm}` === record.username);
+//		   return   `${username}@${realm}` === record.username;
+//	      }
+ //           );
+//		  console.log("account_name onClick record: ", record);
+//		  console.log("account_name onClick result: ", result);
+//		  console.log("account_name onClick dataRegistrations: ", dataRegistrations);
+            onDrawerOpen(record);
           }}
         />
       ),
@@ -232,14 +187,14 @@ const CurrentRegistrations = (props) => {
 
   const onRegistrationDrawerClose = () => {
     setIsRegistrationDrawerVisible(false);
-    setSelectedRegistration(false);
+    setSelectedRegistration({});
   };
 
   return (
     <PageHeaderWrapper
       tags={
         <Tag color="blue">
-          {rs_registrations.data ? rs_registrations.data.length : 'No registrations found!'}
+          {dataRegistrations.length > 0 ? dataRegistrations.length : 'No registrations found!'}
         </Tag>
       }
       extra={[<ResellerChildFlush key="extraFlush" />, <ResellerChildSearch key="extraSearch" />]}
@@ -286,6 +241,11 @@ const CurrentRegistrations = (props) => {
                 }}
                 footer={countSelectedRegs}
                 style={{ backgroundColor: 'white' }}
+		                rowKey={(record) =>
+              record.event_timestamp.toString().replace(/[^A-Za-z0-9]/g, '') +
+              record.call_id.replace(/[^A-Za-z0-9]/g, '')
+            }
+
               />
             }
           />
@@ -300,9 +260,8 @@ const CurrentRegistrations = (props) => {
   );
 };
 
-export default connect(({ kz_login, kz_account, rs_registrations, child_account }) => ({
+export default connect(({ kz_login, kz_account, child_account }) => ({
   kz_login,
   kz_account,
-  rs_registrations,
   child_account,
 }))(CurrentRegistrations);

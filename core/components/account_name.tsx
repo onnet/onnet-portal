@@ -103,6 +103,12 @@ const MyFetchingComponent = (params) => {
 const AccountName = (props) => {
   const { kz_cache } = props;
 
+  console.log('account_name.tsx props: ', props);
+  console.log('account_name.tsx props.account_id: ', props.account_id);
+  console.log('account_name.tsx props.realm: ', props.realm);
+  console.log('account_name.tsx props.caller_id_number: ', props.caller_id_number);
+  console.log('account_name.tsx props.callee_id_number: ', props.callee_id_number);
+  console.log('account_name.tsx props.destination: ', props.destination);
   return (
     <Suspense fallback="Loading...">
       {kz_cache.account_name[props.account_id] ? (
