@@ -194,9 +194,7 @@ const SuperAdminPie = (props) => {
     }
   }, [kz_login, kz_account, kz_registrations_count, kz_system_status]);
 
-  return (
-        <div id="registrations_pie_div" style={{display: 'flex', justifyContent: 'center'}} />
-  );
+  return <div id="registrations_pie_div" style={{ display: 'flex', justifyContent: 'center' }} />;
 };
 
 export default connect(({ kz_login, kz_account, kz_system_status, kz_registrations_count }) => ({

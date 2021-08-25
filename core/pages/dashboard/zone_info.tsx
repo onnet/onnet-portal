@@ -4,6 +4,7 @@ import JSONPretty from 'react-json-pretty';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Tabs, Card, Table, Typography, Spin } from 'antd';
 import Masonry from 'react-masonry-css';
+import SuperAdminPie from './super_admin_pie';
 
 import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 
@@ -24,7 +25,7 @@ const ZoneInfo = (props) => {
   }, [kz_account, kz_system_status]);
 
   if (kz_system_status.data) {
-    if (!kz_system_status.data[location?.state?.zone]) {
+    if (!kz_system_status.data[location?.state?.zone] && location?.state?.zone != 'pie') {
       console.log(
         'Absent zone name. Redirecting to dashboard. kz_system_status: ',
         kz_system_status,
@@ -50,12 +51,6 @@ const ZoneInfo = (props) => {
       </div>
     );
   }
-
-  const kapps = Object.values(kz_system_status.data[location.state.zone].kazoo_apps);
-  const kamailios = kz_system_status.data[location.state.zone].kamailio
-    ? Object.values(kz_system_status.data[location.state.zone].kamailio)
-    : [];
-  const list = kapps.concat(kamailios);
 
   const getDataSource = (item) => {
     if (item.node.includes('kamailio')) {
@@ -165,6 +160,14 @@ const ZoneInfo = (props) => {
     history.push({ pathname: '/int/zone', state: { zone: e } });
   }
 
+  const kapps = kz_system_status.data[location.state.zone]
+    ? Object.values(kz_system_status.data[location.state.zone].kazoo_apps)
+    : [];
+  const kamailios = kz_system_status.data[location.state.zone]?.kamailio
+    ? Object.values(kz_system_status.data[location.state.zone].kamailio)
+    : [];
+  const list = kapps.concat(kamailios);
+
   const items = list.map((item) => (
     <Card hoverable className={styles.card} key={item.node}>
       <Card.Meta
@@ -183,37 +186,47 @@ const ZoneInfo = (props) => {
     </Card>
   ));
 
-const pie_tab = (kz_system_status.data?.length > 1) ? <TabPane key={'pie'} tab={'pie'} /> : [];
-  const my_tabs =
-          kz_system_status.data
-            ? Object.keys(kz_system_status.data)
-                .reverse()
-                .map((z) => <TabPane key={z} tab={z} />)
-            : null;
+  const pie_tab =
+    Object.keys(kz_system_status.data).length > 1 ? [<TabPane key={'pie'} tab={'Pie'} />] : [];
+  const my_tabs = kz_system_status.data
+    ? Object.keys(kz_system_status.data)
+        .reverse()
+        .map((z) => <TabPane key={z} tab={z} />)
+    : null;
 
+  const my_title =
+    location?.state?.zone != 'pie' ? (
+      <>
+        Zone details:
+        <Text className={styles.zoneLabel} style={{ color: settings.primaryColor }}>
+          {location.state.zone}
+        </Text>
+      </>
+    ) : (
+      <Text className={styles.zoneLabel} style={{ color: settings.primaryColor }}>
+        Pie
+      </Text>
+    );
   return (
     <PageHeaderWrapper
-      title={
-        <Title level={4}>
-          Zone details:
-          <Text className={styles.zoneLabel} style={{ color: settings.primaryColor }}>
-            {location.state.zone}
-          </Text>
-        </Title>
-      }
+      title={<Title level={4}>{my_title}</Title>}
       extra={[
         <Tabs defaultActiveKey={location.state.zone} onChange={callback} key="zones_tabs">
-            {[...pie_tab, ...my_tabs]}
+          {[...pie_tab, ...my_tabs]}
         </Tabs>,
       ]}
     >
-      <Masonry
-        breakpointCols={masonryBreakpointCols}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {items}
-      </Masonry>
+      {location?.state?.zone == 'pie' ? (
+        <SuperAdminPie />
+      ) : (
+        <Masonry
+          breakpointCols={masonryBreakpointCols}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {items}
+        </Masonry>
+      )}
     </PageHeaderWrapper>
   );
 };

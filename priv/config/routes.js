@@ -89,13 +89,13 @@ export default [
             path: '/int/reseller_portal/telephony',
             name: 'telephony',
             icon: 'phone',
-  //          authority: ['telephony'],
+            //          authority: ['telephony'],
             routes: [
               {
                 name: 'settings',
                 path: '/int/reseller_portal/telephony/admin-settings',
                 component: './onnet-portal/telephony/pages/admin-settings',
-   //             authority: ['child_telephony'],
+                //             authority: ['child_telephony'],
               },
               {
                 name: 'current_calls',
