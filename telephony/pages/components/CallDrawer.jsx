@@ -39,7 +39,11 @@ const CallDrawer = (props) => {
     console.log('Inside useEffect selectedCall', selectedCall);
     if (kz_account.data) {
       console.log('Inside useEffect 2');
-      if (((kz_account?.data?.is_reseller && child_account.data) || kz_account?.data) && selectedCall.id) setCallLegsState();
+      if (
+        ((kz_account?.data?.is_reseller && child_account.data) || kz_account?.data) &&
+        selectedCall.id
+      )
+        setCallLegsState();
     }
   }, [kz_account, child_account, selectedCall]);
 

@@ -6,6 +6,8 @@ export default {
   'menu.telephony.devices': 'Устройства',
   'menu.telephony.users': 'Пользователи',
   'menu.telephony.statistics': 'Статистика',
+  'menu.telephony.current_calls': 'Текущие вызовы',
+  'menu.telephony.current_sip_registrations': 'Текущие регистрации',
   'menu.accounts.telephony': 'Телефония',
   'menu.accounts.telephony.settings': 'Настройки',
   'menu.accounts.telephony.statistics': 'Статистика',

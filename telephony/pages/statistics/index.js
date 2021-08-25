@@ -37,10 +37,10 @@ const Statistics = (props) => {
   useEffect(() => {
     if (kz_account.data) {
       if ((kz_account?.data?.is_reseller && child_account.data) || kz_account?.data)
-	    setCallsState();
+        setCallsState();
       dispatch({
         type: 'kz_children/refresh',
-        payload: { account_id: kz_account.data.id, method: 'GET' },
+        payload: { account_id: kz_account.data?.id, method: 'GET' },
       });
     }
   }, [kz_account, child_account, createdTo, createdFrom]);
@@ -51,7 +51,7 @@ const Statistics = (props) => {
     setDataCallsQty(0);
     setDataSource([]);
     AccountCdrInteraction({
-      account_id: kz_account.data.is_reseller ? child_account.data.id : kz_account.data.id,
+      account_id: kz_account.data?.is_reseller ? child_account.data?.id : kz_account.data.id,
       created_to: dateToGregorian(createdTo.toDate()),
       created_from: dateToGregorian(createdFrom.toDate()),
       method: 'GET',

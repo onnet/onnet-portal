@@ -57,8 +57,8 @@ const MaybeFetchByRealm = (realm) => {
   console.log(`MaybeFetchByRealm realm: ${realm} response:`);
   console.log(response);
   console.log(response.data);
-  console.log(response.data[0].name);
-  return response.data[0].name ? (
+  console.log(response.data[0]?.name);
+  return response.data[0]?.name ? (
     <MyLink account_id={response.data[0].id}>{response.data[0].name}</MyLink>
   ) : (
     'N/A'

@@ -159,12 +159,12 @@ export default [
             component: './onnet-portal/telephony/pages/admin-settings',
             authority: ['telephony'],
           },
-              {
-                name: 'devices',
-                path: '/int/telephony/devices',
-                component: './onnet-portal/telephony/pages/devices',
-                authority: ['telephony'],
-              },
+          {
+            name: 'devices',
+            path: '/int/telephony/devices',
+            component: './onnet-portal/telephony/pages/devices',
+            authority: ['telephony'],
+          },
           {
             name: 'callflow-builder',
             path: '/int/telephony/callflow-builder',
@@ -175,6 +175,18 @@ export default [
             name: 'statistics',
             path: '/int/telephony/statistics',
             component: './onnet-portal/telephony/pages/statistics',
+            authority: ['telephony'],
+          },
+          {
+            name: 'current_calls',
+            path: '/int/telephony/calls',
+            component: './onnet-portal/telephony/pages/current_calls',
+            authority: ['telephony'],
+          },
+          {
+            name: 'current_sip_registrations',
+            path: '/int/telephony/sip_registrations',
+            component: './onnet-portal/telephony/pages/current_registrations',
             authority: ['telephony'],
           },
         ],

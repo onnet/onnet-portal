@@ -181,12 +181,13 @@ export async function getResellerChildren(params: FormDataTyp): Promise<any> {
   });
 }
 
-export async function getResellerSIPRegistrations(params: FormDataTyp): Promise<any> {
+export async function getSIPRegistrations(params: FormDataTyp): Promise<any> {
   const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = redux_state.kz_account.data.superduper_admin
-    ? `${API_URL_V2}/registrations`
-    : `${API_URL_V2}/accounts/${params.account_id}/registrations`;
+  const url =
+    redux_state.kz_account.data.superduper_admin && !redux_state.child_account?.data
+      ? `${API_URL_V2}/registrations`
+      : `${API_URL_V2}/accounts/${params.account_id}/registrations`;
   return request(url, {
     method: 'GET',
     headers: JSON_HEADERS(),
@@ -196,9 +197,10 @@ export async function getResellerSIPRegistrations(params: FormDataTyp): Promise<
 export async function SIPRegistrationsCount(params: FormDataTyp): Promise<any> {
   const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = redux_state.kz_account.data.superduper_admin
-    ? `${API_URL_V2}/registrations/count`
-    : `${API_URL_V2}/accounts/${params.account_id}/registrations/count`;
+  const url =
+    redux_state.kz_account.data.superduper_admin && !redux_state.child_account?.data
+      ? `${API_URL_V2}/registrations/count`
+      : `${API_URL_V2}/accounts/${params.account_id}/registrations/count`;
   return request(url, {
     method: 'GET',
     headers: JSON_HEADERS(),

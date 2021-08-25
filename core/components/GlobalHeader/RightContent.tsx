@@ -24,7 +24,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
   return (
     <div className={className}>
       {kz_account.data ? (
-        kz_account.data.id !== kz_login.data.account_id ? (
+        kz_account.data.id !== kz_login.data?.account_id ? (
           <RsDemaskBtn />
         ) : null
       ) : null}

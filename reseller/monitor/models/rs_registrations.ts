@@ -1,7 +1,7 @@
 import { AnyAction, Reducer } from 'redux';
 
 import { EffectsCommandMap } from 'dva';
-import { getResellerSIPRegistrations } from '@/pages/onnet-portal/core/services/kazoo';
+import { getSIPRegistrations } from '@/pages/onnet-portal/core/services/kazoo';
 
 export type Effect = (
   action: AnyAction,
@@ -27,8 +27,8 @@ const Model: ModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      console.log('model rs_registrations getResellerSIPRegistrations Refresh');
-      const response = yield call(getResellerSIPRegistrations, payload);
+      console.log('model rs_registrations getSIPRegistrations Refresh');
+      const response = yield call(getSIPRegistrations, payload);
       yield put({
         type: 'update',
         payload: response,
