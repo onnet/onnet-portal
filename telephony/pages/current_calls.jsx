@@ -54,6 +54,12 @@ const CurrentCalls = (props) => {
   useEffect(() => {
     if (!ws.current) return;
 
+    const accId = kz_account.data?.superduper_admin
+      ? '*'
+      : child_account?.data
+      ? child_account?.data.id
+      : kz_account.data?.id;
+
     if (kz_account.data) {
       ws.current.onopen = (e) => {
         console.log('on ws open');
@@ -63,7 +69,8 @@ const CurrentCalls = (props) => {
             action: 'subscribe',
             auth_token,
             data: {
-              account_id: '*',
+              //    account_id: '*',
+              account_id: accId,
               binding: 'call.*.*',
             },
           }),

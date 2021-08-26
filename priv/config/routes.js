@@ -17,6 +17,7 @@ export default [
         path: '/int/dashboard',
         component: './onnet-portal/core/pages/dashboard',
         icon: 'dashboard',
+        authority: ['!superduper_admin', '!reseller', 'consumer'],
       },
       { path: '/int/zone', component: './onnet-portal/core/pages/dashboard/zone_info' },
       {
@@ -73,12 +74,7 @@ export default [
         name: 'reseller_portal',
         path: '/int/reseller_portal',
         icon: 'account-book',
-        authority: [
-          'superduper_admin',
-          'reseller',
-          '!child_account_selected',
-          '!354c50fb268bf2da40e317dee90f7de3',
-        ],
+        authority: ['superduper_admin', 'reseller', '!child_account_selected'],
         routes: [
           {
             name: 'reseller_settings',

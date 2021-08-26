@@ -30,7 +30,15 @@ const ZoneInfo = (props) => {
         'Absent zone name. Redirecting to dashboard. kz_system_status: ',
         kz_system_status,
       );
-      return <Redirect to="/int/dashboard" />;
+      //  return <Redirect to="/int/dashboard" />;
+      return (
+        <Redirect
+          to={{
+            pathname: '/int/zone',
+            state: { zone: Object.keys(kz_system_status.data).reverse()[0] },
+          }}
+        />
+      );
     }
   } else {
     dispatch({

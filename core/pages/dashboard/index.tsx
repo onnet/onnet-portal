@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'umi';
+import { connect, Redirect, history } from 'umi';
 import { Spin } from 'antd';
 import LBAccountDashboard from '@/pages/onnet-portal/lb/dashboard';
 import SuperDuperDashboard from './super_admin';
@@ -30,11 +30,13 @@ const DashboardSelector = (props) => {
 
   if (kz_account.data) {
     if (isSuperDuperAdmin) {
-      return <SuperDuperDashboard />;
+      //     return <SuperDuperDashboard />;
+      return <Redirect to="/int/accounts" />;
     }
 
     if (isReseller) {
-      return <ResellerDashboard />;
+      //     return <ResellerDashboard />;
+      return <Redirect to="/int/accounts" />;
     }
 
     return lb_account.data ? <LBAccountDashboard /> : <AccountDashboard />;
