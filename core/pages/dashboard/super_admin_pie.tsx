@@ -157,13 +157,13 @@ const SuperAdminPie = (props) => {
           .circle(cx, cy, r / 3)
           .attr({ fill: '#fff', stroke: '#fff', cursor: 'pointer' })
           .click(function () {
-            history.push(`/int/reseller_portal/monitor/sip_registrations`);
+            history.push(`/int/reseller_portal/telephony/sip_registrations`);
           });
         paper
           .text(cx, cy, `Registrations\n${total_reg_count}`)
           .attr({ 'font-size': '14', cursor: 'pointer' })
           .click(function () {
-            history.push(`/int/reseller_portal/monitor/sip_registrations`);
+            history.push(`/int/reseller_portal/telephony/sip_registrations`);
           });
       };
       document.getElementById('registrations_pie_div').innerHTML = '';

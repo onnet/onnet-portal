@@ -220,7 +220,7 @@ const ZoneInfo = (props) => {
       title={<Title level={4}>{my_title}</Title>}
       extra={[
         <Tabs defaultActiveKey={location.state.zone} onChange={callback} key="zones_tabs">
-          {[...pie_tab, ...my_tabs]}
+          {[...my_tabs, ...pie_tab]}
         </Tabs>,
       ]}
     >

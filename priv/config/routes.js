@@ -108,7 +108,13 @@ export default [
           {
             name: 'monitor',
             path: '/int/reseller_portal/monitor', // icon: 'user',
+            authority: ['superduper_admin'],
             routes: [
+              {
+                name: 'cluster',
+                path: '/int/reseller_portal/monitor/cluster',
+                component: './onnet-portal/core/pages/dashboard/zone_info',
+              },
               {
                 name: 'amqp_messages',
                 path: '/int/reseller_portal/monitor/amqp',

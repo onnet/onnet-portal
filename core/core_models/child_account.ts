@@ -1,5 +1,5 @@
 import { Effect, Reducer, getDvaApp } from 'umi';
-import { aGetAccount } from '../services/kazoo';
+import { aGetAccount, accountByRealm } from '../services/kazoo';
 
 export interface ModelType {
   namespace: string;
@@ -21,6 +21,7 @@ const Model: ModelType = {
   effects: {
     *refresh({ payload }, { call, put }) {
       const response = yield call(aGetAccount, payload);
+      console.log('child_account/refresh: response', response);
       yield put({
         type: 'update',
         payload: response,
@@ -28,6 +29,16 @@ const Model: ModelType = {
       getDvaApp()._store.dispatch({ type: 'child_brief_users/refresh', payload });
       getDvaApp()._store.dispatch({ type: 'child_numbers/refresh', payload });
       getDvaApp()._store.dispatch({ type: 'authority/refresh', payload: {} });
+    },
+    *refresh_by_realm({ payload }, { call, put }) {
+      const response = yield call(accountByRealm, payload);
+      console.log('child_account/refresh_by_realm: response', response);
+      console.log('child_account/refresh_by_realm: response.data[0].id', response.data[0]?.id);
+      //  getDvaApp()._store.dispatch({ type: 'child_account/refresh', payload: {account_id: response.data[0]?.id} });
+      yield put({
+        type: 'refresh',
+        payload: { account_id: response.data[0]?.id },
+      });
     },
     *flush(_, { put }) {
       yield put({

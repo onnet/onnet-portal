@@ -277,3 +277,13 @@ export function AccountDialplans(params: FormDataTyp): Promise<any> {
 export function AccountMedia(params: FormDataTyp): Promise<any> {
   return kzRequest(`${accountsUrl(params)}/media`, params);
 }
+
+export function accountByRealm(params) {
+  const redux_state = getDvaApp()._store.getState();
+  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
+  const url = `${API_URL_V2}/search?t=account&q=realm&v=${params.realm}`;
+  return request(url, {
+    method: 'GET',
+    headers: JSON_HEADERS(),
+  });
+}

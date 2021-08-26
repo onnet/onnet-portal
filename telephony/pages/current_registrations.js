@@ -90,7 +90,23 @@ const CurrentRegistrations = (props) => {
             ellipsis: true,
             render: (text, record) =>
               record.account_name ? (
-                record.account_name
+                <Button
+                  size="small"
+                  type="link"
+                  onClick={() => {
+                    dispatch({
+                      type: 'child_account/refresh_by_realm',
+                      payload: { realm: record.realm },
+                    });
+                    window.scrollTo({
+                      top: 0,
+                      left: 0,
+                      behavior: 'smooth',
+                    });
+                  }}
+                >
+                  {record.account_name}
+                </Button>
               ) : (
                 <AccountName realm={record.realm} record={record} text={text} />
               ),
