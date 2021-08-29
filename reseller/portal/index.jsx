@@ -91,8 +91,8 @@ const ResellerPortal = (props) => {
     dispatch({
       type: 'child_numbers/flush',
     });
-    if (child_account.data.is_reseller1) {
-      history.push('/int/reseller_portal/accounts');
+    if (child_account.data.is_reseller) {
+      history.push('/int/accounts/accounts');
     } else {
       history.push('/int/dashboard');
     }
