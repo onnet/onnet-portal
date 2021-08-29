@@ -1,5 +1,5 @@
 import { Reducer } from 'umi';
-import defaultSettings, { DefaultSettings } from '../../priv/config/defaultSettings';
+import defaultSettings, { DefaultSettings } from '../../../../../config/defaultSettings';
 
 export interface SettingModelType {
   namespace: 'settings';
