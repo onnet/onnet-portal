@@ -47,6 +47,16 @@ const CurrentCalls = (props) => {
     };
 
     return () => {
+      ws.current.send(
+        JSON.stringify({
+          action: 'unsubscribe',
+          auth_token,
+          data: {
+            account_id: '*',
+            binding: 'call.*.*',
+          },
+        }),
+      );
       ws.current.close();
     };
   }, []);
@@ -54,11 +64,14 @@ const CurrentCalls = (props) => {
   useEffect(() => {
     if (!ws.current) return;
 
-    const accId = kz_account.data?.superduper_admin
-      ? '*'
-      : child_account?.data
-      ? child_account?.data.id
-      : kz_account.data?.id;
+    const accId =
+      kz_account.data?.superduper_admin && !child_account?.data
+        ? '*'
+        : child_account?.data
+        ? child_account?.data.id
+        : kz_account.data?.id;
+
+    console.log('ws.current.onopen account_id: ', accId);
 
     if (kz_account.data) {
       ws.current.onopen = (e) => {

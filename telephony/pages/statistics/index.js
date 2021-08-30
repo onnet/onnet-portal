@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useIntl, connect } from 'umi';
-import { Card, Switch, Table, DatePicker } from 'antd';
+import { Card, Switch, Table, DatePicker, Tag } from 'antd';
 import { useMediaQuery } from 'react-responsive';
 import * as _ from 'lodash';
 import moment from 'moment';
@@ -119,18 +119,8 @@ const Statistics = (props) => {
           ? child_account?.data?.name
           : formatMessage({ id: 'telephony.Statistics', defaultMessage: 'Statistics' })
       }
-      subTitle={
-        child_account.data ? (
-          <>
-            {formatMessage({
-              id: 'telephony.CDR',
-              defaultMessage: 'CDR',
-            })}{' '}
-            ({dataCallsQty})
-          </>
-        ) : null
-      }
       key="pagewrapper"
+      tags={<Tag color="blue">{dataCallsQty > 0 ? dataCallsQty : null}</Tag>}
       extra={
         kz_account?.data?.is_reseller
           ? [<ResellerChildFlush key="extraFlush" />, <ResellerChildSearch key="extraSearch" />]
