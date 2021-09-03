@@ -4,6 +4,8 @@ export default {
   'navBar.lang': 'Languages',
   'core.T38': 'T.38',
   'core.Enabled': 'Enabled',
+  'core.Cancel': 'Cancel',
+  'core.Confirm': 'Confirm',
   'core.No_owner': ' -No owner- ',
   'core.Password': 'Password',
   'core.Dialplan': 'Dialplan',

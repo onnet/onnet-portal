@@ -4,10 +4,21 @@ import ProLayout, {
   Settings,
   SettingDrawer,
 } from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
-import { useIntl, Link, connect } from 'umi';
+import React, { useEffect, useState } from 'react';
+import { useIntl, Link, connect, FormattedMessage } from 'umi';
 import Authorized from '../utils/Authorized';
 import RightContent from '../components/GlobalHeader/RightContent';
+import MenuSelectLang from '../components/MenuSelectLang';
+import { Popconfirm, Modal } from 'antd';
+import {
+  GlobalOutlined,
+  LinkOutlined,
+  BookOutlined,
+  LogoutOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import EditUserDrawer from '@/pages/onnet-portal/core/components/UsersList/EditUserDrawer';
+const { confirm } = Modal;
 
 import logo from '../assets/logo.svg';
 
@@ -49,6 +60,7 @@ const BasicLayout: React.FC = (props) => {
   const {
     dispatch,
     children,
+    global,
     settings,
     kz_login,
     kz_account,
@@ -57,9 +69,7 @@ const BasicLayout: React.FC = (props) => {
     authority,
   } = props;
 
-  /**
-   * use Authorized check all menu item
-   */
+  const [isEditUserDrawerVisible, setIsEditUserDrawerVisible] = useState(false);
 
   const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
     menuList.map((item) => {
@@ -126,6 +136,16 @@ const BasicLayout: React.FC = (props) => {
       payload,
     });
 
+  const onEditUserDrawerClose = () => {
+    setIsEditUserDrawerVisible(false);
+  };
+
+  const onLogoutConfirmed = () => {
+    dispatch({
+      type: 'kz_login/logout',
+    });
+  };
+
   return (
     <>
       <ProLayout
@@ -151,11 +171,46 @@ const BasicLayout: React.FC = (props) => {
         menuDataRender={menuDataRender}
         formatMessage={formatMessage}
         rightContentRender={(rightProps) => <RightContent {...rightProps} />}
+        links={[
+          <span onClick={() => setIsEditUserDrawerVisible(true)}>
+            <UserOutlined />
+            {!global.collapsed ? (
+              <span style={{ marginLeft: '10px' }}>
+                <FormattedMessage id="menu.account_portal.profile" defaultMessage="Profile" />
+              </span>
+            ) : null}
+          </span>,
+          <MenuSelectLang />,
+
+          <Popconfirm
+            title={`${formatMessage({
+              id: 'menu.account.logout',
+              defaultMessage: 'Logout',
+            })}?`}
+            okText={formatMessage({ id: 'core.Confirm', defaultMessage: 'Confirm' })}
+            cancelText={formatMessage({ id: 'core.Cancel', defaultMessage: 'Cancel' })}
+            onConfirm={() => {
+              onLogoutConfirmed();
+            }}
+          >
+            <LogoutOutlined />
+            {!global.collapsed ? (
+              <span style={{ marginLeft: '13px' }}>
+                <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
+              </span>
+            ) : null}
+          </Popconfirm>,
+        ]}
         {...props}
         {...settings}
       >
         {children}
       </ProLayout>
+      <EditUserDrawer
+        selectedUser={kz_user.data?.id}
+        onDrawerClose={onEditUserDrawerClose}
+        isDrawerVisible={isEditUserDrawerVisible}
+      />
       <SettingDrawer
         settings={settings}
         onSettingChange={(config) =>
@@ -170,7 +225,8 @@ const BasicLayout: React.FC = (props) => {
 };
 
 export default connect(
-  ({ settings, kz_login, kz_account, kz_user, kz_registrations_count, authority }) => ({
+  ({ global, settings, kz_login, kz_account, kz_user, kz_registrations_count, authority }) => ({
+    global,
     settings,
     kz_login,
     kz_account,
