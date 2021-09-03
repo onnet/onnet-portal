@@ -138,7 +138,7 @@ const CurrentMessages = (props) => {
   ];
 
   return (
-    <PageHeaderWrapper tags={<Tag color="blue"> {rows.length} </Tag>}>
+    <PageHeaderWrapper breadcrumb={false} tags={<Tag color="blue">{rows.length}</Tag>}>
       <Table
         columns={columns}
         dataSource={rows}

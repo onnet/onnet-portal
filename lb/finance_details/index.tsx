@@ -11,7 +11,7 @@ import CardOnlinePayments from './CardOnlinePayments';
 import CardWireTransfer from './CardWireTransfer';
 
 const LbFinanceDetails = (props) => {
-  const { dispatch, lb_account, kz_account } = props;
+  const { dispatch, lb_account, kz_account, kz_user } = props;
 
   useEffect(() => {
     if (kz_account.data) {
@@ -52,11 +52,18 @@ const LbFinanceDetails = (props) => {
           />
         ) : null}
       </div>
+      <div className={styles.statItem}>
+        <p>
+          {kz_user.data?.first_name ? `${kz_user.data.first_name} ` : ' '}
+          {kz_user.data?.last_name ? kz_user.data.last_name : ' '}
+        </p>
+        <p>{kz_account.data?.name ? `${kz_account.data?.name}` : ' '}</p>
+      </div>
     </div>
   );
 
   return (
-    <PageHeaderWrapper extra={extraContent}>
+    <PageHeaderWrapper breadcrumb={false}>
       {lb_account.data ? (
         <Fragment>
           <Row gutter={24}>
@@ -88,7 +95,8 @@ const LbFinanceDetails = (props) => {
   );
 };
 
-export default connect(({ lb_account, kz_account }) => ({
+export default connect(({ lb_account, kz_account, kz_user }) => ({
   lb_account,
   kz_account,
+  kz_user,
 }))(LbFinanceDetails);

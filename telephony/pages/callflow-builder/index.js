@@ -8,7 +8,7 @@ const CallflowBuilder = (props) => {
   const { kz_account } = props;
 
   return (
-    <PageHeaderWrapper>
+    <PageHeaderWrapper breadcrumb={false}>
       <div>
         Hello from Callflow Builder for <Tag>{kz_account?.data?.name}</Tag>!
       </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useIntl, connect } from 'umi';
+import { useIntl, connect, history } from 'umi';
 import { useMediaQuery } from 'react-responsive';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Table, Card, Switch } from 'antd';
@@ -10,7 +10,7 @@ import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 import HeaderSearch from '@/pages/onnet-portal/core/components/HeaderSearch';
 
 const ResellerChildrenTable = (props) => {
-  const { dispatch, settings, kz_children } = props;
+  const { dispatch, settings, kz_children, kz_account } = props;
 
   const [dataSource, setDataSource] = useState([]);
 
@@ -23,13 +23,15 @@ const ResellerChildrenTable = (props) => {
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   useEffect(() => {
+    //   if (!(kz_account.data?.is_reseller || kz_account.data?.superduper_admin) ) history.push('/int/dashboard');
+
     if (kz_children.data) {
       setDataSourceLoading(true);
       setDataSales(kz_children.data);
       setDataSource(kz_children.data);
       setDataSourceLoading(false);
     }
-  }, [kz_children]);
+  }, [kz_account, kz_children]);
 
   const { formatMessage } = useIntl();
 
@@ -157,7 +159,8 @@ const ResellerChildrenTable = (props) => {
   );
 };
 
-export default connect(({ settings, kz_children }) => ({
+export default connect(({ settings, kz_children, kz_account }) => ({
   settings,
   kz_children,
+  kz_account,
 }))(ResellerChildrenTable);

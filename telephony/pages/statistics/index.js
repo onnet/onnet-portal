@@ -114,18 +114,9 @@ const Statistics = (props) => {
 
   return (
     <PageHeaderWrapper
-      title={
-        child_account.data
-          ? child_account?.data?.name
-          : formatMessage({ id: 'telephony.Statistics', defaultMessage: 'Statistics' })
-      }
+      breadcrumb={false}
       key="pagewrapper"
       tags={<Tag color="blue">{dataCallsQty > 0 ? dataCallsQty : null}</Tag>}
-      extra={
-        kz_account?.data?.is_reseller
-          ? [<ResellerChildFlush key="extraFlush" />, <ResellerChildSearch key="extraSearch" />]
-          : null
-      }
     >
       {(kz_account?.data?.is_reseller && child_account.data) || kz_account?.data ? (
         <Fragment>

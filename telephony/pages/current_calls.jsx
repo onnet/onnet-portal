@@ -266,15 +266,7 @@ const CurrentCalls = (props) => {
   ];
 
   return (
-    <PageHeaderWrapper
-      title={
-        child_account.data
-          ? child_account?.data?.name
-          : formatMessage({ id: 'telephony.Current_calls', defaultMessage: 'Current calls' })
-      }
-      extra={[<ResellerChildFlush key="extraFlush" />, <ResellerChildSearch key="extraSearch" />]}
-      tags={<Tag color="blue"> {rows.length} </Tag>}
-    >
+    <PageHeaderWrapper breadcrumb={false} tags={<Tag color="blue"> {rows.length} </Tag>}>
       <Table
         columns={columns}
         dataSource={rows}

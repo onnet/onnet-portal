@@ -15,7 +15,7 @@ const ResellerSettings = (props) => {
   const data = [<UsersList key="UsersList1" />];
 
   return (
-    <PageHeaderWrapper>
+    <PageHeaderWrapper breadcrumb={false}>
       <div
         style={{
           backgroundColor: 'white',

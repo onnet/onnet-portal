@@ -6,6 +6,7 @@ const Settings = {
   layout: 'side',
   contentWidth: 'Fluid',
   fixedHeader: false,
+  headerRender: false,
   fixSiderbar: true,
   colorWeak: false,
   title: 'OnNet Portal',

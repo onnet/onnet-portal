@@ -166,9 +166,13 @@ const CollectionCreateForm = (props) => {
 const ResellerCreateChild = (props) => {
   const [visible, setVisible] = useState(false);
 
-  const { dispatch, kz_account } = props;
+  const { dispatch, kz_account, child_account } = props;
   const { formatMessage } = useIntl();
   const formRef = React.createRef();
+
+  if (child_account.data) {
+    return null;
+  }
 
   const showModal = () => {
     setVisible(true);
@@ -240,6 +244,7 @@ const ResellerCreateChild = (props) => {
   );
 };
 
-export default connect(({ kz_account }) => ({
+export default connect(({ kz_account, child_account }) => ({
   kz_account,
+  child_account,
 }))(ResellerCreateChild);

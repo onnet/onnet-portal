@@ -5,7 +5,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import DevicesList from '@/pages/onnet-portal/core/components/DevicesList/index_short';
 
 const TelephonyDevices = () => (
-  <PageHeaderWrapper>
+  <PageHeaderWrapper breadcrumb={false}>
     <DevicesList key="DevicesListKey" />
   </PageHeaderWrapper>
 );

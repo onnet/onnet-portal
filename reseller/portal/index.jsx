@@ -27,6 +27,8 @@ const ResellerPortal = (props) => {
         payload: { account_id: kz_account.data.id },
       });
     }
+    if (!(kz_account.data?.is_reseller || kz_account.data?.superduper_admin))
+      history.push('/int/dashboard');
   }, [kz_account]);
 
   const { formatMessage } = useIntl();
@@ -124,14 +126,7 @@ const ResellerPortal = (props) => {
   const data = [<AccountDetails key="AccountDetails" />, <UsersList key="UsersList" />];
 
   return (
-    <PageHeaderWrapper
-      key="pagewrapper"
-      extra={[
-        <ResellerChildFlush key="extraFlush" />,
-        <ResellerChildSearch key="extraSearch" />,
-        <ResellerCreateChild key="extraCreate" />,
-      ]}
-    >
+    <PageHeaderWrapper key="pagewrapper" breadcrumb={false}>
       {child_account.data ? (
         <Fragment>
           <div style={{ backgroundColor: 'white', display: 'flow-root', marginBottom: '2em' }}>

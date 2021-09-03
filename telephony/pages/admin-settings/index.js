@@ -30,13 +30,7 @@ const AdminSettings = (props) => {
   }, [kz_account]);
 
   return (
-    <PageHeaderWrapper
-      title={
-        child_account.data
-          ? child_account?.data?.name
-          : formatMessage({ id: 'telephony.Statistics', defaultMessage: 'Statistics' })
-      }
-    >
+    <PageHeaderWrapper breadcrumb={false}>
       <Masonry
         breakpointCols={masonryBreakpointCols}
         className="my-masonry-grid"

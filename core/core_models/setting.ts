@@ -11,6 +11,7 @@ export interface SettingModelType {
 
 const updateColorWeak: (colorWeak: boolean) => void = (colorWeak) => {
   const root = document.getElementById('root');
+  console.log('IAM root: ', root);
   if (root) {
     root.className = colorWeak ? 'colorWeak' : '';
   }

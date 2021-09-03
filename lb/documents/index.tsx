@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useIntl, connect } from 'umi';
 import moment from 'moment';
 import Masonry from 'react-masonry-css';
@@ -38,9 +38,13 @@ const LbFinanceDetails = (props) => {
     }
   }, [kz_account]);
 
+  if (!lb_documents.data) {
+    return null;
+  }
+
   const { formatMessage } = useIntl();
 
-  const extraContent = (
+  const ExtraContent = () => (
     <div className={styles.extraContent}>
       <div className={styles.statItem}>
         <p>{formatMessage({ id: 'reseller_portal.Period', defaultMessage: 'Period' })}</p>
@@ -76,46 +80,48 @@ const LbFinanceDetails = (props) => {
     </div>
   );
 
-  if (!lb_documents.data) {
-    return null;
-  }
-
   return (
-    <PageHeaderWrapper extra={extraContent}>
-      <Masonry
-        breakpointCols={masonryBreakpointCols}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {lb_documents.data.proformas.length > 0 ? (
-          <CardProforma
-            {...CardProps}
-            proformas={lb_documents.data.proformas}
-            account_id={lb_documents.data.account_id}
-          />
-        ) : null}
-        {lb_documents.data.vat_invoices.length > 0 ? (
-          <CardVatInvoices
-            {...CardProps}
-            proformas={lb_documents.data.vat_invoices}
-            account_id={lb_documents.data.account_id}
-          />
-        ) : null}
-        {lb_documents.data.acts.length > 0 ? (
-          <CardActs
-            {...CardProps}
-            proformas={lb_documents.data.acts}
-            account_id={lb_documents.data.account_id}
-          />
-        ) : null}
-        {lb_documents.data.calls_reports_pdf.length > 0 ? (
-          <CardCallsReports
-            {...CardProps}
-            calls_reports_pdf={lb_documents.data.calls_reports_pdf}
-            account_id={lb_documents.data.account_id}
-          />
-        ) : null}
-      </Masonry>
+    <PageHeaderWrapper breadcrumb={false}>
+      <Fragment>
+        <div style={{ display: 'flex', margin: '2em' }}>
+          <ExtraContent />
+        </div>
+
+        <Masonry
+          breakpointCols={masonryBreakpointCols}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {lb_documents.data.proformas.length > 0 ? (
+            <CardProforma
+              {...CardProps}
+              proformas={lb_documents.data.proformas}
+              account_id={lb_documents.data.account_id}
+            />
+          ) : null}
+          {lb_documents.data.vat_invoices.length > 0 ? (
+            <CardVatInvoices
+              {...CardProps}
+              proformas={lb_documents.data.vat_invoices}
+              account_id={lb_documents.data.account_id}
+            />
+          ) : null}
+          {lb_documents.data.acts.length > 0 ? (
+            <CardActs
+              {...CardProps}
+              proformas={lb_documents.data.acts}
+              account_id={lb_documents.data.account_id}
+            />
+          ) : null}
+          {lb_documents.data.calls_reports_pdf.length > 0 ? (
+            <CardCallsReports
+              {...CardProps}
+              calls_reports_pdf={lb_documents.data.calls_reports_pdf}
+              account_id={lb_documents.data.account_id}
+            />
+          ) : null}
+        </Masonry>
+      </Fragment>
     </PageHeaderWrapper>
   );
 };

@@ -4,12 +4,13 @@ import ProLayout, {
   Settings,
   SettingDrawer,
 } from '@ant-design/pro-layout';
+import NumberFormat from 'react-number-format';
 import React, { useEffect, useState } from 'react';
 import { useIntl, Link, connect, FormattedMessage } from 'umi';
 import Authorized from '../utils/Authorized';
 import RightContent from '../components/GlobalHeader/RightContent';
 import MenuSelectLang from '../components/MenuSelectLang';
-import { Popconfirm, Modal } from 'antd';
+import { Popconfirm } from 'antd';
 import {
   GlobalOutlined,
   LinkOutlined,
@@ -17,44 +18,16 @@ import {
   LogoutOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
+import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
+import ResellerCreateChild from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateChild';
 import EditUserDrawer from '@/pages/onnet-portal/core/components/UsersList/EditUserDrawer';
-const { confirm } = Modal;
+import RsDemaskBtn from '@/pages/onnet-portal/reseller/portal/components/RsDemaskBtn';
+import styles from '@/pages/onnet-portal/core/style.less';
 
 import logo from '../assets/logo.svg';
 
-export interface BasicLayoutProps extends ProLayoutProps {
-  breadcrumbNameMap: {
-    [path: string]: MenuDataItem;
-  };
-  route: ProLayoutProps['route'] & {
-    authority: string[];
-  };
-  settings: Settings;
-  dispatch: Dispatch;
-}
-
-export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
-  breadcrumbNameMap: {
-    [path: string]: MenuDataItem;
-  };
-};
-
 const footerRender = () => <span />;
-
-const BreadcrumbRender = (routers = []) => {
-  const { formatMessage } = useIntl();
-  const pathList = [
-    {
-      path: '//dashboard',
-      breadcrumbName: formatMessage({
-        id: 'menu.home',
-        defaultMessage: 'Home',
-      }),
-    },
-    ...routers,
-  ];
-  return pathList;
-};
 
 const BasicLayout: React.FC = (props) => {
   const {
@@ -67,6 +40,8 @@ const BasicLayout: React.FC = (props) => {
     kz_user,
     kz_registrations_count,
     authority,
+    child_account,
+    lb_account,
   } = props;
 
   const [isEditUserDrawerVisible, setIsEditUserDrawerVisible] = useState(false);
@@ -146,6 +121,63 @@ const BasicLayout: React.FC = (props) => {
     });
   };
 
+  const transform_style = { transform: `translateY(-50%)` };
+
+  const extraConsumerContent = (
+    <div className={styles.extraContent}>
+      <div className={styles.statItem}>
+        <p>
+          {formatMessage({
+            id: 'reseller_portal.Account_status',
+            defaultMessage: 'Account status',
+          })}
+        </p>
+        <p>Active</p>
+      </div>
+      <div className={styles.statItem}>
+        <p>
+          {formatMessage({
+            id: 'reseller_portal.Current_balance',
+            defaultMessage: 'Current balance',
+          })}
+        </p>
+        {lb_account.data ? (
+          <NumberFormat
+            value={lb_account.data.account_balance}
+            displayType="text"
+            thousandSeparator=" "
+            decimalScale={2}
+            renderText={(value) => <div>{value} руб.</div>}
+          />
+        ) : null}
+      </div>
+      <div className={styles.statItem}>
+        <p>
+          {kz_user.data?.first_name ? `${kz_user.data.first_name} ` : ' '}
+          {kz_user.data?.last_name ? kz_user.data.last_name : ' '}
+        </p>
+        <p>{kz_account.data?.name ? `${kz_account.data?.name}` : ' '}</p>
+      </div>
+      {kz_account.data && kz_account.data.id !== kz_login.data?.account_id ? (
+        <div className={styles.statItem} style={transform_style}>
+          <RsDemaskBtn />
+        </div>
+      ) : null}
+    </div>
+  );
+
+  const extraResellerContent = kz_account?.data?.is_reseller ? (
+    [
+      <ResellerChildFlush key="extraFlush" />,
+      <ResellerChildSearch key="extraSearch" />,
+      <ResellerCreateChild key="extraCreate" />,
+    ]
+  ) : kz_account.data ? (
+    kz_account.data.id !== kz_login.data?.account_id ? (
+      <RsDemaskBtn />
+    ) : null
+  ) : null;
+
   return (
     <>
       <ProLayout
@@ -158,19 +190,17 @@ const BasicLayout: React.FC = (props) => {
 
           return <Link to={menuItemProps.path}>{defaultDom}</Link>;
         }}
-        breadcrumbRender={BreadcrumbRender}
-        itemRender={(route, params, routes, paths) => {
-          const first = routes.indexOf(route) === 0;
-          return first ? (
-            <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
-          ) : (
-            <span>{route.breadcrumbName}</span>
-          );
-        }}
+        breadcrumb={false}
+        subTitle={
+          child_account?.data ? (
+            <span style={{ color: settings.primaryColor }}>{child_account?.data?.name}</span>
+          ) : null
+        }
         footerRender={footerRender}
         menuDataRender={menuDataRender}
         formatMessage={formatMessage}
-        rightContentRender={(rightProps) => <RightContent {...rightProps} />}
+        extra={kz_account?.data?.is_reseller ? extraResellerContent : extraConsumerContent}
+        //       rightContentRender={(rightProps) => <RightContent {...rightProps} />}
         links={[
           <span onClick={() => setIsEditUserDrawerVisible(true)}>
             <UserOutlined />
@@ -225,7 +255,7 @@ const BasicLayout: React.FC = (props) => {
 };
 
 export default connect(
-  ({ global, settings, kz_login, kz_account, kz_user, kz_registrations_count, authority }) => ({
+  ({
     global,
     settings,
     kz_login,
@@ -233,5 +263,17 @@ export default connect(
     kz_user,
     kz_registrations_count,
     authority,
+    child_account,
+    lb_account,
+  }) => ({
+    global,
+    settings,
+    kz_login,
+    kz_account,
+    kz_user,
+    kz_registrations_count,
+    authority,
+    child_account,
+    lb_account,
   }),
 )(BasicLayout);

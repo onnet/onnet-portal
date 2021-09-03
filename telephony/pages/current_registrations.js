@@ -188,7 +188,7 @@ const CurrentRegistrations = (props) => {
           {dataRegistrations.length > 0 ? dataRegistrations.length : 'No registrations found!'}
         </Tag>
       }
-      extra={[<ResellerChildFlush key="extraFlush" />, <ResellerChildSearch key="extraSearch" />]}
+      breadcrumb={false}
     >
       <Fragment>
         <Card hoverable className={styles.card} {...cardProps}>
