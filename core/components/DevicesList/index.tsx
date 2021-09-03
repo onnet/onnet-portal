@@ -21,18 +21,19 @@ const DevicesList = (props) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(false);
 
-  const { dispatch, settings, account, brief_devices, full_devices, full_users } = props;
+  const { dispatch, settings, kz_account, brief_devices, full_devices, full_users } = props;
 
   useEffect(() => {
-    if (brief_devices.data) {
-      setDataSource(brief_devices.data);
-    } else {
-      dispatch({
-        type: 'kz_brief_devices/refresh',
-        payload: { account_id: account.data.id },
-      });
-    }
-  }, [brief_devices]);
+    if (kz_account.data)
+      if (brief_devices.data) {
+        setDataSource(brief_devices.data);
+      } else {
+        dispatch({
+          type: 'kz_brief_devices/refresh',
+          payload: { account_id: kz_account.data.id },
+        });
+      }
+  }, [brief_devices, kz_account]);
 
   if (!brief_devices.data) {
     return null;
@@ -42,12 +43,12 @@ const DevicesList = (props) => {
     confirm({
       title: `Do you want to delete device ${record.username}?`,
       onOk() {
-        kzDevice({ method: 'DELETE', account_id: account.data.id, device_id: record.id })
+        kzDevice({ method: 'DELETE', account_id: kz_account.data.id, device_id: record.id })
           .then((uRes) => {
             console.log(uRes);
             dispatch({
               type: 'kz_brief_devices/refresh',
-              payload: { account_id: account.data.id },
+              payload: { account_id: kz_account.data.id },
             });
           })
           .catch(() => console.log('Oops errors!', record));
@@ -120,7 +121,7 @@ const DevicesList = (props) => {
             setSelectedDevice(record.id);
             dispatch({
               type: 'kz_full_devices/refresh',
-              payload: { account_id: account.data.id, device_id: record.id },
+              payload: { account_id: kz_account.data.id, device_id: record.id },
             });
             setIsDrawerVisible(true);
           }}
@@ -177,7 +178,7 @@ const DevicesList = (props) => {
       onOk() {
         kzDevice({
           method: 'PATCH',
-          account_id: account.data.id,
+          account_id: kz_account.data.id,
           device_id: record.id,
           data: { enabled: checked },
         })
@@ -185,7 +186,7 @@ const DevicesList = (props) => {
             console.log(uRes);
             dispatch({
               type: 'kz_full_devices/refresh',
-              payload: { account_id: account.data.id, device_id: record.id },
+              payload: { account_id: kz_account.data.id, device_id: record.id },
             });
           })
           .catch(() => console.log('Oops errors!', record));
@@ -263,7 +264,7 @@ const DevicesList = (props) => {
 export default connect(
   ({ settings, kz_account, kz_brief_devices, kz_full_devices, kz_full_users }) => ({
     settings,
-    account: kz_account,
+    kz_account,
     brief_devices: kz_brief_devices,
     full_devices: kz_full_devices,
     full_users: kz_full_users,

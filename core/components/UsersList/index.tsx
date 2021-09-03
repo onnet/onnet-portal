@@ -29,20 +29,21 @@ const UsersList = (props) => {
   const [isCreateDrawerVisible, setIsCreateDrawerVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(false);
 
-  const { dispatch, settings, account, brief_users, full_users } = props;
+  const { dispatch, settings, kz_account, brief_users, full_users } = props;
   const formRef = React.createRef();
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
   useEffect(() => {
-    if (brief_users.data) {
-      setDataSource(brief_users.data);
-    } else {
-      dispatch({
-        type: 'kz_brief_users/refresh',
-        payload: { account_id: account.data.id },
-      });
-    }
-  }, [brief_users]);
+    if (kz_account.data)
+      if (brief_users.data) {
+        setDataSource(brief_users.data);
+      } else {
+        dispatch({
+          type: 'kz_brief_users/refresh',
+          payload: { account_id: kz_account.data.id },
+        });
+      }
+  }, [brief_users, kz_account]);
 
   const { formatMessage } = useIntl();
 
@@ -70,12 +71,12 @@ const UsersList = (props) => {
       okText: formatMessage({ id: 'core.Yes', defaultMessage: 'Yes' }),
       cancelText: formatMessage({ id: 'core.No', defaultMessage: 'No' }),
       onOk() {
-        kzUser({ method: 'DELETE', account_id: account.data.id, owner_id: record.id })
+        kzUser({ method: 'DELETE', account_id: kz_account.data.id, owner_id: record.id })
           .then((uRes) => {
             console.log(uRes);
             dispatch({
               type: 'kz_brief_users/refresh',
-              payload: { account_id: account.data.id },
+              payload: { account_id: kz_account.data.id },
             });
           })
           .catch(() => console.log('Oops errors!', record));
@@ -140,7 +141,7 @@ const UsersList = (props) => {
             setSelectedUser(record.id);
             dispatch({
               type: 'kz_full_users/refresh',
-              payload: { account_id: account.data.id, owner_id: record.id },
+              payload: { account_id: kz_account.data.id, owner_id: record.id },
             });
             setIsDrawerVisible(true);
           }}
@@ -193,7 +194,7 @@ const UsersList = (props) => {
       onOk() {
         kzUser({
           method: 'PATCH',
-          account_id: account.data.id,
+          account_id: kz_account.data.id,
           owner_id: record.id,
           data: { enabled: checked },
         })
@@ -201,7 +202,7 @@ const UsersList = (props) => {
             console.log(uRes);
             dispatch({
               type: 'kz_full_users/refresh',
-              payload: { account_id: account.data.id, owner_id: record.id },
+              payload: { account_id: kz_account.data.id, owner_id: record.id },
             });
           })
           .catch(() => console.log('Oops errors!', record));
@@ -245,18 +246,18 @@ const UsersList = (props) => {
     };
     kzUsers({
       method: 'PUT',
-      account_id: account.data.id,
+      account_id: kz_account.data.id,
       data: userDataBag,
     }).then((uRes) => {
       console.log('kzUsers uRes: ', uRes);
       dispatch({
         type: 'kz_brief_users/refresh',
-        payload: { account_id: account.data.id },
+        payload: { account_id: kz_account.data.id },
       });
       setSelectedUser(uRes.data.id);
       dispatch({
         type: 'kz_full_users/refresh',
-        payload: { account_id: account.data.id, owner_id: uRes.data.id },
+        payload: { account_id: kz_account.data.id, owner_id: uRes.data.id },
       });
       setIsDrawerVisible(true);
     });
@@ -276,6 +277,16 @@ const UsersList = (props) => {
     } else {
       setDataSource(brief_users.data);
     }
+  };
+
+  const countSelectedUsers = () => {
+    const dsLength = dataSource.length;
+    if (dsLength == 0) return 'No users found!';
+
+    const drLength = brief_users.data.length;
+    if (drLength == dsLength) return `Users amount: ${drLength}`;
+
+    return `Users selected: ${dsLength} / ${drLength}`;
   };
 
   return (
@@ -328,6 +339,7 @@ const UsersList = (props) => {
               pagination={isPaginated}
               size="small"
               rowKey={(record) => record.id}
+              footer={countSelectedUsers}
             />
           }
         />
@@ -368,7 +380,7 @@ const UsersList = (props) => {
 
 export default connect(({ settings, kz_account, kz_brief_users, kz_full_users }) => ({
   settings,
-  account: kz_account,
+  kz_account,
   brief_users: kz_brief_users,
   full_users: kz_full_users,
 }))(UsersList);

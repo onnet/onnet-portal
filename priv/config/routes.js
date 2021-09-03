@@ -162,6 +162,12 @@ export default [
             authority: ['telephony'],
           },
           {
+            name: 'users',
+            path: '/int/telephony/users',
+            component: './onnet-portal/telephony/pages/users',
+            authority: ['telephony'],
+          },
+          {
             name: 'devices',
             path: '/int/telephony/devices',
             component: './onnet-portal/telephony/pages/devices',

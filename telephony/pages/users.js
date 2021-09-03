@@ -5,7 +5,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import UsersList from '@/pages/onnet-portal/core/components/UsersList';
 
 const TelephonyUsers = () => (
-  <PageHeaderWrapper>
+  <PageHeaderWrapper breadcrumb={false}>
     <UsersList key="UsersListKey" />
   </PageHeaderWrapper>
 );

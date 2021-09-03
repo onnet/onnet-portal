@@ -6,6 +6,8 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import Masonry from 'react-masonry-css';
 import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';
 import GeneralSettingsWidget from './GeneralSettingsWidget';
+import UsersList from '@/pages/onnet-portal/core/components/UsersList';
+import DevicesListShort from '@/pages/onnet-portal/core/components/DevicesList/index_short';
 
 const AdminSettings = (props) => {
   const { dispatch, kz_account, child_account } = props;
@@ -37,6 +39,8 @@ const AdminSettings = (props) => {
         columnClassName="my-masonry-grid_column"
       >
         <GeneralSettingsWidget key="GeneralSettingsWidgetKey" />
+        <UsersList />
+        <DevicesListShort />
       </Masonry>
     </PageHeaderWrapper>
   );

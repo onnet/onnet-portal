@@ -321,6 +321,16 @@ const DevicesList = (props) => {
     }
   };
 
+  const countSelectedDevices = () => {
+    const dsLength = dataSource.length;
+    if (dsLength == 0) return 'No devices found!';
+
+    const drLength = brief_devices.data.length;
+    if (drLength == dsLength) return `Devices amount: ${drLength}`;
+
+    return `Devices selected: ${dsLength} / ${drLength}`;
+  };
+
   return (
     <Fragment>
       <Card hoverable className={styles.card} {...cardProps}>
@@ -370,6 +380,7 @@ const DevicesList = (props) => {
               pagination={isPaginated}
               size="small"
               rowKey={(record) => record.id}
+              footer={countSelectedDevices}
             />
           }
         />
