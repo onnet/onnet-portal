@@ -1,5 +1,5 @@
 import { Effect, Reducer } from 'umi';
-import { aGetAccount } from '../services/kazoo';
+import { aKzAccount } from '../services/kazoo';
 
 export interface KzooCacheModelType {
   namespace: 'kz_cache';
@@ -20,7 +20,7 @@ const KzooCacheModel: KzooCacheModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const response = yield call(aGetAccount, payload);
+      const response = yield call(aKzAccount, payload);
       yield put({
         type: 'update',
         payload: response,

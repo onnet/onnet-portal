@@ -101,36 +101,16 @@ export async function getUser(params: FormDataTyp): Promise<any> {
 }
 
 export async function getUsers(params: FormDataTyp): Promise<any> {
-  const redux_state = getDvaApp()._store.getState();
-  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = `${API_URL_V2}/accounts/${params.account_id}/users/`;
-  return request(url, {
-    method: 'GET',
-    headers: JSON_HEADERS(),
-  });
-}
-
-function userUrl(params) {
-  const redux_state = getDvaApp()._store.getState();
-  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = `${API_URL_V2}/accounts/${params.account_id}/users/${params.owner_id}`;
-  return url;
-}
-
-function usersUrl(params) {
-  const redux_state = getDvaApp()._store.getState();
-  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = `${API_URL_V2}/accounts/${params.account_id}/users`;
-  return url;
+  return kzRequest(`${accountsUrl(params)}/users/`, params);
 }
 
 export function kzUsers(params: FormDataTyp) {
-  return kzRequest(usersUrl(params), params);
+  return kzRequest(`${accountsUrl(params)}/users`, params);
 }
 
 export function kzUser(params: FormDataTyp) {
   console.log('IAMMM!!!!  kzUser services file, params: ', params);
-  return kzRequest(userUrl(params), params);
+  return kzRequest(`${accountsUrl(params)}/users/${params.owner_id}`, params);
 }
 
 export function accountsUrl(params) {
@@ -153,45 +133,14 @@ export async function aKzAccount(params: FormDataTyp): Promise<any> {
   return kzAccount(params);
 }
 
-export function getAccount(params: FormDataTyp): Promise<any> {
-  return request(accountsUrl(params), {
-    method: 'GET',
-    headers: JSON_HEADERS(),
-  });
-}
-
-export async function aGetAccount(params: FormDataTyp): Promise<any> {
-  return getAccount(params);
-}
-
 export function resellerStatus(params) {
-  const redux_state = getDvaApp()._store.getState();
-  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = `${API_URL_V2}/accounts/${params.account_id}/reseller`;
+  const url = `${accountsUrl(params)}/reseller`;
   return kzRequest(url, params);
 }
 
 export async function getResellerChildren(params: FormDataTyp): Promise<any> {
-  const redux_state = getDvaApp()._store.getState();
-  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = `${API_URL_V2}/accounts/${params.account_id}/children`;
-  return request(url, {
-    method: 'GET',
-    headers: JSON_HEADERS(),
-  });
-}
-
-export async function getSIPRegistrations(params: FormDataTyp): Promise<any> {
-  const redux_state = getDvaApp()._store.getState();
-  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url =
-    redux_state.kz_account.data.superduper_admin && !redux_state.child_account?.data
-      ? `${API_URL_V2}/registrations`
-      : `${API_URL_V2}/accounts/${params.account_id}/registrations`;
-  return request(url, {
-    method: 'GET',
-    headers: JSON_HEADERS(),
-  });
+  const url = `${accountsUrl(params)}/children`;
+  return kzRequest(url, params);
 }
 
 export async function SIPRegistrationsCount(params: FormDataTyp): Promise<any> {
@@ -201,18 +150,6 @@ export async function SIPRegistrationsCount(params: FormDataTyp): Promise<any> {
     redux_state.kz_account.data.superduper_admin && !redux_state.child_account?.data
       ? `${API_URL_V2}/registrations/count`
       : `${API_URL_V2}/accounts/${params.account_id}/registrations/count`;
-  return request(url, {
-    method: 'GET',
-    headers: JSON_HEADERS(),
-  });
-}
-
-export function getResellerChannels(params: FormDataTyp): Promise<any> {
-  const redux_state = getDvaApp()._store.getState();
-  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url = redux_state.kz_account.data.superduper_admin
-    ? `${API_URL_V2}/channels`
-    : `${API_URL_V2}/accounts/${params.account_id}/channels`;
   return request(url, {
     method: 'GET',
     headers: JSON_HEADERS(),

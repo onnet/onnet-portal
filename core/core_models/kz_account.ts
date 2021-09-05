@@ -1,5 +1,5 @@
 import { Effect, Reducer, getDvaApp } from 'umi';
-import { aGetAccount } from '../services/kazoo';
+import { aKzAccount } from '../services/kazoo';
 
 export interface KazooAccountModelType {
   namespace: 'kz_account';
@@ -22,7 +22,7 @@ const KazooAccountModel: KazooAccountModelType = {
     *refresh({ payload }, { call, put }) {
       console.log('IAMMM  kz_account/refresh payload: ', payload);
 
-      const response = yield call(aGetAccount, payload);
+      const response = yield call(aKzAccount, payload);
       yield put({
         type: 'update',
         payload: response,

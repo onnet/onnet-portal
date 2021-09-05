@@ -1,4 +1,6 @@
 import React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { connect } from 'umi';
 import { Tag } from 'antd';
 
@@ -9,9 +11,7 @@ const CallflowBuilder = (props) => {
 
   return (
     <PageHeaderWrapper breadcrumb={false}>
-      <div>
-        Hello from Callflow Builder for <Tag>{kz_account?.data?.name}</Tag>!
-      </div>
+      <div id="treeWrapper" style={{ width: '100em', height: '100em' }}></div>
     </PageHeaderWrapper>
   );
 };

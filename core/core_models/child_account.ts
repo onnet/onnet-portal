@@ -1,5 +1,5 @@
 import { Effect, Reducer, getDvaApp } from 'umi';
-import { aGetAccount, accountByRealm } from '../services/kazoo';
+import { aKzAccount, accountByRealm } from '../services/kazoo';
 
 export interface ModelType {
   namespace: string;
@@ -20,7 +20,7 @@ const Model: ModelType = {
 
   effects: {
     *refresh({ payload }, { call, put }) {
-      const response = yield call(aGetAccount, payload);
+      const response = yield call(aKzAccount, payload);
       console.log('child_account/refresh: response', response);
       yield put({
         type: 'update',

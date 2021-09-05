@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect, useIntl } from 'umi';
 import { Table, Tag } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { getResellerChannels } from '@/pages/onnet-portal/core/services/kazoo';
+import { getResellerChannels } from '@/pages/onnet-portal/telephony/services/kazoo-telephony';
 import AccountName from '@/pages/onnet-portal/core/components/account_name';
 import * as subr from '@/pages/onnet-portal/core/utils/subroutine';
 import Moment from 'react-moment';

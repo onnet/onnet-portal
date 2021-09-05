@@ -10,7 +10,7 @@ import gh_styles from '@/pages/onnet-portal/core/components/HeaderSearch/globhea
 import AccountName from '@/pages/onnet-portal/core/components/account_name';
 import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
 import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
-import { getSIPRegistrations } from '@/pages/onnet-portal/core/services/kazoo';
+import { getSIPRegistrations } from '@/pages/onnet-portal/telephony/services/kazoo-telephony';
 import RegistrationDetailsDrawer from './components/RegistrationDetailsDrawer.jsx';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';

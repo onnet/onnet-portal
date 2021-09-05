@@ -12,6 +12,7 @@ import CardWireTransfer from './CardWireTransfer';
 
 const LbFinanceDetails = (props) => {
   const { dispatch, lb_account, kz_account, kz_user } = props;
+  const { formatMessage } = useIntl();
 
   useEffect(() => {
     if (kz_account.data) {
@@ -21,8 +22,6 @@ const LbFinanceDetails = (props) => {
       });
     }
   }, [kz_account]);
-
-  const { formatMessage } = useIntl();
 
   const extraContent = (
     <div className={styles.extraContent}>
