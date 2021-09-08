@@ -180,6 +180,12 @@ export default [
             authority: ['telephony'],
           },
           {
+            name: 'callflow-builder',
+            path: '/int/telephony/callflow-builder_test',
+            component: './onnet-portal/telephony/pages/callflow-builder/index_test',
+            authority: ['telephony'],
+          },
+          {
             name: 'statistics',
             path: '/int/telephony/statistics',
             component: './onnet-portal/telephony/pages/statistics',
