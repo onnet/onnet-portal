@@ -8,7 +8,6 @@ import styles from '../style.less';
 
 const ResellerUserMedia = (props) => {
   const [audioCodecs, setAudioCodecs] = useState([]);
-  const [videoCodecs, setVideoCodecs] = useState([]);
   const [isLoading, setIsLoading] = useState({});
 
   const { dispatch, child_account, child_full_users, owner_id } = props;

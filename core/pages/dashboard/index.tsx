@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { connect, Redirect, history } from 'umi';
+import { connect, Redirect } from 'umi';
 import { Spin } from 'antd';
 import LBAccountDashboard from '@/pages/onnet-portal/lb/dashboard';
-import SuperDuperDashboard from './super_admin';
-import ResellerDashboard from './reseller';
 import AccountDashboard from './account';
 
 const DashboardSelector = (props) => {

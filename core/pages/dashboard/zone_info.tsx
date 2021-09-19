@@ -25,7 +25,7 @@ const ZoneInfo = (props) => {
   }, [kz_account, kz_system_status]);
 
   if (kz_system_status.data) {
-    if (!kz_system_status.data[location?.state?.zone] && location?.state?.zone != 'pie') {
+    if (!kz_system_status.data[location?.state?.zone] && location?.state?.zone !== 'pie') {
       console.log(
         'Absent zone name. Redirecting to dashboard. kz_system_status: ',
         kz_system_status,
@@ -203,7 +203,7 @@ const ZoneInfo = (props) => {
     : null;
 
   const my_title =
-    location?.state?.zone != 'pie' ? (
+    location?.state?.zone !== 'pie' ? (
       <>
         Zone details:
         <Text className={styles.zoneLabel} style={{ color: settings.primaryColor }}>
@@ -224,7 +224,7 @@ const ZoneInfo = (props) => {
         </Tabs>,
       ]}
     >
-      {location?.state?.zone == 'pie' ? (
+      {location?.state?.zone === 'pie' ? (
         <SuperAdminPie />
       ) : (
         <Masonry

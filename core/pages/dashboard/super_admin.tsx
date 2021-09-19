@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 
 import React from 'react';
-import { connect, Redirect, history } from 'umi';
+import { connect, Redirect } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import SuperAdminPie from './super_admin_pie';
 

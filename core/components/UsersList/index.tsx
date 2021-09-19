@@ -281,10 +281,10 @@ const UsersList = (props) => {
 
   const countSelectedUsers = () => {
     const dsLength = dataSource.length;
-    if (dsLength == 0) return 'No users found!';
+    if (dsLength === 0) return 'No users found!';
 
     const drLength = brief_users.data.length;
-    if (drLength == dsLength) return `Users amount: ${drLength}`;
+    if (drLength === dsLength) return `Users amount: ${drLength}`;
 
     return `Users selected: ${dsLength} / ${drLength}`;
   };

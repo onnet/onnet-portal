@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import React, { useState, useEffect } from 'react';
 import { connect, useIntl } from 'umi';
 import { DownOutlined } from '@ant-design/icons';

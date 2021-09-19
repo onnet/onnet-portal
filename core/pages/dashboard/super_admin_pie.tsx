@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Raphael from 'raphael';
-import { connect, Redirect, history } from 'umi';
+import { connect, history } from 'umi';
 
 const myGraph = (system_status, kz_registrations_count) =>
   system_status.data

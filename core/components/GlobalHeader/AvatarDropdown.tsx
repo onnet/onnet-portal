@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Menu } from 'antd';
-import { ClickParam } from 'antd/es/menu';
+import { Menu } from 'antd';
 import { history, connect, FormattedMessage } from 'umi';
 import EditUserDrawer from '@/pages/onnet-portal/core/components/UsersList/EditUserDrawer';
 
@@ -12,7 +11,7 @@ const AvatarDropdown = (props) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const { dispatch, kz_user_data = {}, kz_account_data = {} } = props;
 
-  const onMenuClick = (event: ClickParam) => {
+  const onMenuClick = (event) => {
     const { key } = event;
     console.log('AvatarDropdown onMenuClick');
     console.log(event);

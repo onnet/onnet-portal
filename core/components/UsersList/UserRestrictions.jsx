@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import React, { useState, useEffect } from 'react';
 import { connect } from 'umi';
 import * as _ from 'lodash';

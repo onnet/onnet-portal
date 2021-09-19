@@ -31,39 +31,6 @@ const UserDevices = (props) => {
     textAlign: 'center',
   };
 
-  const items = _.filter(brDevs, { owner_id }).map((item) => (
-    <Card.Grid style={gridStyle} key={item.id}>
-      <Card.Meta
-        title={
-          <span>
-            <Badge dot style={{ color: settings.primaryColor, marginRight: '1.1em' }} />
-            {item.name}
-            <EditOutlined
-              style={{ color: settings.primaryColor, marginLeft: '0.5em' }}
-              onClick={() => {
-                setSelectedDevice(item.id);
-                dispatch({
-                  type: 'kz_full_devices/refresh',
-                  payload: { account_id: account.data.id, device_id: item.id },
-                });
-                setIsEditDrawerVisible(true);
-              }}
-            />
-          </span>
-        }
-        description={
-          <Switch
-            key={item.id}
-            checkedChildren="enabled"
-            unCheckedChildren="disabled"
-            checked={full_devices[item.id] ? full_devices[item.id].data.enabled : item.enabled}
-            onChange={(checked) => onDeviceEnableSwitch(checked, item)}
-          />
-        }
-      />
-    </Card.Grid>
-  ));
-
   function onDeviceEnableSwitch(checked, record) {
     confirm({
       title: (
@@ -96,6 +63,39 @@ const UserDevices = (props) => {
       onCancel() {},
     });
   }
+
+  const items = _.filter(brDevs, { owner_id }).map((item) => (
+    <Card.Grid style={gridStyle} key={item.id}>
+      <Card.Meta
+        title={
+          <span>
+            <Badge dot style={{ color: settings.primaryColor, marginRight: '1.1em' }} />
+            {item.name}
+            <EditOutlined
+              style={{ color: settings.primaryColor, marginLeft: '0.5em' }}
+              onClick={() => {
+                setSelectedDevice(item.id);
+                dispatch({
+                  type: 'kz_full_devices/refresh',
+                  payload: { account_id: account.data.id, device_id: item.id },
+                });
+                setIsEditDrawerVisible(true);
+              }}
+            />
+          </span>
+        }
+        description={
+          <Switch
+            key={item.id}
+            checkedChildren="enabled"
+            unCheckedChildren="disabled"
+            checked={full_devices[item.id] ? full_devices[item.id].data.enabled : item.enabled}
+            onChange={(checked) => onDeviceEnableSwitch(checked, item)}
+          />
+        }
+      />
+    </Card.Grid>
+  ));
 
   const onDrawerClose = () => {
     setIsEditDrawerVisible(false);

@@ -55,6 +55,40 @@ const UsersList = (props) => {
     });
   };
 
+  function onUserEnableSwitch(checked, record) {
+    confirm({
+      title: (
+        <p>
+          {formatMessage({ id: 'core.User', defaultMessage: 'User' })}: {record.username}
+        </p>
+      ),
+      content: (
+        <span style={{ paddingLeft: '6em' }}>
+          {checked
+            ? formatMessage({ id: 'core.switch_on', defaultMessage: 'Switch ON' })
+            : formatMessage({ id: 'core.switch_off', defaultMessage: 'Switch OFF' })}
+        </span>
+      ),
+      onOk() {
+        kzUser({
+          method: 'PATCH',
+          account_id: account.data.id,
+          owner_id: record.id,
+          data: { enabled: checked },
+        })
+          .then((uRes) => {
+            console.log(uRes);
+            dispatch({
+              type: 'child_full_users/refresh',
+              payload: { account_id: account.data.id, owner_id: record.id },
+            });
+          })
+          .catch(() => console.log('Oops errors!', record));
+      },
+      onCancel() {},
+    });
+  }
+
   const columns = [
     {
       dataIndex: 'id',
@@ -158,40 +192,6 @@ const UsersList = (props) => {
   const onDrawerClose = () => {
     setIsDrawerVisible(false);
   };
-
-  function onUserEnableSwitch(checked, record) {
-    confirm({
-      title: (
-        <p>
-          {formatMessage({ id: 'core.User', defaultMessage: 'User' })}: {record.username}
-        </p>
-      ),
-      content: (
-        <span style={{ paddingLeft: '6em' }}>
-          {checked
-            ? formatMessage({ id: 'core.switch_on', defaultMessage: 'Switch ON' })
-            : formatMessage({ id: 'core.switch_off', defaultMessage: 'Switch OFF' })}
-        </span>
-      ),
-      onOk() {
-        kzUser({
-          method: 'PATCH',
-          account_id: account.data.id,
-          owner_id: record.id,
-          data: { enabled: checked },
-        })
-          .then((uRes) => {
-            console.log(uRes);
-            dispatch({
-              type: 'child_full_users/refresh',
-              payload: { account_id: account.data.id, owner_id: record.id },
-            });
-          })
-          .catch(() => console.log('Oops errors!', record));
-      },
-      onCancel() {},
-    });
-  }
 
   return (
     <Fragment>

@@ -33,7 +33,7 @@ export async function getSIPRegistrations(params: FormDataTyp): Promise<any> {
 export async function SIPRegistrationsCount(params: FormDataTyp): Promise<any> {
   const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  const url =
+  const path =
     redux_state.kz_account.data.superduper_admin && !redux_state.child_account?.data
       ? `${API_URL_V2}/registrations/count`
       : `${accountsUrl(params)}/registrations/count`;

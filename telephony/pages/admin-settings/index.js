@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import React, { useEffect } from 'react';
 import { connect, useIntl } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
@@ -10,9 +8,7 @@ import UsersList from '@/pages/onnet-portal/core/components/UsersList';
 import DevicesListShort from '@/pages/onnet-portal/core/components/DevicesList/index_short';
 
 const AdminSettings = (props) => {
-  const { dispatch, kz_account, child_account } = props;
-
-  const { formatMessage } = useIntl();
+  const { dispatch, kz_account } = props;
 
   useEffect(() => {
     if (kz_account.data) {
@@ -46,7 +42,6 @@ const AdminSettings = (props) => {
   );
 };
 
-export default connect(({ kz_account, child_account }) => ({
+export default connect(({ kz_account }) => ({
   kz_account,
-  child_account,
 }))(AdminSettings);

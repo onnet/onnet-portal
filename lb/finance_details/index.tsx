@@ -23,44 +23,6 @@ const LbFinanceDetails = (props) => {
     }
   }, [kz_account]);
 
-  const extraContent = (
-    <div className={styles.extraContent}>
-      <div className={styles.statItem}>
-        <p>
-          {formatMessage({
-            id: 'reseller_portal.Account_status',
-            defaultMessage: 'Account status',
-          })}
-        </p>
-        <p>Active</p>
-      </div>
-      <div className={styles.statItem}>
-        <p>
-          {formatMessage({
-            id: 'reseller_portal.Current_balance',
-            defaultMessage: 'Current balance',
-          })}
-        </p>
-        {lb_account.data ? (
-          <NumberFormat
-            value={lb_account.data.account_balance}
-            displayType="text"
-            thousandSeparator=" "
-            decimalScale={2}
-            renderText={(value) => <div>{value} руб.</div>}
-          />
-        ) : null}
-      </div>
-      <div className={styles.statItem}>
-        <p>
-          {kz_user.data?.first_name ? `${kz_user.data.first_name} ` : ' '}
-          {kz_user.data?.last_name ? kz_user.data.last_name : ' '}
-        </p>
-        <p>{kz_account.data?.name ? `${kz_account.data?.name}` : ' '}</p>
-      </div>
-    </div>
-  );
-
   return (
     <PageHeaderWrapper breadcrumb={false}>
       {lb_account.data ? (

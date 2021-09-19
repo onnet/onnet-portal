@@ -21,6 +21,7 @@ const CardProps = {
 
 const LbFinanceDetails = (props) => {
   const { dispatch, lb_documents = {}, kz_account } = props;
+  const { formatMessage } = useIntl();
 
   const [selectedMonth, setSelectedMonth] = useState(moment().subtract(1, 'months').format('MM'));
   const [selectedYear, setSelectedYear] = useState(moment().subtract(1, 'months').format('YYYY'));
@@ -41,8 +42,6 @@ const LbFinanceDetails = (props) => {
   if (!lb_documents.data) {
     return null;
   }
-
-  const { formatMessage } = useIntl();
 
   const ExtraContent = () => (
     <div className={styles.extraContent}>

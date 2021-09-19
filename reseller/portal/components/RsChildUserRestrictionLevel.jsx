@@ -12,13 +12,6 @@ const RsChildUserRestrictionLevel = (props) => {
   const { dispatch, child_account, owner_id, classifier, text } = props;
   const { formatMessage } = useIntl();
 
-  const menuUserPrivLevels = (
-    <Menu selectedKeys={[]} onClick={onUserRestrictionSelect}>
-      <Menu.Item key="inherit">inherit</Menu.Item>
-      <Menu.Item key="deny">deny</Menu.Item>
-    </Menu>
-  );
-
   function onUserRestrictionSelect(event) {
     const { key } = event;
     console.log('event: ', event);
@@ -48,6 +41,13 @@ const RsChildUserRestrictionLevel = (props) => {
       onCancel() {},
     });
   }
+
+  const menuUserPrivLevels = (
+    <Menu selectedKeys={[]} onClick={onUserRestrictionSelect}>
+      <Menu.Item key="inherit">inherit</Menu.Item>
+      <Menu.Item key="deny">deny</Menu.Item>
+    </Menu>
+  );
 
   return (
     <Dropdown overlay={menuUserPrivLevels} trigger={['click']}>
