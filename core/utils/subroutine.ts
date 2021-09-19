@@ -62,3 +62,12 @@ function depthOf(object) {
   }
   return level;
 }
+
+export function id_to_uuid(id_string) {
+  return id_string
+    ? 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.replace(/[x]/g, function (c, p) {
+        return id_string[p % id_string.length];
+      })
+    : null;
+}
+
