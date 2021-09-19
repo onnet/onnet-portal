@@ -43,37 +43,32 @@ const CallflowBuilder = (props) => {
     }
   }, [kz_account]);
 
-        var tree = {
-            name: "rootNode",
-            children: [
-                {
-                    name: "child1"
-                },
-                {
-                    name: "child2",
-                    children: [
-                        {
-                            name: "grandchild1",
-                            children: [
-                                { name: "grand granchild1" },
-                                { name: "grand granchild2" }
-                            ]
-                        },
-                    ]
-                },
-                {
-                    name: "child3",
-                    children: [
-                        { name: "grandchild2" },
-                        { name: "grandchild3" },
-                        { name: "grandchild4" },
-                        { name: "grandchild5" }
-                    ]
-                }
-            ]
-        };
-  
-
+  var tree = {
+    name: 'rootNode',
+    children: [
+      {
+        name: 'child1',
+      },
+      {
+        name: 'child2',
+        children: [
+          {
+            name: 'grandchild1',
+            children: [{ name: 'grand granchild1' }, { name: 'grand granchild2' }],
+          },
+        ],
+      },
+      {
+        name: 'child3',
+        children: [
+          { name: 'grandchild2' },
+          { name: 'grandchild3' },
+          { name: 'grandchild4' },
+          { name: 'grandchild5' },
+        ],
+      },
+    ],
+  };
 
   return (
     <PageHeaderWrapper breadcrumb={false}>

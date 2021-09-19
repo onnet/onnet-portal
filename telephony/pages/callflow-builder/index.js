@@ -53,30 +53,28 @@ const CallflowBuilder = (props) => {
   function drawTree(cF) {
     console.log('Insde drawTree cF: ', cF);
     var nodes = d3.hierarchy(cF, function (d) {
-	    if (d.flow) { 
-	    console.log("Inside flow nodes calc d: ", d);
-  //    return Object.values(d?.flow.children);
-	let cf_children = Object.keys(d.flow.children).map(
-			    function (key) {
-				    d.flow.children[key].cf_path = "flow";
-				    return d.flow.children[key];
-			    });
-	    console.log("Inside flow nodes calc cf_children: ", cf_children);
-		    return cf_children;
-	    } else {
-	    console.log("Inside nodes calc d: ", d);
-	    console.log("Inside nodes calc Object.keys(d?.children): ", Object.keys(d?.children));
-	    console.log("Inside nodes calc Object.values: ", Object.values(d?.children) );
-   //   return d?.children;
-   //   return Object.values(d?.children);
-		   let cf_children =  Object.keys(d.children).map(
-			    function (key) {
-				    d.children[key].cf_path = d.cf_path + "." + key;
-				    return d.children[key];
-			    });
-	    console.log("Inside nodes calc cf_children: ", cf_children);
-		    return cf_children;
-	    }
+      if (d.flow) {
+        console.log('Inside flow nodes calc d: ', d);
+        //    return Object.values(d?.flow.children);
+        let cf_children = Object.keys(d.flow.children).map(function (key) {
+          d.flow.children[key].cf_path = 'flow';
+          return d.flow.children[key];
+        });
+        console.log('Inside flow nodes calc cf_children: ', cf_children);
+        return cf_children;
+      } else {
+        console.log('Inside nodes calc d: ', d);
+        console.log('Inside nodes calc Object.keys(d?.children): ', Object.keys(d?.children));
+        console.log('Inside nodes calc Object.values: ', Object.values(d?.children));
+        //   return d?.children;
+        //   return Object.values(d?.children);
+        let cf_children = Object.keys(d.children).map(function (key) {
+          d.children[key].cf_path = d.cf_path + '.' + key;
+          return d.children[key];
+        });
+        console.log('Inside nodes calc cf_children: ', cf_children);
+        return cf_children;
+      }
     });
 
     nodes = treemap(nodes);
@@ -125,17 +123,19 @@ const CallflowBuilder = (props) => {
         return 'translate(' + d.y + ',' + d.x + ')';
       });
 
-    node.append('circle').attr('r', 10)
-      .on("click", function(event, d) {
-	      console.log("Clicked node event: ", event);
-	      console.log("Clicked circle d: ", d);
-	      console.log("Clicked circle d.data: ", d.data);
+    node
+      .append('circle')
+      .attr('r', 10)
+      .on('click', function (event, d) {
+        console.log('Clicked node event: ', event);
+        console.log('Clicked circle d: ', d);
+        console.log('Clicked circle d.data: ', d.data);
       });
 
     // adds the text to the node
     node
       .append('text')
-  //    .data('Kirill')
+      //    .data('Kirill')
       .attr('dy', '.35em')
       .attr('x', function (d) {
         return d.children ? -13 : 13;
@@ -144,18 +144,18 @@ const CallflowBuilder = (props) => {
         return d.children ? 'end' : 'start';
       })
       .text(function (d) {
-	      console.log("name d", d);
+        console.log('name d', d);
         return d.data.name ? d.data.name : d.data.module;
       })
-//      .dataset.my_test(function (d) {
-//              console.log("dataset d", d);
-//        return d.data.name ? d.data.name : d.data.module;
-//      })
-      .on("click", function(event, d) {
-	      console.log("Clicked node nodes.ancestors(): ", nodes.ancestors());
-	      console.log("Clicked node event: ", event);
-	      console.log("Clicked node d: ", d);
-	      console.log("Clicked node d.data: ", d.data);
+      //      .dataset.my_test(function (d) {
+      //              console.log("dataset d", d);
+      //        return d.data.name ? d.data.name : d.data.module;
+      //      })
+      .on('click', function (event, d) {
+        console.log('Clicked node nodes.ancestors(): ', nodes.ancestors());
+        console.log('Clicked node event: ', event);
+        console.log('Clicked node d: ', d);
+        console.log('Clicked node d.data: ', d.data);
       });
   }
 
