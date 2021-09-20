@@ -70,4 +70,3 @@ export function id_to_uuid(id_string) {
       })
     : null;
 }
-
