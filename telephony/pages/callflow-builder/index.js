@@ -43,49 +43,49 @@ const CallflowBuilder = (props) => {
     }
   }, [kz_account]);
 
-  var margin = { top: 20, right: 90, bottom: 30, left: 90 },
-    width = 660 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+  const margin = { top: 20, right: 90, bottom: 30, left: 90 };
+    const width = 660 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
 
   // declares a tree layout and assigns the size
-  var treemap = d3.tree().size([height, width]);
+  const treemap = d3.tree().size([height, width]);
 
   function drawTree(cF) {
     console.log('Insde drawTree cF: ', cF);
-    var nodes = d3.hierarchy(cF, function (d) {
+    let nodes = d3.hierarchy(cF, function (d) {
       if (d.flow) {
         console.log('Inside flow nodes calc d: ', d);
         //    return Object.values(d?.flow.children);
-        let cf_children = Object.keys(d.flow.children).map(function (key) {
+        const cf_children = Object.keys(d.flow.children).map(function (key) {
           d.flow.children[key].cf_path = 'flow';
           return d.flow.children[key];
         });
         console.log('Inside flow nodes calc cf_children: ', cf_children);
         return cf_children;
-      } else {
+      } 
         console.log('Inside nodes calc d: ', d);
         console.log('Inside nodes calc Object.keys(d?.children): ', Object.keys(d?.children));
         console.log('Inside nodes calc Object.values: ', Object.values(d?.children));
         //   return d?.children;
         //   return Object.values(d?.children);
-        let cf_children = Object.keys(d.children).map(function (key) {
-          d.children[key].cf_path = d.cf_path + '.' + key;
+        const cf_children = Object.keys(d.children).map(function (key) {
+          d.children[key].cf_path = `${d.cf_path  }.${  key}`;
           return d.children[key];
         });
         console.log('Inside nodes calc cf_children: ', cf_children);
         return cf_children;
-      }
+      
     });
 
     nodes = treemap(nodes);
 
-    var svg = d3
+    const svg = d3
         .select('#treeWrapper')
         .append('svg')
         .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom),
-      g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-    var link = g
+        .attr('height', height + margin.top + margin.bottom);
+      const g = svg.append('g').attr('transform', `translate(${  margin.left  },${  margin.top  })`);
+    const link = g
       .selectAll('.cf-link')
       .data(nodes.descendants().slice(1))
       .enter()
@@ -93,34 +93,34 @@ const CallflowBuilder = (props) => {
       .attr('class', 'cf-link')
       .attr('d', function (d) {
         return (
-          'M' +
-          d.y +
-          ',' +
-          d.x +
-          'C' +
-          (d.y + d.parent.y) / 2 +
-          ',' +
-          d.x +
-          ' ' +
-          (d.y + d.parent.y) / 2 +
-          ',' +
-          d.parent.x +
-          ' ' +
-          d.parent.y +
-          ',' +
-          d.parent.x
+          `M${ 
+          d.y 
+          },${ 
+          d.x 
+          }C${ 
+          (d.y + d.parent.y) / 2 
+          },${ 
+          d.x 
+          } ${ 
+          (d.y + d.parent.y) / 2 
+          },${ 
+          d.parent.x 
+          } ${ 
+          d.parent.y 
+          },${ 
+          d.parent.x}`
         );
       });
-    var node = g
+    const node = g
       .selectAll('.cf-node')
       .data(nodes.descendants())
       .enter()
       .append('g')
       .attr('class', function (d) {
-        return 'cf-node' + (d.children ? ' cf-node--internal' : ' cf-node--leaf');
+        return `cf-node${  d.children ? ' cf-node--internal' : ' cf-node--leaf'}`;
       })
       .attr('transform', function (d) {
-        return 'translate(' + d.y + ',' + d.x + ')';
+        return `translate(${  d.y  },${  d.x  })`;
       });
 
     node

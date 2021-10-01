@@ -1,17 +1,15 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useIntl, connect } from 'umi';
 import moment from 'moment';
-import NumberFormat from 'react-number-format';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Row, Col, DatePicker, Radio, Form } from 'antd';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
-import styles from '../style.less';
 import CardCDR from './CardCDR';
 
 const dayFormat = 'YYYY/MM/DD';
 
 const LbStatistics = (props) => {
-  const { dispatch, lb_statistics, lb_account, kz_account } = props;
+  const { dispatch, lb_statistics, kz_account } = props;
 
   const [selectedYear, setSelectedYear] = useState(moment().format('YYYY'));
   const [selectedMonth, setSelectedMonth] = useState(moment().format('MM'));
@@ -191,8 +189,7 @@ const LbStatistics = (props) => {
   );
 };
 
-export default connect(({ lb_statistics, lb_account, kz_account }) => ({
+export default connect(({ lb_statistics, kz_account }) => ({
   lb_statistics,
-  lb_account,
   kz_account,
 }))(LbStatistics);

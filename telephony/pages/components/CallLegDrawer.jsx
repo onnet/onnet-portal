@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactJson from 'react-json-view';
 import * as _ from 'lodash';
 import { useMediaQuery } from 'react-responsive';
 import { useIntl, connect } from 'umi';
 import { Drawer } from 'antd';
-//import { AccountCdrLeg } from '@/pages/onnet-portal/telephony/services/kazoo-telephony';
 import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 
 const CallLegDrawer = (props) => {
@@ -12,7 +11,6 @@ const CallLegDrawer = (props) => {
 
   const {
     settings,
-    kz_account,
     selectedLeg,
     onSelectedLegDrawerClose,
     isSelectedLegDrawerVisible,
@@ -20,24 +18,6 @@ const CallLegDrawer = (props) => {
 
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
   const { formatMessage } = useIntl();
-
-  //  useEffect(() => {
-  //    if (kz_account.data && selectedAction.event_doc_id) setActionState();
-  //  }, [kz_account, selectedAction]);
-  //
-  //  function setActionState() {
-  //    setActionData({});
-  //    AccountCdrLeg({
-  //      account_id: kz_account.data.id,
-  //      call: selectedCallLeg.id,
-  //      method: 'GET',
-  //    })
-  //     .then((resp) => {
-  //        console.log('AccountCdrLeg resp: ', resp);
-  //        setCallLegData(resp.data);
-  //      })
-  //      .catch(() => console.log('Oops errors!'));
-  //  }
 
   return (
     <Drawer
@@ -64,7 +44,6 @@ const CallLegDrawer = (props) => {
   );
 };
 
-export default connect(({ settings, kz_account }) => ({
+export default connect(({ settings }) => ({
   settings,
-  kz_account,
 }))(CallLegDrawer);

@@ -40,23 +40,21 @@ export function dateToGregorian(date) {
 }
 
 export function branchEndObjects(obj, acc) {
-  for (var k in obj) {
+  for (const k in obj) {
     if (depthOf(obj[k]) > 1) {
       branchEndObjects(obj[k], acc);
-    } else {
-      if (obj[k].nomenclature_key) acc.push(obj[k]);
-    }
+    } else if (obj[k].nomenclature_key) acc.push(obj[k]);
   }
   return acc;
 }
 
 function depthOf(object) {
-  var level = 1;
-  for (var key in object) {
+  let level = 1;
+  for (const key in object) {
     if (!object.hasOwnProperty(key)) continue;
 
-    if (typeof object[key] == 'object') {
-      var depth = depthOf(object[key]) + 1;
+    if (typeof object[key] === 'object') {
+      const depth = depthOf(object[key]) + 1;
       level = Math.max(depth, level);
     }
   }

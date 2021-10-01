@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect, useIntl } from 'umi';
+import { connect } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import Masonry from 'react-masonry-css';
 import { masonryBreakpointCols } from '@/pages/onnet-portal/core/utils/props';

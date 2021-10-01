@@ -43,7 +43,7 @@ const CallflowBuilder = (props) => {
     }
   }, [kz_account]);
 
-  var tree = {
+  const tree = {
     name: 'rootNode',
     children: [
       {

@@ -13,8 +13,6 @@ import HeaderSearch from '@/pages/onnet-portal/core/components/HeaderSearch';
 import gh_styles from '@/pages/onnet-portal/core/components/HeaderSearch/globhead.less';
 import CallDrawer from '../components/CallDrawer';
 import { columns } from './columns_cdr';
-import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
-import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
 import ResellerChildrenTable from '@/pages/onnet-portal/reseller/portal/components/ResellerChildrenTable';
 import { dateToGregorian } from '@/pages/onnet-portal/core/utils/subroutine';
 
@@ -101,7 +99,7 @@ const Statistics = (props) => {
     console.log('currentDataSource :', currentDataSource);
   };
 
-  function onDateChange(value, dateString) {
+  function onDateChange(value) {
     if (value) {
       const sartOfDay = value.clone().startOf('day');
       const endOfDay = value.clone().endOf('day');
