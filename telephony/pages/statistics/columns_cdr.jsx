@@ -2,7 +2,7 @@ import React from 'react';
 import { getDvaApp } from 'umi';
 import Moment from 'react-moment';
 import { gregorianToDate } from '@/pages/onnet-portal/core/utils/subroutine';
-import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import { caller_number, callee_number } from '../../utils/subroutine.ts';
 
 const redux_state = getDvaApp()._store.getState();
@@ -41,13 +41,13 @@ export const columns = (onDrawerOpen, formatMessage) => [
   {
     key: 'call_recording',
     align: 'center',
-    render: (text, record) => <div>-</div>,
+    render: () => <div>-</div>,
   },
   {
     dataIndex: 'call_details',
     key: 'call_details',
     align: 'center',
-    render: (text, record) => (
+    render: () => (
       <div style={{ color: redux_state.settings.primaryColor, cursor: 'pointer' }}>
         <InfoCircleOutlined />
       </div>

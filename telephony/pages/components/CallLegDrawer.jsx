@@ -7,7 +7,7 @@ import { Drawer } from 'antd';
 import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 
 const CallLegDrawer = (props) => {
-  const [callLegData, setCallLegData] = useState({});
+  const [callLegData, ] = useState({});
 
   const {
     settings,

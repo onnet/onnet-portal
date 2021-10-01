@@ -1,18 +1,15 @@
 import React, { useEffect, Fragment } from 'react';
-import { useIntl, connect } from 'umi';
-import NumberFormat from 'react-number-format';
+import { connect } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Row, Col } from 'antd';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
-import styles from '../style.less';
 
 import CardPaymentsList from './CardPaymentsList';
 import CardOnlinePayments from './CardOnlinePayments';
 import CardWireTransfer from './CardWireTransfer';
 
 const LbFinanceDetails = (props) => {
-  const { dispatch, lb_account, kz_account, kz_user } = props;
-  const { formatMessage } = useIntl();
+  const { dispatch, lb_account, kz_account } = props;
 
   useEffect(() => {
     if (kz_account.data) {
@@ -56,8 +53,7 @@ const LbFinanceDetails = (props) => {
   );
 };
 
-export default connect(({ lb_account, kz_account, kz_user }) => ({
+export default connect(({ lb_account, kz_account }) => ({
   lb_account,
   kz_account,
-  kz_user,
 }))(LbFinanceDetails);

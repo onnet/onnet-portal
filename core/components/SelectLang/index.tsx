@@ -2,20 +2,14 @@ import { GlobalOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useIntl, getLocale, setLocale } from 'umi';
 
-import { ClickParam } from 'antd/es/menu';
 import React from 'react';
-import classNames from 'classnames';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
-interface SelectLangProps {
-  className?: string;
-}
-const SelectLang: React.FC<SelectLangProps> = (props) => {
-  const { className } = props;
+const SelectLang = () => {
   const { formatMessage } = useIntl();
   const selectedLang = getLocale();
-  const changeLang = ({ key }: ClickParam): void => setLocale(key, false);
+  const changeLang = (key) => setLocale(key, false);
   const locales = ['en-US', 'ru-RU'];
   const languageLabels = {
     'ru-RU': 'Русский',

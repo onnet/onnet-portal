@@ -1,12 +1,9 @@
 import React, { useEffect, Fragment } from 'react';
 import { useIntl, connect, history } from 'umi';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Menu, Dropdown, Modal, message, Avatar, List } from 'antd';
+import { Button, Menu, Dropdown, Modal, message, List } from 'antd';
 
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
-import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
-import ResellerCreateChild from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateChild';
 import ResellerCreateUser from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateUser';
 import { kzAccount } from '@/pages/onnet-portal/core/services/kazoo';
 import ResellerChildrenTable from './components/ResellerChildrenTable';
