@@ -5,7 +5,7 @@ import PromiseRender from './PromiseRender';
 const checkPermissions = (
   authority,
   target,
-  Exception,
+  Exception
 ) => {
   if (!authority) {
     return target;
@@ -49,7 +49,7 @@ const checkPermissions = (
     try {
       const bool = authority(currentAuthority);
       if (bool instanceof Promise) {
-        return <PromiseRender<T, K> ok={target} error={Exception} promise={bool} />;
+        return <PromiseRender ok={target} error={Exception} promise={bool} />;
       }
       if (bool) {
         return target;
@@ -64,7 +64,7 @@ const checkPermissions = (
 
 export { checkPermissions };
 
-function check<T, K>(authority, target, Exception) {
+function check(authority, target, Exception) {
   return checkPermissions(authority, target, Exception);
 }
 
