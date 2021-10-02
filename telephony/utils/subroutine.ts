@@ -1,19 +1,21 @@
+import * as _ from 'lodash';
+
 export function caller_number(obj) {
-  let caller_number;
+  let cn;
   if (obj.caller_id_number) {
-    caller_number = obj.caller_id_number;
+    cn = obj.caller_id_number;
   } else if (obj.from) {
-    caller_number = _.split(obj.from, '@')[0];
+    cn = _.split(obj.from, '@')[0];
   }
-  return caller_number;
+  return cn;
 }
 
 export function callee_number(obj) {
-  let callee_number;
+  let ceen;
   if (obj.callee_id_number) {
-    callee_number = obj.callee_id_number;
+    ceen = obj.callee_id_number;
   } else if (obj.to) {
-    callee_number = _.split(obj.to, '@')[0];
+    ceen = _.split(obj.to, '@')[0];
   }
-  return callee_number;
+  return ceen;
 }

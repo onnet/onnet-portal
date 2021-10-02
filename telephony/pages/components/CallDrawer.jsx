@@ -6,7 +6,7 @@ import { useMediaQuery } from 'react-responsive';
 import ReactJson from 'react-json-view';
 import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 import { useIntl, connect } from 'umi';
-import { Drawer, Timeline, Collapse, Card, Table } from 'antd';
+import { Drawer, Timeline, Collapse, Card } from 'antd';
 import { gregorianToDate } from '@/pages/onnet-portal/core/utils/subroutine';
 import { AccountCdrLegs } from '@/pages/onnet-portal/telephony/services/kazoo-telephony';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
@@ -17,7 +17,6 @@ import { caller_number, callee_number } from '../../utils/subroutine.ts';
 const { Panel } = Collapse;
 
 const CallDrawer = (props) => {
-  const [isCallLegDrawerVisible, setIsCallLegDrawerVisible] = useState(false);
   const [isSelectedLegDrawerVisible, setIsSelectedLegDrawerVisible] = useState(false);
   const [selectedLeg, setSelectedLeg] = useState(false);
   const [callLegs, setCallLegs] = useState([]);
@@ -26,7 +25,6 @@ const CallDrawer = (props) => {
     settings,
     kz_account,
     child_account,
-    authority,
     selectedCall,
     onDrawerClose,
     isCallDrawerVisible,
@@ -82,7 +80,7 @@ const CallDrawer = (props) => {
             setIsSelectedLegDrawerVisible(true);
           }}
         >
-          {leg.call_direction == 'outbound' ? (
+          {leg.call_direction === 'outbound' ? (
             <>
               {leg.switch_hostname} {' -> '}{' '}
               {leg.user_agent ? leg.user_agent : _.split(leg.to, '@')[0]}
@@ -170,9 +168,8 @@ const CallDrawer = (props) => {
   );
 };
 
-export default connect(({ settings, kz_account, child_account, authority }) => ({
+export default connect(({ settings, kz_account, child_account }) => ({
   settings,
   kz_account,
   child_account,
-  authority,
 }))(CallDrawer);

@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactJson from 'react-json-view';
-import * as _ from 'lodash';
 import { useMediaQuery } from 'react-responsive';
-import { useIntl, connect } from 'umi';
+import { connect } from 'umi';
 import { Drawer } from 'antd';
 import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 
 const RegistrationDetailsDrawer = (props) => {
   const {
     settings,
-    kz_account,
     selectedRegistration,
-    onSelectedRegistrationDrawerClose,
     onRegistrationDrawerClose,
     isRegistrationDrawerVisible,
   } = props;
 
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
-  const { formatMessage } = useIntl();
 
   return (
     <Drawer
@@ -40,7 +36,6 @@ const RegistrationDetailsDrawer = (props) => {
   );
 };
 
-export default connect(({ settings, kz_account }) => ({
+export default connect(({ settings }) => ({
   settings,
-  kz_account,
 }))(RegistrationDetailsDrawer);

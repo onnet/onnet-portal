@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { connect, useIntl } from 'umi';
+import { connect } from 'umi';
 import { Table, Tag } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { getResellerChannels } from '@/pages/onnet-portal/telephony/services/kazoo-telephony';
 import AccountName from '@/pages/onnet-portal/core/components/account_name';
 import * as subr from '@/pages/onnet-portal/core/utils/subroutine';
 import Moment from 'react-moment';
-import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
-import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
 
 function get_calee_id_number(data_obj) {
   let callee_id_number;
@@ -26,10 +24,7 @@ function get_calee_id_number(data_obj) {
 const CurrentCalls = (props) => {
   const { dispatch, kz_login, kz_account, settings, child_account } = props;
   const [rows, setRows] = useState([]);
-  const [isMounted, setIsMounted] = useState(false);
   const ws = useRef(null);
-
-  const { formatMessage } = useIntl();
 
   const { auth_token } = kz_login;
 

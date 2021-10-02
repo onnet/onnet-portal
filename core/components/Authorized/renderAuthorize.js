@@ -1,4 +1,4 @@
-const CURRENT;
+let CURRENT = 'NULL';
 
 const renderAuthorize =
   (Authorized) =>
