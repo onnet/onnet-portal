@@ -1,20 +1,14 @@
 import ProLayout, {
   MenuDataItem,
-  BasicLayoutProps as ProLayoutProps,
-  Settings,
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import NumberFormat from 'react-number-format';
 import React, { useEffect, useState } from 'react';
 import { useIntl, Link, connect, FormattedMessage } from 'umi';
 import Authorized from '../utils/Authorized';
-import RightContent from '../components/GlobalHeader/RightContent';
 import MenuSelectLang from '../components/MenuSelectLang';
 import { Popconfirm } from 'antd';
 import {
-  GlobalOutlined,
-  LinkOutlined,
-  BookOutlined,
   LogoutOutlined,
   UserOutlined,
 } from '@ant-design/icons';
@@ -29,7 +23,7 @@ import logo from '../assets/logo.svg';
 
 const footerRender = () => <span />;
 
-const BasicLayout: React.FC = (props) => {
+const BasicLayout = (props) => {
   const {
     dispatch,
     children,
@@ -46,10 +40,10 @@ const BasicLayout: React.FC = (props) => {
 
   const [isEditUserDrawerVisible, setIsEditUserDrawerVisible] = useState(false);
 
-  const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
+  const menuDataRender = (menuList) =>
     menuList.map((item) => {
       const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
-      return Authorized.check(item.authority, localItem, null) as MenuDataItem;
+      return Authorized.check(item.authority, localItem, null);
     });
 
   useEffect(() => {
@@ -200,9 +194,10 @@ const BasicLayout: React.FC = (props) => {
         menuDataRender={menuDataRender}
         formatMessage={formatMessage}
         extra={kz_account?.data?.is_reseller ? extraResellerContent : extraConsumerContent}
-        //       rightContentRender={(rightProps) => <RightContent {...rightProps} />}
         links={[
-          <span onClick={() => setIsEditUserDrawerVisible(true)}>
+          <span key="profile_link_key"
+            onClick={() => setIsEditUserDrawerVisible(true)}
+          >
             <UserOutlined />
             {!global.collapsed ? (
               <span style={{ marginLeft: '10px' }}>
@@ -210,9 +205,10 @@ const BasicLayout: React.FC = (props) => {
               </span>
             ) : null}
           </span>,
-          <MenuSelectLang />,
+          <MenuSelectLang key="menu_select_lang_link_key" />,
 
           <Popconfirm
+            key="logout+link_key"
             title={`${formatMessage({
               id: 'menu.account.logout',
               defaultMessage: 'Logout',

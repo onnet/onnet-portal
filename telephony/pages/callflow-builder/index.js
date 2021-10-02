@@ -1,8 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import React, { useEffect } from 'react';
 import { connect } from 'umi';
-import { Tag } from 'antd';
 import {
   AccountCallflows,
   AccountCallflow,
@@ -13,22 +10,22 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 const CallflowBuilder = (props) => {
   const { kz_account } = props;
 
-  const [dataCallFlows, setDataCallFlows] = useState([]);
-  const [selectedCF, setSelectedCF] = useState({});
+//  const [dataCallFlows, setDataCallFlows] = useState([]);
+//  const [selectedCF, setSelectedCF] = useState({});
 
   useEffect(() => {
     if (kz_account.data) {
-      setDataCallFlows([]);
+//      setDataCallFlows([]);
       AccountCallflows({
         account_id: kz_account.data?.id,
         method: 'GET',
       })
         .then((resp) => {
           console.log('AccountCallflows resp: ', resp);
-          setDataCallFlows(resp.data);
+//          setDataCallFlows(resp.data);
         })
         .catch(() => console.log('Oops errors!'));
-      setSelectedCF({});
+//      setSelectedCF({});
       AccountCallflow({
         account_id: kz_account.data?.id,
         callflow_id: '2e8d1ae6bfcd96b90f954fd2ed82d345',
@@ -36,7 +33,7 @@ const CallflowBuilder = (props) => {
       })
         .then((resp) => {
           console.log('AccountCallflow resp: ', resp);
-          setSelectedCF(resp.data);
+//          setSelectedCF(resp.data);
           drawTree(resp.data);
         })
         .catch(() => console.log('Oops errors!'));

@@ -16,7 +16,7 @@ const AuthorizedRoute = ({
   >
     <Route
       {...rest}
-      render={(props: any) => (Component ? <Component {...props} /> : render(props))}
+      render={(props) => (Component ? <Component {...props} /> : render(props))}
     />
   </Authorized>
 );

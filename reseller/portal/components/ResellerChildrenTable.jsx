@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useIntl, connect, history } from 'umi';
+import { useIntl, connect } from 'umi';
 import { useMediaQuery } from 'react-responsive';
+import * as _ from 'lodash';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button, Table, Card, Switch } from 'antd';
 import info_details_fun from '@/pages/onnet-portal/core/components/info_details';
@@ -16,9 +17,7 @@ const ResellerChildrenTable = (props) => {
 
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSales, setDataSales] = useState([]);
-  const [dataSourceLoading, setDataSourceLoading] = useState(true);
-  const [isAccountDetailsDrawerIdVisible, setIsAccountDetailsDrawerIdVisible] = useState(false);
-  const [selectedAccountId, setSelectedAccountId] = useState(false);
+//  const [dataSourceLoading, setDataSourceLoading] = useState(true);
 
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
@@ -26,10 +25,10 @@ const ResellerChildrenTable = (props) => {
     //   if (!(kz_account.data?.is_reseller || kz_account.data?.superduper_admin) ) history.push('/int/dashboard');
 
     if (kz_children.data) {
-      setDataSourceLoading(true);
+   //   setDataSourceLoading(true);
       setDataSales(kz_children.data);
       setDataSource(kz_children.data);
-      setDataSourceLoading(false);
+ //     setDataSourceLoading(false);
     }
   }, [kz_account, kz_children]);
 
