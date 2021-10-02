@@ -55,7 +55,7 @@ const AuthorityModel = {
 
         // One more dirty hack 17e3d20d5343462f15f7563f3b6f388e
         let authority;
-        if (account_id == '17e3d20d5343462f15f7563f3b6f388e') authority = ['faceless_sub_sub'];
+        if (account_id === '17e3d20d5343462f15f7563f3b6f388e') authority = ['faceless_sub_sub'];
         else
           authority = priv_level.concat(
             reseller,

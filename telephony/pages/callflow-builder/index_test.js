@@ -1,8 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'umi';
-import { Tag } from 'antd';
 import {
   AccountCallflows,
   AccountCallflow,
@@ -13,8 +10,8 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 const CallflowBuilder = (props) => {
   const { kz_account } = props;
 
-  const [dataCallFlows, setDataCallFlows] = useState([]);
-  const [selectedCF, setSelectedCF] = useState({});
+  const [, setDataCallFlows] = useState([]);
+  const [, setSelectedCF] = useState({});
 
   useEffect(() => {
     if (kz_account.data) {
@@ -37,38 +34,11 @@ const CallflowBuilder = (props) => {
         .then((resp) => {
           console.log('AccountCallflow resp: ', resp);
           setSelectedCF(resp.data);
-          drawTree(resp.data);
+ //         drawTree(resp.data);
         })
         .catch(() => console.log('Oops errors!'));
     }
   }, [kz_account]);
-
-  const tree = {
-    name: 'rootNode',
-    children: [
-      {
-        name: 'child1',
-      },
-      {
-        name: 'child2',
-        children: [
-          {
-            name: 'grandchild1',
-            children: [{ name: 'grand granchild1' }, { name: 'grand granchild2' }],
-          },
-        ],
-      },
-      {
-        name: 'child3',
-        children: [
-          { name: 'grandchild2' },
-          { name: 'grandchild3' },
-          { name: 'grandchild4' },
-          { name: 'grandchild5' },
-        ],
-      },
-    ],
-  };
 
   return (
     <PageHeaderWrapper breadcrumb={false}>
