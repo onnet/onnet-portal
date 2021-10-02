@@ -1,20 +1,7 @@
-import { Effect, Reducer, getDvaApp } from 'umi';
+import { getDvaApp } from 'umi';
 import isEqual from 'lodash.isequal';
-// import { isArrayEqual } from '../utils/subroutine';
 
-export interface AuthorityModelType {
-  namespace: 'authority';
-  state: {};
-  effects: {
-    refresh: Effect;
-    flush: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-  };
-}
-
-const AuthorityModel: AuthorityModelType = {
+const AuthorityModel = {
   namespace: 'authority',
 
   state: { currentAuthority: [] },
