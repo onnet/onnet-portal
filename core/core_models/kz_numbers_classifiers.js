@@ -1,19 +1,6 @@
-import { Effect, Reducer } from 'umi';
 import { numbersClassifiers } from '../services/kazoo';
 
-export interface KzNumbersClassifiersModelType {
-  namespace: 'kz_numbers_classifiers';
-  state: {};
-  effects: {
-    refreshAccountState: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-    flush: Reducer<{}>;
-  };
-}
-
-const KzNumbersClassifiersModel: KzNumbersClassifiersModelType = {
+const KzNumbersClassifiersModel = {
   namespace: 'kz_numbers_classifiers',
 
   state: {},
