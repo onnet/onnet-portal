@@ -1,19 +1,6 @@
-import { Effect, Reducer } from 'umi';
 import { aKzAccount } from '../services/kazoo';
 
-export interface KzooCacheModelType {
-  namespace: 'kz_cache';
-  state: {};
-  effects: {
-    refreshAccountState: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-    flush: Reducer<{}>;
-  };
-}
-
-const KzooCacheModel: KzooCacheModelType = {
+const KzooCacheModel = {
   namespace: 'kz_cache',
 
   state: { account_name: [] },
