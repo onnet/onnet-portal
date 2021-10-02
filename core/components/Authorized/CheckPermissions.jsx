@@ -46,7 +46,6 @@ const checkPermissions = (
     return <PromiseRender ok={target} error={Exception} promise={authority} />;
   }
   if (typeof authority === 'function') {
-    try {
       const bool = authority(currentAuthority);
       if (bool instanceof Promise) {
         return <PromiseRender ok={target} error={Exception} promise={bool} />;
@@ -55,9 +54,6 @@ const checkPermissions = (
         return target;
       }
       return Exception;
-    } catch (error) {
-      throw error;
-    }
   }
   throw new Error('unsupported parameters');
 };
