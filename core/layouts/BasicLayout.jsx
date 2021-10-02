@@ -1,5 +1,4 @@
 import ProLayout, {
-  MenuDataItem,
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import NumberFormat from 'react-number-format';
@@ -98,7 +97,7 @@ const BasicLayout = (props) => {
 
   const { formatMessage } = useIntl();
 
-  const handleMenuCollapse = (payload: boolean): void =>
+  const handleMenuCollapse = (payload) =>
     dispatch &&
     dispatch({
       type: 'global/changeLayoutCollapsed',
