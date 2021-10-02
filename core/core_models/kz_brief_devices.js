@@ -1,20 +1,7 @@
-import { Effect, Reducer } from 'umi';
 import { saga } from 'dva';
 import { kzDevices } from '../services/kazoo';
 
-export interface ModelType {
-  namespace: string;
-  state: {};
-  effects: {
-    refreshAccountState: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-    flush: Reducer<{}>;
-  };
-}
-
-const Model: ModelType = {
+const Model = {
   namespace: 'kz_brief_devices',
 
   state: {},

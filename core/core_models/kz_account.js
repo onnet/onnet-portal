@@ -1,19 +1,7 @@
-import { Effect, Reducer, getDvaApp } from 'umi';
+import { getDvaApp } from 'umi';
 import { aKzAccount } from '../services/kazoo';
 
-export interface KazooAccountModelType {
-  namespace: 'kz_account';
-  state: {};
-  effects: {
-    refreshAccountState: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-    flush: Reducer<{}>;
-  };
-}
-
-const KazooAccountModel: KazooAccountModelType = {
+const KazooAccountModel = {
   namespace: 'kz_account',
 
   state: {},
