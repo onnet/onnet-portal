@@ -1,19 +1,7 @@
-import { Effect, Reducer, getDvaApp } from 'umi';
+import { getDvaApp } from 'umi';
 import { SIPRegistrationsCount } from '../services/kazoo';
 
-export interface RsRegistrationsCountModelType {
-  namespace: 'kz_registrations_count';
-  state: {};
-  effects: {
-    refreshAccountState: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-    flush: Reducer<{}>;
-  };
-}
-
-const RsRegistrationsCountModel: RsRegistrationsCountModelType = {
+const RsRegistrationsCountModel = {
   namespace: 'kz_registrations_count',
 
   state: {},
