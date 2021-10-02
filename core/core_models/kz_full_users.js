@@ -1,19 +1,6 @@
-import { Effect, Reducer } from 'umi';
 import { getUser } from '../services/kazoo';
 
-export interface ModelType {
-  namespace: string;
-  state: {};
-  effects: {
-    refreshAccountState: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-    flush: Reducer<{}>;
-  };
-}
-
-const Model: ModelType = {
+const Model = {
   namespace: 'kz_full_users',
 
   state: {},
