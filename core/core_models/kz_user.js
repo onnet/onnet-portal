@@ -1,19 +1,7 @@
-import { Effect, Reducer, getDvaApp } from 'umi';
+import { getDvaApp } from 'umi';
 import { getUser } from '../services/kazoo';
 
-export interface KazooUserModelType {
-  namespace: 'kz_user';
-  state: {};
-  effects: {
-    refresh: Effect;
-    flush: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-  };
-}
-
-const KazooUserModel: KazooUserModelType = {
+const KazooUserModel = {
   namespace: 'kz_user',
 
   state: {},
