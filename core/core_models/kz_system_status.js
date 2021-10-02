@@ -1,19 +1,6 @@
-import { Effect, Reducer } from 'umi';
 import { kzSystemStatus } from '../services/kazoo';
 
-export interface KzSystemStatusModelType {
-  namespace: 'kz_system_status';
-  state: {};
-  effects: {
-    refreshAccountState: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-    flush: Reducer<{}>;
-  };
-}
-
-const KzSystemStatusModel: KzSystemStatusModelType = {
+const KzSystemStatusModel = {
   namespace: 'kz_system_status',
 
   state: {},
