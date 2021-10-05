@@ -1,26 +1,6 @@
-import { AnyAction, Reducer } from 'redux';
-
-import { EffectsCommandMap } from 'dva';
 import { lbAccountDocs } from '@/pages/onnet-portal/core/services/zzlb';
 
-export type Effect = (
-  action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
-) => void;
-
-export interface ModelType {
-  namespace: string;
-  state: {};
-  effects: {
-    refreshAccountState: Effect;
-  };
-  reducers: {
-    update: Reducer<{}>;
-    flush: Reducer<{}>;
-  };
-}
-
-const Model: ModelType = {
+const Model = {
   namespace: 'lb_documents',
 
   state: {},
