@@ -1,29 +1,26 @@
-import React, { useState, useEffect, Fragment, useRef } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
+import * as _ from 'lodash';
 import { connect, useIntl } from 'umi';
-import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
-import { Tag, Button, Table, Modal, Input, Switch, Card } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Tag, Button, Table, Switch, Card } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import HeaderSearch from '@/pages/onnet-portal/core/components/HeaderSearch';
-import Highlighter from 'react-highlight-words';
 import { useMediaQuery } from 'react-responsive';
 import gh_styles from '@/pages/onnet-portal/core/components/HeaderSearch/globhead.less';
 import AccountName from '@/pages/onnet-portal/core/components/account_name';
-import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
-import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
 import { getSIPRegistrations } from '@/pages/onnet-portal/telephony/services/kazoo-telephony';
 import RegistrationDetailsDrawer from './components/RegistrationDetailsDrawer.jsx';
 import styles from '@/pages/onnet-portal/core/style.less';
 import { cardProps } from '@/pages/onnet-portal/core/utils/props';
 
 const CurrentRegistrations = (props) => {
-  const { dispatch, kz_login, kz_account, settings, child_account } = props;
-  const [searchText, setSearchText] = useState('');
-  const [currentTableLength, setCurrentTableLength] = useState(0);
+  const { dispatch, kz_account, child_account } = props;
+  const [, setCurrentTableLength] = useState(0);
 
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSource, setDataSource] = useState([]);
   const [dataRegistrations, setDataRegistrations] = useState([]);
-  const [dataRegistrationsQty, setDataRegistrationsQty] = useState(0);
+  const [, setDataRegistrationsQty] = useState(0);
   const [isRegistrationDrawerVisible, setIsRegistrationDrawerVisible] = useState(false);
   const [selectedRegistration, setSelectedRegistration] = useState({});
   const [dataSourceLoading, setDataSourceLoading] = useState(false);
@@ -60,22 +57,12 @@ const CurrentRegistrations = (props) => {
       .catch(() => console.log('Oops errors!'));
   }
 
-  const handleSearch = (selectedKeys, confirm) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-  };
-
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText('');
-  };
-
   const countSelectedRegs = () => {
     const dsLength = dataSource.length;
-    if (dsLength == 0) return 'No registrations found!';
+    if (dsLength === 0) return 'No registrations found!';
 
     const drLength = dataRegistrations.length;
-    if (drLength == dsLength) return `Registrations amount: ${drLength}`;
+    if (drLength === dsLength) return `Registrations amount: ${drLength}`;
 
     return `Registrations selected: ${dsLength} / ${drLength}`;
   };
@@ -250,8 +237,7 @@ const CurrentRegistrations = (props) => {
   );
 };
 
-export default connect(({ kz_login, kz_account, child_account }) => ({
-  kz_login,
+export default connect(({ kz_account, child_account }) => ({
   kz_account,
   child_account,
 }))(CurrentRegistrations);
