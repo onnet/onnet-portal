@@ -37,7 +37,7 @@ const CurrentRegistrations = (props) => {
         payload: { account_id: kz_account.data.id, method: 'GET' },
       });
     }
-  }, [kz_account, child_account]);
+  }, [kz_account, child_account, dispatch]);
 
   function setRegistrationsState() {
     setDataSourceLoading(true);

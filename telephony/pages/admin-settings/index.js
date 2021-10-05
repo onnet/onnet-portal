@@ -25,7 +25,7 @@ const AdminSettings = (props) => {
         payload: { method: 'GET', account_id: kz_account.data.id },
       });
     }
-  }, [kz_account]);
+  }, [dispatch, kz_account]);
 
   return (
     <PageHeaderWrapper breadcrumb={false}>
