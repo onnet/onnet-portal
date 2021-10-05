@@ -1,4 +1,3 @@
-import { EffectsCommandMap } from 'dva';
 import { AccountCallflow } from '../services/kazoo-telephony';
 
 const Model = {

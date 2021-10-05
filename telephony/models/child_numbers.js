@@ -1,6 +1,5 @@
 import { getDvaApp } from 'umi';
 
-import { EffectsCommandMap } from 'dva';
 import { AccountNumbers } from '@/pages/onnet-portal/core/services/kazoo';
 
 const Model = {
