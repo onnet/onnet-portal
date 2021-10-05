@@ -178,7 +178,7 @@ const CurrentCalls = (props) => {
         }
       };
     }
-  }, [kz_account, rows]);
+  }, [kz_account, rows, dispatch]);
 
   const initCurCalls = () => {
     const reqPayload = kz_account.data ? { account_id: kz_account.data.id } : {};
