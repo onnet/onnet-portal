@@ -7,14 +7,9 @@ import { Drawer } from 'antd';
 import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 
 const CallLegDrawer = (props) => {
-  const [callLegData, ] = useState({});
+  const [callLegData] = useState({});
 
-  const {
-    settings,
-    selectedLeg,
-    onSelectedLegDrawerClose,
-    isSelectedLegDrawerVisible,
-  } = props;
+  const { settings, selectedLeg, onSelectedLegDrawerClose, isSelectedLegDrawerVisible } = props;
 
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
   const { formatMessage } = useIntl();

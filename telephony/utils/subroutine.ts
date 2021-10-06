@@ -6,7 +6,7 @@ export function caller_number(obj) {
   if (caller_id_number) {
     cn = caller_id_number;
   } else if (from) {
-    [ cn ] = _.split(from, '@');
+    [cn] = _.split(from, '@');
   }
   return cn;
 }
@@ -17,7 +17,7 @@ export function callee_number(obj) {
   if (callee_id_number) {
     ceen = callee_id_number;
   } else if (to) {
-    [ ceen ] = _.split(to, '@');
+    [ceen] = _.split(to, '@');
   }
   return ceen;
 }

@@ -1,16 +1,11 @@
-import ProLayout, {
-  SettingDrawer,
-} from '@ant-design/pro-layout';
+import ProLayout, { SettingDrawer } from '@ant-design/pro-layout';
 import NumberFormat from 'react-number-format';
 import React, { useEffect, useState } from 'react';
 import { useIntl, Link, connect, FormattedMessage } from 'umi';
 import Authorized from '../utils/Authorized';
 import MenuSelectLang from '../components/MenuSelectLang';
 import { Popconfirm } from 'antd';
-import {
-  LogoutOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import ResellerChildFlush from '@/pages/onnet-portal/reseller/portal/components/ResellerChildFlush';
 import ResellerChildSearch from '@/pages/onnet-portal/reseller/portal/components/ResellerChildSearch';
 import ResellerCreateChild from '@/pages/onnet-portal/reseller/portal/components/ResellerCreateChild';
@@ -194,9 +189,7 @@ const BasicLayout = (props) => {
         formatMessage={formatMessage}
         extra={kz_account?.data?.is_reseller ? extraResellerContent : extraConsumerContent}
         links={[
-          <span key="profile_link_key"
-            onClick={() => setIsEditUserDrawerVisible(true)}
-          >
+          <span key="profile_link_key" onClick={() => setIsEditUserDrawerVisible(true)}>
             <UserOutlined />
             {!global.collapsed ? (
               <span style={{ marginLeft: '10px' }}>

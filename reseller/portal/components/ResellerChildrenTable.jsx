@@ -17,7 +17,7 @@ const ResellerChildrenTable = (props) => {
 
   const [isPaginated, setIsPaginated] = useState({ position: 'bottom' });
   const [dataSales, setDataSales] = useState([]);
-//  const [dataSourceLoading, setDataSourceLoading] = useState(true);
+  //  const [dataSourceLoading, setDataSourceLoading] = useState(true);
 
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
@@ -25,10 +25,10 @@ const ResellerChildrenTable = (props) => {
     //   if (!(kz_account.data?.is_reseller || kz_account.data?.superduper_admin) ) history.push('/int/dashboard');
 
     if (kz_children.data) {
-   //   setDataSourceLoading(true);
+      //   setDataSourceLoading(true);
       setDataSales(kz_children.data);
       setDataSource(kz_children.data);
- //     setDataSourceLoading(false);
+      //     setDataSourceLoading(false);
     }
   }, [kz_account, kz_children]);
 

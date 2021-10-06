@@ -6,12 +6,8 @@ import { Drawer } from 'antd';
 import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 
 const RegistrationDetailsDrawer = (props) => {
-  const {
-    settings,
-    selectedRegistration,
-    onRegistrationDrawerClose,
-    isRegistrationDrawerVisible,
-  } = props;
+  const { settings, selectedRegistration, onRegistrationDrawerClose, isRegistrationDrawerVisible } =
+    props;
 
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 

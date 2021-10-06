@@ -2,11 +2,7 @@ import { getDvaApp } from 'umi';
 import React from 'react';
 import PromiseRender from './PromiseRender';
 
-const checkPermissions = (
-  authority,
-  target,
-  Exception
-) => {
+const checkPermissions = (authority, target, Exception) => {
   if (!authority) {
     return target;
   }
@@ -46,14 +42,14 @@ const checkPermissions = (
     return <PromiseRender ok={target} error={Exception} promise={authority} />;
   }
   if (typeof authority === 'function') {
-      const bool = authority(currentAuthority);
-      if (bool instanceof Promise) {
-        return <PromiseRender ok={target} error={Exception} promise={bool} />;
-      }
-      if (bool) {
-        return target;
-      }
-      return Exception;
+    const bool = authority(currentAuthority);
+    if (bool instanceof Promise) {
+      return <PromiseRender ok={target} error={Exception} promise={bool} />;
+    }
+    if (bool) {
+      return target;
+    }
+    return Exception;
   }
   throw new Error('unsupported parameters');
 };

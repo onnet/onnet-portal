@@ -3,8 +3,7 @@ import { Spin } from 'antd';
 import isEqual from 'lodash/isEqual';
 import { isComponentClass } from './Secured';
 
-export default class PromiseRender extends React.Component
-  {
+export default class PromiseRender extends React.Component {
   state = {
     component: () => null,
   };

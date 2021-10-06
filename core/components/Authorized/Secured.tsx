@@ -24,7 +24,7 @@ const checkIsInstantiation = (target) => {
 const authorize = (authority, error) => {
   let classError = false;
   if (error) {
-    classError = (() => error);
+    classError = () => error;
   }
   if (!authority) {
     throw new Error('authority is required');

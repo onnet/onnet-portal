@@ -21,14 +21,8 @@ const CallDrawer = (props) => {
   const [selectedLeg, setSelectedLeg] = useState(false);
   const [callLegs, setCallLegs] = useState([]);
 
-  const {
-    settings,
-    kz_account,
-    child_account,
-    selectedCall,
-    onDrawerClose,
-    isCallDrawerVisible,
-  } = props;
+  const { settings, kz_account, child_account, selectedCall, onDrawerClose, isCallDrawerVisible } =
+    props;
 
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
   const { formatMessage } = useIntl();
