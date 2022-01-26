@@ -117,7 +117,11 @@ export function accountsUrl(params) {
   let url;
   const redux_state = getDvaApp()._store.getState();
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
-  if (MAYBE_SUPER_DUPER() && params.method === 'PUT') {
+  //
+  // ResellerCreateChild from superadmin fails due id account_id absense
+  // Need to lookup where account_id vanish needed 
+  //
+  if (MAYBE_SUPER_DUPER() && params.method === 'PUT_CHANGED') {
     url = `${API_URL_V2}/accounts`;
   } else {
     url = `${API_URL_V2}/accounts/${params.account_id}`;
@@ -223,4 +227,14 @@ export function accountByRealm(params) {
     method: 'GET',
     headers: JSON_HEADERS(),
   });
+}
+
+export async function ext_new_stakeholder(params) {
+  const redux_state = getDvaApp()._store.getState();
+  const API_URL_V2 = redux_state.settings.crossbarUrlV2;
+  const result = request(`${API_URL_V2}/ext/new_stakeholder`, {
+    method: 'PUT',
+    data: params,
+  });
+  return result;
 }
