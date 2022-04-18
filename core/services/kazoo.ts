@@ -119,7 +119,7 @@ export function accountsUrl(params) {
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   //
   // ResellerCreateChild from superadmin fails due id account_id absense
-  // Need to lookup where account_id vanish needed 
+  // Need to lookup where account_id vanish needed
   //
   if (MAYBE_SUPER_DUPER() && params.method === 'PUT_CHANGED') {
     url = `${API_URL_V2}/accounts`;
