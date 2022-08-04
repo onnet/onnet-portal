@@ -6,8 +6,7 @@ import { Drawer } from 'antd';
 import { reactJsonProps } from '@/pages/onnet-portal/core/utils/props';
 
 const DetailsDrawer = (props) => {
-  const { settings, details, title, onDetailsDrawerClose, isDetailsDrawerVisible } =
-    props;
+  const { settings, details, title, onDetailsDrawerClose, isDetailsDrawerVisible } = props;
 
   const isSmallDevice = useMediaQuery({ maxWidth: 991 });
 
@@ -16,9 +15,7 @@ const DetailsDrawer = (props) => {
       title={
         details ? (
           <>
-            <b style={{ color: settings.primaryColor }}>
-              {title}
-            </b>
+            <b style={{ color: settings.primaryColor }}>{title}</b>
           </>
         ) : null
       }

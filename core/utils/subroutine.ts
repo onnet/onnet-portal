@@ -53,6 +53,8 @@ function depthOf(object) {
   for (const key in object) {
     if (!object.hasOwnProperty(key)) continue;
 
+    if (key === 'footnotes') continue;
+
     if (typeof object[key] === 'object') {
       const depth = depthOf(object[key]) + 1;
       level = Math.max(depth, level);
