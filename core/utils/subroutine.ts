@@ -54,6 +54,7 @@ function depthOf(object) {
     if (!object.hasOwnProperty(key)) continue;
 
     if (key === 'footnotes') continue;
+    if (key === 'rates') continue;
 
     if (typeof object[key] === 'object') {
       const depth = depthOf(object[key]) + 1;
