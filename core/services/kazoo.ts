@@ -234,7 +234,7 @@ export async function ext_new_stakeholder(params) {
   const API_URL_V2 = redux_state.settings.crossbarUrlV2;
   const result = request(`${API_URL_V2}/ext/new_stakeholder`, {
     method: 'PUT',
-    data: params,
+    data: params.data,
   });
   return result;
 }
