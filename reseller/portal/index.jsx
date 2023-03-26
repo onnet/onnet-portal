@@ -30,53 +30,56 @@ const ResellerPortal = (props) => {
 
   const { formatMessage } = useIntl();
 
-  const menu = (
-    <Menu onClick={handleMenuClick}>
-      {child_account.data && child_brief_users.data
-        ? [
-            {
-              id: 'no_user_defined',
-              first_name: 'Faceless',
-              last_name: '',
-              username: 'User',
-              priv_level: 'user',
-            },
-          ]
-            .concat(child_brief_users.data)
-            .map((u) => (
-              <Menu.Item
-                key={u.id}
-                account_id={child_account.data.id}
-                account_name={child_account.data.name}
-                user_username={u.username}
-                user_id={u.id}
-              >
-                <UserOutlined />
-                {u.first_name} {u.last_name} ({u.username})
-              </Menu.Item>
-            ))
-        : null}
-    </Menu>
-  );
+  const menuItems =
+    _.get(child_account, 'data') && _.get(child_brief_users, 'data', []).length > 0
+      ? [
+          {
+            key: 'no_user_defined',
+            label: (
+              <>
+                <UserOutlined /> Faceless (User)
+              </>
+            ),
+            id: 'no_user_defined',
+            first_name: 'Faceless',
+            last_name: '',
+            username: 'User',
+            priv_level: 'user',
+          },
+        ]
+          .concat(child_brief_users.data)
+          .map((u) => ({
+            key: u.id,
+            label: (
+              <>
+                <UserOutlined /> {u.first_name} {u.last_name} ({u.username})
+              </>
+            ),
+            account_id: child_account.data.id,
+            account_name: child_account.data.name,
+            user_username: u.username,
+            user_id: u.id,
+          }))
+      : null;
 
-  function handleMenuClick(e) {
-    message.info(`Masking as ${e.item.props.user_username} @ ${e.item.props.account_name}.`);
-    console.log('click', e.item.props);
+  function handleMenuClick({ key: eventKey }) {
+    const selectedItem = menuItems.find(({ key }) => key === eventKey);
+    message.info(`Masking as ${selectedItem.user_username} @ ${selectedItem.account_name}.`);
     dispatch({
       type: 'kz_account/refresh',
-      payload: { account_id: e.item.props.account_id },
+      payload: { account_id: selectedItem.account_id },
     });
     dispatch({
       type: 'kz_user/refresh',
-      payload: { account_id: e.item.props.account_id, owner_id: e.item.props.user_id },
+      payload: { account_id: selectedItem.account_id, owner_id: selectedItem.user_id },
     });
     dispatch({
       type: 'mask_history/mask',
-      payload: { account_id: e.item.props.account_id, owner_id: e.item.props.user_id },
+      payload: { account_id: selectedItem.account_id, owner_id: selectedItem.user_id },
     });
     dispatch({
       type: 'lb_account/refresh',
-      payload: { account_id: e.item.props.account_id },
+      payload: { account_id: selectedItem.account_id },
     });
     dispatch({
       type: 'child_account/flush',
@@ -150,7 +153,7 @@ const ResellerPortal = (props) => {
                 defaultMessage: 'Delete Account',
               })}
             </Button>
-            <Dropdown key="dropdownkey1" overlay={menu}>
+            <Dropdown key="dropdownkey1" menu={{ onClick: handleMenuClick, items: menuItems }}>
               <Button
                 key="buttonkey2"
                 type="primary"

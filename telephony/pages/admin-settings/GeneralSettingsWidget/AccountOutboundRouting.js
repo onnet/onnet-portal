@@ -62,16 +62,17 @@ const AccountOutboundRouting = (props) => {
 
   if (!kz_cf_list.data) return null;
 
-  const menuAccountOutboundRouting = (
-    <Menu selectedKeys={[]} onClick={onAccountOutboundRoutingSelect}>
-      <Menu.Item key="general_routing">
-        {formatMessage({ id: 'telephony.general_routing', defaultMessage: 'General routing' })}
-      </Menu.Item>
-      <Menu.Item key="account_defined">
-        {formatMessage({ id: 'telephony.account_defined', defaultMessage: 'Account defined' })}
-      </Menu.Item>
-    </Menu>
-  );
+  const menuAccountOutboundRoutingItems = [
+    {
+      label: formatMessage({ id: 'telephony.general_routing', defaultMessage: 'General routing' }),
+      key: 'general_routing',
+    },
+    {
+      label: formatMessage({ id: 'telephony.account_defined', defaultMessage: 'Account defined' }),
+      key: 'account_defined',
+    },
+  ];
+
 
   function onAccountOutboundRoutingSelect(event) {
     const { key } = event;
@@ -126,7 +127,7 @@ const AccountOutboundRouting = (props) => {
   }
 
   return (
-    <Dropdown overlay={menuAccountOutboundRouting} trigger={['click']}>
+    <Dropdown menu={{ onClick: onAccountOutboundRoutingSelect, items: menuAccountOutboundRoutingItems }} trigger={['click']}>
       <a className="ant-dropdown-link" href="#">
         {currRoutingMode} <DownOutlined />
       </a>
