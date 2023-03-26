@@ -120,7 +120,7 @@ const CallDrawer = (props) => {
         width={isSmallDevice ? '100%' : '80%'}
         placement="right"
         onClose={onDrawerClose}
-        visible={isCallDrawerVisible}
+        open={isCallDrawerVisible}
       >
         <Collapse defaultActiveKey={['1']} accordion>
           <Panel

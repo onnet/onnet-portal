@@ -25,7 +25,7 @@ const RegistrationDetailsDrawer = (props) => {
       width={isSmallDevice ? '100%' : '70%'}
       placement="right"
       onClose={onRegistrationDrawerClose}
-      visible={isRegistrationDrawerVisible}
+      open={isRegistrationDrawerVisible}
     >
       <ReactJson src={selectedRegistration} {...reactJsonProps} />
     </Drawer>

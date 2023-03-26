@@ -45,7 +45,7 @@ const EditDeviceDrawer = (props) => {
       width={isSmallDevice ? '100%' : '50%'}
       placement="right"
       onClose={onDrawerClose}
-      visible={isEditDrawerVisible}
+      open={isEditDrawerVisible}
     >
       <EditDevice selectedDevice={selectedDevice} disableAssignBtn={disableAssignBtn} />
     </Drawer>

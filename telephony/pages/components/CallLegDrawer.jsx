@@ -32,7 +32,7 @@ const CallLegDrawer = (props) => {
       width={isSmallDevice ? '100%' : '70%'}
       placement="right"
       onClose={onSelectedLegDrawerClose}
-      visible={isSelectedLegDrawerVisible}
+      open={isSelectedLegDrawerVisible}
     >
       <ReactJson src={selectedLeg} {...reactJsonProps} />
     </Drawer>

@@ -400,7 +400,7 @@ const DevicesList = (props) => {
         width={isSmallDevice ? '100%' : '50%'}
         placement="right"
         onClose={onCloseCancel}
-        visible={isCreateDrawerVisible}
+        open={isCreateDrawerVisible}
         bodyStyle={{ paddingBottom: 80 }}
         footer={
           <div

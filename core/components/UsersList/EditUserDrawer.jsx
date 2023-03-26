@@ -23,7 +23,7 @@ const EditUserDrawer = (props) => {
       width={isSmallDevice ? '100%' : '50%'}
       placement="right"
       onClose={onDrawerClose}
-      visible={isDrawerVisible}
+      open={isDrawerVisible}
     >
       <EditUser selectedUser={selectedUser} />
     </Drawer>

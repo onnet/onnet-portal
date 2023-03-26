@@ -253,7 +253,7 @@ const DevicesList = (props) => {
         width="50%"
         placement="right"
         onClose={onDrawerClose}
-        visible={isDrawerVisible}
+        open={isDrawerVisible}
       >
         <EditDevice selectedDevice={selectedDevice} />
       </Drawer>

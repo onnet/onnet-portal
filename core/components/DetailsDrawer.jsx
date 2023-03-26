@@ -22,7 +22,7 @@ const DetailsDrawer = (props) => {
       width={isSmallDevice ? '100%' : '70%'}
       placement="right"
       onClose={onDetailsDrawerClose}
-      visible={isDetailsDrawerVisible}
+      open={isDetailsDrawerVisible}
     >
       <ReactJson src={details} {...reactJsonProps} />
     </Drawer>

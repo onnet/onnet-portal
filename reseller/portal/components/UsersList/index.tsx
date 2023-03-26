@@ -232,7 +232,7 @@ const UsersList = (props) => {
         width={isSmallDevice ? '100%' : '50%'}
         placement="right"
         onClose={onDrawerClose}
-        visible={isDrawerVisible}
+        open={isDrawerVisible}
       >
         <ResellerChildEditUser selectedUser={selectedUser} />
       </Drawer>
